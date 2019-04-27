@@ -1,0 +1,6 @@
+@import '../../../assets/scss/color_variables';
+aside{
+    position: fixed;
+    min-height: 100vh;
+    background-color: $main_color;
+}

@@ -4,7 +4,7 @@
     display: block;
     width: 100%;
     a {
-        color: #8f5c2c;
+        color: $main_color;
         text-decoration: none;
         width: 100%;
         display: block;
@@ -12,6 +12,18 @@
         &:active,
         &.active {
             color: #40A4C8;
+            &::after{
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 15px solid $main_color;
+                left: 100%;
+                top: 50%;
+                transform: translateY(-50%)
+            }
         }
     }
 }

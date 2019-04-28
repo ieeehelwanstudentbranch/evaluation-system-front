@@ -29,19 +29,16 @@ class Toolbar extends Component {
             <header className={classes.Toolbar}>
                 {/* <DrawerToggle clicked={props.drawerToggleClicked}/> */}
                 <Logo height="80%"/>
-                
-                <div className={classes.test + ' ' + classes.DesktopOnly}>
-                        <Input elementConfig={this.state.searchInput}/>
-                        <nav>
-                            <ul>
-                                <NavigationItem link="/" exact>Home</NavigationItem>
-                                <NavigationItem link="/profile" exact>profile</NavigationItem>
-                            </ul>
-                        </nav>
+                <div className={classes.DesktopOnly}>
+                    <Input elementConfig={this.state.searchInput}/>
+                    <nav>
+                        <ul>
+                            <NavigationItem link="/" exact>Home</NavigationItem>
+                            <NavigationItem link="/profile" exact>profile</NavigationItem>
+                        </ul>
+                    </nav>
                     <NavigationItems />
                 </div>
-                
-
             </header>
         )
     }

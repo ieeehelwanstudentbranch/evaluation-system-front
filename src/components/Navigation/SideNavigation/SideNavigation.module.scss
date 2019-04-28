@@ -1,6 +1,14 @@
 @import '../../../assets/scss/color_variables';
-aside{
+aside {
     position: fixed;
     min-height: 100vh;
     background-color: $main_color;
+    ul {
+        li {
+            position: relative;
+            a {
+                
+            }
+        }
+    }
 }

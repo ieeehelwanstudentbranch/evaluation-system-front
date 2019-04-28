@@ -5,7 +5,7 @@ import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem'
 const sideNavigation = () => (
     <aside>
         <nav>
-            <ul className={classes.Sidebar}>
+            <ul>
                 <NavigationItem link="/create-task">Create Task</NavigationItem>
                 <NavigationItem link="/completed-tasks">Completed Tasks</NavigationItem>
                 <NavigationItem link="/pending-tasks">Pending Tasks</NavigationItem>

@@ -6,7 +6,7 @@ const sideNavigation = () => (
     <aside>
         <nav>
             <ul className={classes.Sidebar}>
-                <NavigationItem link="/" exact>Create Task</NavigationItem>
+                <NavigationItem link="/create-task">Create Task</NavigationItem>
                 <NavigationItem link="/completed-tasks">Completed Tasks</NavigationItem>
                 <NavigationItem link="/pending-tasks">Pending Tasks</NavigationItem>
                 <NavigationItem link="/committees">Committees</NavigationItem>

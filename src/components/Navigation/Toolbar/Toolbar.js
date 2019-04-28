@@ -3,6 +3,7 @@ import classes from './Toolbar.module.scss';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Input from '../../UI/Input/Input'
+import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem';
 // import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 
 class Toolbar extends Component {
@@ -30,13 +31,13 @@ class Toolbar extends Component {
                 <Logo height="80%"/>
                 
                 <div className={classes.test + ' ' + classes.DesktopOnly}>
-                    if user has token
                         <Input elementConfig={this.state.searchInput}/>
                         <nav>
-                            <p>Profile link</p>
-                            <p>Notification</p>
+                            <ul>
+                                <NavigationItem link="/" exact>Home</NavigationItem>
+                                <NavigationItem link="/profile" exact>profile</NavigationItem>
+                            </ul>
                         </nav>
-                    else 
                     <NavigationItems />
                 </div>
                 

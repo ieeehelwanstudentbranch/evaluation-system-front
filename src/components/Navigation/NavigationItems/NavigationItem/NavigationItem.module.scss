@@ -1,3 +1,4 @@
+@import '../../../../assets/scss/color_variables';
 .NavigationItem {
     margin: 10px 0;
     display: block;
@@ -31,9 +32,9 @@
             &:hover,
             &:active,
             &.active {
-                background-color: #8f5c2c;
+                background-color: $white;
                 border-bottom: 4px solid #40A4C8;
-                color: #fff;
+                color: $main_color;
             }
         }
     }

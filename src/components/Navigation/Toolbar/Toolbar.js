@@ -30,7 +30,7 @@ class Toolbar extends Component {
                 {/* <DrawerToggle clicked={props.drawerToggleClicked}/> */}
                 <Logo height="80%"/>
                 <div className={classes.DesktopOnly}>
-                    <Input elementConfig={this.state.searchInput}/>
+                    <Input elementConfig={this.state.searchInput.elementConfig}/>
 
                     <AuthenticatedNavigation />
 

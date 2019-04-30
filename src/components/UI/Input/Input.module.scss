@@ -17,9 +17,11 @@
     padding: 6px 10px;
     display: block;
     width: 100%;
+    border-radius: 5px;
     &:focus {
         outline: none;
-        background-color: $lite_gray
+        background-color: $lite_gray;
+        color: $white
     }
 }
 .Invalid{

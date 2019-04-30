@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './SideNavigation.module.scss';
-import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem'
+import NavigationItem from '../NavigationItem/NavigationItem'
 
 const sideNavigation = () => (
     <aside>

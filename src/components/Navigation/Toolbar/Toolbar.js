@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import classes from './Toolbar.module.scss';
 import Logo from '../../Logo/Logo';
-import NavigationItems from '../NavigationItems/NavigationItems';
+import AnonymousNavigation from '../AnonymousNavigation/AnonymousNavigation';
 import Input from '../../UI/Input/Input'
-import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem';
+import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 // import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 
 class Toolbar extends Component {
@@ -31,13 +31,10 @@ class Toolbar extends Component {
                 <Logo height="80%"/>
                 <div className={classes.DesktopOnly}>
                     <Input elementConfig={this.state.searchInput}/>
-                    <nav>
-                        <ul>
-                            <NavigationItem link="/" exact>Home</NavigationItem>
-                            <NavigationItem link="/profile" exact>profile</NavigationItem>
-                        </ul>
-                    </nav>
-                    <NavigationItems />
+
+                    <AuthenticatedNavigation />
+
+                    <AnonymousNavigation />
                 </div>
             </header>
         )

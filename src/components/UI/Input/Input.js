@@ -6,8 +6,6 @@ const input = (props) => {
         icon = null,
         inputClasses = [classes.InputElement];
 
-    console.log(props);
-
     // if(!props.elementConfig.config.valid && props.elementConfig.config.validation && props.elementConfig.config.touched){
     //     inputClasses.push(classes.Invalid);
     // }else{

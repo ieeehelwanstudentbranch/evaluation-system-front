@@ -4,7 +4,7 @@ import Logo from '../../Logo/Logo';
 import AnonymousNavigation from '../AnonymousNavigation/AnonymousNavigation';
 import Input from '../../UI/Input/Input'
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
-// import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
+import DrawerToggle from '../DrawerToggler/DrawerToggler';
 
 class Toolbar extends Component {
     state = {
@@ -22,13 +22,16 @@ class Toolbar extends Component {
             },
             valid: true,
             touched: false
-        }
+        },
+        MobileMenuOpen: false,
     }
     render(){
+        
+
         return (
             <header className={classes.Toolbar}>
-                {/* <DrawerToggle clicked={props.drawerToggleClicked}/> */}
                 <Logo height="80%"/>
+                <DrawerToggle MobileMenuOpen={this.state.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
                 <div className={classes.DesktopOnly}>
                     <Input elementConfig={this.state.searchInput.elementConfig}/>
                     <AuthenticatedNavigation />

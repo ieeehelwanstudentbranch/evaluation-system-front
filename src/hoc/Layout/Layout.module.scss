@@ -4,7 +4,12 @@ main, aside {
     margin-top: 56px;
 }
 main {
-    width: 85vw
+    @media (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width) {
+        width: 80vw;
+    }
+    @media (min-width: $large_min_width){
+        width: 85vw;
+    }
 }
 aside {
     @media (max-width: $small_tablet_max_width){

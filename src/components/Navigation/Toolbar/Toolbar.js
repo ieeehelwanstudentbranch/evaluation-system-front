@@ -31,9 +31,7 @@ class Toolbar extends Component {
                 <Logo height="80%"/>
                 <div className={classes.DesktopOnly}>
                     <Input elementConfig={this.state.searchInput.elementConfig}/>
-
                     <AuthenticatedNavigation />
-
                     <AnonymousNavigation />
                 </div>
             </header>

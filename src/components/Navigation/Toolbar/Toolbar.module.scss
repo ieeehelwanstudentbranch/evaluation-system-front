@@ -15,13 +15,10 @@
 
     .DesktopOnly {
         display: flex;
-
         nav {
             height: 100%;
-
             ul {
                 display: flex;
-
                 li {
                     a {
                         border: none;
@@ -34,7 +31,9 @@
 }
 
 @media (max-width: 499px) {
-    .DesktopOnly {
-        display: none;
+    .Toolbar {
+        .DesktopOnly {
+            display: none;
+        }
     }
 }

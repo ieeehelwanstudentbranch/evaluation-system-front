@@ -1,5 +1,6 @@
 @import '../../../assets/scss/color_variables';
-.Toolbar{
+
+.Toolbar {
     position: fixed;
     height: 56px;
     width: 100%;
@@ -11,19 +12,29 @@
     align-items: center;
     padding: 0 20px;
     z-index: 90;
-    .DesktopOnly{
+
+    .DesktopOnly {
         display: flex;
-        nav{
+
+        nav {
             height: 100%;
-            ul{
-                display: flex
+
+            ul {
+                display: flex;
+
+                li {
+                    a {
+                        border: none;
+                        border-right: 1px solid $white;
+                    }
+                }
             }
         }
     }
 }
 
-@media (max-width: 499px){
-    .DesktopOnly{
+@media (max-width: 499px) {
+    .DesktopOnly {
         display: none;
     }
 }

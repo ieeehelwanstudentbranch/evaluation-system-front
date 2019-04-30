@@ -39,13 +39,15 @@
             color: #fff;
             height: 100%;
             padding: 16px 10px;
-            border-bottom: 4px solid transparent;
+            border-top: 1px solid $white;
+            border-bottom: 1px solid $white;
             display: block;
             &:hover,
             &:active,
             &.active {
                 background-color: $white;
-                border-bottom: 4px solid #40A4C8;
+                border-top: 1px solid $main_color;
+                border-bottom: 1px solid $main_color;
                 color: $main_color;
             }
         }

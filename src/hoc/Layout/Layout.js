@@ -8,7 +8,7 @@ class Layout extends Component {
         MobileMenuOpen: false,
     }
     sideDrawerClosedHandler = () =>{
-        this.setState({showSideDrawer: false})
+        this.setState({showSideDrawer: false, MobileMenuOpen: false,})
     }
     sideDrawerToggleHandler = () =>{
         this.setState((prevState) => {
@@ -22,11 +22,7 @@ class Layout extends Component {
         return(
             <>
                 <Toolbar MobileMenuOpen={this.state.MobileMenuOpen} drawerToggleClicked={this.sideDrawerToggleHandler}/>
-                {/* <SideDrawer 
-                    open={this.state.showSideDrawer}
-                    closed={this.sideDrawerClosedHandler}
-                /> */}
-                <SideNavigation />
+                <SideNavigation open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler} />
                 <main>
                     {this.props.children}
                 </main>

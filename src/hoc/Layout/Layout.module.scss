@@ -12,8 +12,9 @@ main {
     }
 }
 aside {
-    @media (max-width: $small_tablet_max_width){
-        display: none
+    @media (max-width: $small_tablet_max_width) {
+        transform: translateX(-150%);
+        width: 30vw
     }
     @media (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width) {
         width: 20vw;

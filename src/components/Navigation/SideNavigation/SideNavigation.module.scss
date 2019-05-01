@@ -1,6 +1,8 @@
 @import '../../../assets/scss/color_variables';
+@import '../../../assets/scss/screen_sizes';
 aside {
     position: fixed;
     min-height: 100vh;
     background-color: $main_color;
+    
 }

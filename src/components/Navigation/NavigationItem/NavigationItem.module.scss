@@ -1,56 +1,40 @@
 @import '../../../assets/scss/color_variables';
-
+@import '../../../assets/scss/screen_sizes';
 .NavigationItem {
-    margin: 10px 0;
-    display: block;
-    width: 100%;
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+    position: relative;
     a {
-        color: $main_color;
+        color: #fff;
         text-decoration: none;
         width: 100%;
-        display: block;
+        height: 100%;
+        padding: 16px 10px;
+        border: 1px solid $white;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
         &:hover,
         &:active,
         &.active {
-            color: #40A4C8;
-            &::after {
-                content: '';
-                position: absolute;
-                width: 0;
-                height: 0;
-                border-top: 15px solid transparent;
-                border-bottom: 15px solid transparent;
-                border-left: 15px solid $main_color;
-                left: 100%;
-                top: 50%;
-                transform: translateY(-50%)
-            }
-        }
-    }
-}
-
-@media (min-width: 500px) {
-    .NavigationItem {
-        margin: 0;
-        display: flex;
-        height: 100%;
-        width: auto;
-        align-items: center;
-        position: relative;
-        a {
-            color: #fff;
-            height: 100%;
-            padding: 16px 10px;
-            border: 1px solid $white;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            &:hover,
-            &:active,
-            &.active {
-                background-color: $white;
-                border: 1px solid $main_color;
-                color: $main_color;
+            background-color: $white;
+            border: 1px solid $main_color;
+            color: $main_color;
+            @media (min-width: $large_tablet_min_width) {
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-top: 15px solid transparent;
+                    border-bottom: 15px solid transparent;
+                    border-left: 15px solid $main_color;
+                    left: 100%;
+                    top: 50%;
+                    transform: translateY(-50%)
+                }
             }
         }
     }

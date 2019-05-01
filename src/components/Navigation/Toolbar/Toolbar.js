@@ -22,16 +22,14 @@ class Toolbar extends Component {
             },
             valid: true,
             touched: false
-        },
-        MobileMenuOpen: false,
+        }
     }
-    render(){
-        
 
+    render(){
         return (
             <header className={classes.Toolbar}>
                 <Logo height="80%"/>
-                <DrawerToggle MobileMenuOpen={this.state.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
+                <DrawerToggle MobileMenuOpen={this.props.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
                 <div className={classes.DesktopOnly}>
                     <Input elementConfig={this.state.searchInput.elementConfig}/>
                     <AuthenticatedNavigation />

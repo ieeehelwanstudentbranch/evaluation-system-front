@@ -4,7 +4,8 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideNavigation from '../../components/Navigation/SideNavigation/SideNavigation';
 class Layout extends Component {
     state={
-        showSideDrawer: false
+        showSideDrawer: false,
+        MobileMenuOpen: false,
     }
     sideDrawerClosedHandler = () =>{
         this.setState({showSideDrawer: false})
@@ -12,14 +13,15 @@ class Layout extends Component {
     sideDrawerToggleHandler = () =>{
         this.setState((prevState) => {
             return {
-                showSideDrawer: !prevState.showSideDrawer
+                showSideDrawer: !prevState.showSideDrawer,
+                MobileMenuOpen: !prevState.MobileMenuOpen
             }
         })
     }
     render(){
         return(
             <>
-                <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                <Toolbar MobileMenuOpen={this.state.MobileMenuOpen} drawerToggleClicked={this.sideDrawerToggleHandler}/>
                 {/* <SideDrawer 
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler}

@@ -1,0 +1,8 @@
+@import '../../../assets/scss/screen_sizes';
+.MenuIcon{
+    font-size: 2rem;
+    color: #fff;
+    @media (min-width: $large_tablet_min_width) {
+        display: none
+    }
+}

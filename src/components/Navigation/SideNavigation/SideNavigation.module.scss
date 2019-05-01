@@ -1,0 +1,24 @@
+@import '../../../assets/scss/color_variables';
+@import '../../../assets/scss/screen_sizes';
+aside {
+    position: fixed;
+    min-height: 100vh;
+    background-color: $main_color;
+    transition: transform 0.5s ease-in-out;
+    z-index: 3;
+    transform: translateX(-150%);
+    @media (min-width: $large_tablet_min_width) {
+        transform: translateX(0) !important; 
+    }
+}
+.Backdrop{
+    @media (min-width: $large_tablet_min_width) {
+        display: none !important
+    }
+}
+.Open{
+    transform: translateX(0);
+}
+.Close{
+    transform: translateX(-150%);
+}

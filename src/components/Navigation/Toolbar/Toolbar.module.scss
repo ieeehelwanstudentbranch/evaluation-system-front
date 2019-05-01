@@ -1,0 +1,35 @@
+@import '../../../assets/scss/color_variables';
+@import '../../../assets/scss/screen_sizes';
+
+.Toolbar {
+    position: fixed;
+    height: 56px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $main_color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 90;
+
+    .DesktopOnly {
+        @media (max-width: $small_tablet_max_width) {
+            display: none;
+        }
+        display: flex;
+        nav {
+            height: 100%;
+            ul {
+                display: flex;
+                li {
+                    a {
+                        border: none;
+                        border-right: 1px solid $white;
+                    }
+                }
+            }
+        }   
+    }
+}

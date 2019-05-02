@@ -5,6 +5,8 @@ import './App.scss';
 import Layout from '../hoc/Layout/Layout';
 import { Route } from 'react-router-dom';
 
+import CreateTask from '../components/CreateTask/CreateTask'
+
 class App extends Component {
   render() {
     return (
@@ -12,7 +14,7 @@ class App extends Component {
         <Layout>
           <Route path="/" exact render={()=><p>home</p>}/>
           <Route path="/profile" render={()=><p>profile</p>}/>
-          <Route path="/create-task" render={()=><p>Create Task</p>}/>
+          <Route path="/create-task" component={CreateTask}/>
           <Route path="/completed-tasks" render={()=><p>Completed Tasks</p>}/>
           <Route path="/pending-tasks" render={()=><p>Pending Tasks</p>}/>
           <Route path="/committees" render={()=><p>Comittees</p>}/>

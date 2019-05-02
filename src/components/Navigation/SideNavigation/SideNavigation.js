@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faCheck, faFolder, faGopuram } from '@fortawesome/free-solid-svg-icons';
 
 const sideNavigation = (props) => {
-    console.log(props)
     return(
         <>
             <Backdrop className={classes.Backdrop} show={props.open} clicked={props.closed}/>

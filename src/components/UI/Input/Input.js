@@ -3,7 +3,7 @@ import classes from './Input.module.scss';
 const input = (props) => {
     let label = null,
         element = null,
-        icon = null,
+        // icon = null,
         inputClasses = [classes.InputElement];
 
     // if(!props.elementConfig.config.valid && props.elementConfig.config.validation && props.elementConfig.config.touched){

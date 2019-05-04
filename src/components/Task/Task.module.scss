@@ -24,10 +24,10 @@ a.TaskLink {
                 color: $lite_gray
             }
         }
-        .TaskScore{
+        .TaskStatus{
             width: 50px;
             height: 50px;
-            border: 1px solid $main_color;
+            border: 1px solid $black;
             border-radius: 50%;
             padding: 20px;
             position: absolute;
@@ -37,6 +37,8 @@ a.TaskLink {
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 25px;
+            color: $black;
         }
         &:hover{
             box-shadow: 7px 7px 24px -1px rgba(0,0,0,0.75);

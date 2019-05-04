@@ -1,9 +1,11 @@
 import React, {Component} from "react";
 import Input from '../UI/Input/Input';
 import classes from './CreateTask.module.scss'
-// import UnicornEditor from '../WYSIWYG/WYSIWYG'
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DragableArea from "../UI/DragableArea/DragableArea";
+
+
 class CreateTask extends Component {
     state = {
         TaskForm: {
@@ -41,8 +43,10 @@ class CreateTask extends Component {
                 valid: false,
                 touched: false
             },
+            files: []
         }
     }
+    
     
     render(){
         return(
@@ -76,6 +80,7 @@ class CreateTask extends Component {
                         } }
                         
                     />
+                    <DragableArea />
 
                 </form>
                 

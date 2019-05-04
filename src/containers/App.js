@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
+import PendingTasks from './PendingTasks/PendingTasks';
 
 class App extends Component {
   render() {
@@ -17,7 +18,7 @@ class App extends Component {
           <Route path="/profile" render={()=><p>profile</p>}/>
           <Route path="/create-task" component={CreateTask}/>
           <Route path="/completed-tasks" component={CompletedTasks}/>
-          <Route path="/pending-tasks" render={()=><p>Pending Tasks</p>}/>
+          <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" render={()=><p>Comittees</p>}/>
           <Route path="/login" render={()=><p>login</p>}/>
           <Route path="/registration" render={()=><p>Registration</p>}/>

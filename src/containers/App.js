@@ -5,7 +5,7 @@ import './App.scss';
 import Layout from '../hoc/Layout/Layout';
 import { Route } from 'react-router-dom';
 
-import CreateTask from '../components/CreateTask/CreateTask';
+import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 
 class App extends Component {

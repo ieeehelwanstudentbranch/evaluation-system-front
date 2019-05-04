@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import Input from '../UI/Input/Input';
+import Input from '../../components/UI/Input/Input';
 import classes from './CreateTask.module.scss'
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import DragableArea from "../UI/DragableArea/DragableArea";
+import DragableArea from "../../components/UI/DragableArea/DragableArea";
 import Select from 'react-select';
 
 const options = [

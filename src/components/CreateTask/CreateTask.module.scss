@@ -1,6 +1,16 @@
 form {
     padding: 20px;
-    .basicInfo {
-        display: flex;
+    display: flex;
+    flex-flow: row;
+    .leftSection{
+        width: 70%;
+        padding-right: 10px;
+        .basicInfo {
+            display: flex;
+            margin-bottom: 20px;
+        }
+    }
+    .rightSection{
+        width: 30%
     }
 }

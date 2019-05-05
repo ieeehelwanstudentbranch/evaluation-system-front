@@ -4,13 +4,26 @@ import classes from './CreateTask.module.scss'
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DragableArea from "../../components/UI/DragableArea/DragableArea";
-import Select from 'react-select';
+import CheckboxTree from 'react-checkbox-tree';
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-];
+
+const nodes = [{
+    value: 'ex-com',
+    label: 'Ex-com',
+    children: [
+        { value: 'chairperson', label: 'Chairperson' },
+        { value: 'vice-chairperson', label: 'Vice Chairperson' },
+    ],
+},
+{
+    value: 'high-board',
+    label: 'High Board',
+    children: [
+        { value: 'it', label: 'IT' },
+        { value: 'ac', label: 'AC' },
+    ],
+}];
 
 
 class CreateTask extends Component {
@@ -51,12 +64,10 @@ class CreateTask extends Component {
                 touched: false
             },
             files: [],
-            selectOption: null
-        }
-    }
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
+            
+        },
+        checked: [],
+        expanded: [],
     }
     
     render(){
@@ -96,16 +107,15 @@ class CreateTask extends Component {
                         <DragableArea />
                     </div>
                     <div className={classes.rightSection}>
-                        <Select
-                            value={selectedOption}
-                            onChange={this.handleChange}
-                            options={options}
-                            isMulti={true}
+                        <CheckboxTree
+                            nodes={nodes}
+                            checked={this.state.checked}
+                            expanded={this.state.expanded}
+                            onCheck={checked => this.setState({ checked })}
+                            onExpand={expanded => this.setState({ expanded })}
                         />
                     </div>
                 </form>
-                
-
             </>
         )
     }

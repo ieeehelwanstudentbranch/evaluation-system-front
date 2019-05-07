@@ -13,7 +13,8 @@ class Toolbar extends Component {
                 type: 'search',
                 placeholder: 'Search',
                 id: 'search',
-                name: 'search'
+                name: 'search',
+                icon: {name: 'faSearch', position: 'Right'}
             },
             value: '',
             validation: {

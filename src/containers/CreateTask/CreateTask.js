@@ -70,7 +70,6 @@ class CreateTask extends Component {
     }
     
     render(){
-        const { selectedOption } = this.state;
         return(
             <>
                 <form>

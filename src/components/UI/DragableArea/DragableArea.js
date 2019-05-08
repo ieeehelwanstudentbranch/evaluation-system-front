@@ -17,6 +17,7 @@ class dragableArea extends Component{
             return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
         }
         if (rejectedFiles && rejectedFiles.length > 0){
+            // eslint-disable-next-line
             rejectedFiles.map(rejectedFile=>{
                 const CurrentRejectedFileName = rejectedFile.name,
                 CurrentRejectedFileSize = rejectedFile.size,
@@ -42,6 +43,7 @@ class dragableArea extends Component{
             })
         }
         if (files && files.length>0){
+            // eslint-disable-next-line
             files.map(file=>{
                 const CurrentFileName = file.name,
                 currentFileSize = file.size,

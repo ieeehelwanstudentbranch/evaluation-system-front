@@ -11,7 +11,9 @@
 }
 
 .Button:disabled{
-    color: #ccc;
+    color: $black;
+    background-color: $lite_gray;
+    border: 1px solid $main_color;
     cursor: not-allowed;
 }
 .Default {
@@ -21,7 +23,6 @@
 .Success {
     color: #5C9210;
 }
-
 .Danger {
-    color: #944317;
+    color: $red;
 }

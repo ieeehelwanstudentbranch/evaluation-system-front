@@ -18,11 +18,8 @@
         display: block;
         width: 100%;
         border-radius: 5px;
-        height: 100%;
         &:focus {
             outline: none;
-            background-color: $lite_gray;
-            color: $white
         }
     }
     .Icon{

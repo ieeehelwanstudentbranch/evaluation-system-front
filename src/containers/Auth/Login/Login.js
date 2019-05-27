@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Login.module.scss';
+import * as actions from '../../../store/actions/index'
 
 class Login extends Component{
     state = {
@@ -63,7 +65,7 @@ class Login extends Component{
         this.setState({controls: updatedControls, formIsValid: formIsValid});
     }
 
-    checkValidity(value, rules) {
+    checkValidity = (value, rules) => {
         let isValid = true;
         if (!rules) {
             return true;
@@ -97,7 +99,10 @@ class Login extends Component{
         }
         return isValid;
     }
-
+    submitHandler = (event) => {
+        event.preventDefault();
+        this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
+    }
     render(){
         const formElementsArray = [];
         for (let key in this.state.controls){
@@ -132,4 +137,10 @@ class Login extends Component{
     }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: (email, password) => dispatch(actions.login(email, password))
+    }
+}
+
+export default connect(null, mapDispatchToProps) (Login);

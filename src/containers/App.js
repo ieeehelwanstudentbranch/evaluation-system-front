@@ -9,6 +9,7 @@ import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
 import Login from './Auth/Login/Login';
+import Registration from './Auth/Registration/Registration';
 
 class App extends Component {
   render() {
@@ -22,7 +23,7 @@ class App extends Component {
           <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" render={()=><p>Comittees</p>}/>
           <Route path="/login" component={Login}/>
-          <Route path="/registration" render={()=><p>Registration</p>}/>
+          <Route path="/registration" component={Registration}/>
         </Layout>
       </div>
     );

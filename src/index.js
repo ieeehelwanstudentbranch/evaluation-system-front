@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers  } from 'redux';
 import thunk from 'redux-thunk';
+import axios from 'axios';
 
 import './index.css';
 import App from './containers/App';
@@ -19,6 +20,24 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
+
+// interceptors for Application
+// interceptors for request
+axios.interceptors.request.use(request=>{
+    console.log(request);
+    return request;
+}, error=>{
+    console.log(error);
+    return Promise.reject(error)
+});
+// interceptors for response
+axios.interceptors.response.use(response=>{
+    console.log(response);
+    return response;
+}, error=>{
+    console.log(error);
+    return Promise.reject(error)
+});
 
 ReactDOM.render(
     <Provider store={store}>

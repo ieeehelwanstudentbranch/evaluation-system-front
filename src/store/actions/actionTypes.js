@@ -30,10 +30,10 @@ export const FETCH_POSTS_START = "FETCH_POSTS_START";
 export const FETCH_POSTS_SUCEESS = "FETCH_POSTS_SUCEESS";
 export const FETCH_POSTS_FAILED = "FETCH_POSTS_FAILED";
 
-// AUTH
-export const AUTH_START = "AUTH_START";
-export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAILED = "AUTH_FAILED";
+// LOGIN
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILED = "LOGIN_FAILED";
 
 // Profile
 export const FETCH_PROFILE_START = "FETCH_PROFILE_START";

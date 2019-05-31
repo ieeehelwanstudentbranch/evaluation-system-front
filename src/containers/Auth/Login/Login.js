@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import classes from './Login.module.scss';
@@ -43,7 +43,7 @@ class Login extends Component{
                 value: '',
                 valid: false,
                 touched: false
-            },
+            }
         },
         formIsValid: false
     }
@@ -99,10 +99,12 @@ class Login extends Component{
         }
         return isValid;
     }
+
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
     }
+
     render(){
         const formElementsArray = [];
         for (let key in this.state.controls){
@@ -133,7 +135,6 @@ class Login extends Component{
                 </form>
             </div>
         )
-        
     }
 }
 
@@ -143,4 +144,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps) (Login);
+export default connect(null, mapDispatchToProps)(Login);

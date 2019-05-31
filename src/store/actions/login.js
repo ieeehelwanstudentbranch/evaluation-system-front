@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axios from '../../axios';
 
 export const loginStart = () => {
     return {
@@ -22,6 +23,18 @@ export const loginFailed = (error) => {
 
 export const login = (email, password) => {
     return dispatch => {
-        dispatch(loginStart())
+        dispatch(loginStart());
+        const loginData = {
+            email: email,
+            password: password
+        }
+        axios.post('/login', loginData)
+            .then(response=>{
+                response.json();
+            })
+            .catch(error => {
+                error = JSON.parse(JSON.stringify(error));
+                console.log(error)
+            })
     }
 }

@@ -53,7 +53,7 @@ class Login extends Component{
             ...this.state.controls,
             [controlName]: {
                 ...this.state.controls[controlName],
-                value: event.target.value,
+                value: event.target.value.trim(),
                 valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true,
             }

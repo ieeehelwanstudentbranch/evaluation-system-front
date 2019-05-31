@@ -26,15 +26,21 @@ export const login = (email, password) => {
         dispatch(loginStart());
         const loginData = {
             email: email,
-            password: password
+            password: password,
+            // remember_me: remember_me
         }
         axios.post('/login', loginData)
             .then(response=>{
-                response.json();
+                
+                dispatch(loginSuccess(response.data));
+                // response.json();
+                console.log(response)
+
             })
             .catch(error => {
                 error = JSON.parse(JSON.stringify(error));
-                console.log(error)
+                console.log(error);
+                dispatch(loginFailed(error));
             })
     }
 }

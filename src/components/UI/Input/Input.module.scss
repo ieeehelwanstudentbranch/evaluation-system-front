@@ -31,10 +31,9 @@
 }
 
 .Invalid{
-    border: 1px solid red;
-    background-color: #FDA49A;
+    border: 1px solid red !important;
 }
 
 .Valid{
-    border: 1px solid green;
+    border: 1px solid green !important;
 }

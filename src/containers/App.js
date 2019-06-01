@@ -22,7 +22,7 @@ class App extends Component {
           <Route path="/completed-tasks" component={CompletedTasks}/>
           <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" render={()=><p>Comittees</p>}/>
-          <Route path="/login" component={Auth}/>
+          <Route path="/Auth" component={Auth}/>
         </Layout>
       </div>
     );

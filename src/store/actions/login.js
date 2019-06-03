@@ -7,10 +7,11 @@ export const loginStart = () => {
     }
 }
 
-export const loginSuccess = (loginData) => {
+export const loginSuccess = (token, response) => {
     return {
         type: actionTypes.LOGIN_SUCCESS,
-        loginData: loginData
+        token: token,
+        response: response
     }
 }
 
@@ -31,14 +32,10 @@ export const login = (email, password, remember_me) => {
         }
         axios.post('/login', loginData)
             .then(response=>{
-                
-                dispatch(loginSuccess(response.data));
-                // response.json();
-                console.log(response)
-
+                dispatch(loginSuccess(response.data.result.token, response.data.response));
+                console.log(response.data.result.token, response.data.response);
             })
             .catch(error => {
-                error = JSON.parse(JSON.stringify(error));
                 console.log(error);
                 dispatch(loginFailed(error));
             })

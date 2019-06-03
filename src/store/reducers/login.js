@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     token: null,
+    response: null,
     message: null,
     error: null,
     loading: false
@@ -20,6 +21,7 @@ const loginSuccess = (state, action) => {
         ...state,
         token: action.token,
         message: action.message,
+        response: action.response,
         error: null,
         loading: false
     };

@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     token: null,
-    userId: null,
+    message: null,
     error: null,
     loading: false
 };
@@ -18,8 +18,8 @@ const loginStart = (state, action) => {
 const loginSuccess = (state, action) => {
     return {
         ...state,
-        token: action.idToken,
-        userId: action.userId,
+        token: action.token,
+        message: action.message,
         error: null,
         loading: false
     };

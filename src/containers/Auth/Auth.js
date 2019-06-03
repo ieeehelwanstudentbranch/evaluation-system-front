@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Modal from '../../components/UI/Modal/Modal';
 import Login from './Login/Login';
 import Register from './Registration/Registration';
-import { Link } from 'react-router-dom';
 class Auth extends Component {
     state = {
         register: false

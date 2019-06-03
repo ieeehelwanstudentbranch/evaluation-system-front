@@ -21,13 +21,13 @@ export const loginFailed = (error) => {
     }
 }
 
-export const login = (email, password) => {
+export const login = (email, password, remember_me) => {
     return dispatch => {
         dispatch(loginStart());
         const loginData = {
             email: email,
             password: password,
-            // remember_me: remember_me
+            remember_me: remember_me
         }
         axios.post('/login', loginData)
             .then(response=>{

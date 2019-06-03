@@ -1,146 +1,73 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Input from '../../../components/UI/Input/Input';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
-import classes from './Login.module.scss';
-import * as actions from '../../../store/actions/index'
+
+import classes from '../../../components/UI/Input/Input.module.scss';
+import * as actions from '../../../store/actions/index';
 
 class Login extends Component{
-    state = {
-        controls: {
-            email: {
-                labelName: 'Email',
-                elementConfig: {
-                    type: 'email',
-                    id: 'email',
-                    name: 'email',
-                    placeholder: 'E-Mail',
-                },
-                validation: {
-                    minLength: 5,
-                    maxLength: 50,
-                    required: true,
-                    isEmail: true
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            password: {
-                labelName: 'Password',
-                elementConfig: {
-                    type: 'password',
-                    id: 'password',
-                    name: 'password',
-                    placeholder: 'Password',
-                },
-                validation: {
-                    minLength: 8,
-                    maxLength: 20,
-                    required: true,
-                    isPassword: true
-                },
-                value: '',
-                valid: false,
-                touched: false
-            }
-        },
-        formIsValid: false
-    }
 
-    inputChangedHandler = (event, controlName) => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
-                value: event.target.value.trim(),
-                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
-                touched: true,
-            }
-        };
-        let formIsValid = true;
-        for (let controlName in updatedControls){
-            formIsValid = updatedControls[controlName].valid && formIsValid;
-        }
-        this.setState({controls: updatedControls, formIsValid: formIsValid});
-    }
-
-    checkValidity = (value, rules) => {
-        let isValid = true;
-        if (!rules) {
-            return true;
-        }
-        
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
-        }
-
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isPassword) {
-            const pattern = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-        return isValid;
-    }
-
-    submitHandler = (event) => {
-        event.preventDefault();
-        this.props.onLogin(this.state.controls.email.value, this.state.controls.password.value);
+    handleSubmit = (values, {props = this.props, setSubmitting }) => {
+        props.onLogin(values.email, values.password, values.remember_me);
+        setSubmitting(false);
+        return;
     }
 
     render(){
-        const formElementsArray = [];
-        for (let key in this.state.controls){
-            formElementsArray.push({
-                id: key,
-                config: this.state.controls[key]
-            })
+        const validationSchema = Yup.object().shape({
+            email: Yup.string()
+                .trim()
+                .required('No Email Provided')
+                .email('It doesn\'t seems an valid Email'),
+                // .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'It doesn\'t seems an valid Email Address'),
+            password: Yup.string()
+                .trim()
+                .required('No Password Provided')
+                .min(8, 'Password is too short it must be at least 8 characters or longer')
+                .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must have numbers, capital letters, small letters and special characters '),
+            remember_me: Yup.boolean()
+        });
+        const initialValues= {
+            email: '',
+            password: '',
+            remember_me: false
         }
-        const form = formElementsArray.map(formElement => (
-            <Input
-                key={formElement.id}
-                labelName={formElement.config.labelName}
-                id={formElement.id}
-                elementConfig={formElement.config.elementConfig}
-                value={formElement.config.value}
-                touched={formElement.config.touched}
-                invalid={!formElement.config.valid}
-                shouldValidate={formElement.config.validation}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}
+        return (
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={this.handleSubmit}
+                render={(FormikProps)=>(
+                    <Form >
+                        <div className={classes.Input}>
+                            <label htmlFor="email" className={classes.Label} >Email</label>
+                            <Field type="email" id="email" name="email" placeholder="Email" className={classes.InputElement}/>
+                            <ErrorMessage name="email" />
+                        </div>
+                        <div className={classes.Input}>
+                            <label htmlFor="password" className={classes.Label} >Email</label>
+                            <Field type="password" id="password" name="password" placeholder="Password" className={classes.InputElement}/>
+                            <ErrorMessage name="password" />
+                        </div>
+                        <div className={classes.Input}>    
+                            <label htmlFor="remember_me" className={classes.Label}>
+                                <Field type="checkbox" id="remember_me" name="remember_me" />
+                                Keep me loged in
+                            </label>
+                        </div>
+                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
+                    </Form>
+                )}
             />
-        ));
-
-        return(
-            <div className={classes.Auth}>
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <Button btnType="Default" disabled={!this.state.formIsValid}>Submit</Button>
-                </form>
-            </div>
         )
     }
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (email, password) => dispatch(actions.login(email, password))
+        onLogin: (email, password, remember_me) => dispatch(actions.login(email, password, remember_me))
     }
 }
 

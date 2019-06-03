@@ -7,8 +7,8 @@ import { Route } from 'react-router-dom';
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
-import Auth from './Auth/Auth';
 import Login from './Auth/Login/Login';
+// import Auth from './Auth/Auth';
 import Registration from './Auth/Registration/Registration';
 
 class App extends Component {
@@ -22,7 +22,8 @@ class App extends Component {
           <Route path="/completed-tasks" component={CompletedTasks}/>
           <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" render={()=><p>Comittees</p>}/>
-          <Route path="/Auth" component={Auth}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/registration" component={Registration}/>
         </Layout>
       </div>
     );

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
 import classes from '../../../components/UI/Input/Input.module.scss';
 import * as actions from '../../../store/actions/index';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class Login extends Component{
 
@@ -33,12 +34,12 @@ class Login extends Component{
             password: '',
             remember_me: false
         }
-        return (
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={this.handleSubmit}
-                render={(FormikProps)=>(
+        let form;
+        if (this.props.loading){
+            form = (FormikProps)=>{return <Spinner />}
+        } else {
+            form =(FormikProps)=>{
+                return(
                     <Form >
                         <div className={classes.Input}>
                             <label htmlFor="email" className={classes.Label} >Email</label>
@@ -58,7 +59,16 @@ class Login extends Component{
                         </div>
                         <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
                     </Form>
-                )}
+                )
+            }
+        }
+            
+        return (
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={this.handleSubmit}
+                render={form}
             />
         )
     }
@@ -67,7 +77,10 @@ class Login extends Component{
 
 const mapStateToProps = state => {
     return {
-        error: state.login.error
+        loading: state.login.loading,
+        error: state.login.error,
+        response: state.login.response,
+        message: state.login.message
     }
 }
 

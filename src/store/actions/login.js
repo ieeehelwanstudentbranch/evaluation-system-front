@@ -8,8 +8,7 @@ export const loginStart = () => {
 }
 
 export const loginSuccess = (response) => {
-    let token;
-    if (response.data.hasOwnProperty(token)){
+    if (response.data.hasOwnProperty('token')){
         return {
             type: actionTypes.LOGIN_SUCCESS,
             token: response.data.token,

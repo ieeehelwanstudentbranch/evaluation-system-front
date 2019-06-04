@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
-
 import classes from '../../../components/UI/Input/Input.module.scss';
 import * as actions from '../../../store/actions/index';
 
@@ -65,10 +64,17 @@ class Login extends Component{
     }
 };
 
+
+const mapStateToProps = state => {
+    return {
+        error: state.login.error
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onLogin: (email, password, remember_me) => dispatch(actions.login(email, password, remember_me))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

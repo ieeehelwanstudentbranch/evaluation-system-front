@@ -19,9 +19,9 @@ const loginStart = (state, action) => {
 const loginSuccess = (state, action) => {
     return {
         ...state,
-        token: action.token,
-        message: action.message,
+        token: `bearer ${action.token}`,
         response: action.response,
+        message: action.message,
         error: null,
         loading: false
     };
@@ -30,8 +30,10 @@ const loginSuccess = (state, action) => {
 const loginFailed = (state, action) => {
     return {
         ...state,
+        response: action.response,
+        message: action.message,
         error: action.error,
-        loading: null
+        loading: false
     };
 }
 

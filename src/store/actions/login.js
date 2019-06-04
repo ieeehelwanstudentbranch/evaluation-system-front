@@ -7,11 +7,21 @@ export const loginStart = () => {
     }
 }
 
-export const loginSuccess = (token, response) => {
-    return {
-        type: actionTypes.LOGIN_SUCCESS,
-        token: token,
-        response: response
+export const loginSuccess = (response) => {
+    let token;
+    if (response.data.hasOwnProperty(token)){
+        return {
+            type: actionTypes.LOGIN_SUCCESS,
+            token: response.data.token,
+            response: response.data.response,
+            message: response.data.message
+        }
+    } else {
+        return {
+            type: actionTypes.LOGIN_SUCCESS,
+            response: response.data.response,
+            message: response.data.message
+        }
     }
 }
 
@@ -32,12 +42,11 @@ export const login = (email, password, remember_me) => {
         }
         axios.post('/login', loginData)
             .then(response=>{
-                dispatch(loginSuccess(response.data.result.token, response.data.response));
-                console.log(response.data.result.token, response.data.response);
+                dispatch(loginSuccess(response));
             })
             .catch(error => {
-                console.log(error);
-                dispatch(loginFailed(error));
+                dispatch(loginFailed(error)); 
             })
+        ;
     }
 }

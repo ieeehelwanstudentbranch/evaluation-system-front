@@ -7,6 +7,20 @@ export const loginStart = () => {
     }
 }
 
+export const destroyToken = () => {
+    return {
+        type: actionTypes.DESTROY_TOKEN
+    }
+}
+
+export const checkLoginTime = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(destroyToken());
+        }, expirationTime);
+    }
+}
+
 export const loginSuccess = (response) => {
     if (response.data.hasOwnProperty('token')){
         return {
@@ -42,6 +56,7 @@ export const login = (email, password, remember_me) => {
         axios.post('/login', loginData)
             .then(response=>{
                 dispatch(loginSuccess(response));
+                dispatch(checkLoginTime(response.data.expirationTime));
             })
             .catch(error => {
                 dispatch(loginFailed(error));

@@ -35,6 +35,14 @@ const loginFailed = (state, action) => {
     };
 }
 
+const destroyToken = (state, action) => {
+    return {
+        ...state,
+        token: null,
+        loading: false
+    };
+}
+
 const loginReducer = (state = initialState, action)=>{
     switch (action.type) {
         case actionTypes.LOGIN_START:
@@ -43,6 +51,8 @@ const loginReducer = (state = initialState, action)=>{
             return loginSuccess(state, action);
         case actionTypes.LOGIN_FAILED:
             return loginFailed(state, action);
+        case actionTypes.DESTROY_TOKEN:
+            return destroyToken(state, action);
         default:
             return state;
     }

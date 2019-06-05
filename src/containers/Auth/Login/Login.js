@@ -36,44 +36,48 @@ class Login extends Component{
         }
         let form;
         if (this.props.loading){
-            form = (FormikProps)=>{return <Spinner />}
+            form =  <Spinner />
         } else {
-            form =(FormikProps)=>{
-                return(
-                    <Form >
-                        <div className={classes.Input}>
-                            <label htmlFor="email" className={classes.Label} >Email</label>
-                            <Field type="email" id="email" name="email" placeholder="Email" className={classes.InputElement}/>
-                            <ErrorMessage name="email" />
-                        </div>
-                        <div className={classes.Input}>
-                            <label htmlFor="password" className={classes.Label} >Email</label>
-                            <Field type="password" id="password" name="password" placeholder="Password" className={classes.InputElement}/>
-                            <ErrorMessage name="password" />
-                        </div>
-                        <div className={classes.Input}>    
-                            <label htmlFor="remember_me" className={classes.Label}>
-                                <Field type="checkbox" id="remember_me" name="remember_me" />
-                                Keep me loged in
-                            </label>
-                        </div>
-                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
-                    </Form>
-                )
-            }
+            form = <>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={this.handleSubmit}
+                    render={(FormikProps)=>(
+                        <Form >
+                            {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
+                            {this.props.message? <span>{this.props.message}</span>: null}
+                            <div className={classes.Input}>
+                                <label htmlFor="email" className={classes.Label} >Email</label>
+                                <Field type="email" id="email" name="email" placeholder="Email" className={classes.InputElement}/>
+                                <ErrorMessage name="email" />
+                            </div>
+                            <div className={classes.Input}>
+                                <label htmlFor="password" className={classes.Label} >Email</label>
+                                <Field type="password" id="password" name="password" placeholder="Password" className={classes.InputElement}/>
+                                <ErrorMessage name="password" />
+                            </div>
+                            <div className={classes.Input}>    
+                                <label htmlFor="remember_me" className={classes.Label}>
+                                    <Field type="checkbox" id="remember_me" name="remember_me" />
+                                    Keep me loged in
+                                </label>
+                            </div>
+                            <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
+                        </Form>
+                    )}
+                />
+            </>
         }
-            
-        return (
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={this.handleSubmit}
-                render={form}
-            />
-        )
+        
+        
+        return(
+            <div>
+                {form}
+            </div>
+        );
     }
-};
-
+}
 
 const mapStateToProps = state => {
     return {

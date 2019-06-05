@@ -11,7 +11,7 @@ const initialState = {
 const loginStart = (state, action) => {
     return {
         ...state,
-        error: false,
+        error: null,
         loading: true
     };
 }
@@ -30,8 +30,6 @@ const loginSuccess = (state, action) => {
 const loginFailed = (state, action) => {
     return {
         ...state,
-        response: action.response,
-        message: action.message,
         error: action.error,
         loading: false
     };

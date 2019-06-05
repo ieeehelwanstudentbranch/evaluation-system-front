@@ -44,7 +44,7 @@ export const login = (email, password, remember_me) => {
                 dispatch(loginSuccess(response));
             })
             .catch(error => {
-                dispatch(loginFailed(error)); 
+                dispatch(loginFailed(error));
             })
         ;
     }

@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import * as reducers from './repeatedReducers';
 
 const initialState = {
     token: null,
@@ -8,14 +9,6 @@ const initialState = {
     loading: false
 };
 
-const loginStart = (state, action) => {
-    return {
-        ...state,
-        error: null,
-        loading: true
-    };
-}
-
 const loginSuccess = (state, action) => {
     return {
         ...state,
@@ -23,14 +16,6 @@ const loginSuccess = (state, action) => {
         response: action.response,
         message: action.message,
         error: null,
-        loading: false
-    };
-}
-
-const loginFailed = (state, action) => {
-    return {
-        ...state,
-        error: action.error,
         loading: false
     };
 }
@@ -46,11 +31,11 @@ const destroyToken = (state, action) => {
 const loginReducer = (state = initialState, action)=>{
     switch (action.type) {
         case actionTypes.LOADING_HANDLER:
-            return loginStart(state, action);
+            return reducers.loadingHandler(state, action);
         case actionTypes.LOGIN_SUCCESS:
             return loginSuccess(state, action);
         case actionTypes.SERVER_ERROR_HANDLER:
-            return loginFailed(state, action);
+            return reducers.serverErrorHandler(state, action);
         case actionTypes.DESTROY_TOKEN:
             return destroyToken(state, action);
         default:

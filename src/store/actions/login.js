@@ -1,11 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
-
-export const loginStart = () => {
-    return {
-        type: actionTypes.LOGIN_START
-    }
-}
+import * as actions from './repeatedActions';
 
 export const destroyToken = () => {
     return {
@@ -38,16 +33,9 @@ export const loginSuccess = (response) => {
     }
 }
 
-export const loginFailed = (error) => {
-    return {
-        type: actionTypes.LOGIN_FAILED,
-        error: error
-    }
-}
-
 export const login = (email, password, remember_me) => {
     return dispatch => {
-        dispatch(loginStart());
+        dispatch(actions.loadingHandler());
         const loginData = {
             email: email,
             password: password,
@@ -59,7 +47,7 @@ export const login = (email, password, remember_me) => {
                 dispatch(checkLoginTime(response.data.expirationTime));
             })
             .catch(error => {
-                dispatch(loginFailed(error));
+                dispatch(actions.serverErrorHandler(error));
             })
         ;
     }

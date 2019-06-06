@@ -3,7 +3,7 @@ import axios from '../../axios';
 
 export const registerStart = () => {
     return {
-        type: actionTypes.REGISTER_START
+        type: actionTypes.LOADING_HANDLER
     }
 }
 
@@ -16,7 +16,7 @@ export const registerSuccess = (registerData) => {
 
 export const registerFailed = (error) => {
     return {
-        type: actionTypes.REGISTER_FAILED,
+        type: actionTypes.SERVER_ERROR_HANDLER,
         error: error
     }
 }

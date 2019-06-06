@@ -45,11 +45,11 @@ const destroyToken = (state, action) => {
 
 const loginReducer = (state = initialState, action)=>{
     switch (action.type) {
-        case actionTypes.LOGIN_START:
+        case actionTypes.LOADING_HANDLER:
             return loginStart(state, action);
         case actionTypes.LOGIN_SUCCESS:
             return loginSuccess(state, action);
-        case actionTypes.LOGIN_FAILED:
+        case actionTypes.SERVER_ERROR_HANDLER:
             return loginFailed(state, action);
         case actionTypes.DESTROY_TOKEN:
             return destroyToken(state, action);

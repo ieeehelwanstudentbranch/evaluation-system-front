@@ -1,0 +1,17 @@
+form {
+    padding: 20px;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    .leftSection{
+        width: 70%;
+        padding-right: 10px;
+        .basicInfo {
+            display: flex;
+            margin-bottom: 20px;
+        }
+    }
+    .rightSection{
+        width: 30%
+    }
+}

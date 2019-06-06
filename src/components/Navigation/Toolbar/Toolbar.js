@@ -13,7 +13,8 @@ class Toolbar extends Component {
                 type: 'search',
                 placeholder: 'Search',
                 id: 'search',
-                name: 'search'
+                name: 'search',
+                icon: {name: 'faSearch', position: 'Right'}
             },
             value: '',
             validation: {
@@ -31,9 +32,12 @@ class Toolbar extends Component {
                 <Logo height="80%"/>
                 <DrawerToggle MobileMenuOpen={this.props.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
                 <div className={classes.DesktopOnly}>
-                    <Input elementConfig={this.state.searchInput.elementConfig}/>
-                    <AuthenticatedNavigation />
-                    <AnonymousNavigation />
+                {this.props.isAuthenticated ?
+                    <>
+                        <Input elementConfig={this.state.searchInput.elementConfig}/> 
+                        <AuthenticatedNavigation />
+                    </> : <AnonymousNavigation />
+                }
                 </div>
             </header>
         )

@@ -1,34 +1,39 @@
 @import '../../../assets/scss/color_variables';
 .Input {
     width: 100%;
-    padding: 10px;
-}
-.Label {
-    font-weight: bold;
-    display: block;
-    margin: 8px 0;
-    text-align: left
-}
-.InputElement {
-    font: inherit;
-    outline: none;
-    border: 1px solid $main_color;
-    background-color: $white;
-    padding: 6px 10px;
-    display: block;
-    width: 100%;
-    border-radius: 5px;
-    &:focus {
+    padding: 8px 0;
+    position: relative;
+    .Label {
+        font-weight: bold;
+        display: block;
+        margin: 8px 0;
+        text-align: left
+    }
+    .InputElement {
+        font: inherit;
         outline: none;
-        background-color: $lite_gray;
-        color: $white
+        border: 1px solid $main_color;
+        background-color: $white;
+        padding: 6px 10px;
+        display: block;
+        width: 100%;
+        border-radius: 5px;
+        &:focus {
+            outline: none;
+        }
+    }
+    .Icon{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $main_color
     }
 }
+
 .Invalid{
-    border: 1px solid red;
-    background-color: #FDA49A;
+    border: 1px solid red !important;
 }
 
 .Valid{
-    border: 1px solid green;
+    border: 1px solid green !important;
 }

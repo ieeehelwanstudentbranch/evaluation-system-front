@@ -7,6 +7,7 @@ const authenticatedNavigation = () => (
         <ul className={classes.AuthenticatedNavigation}>
             <NavigationItem link="/" exact>Home</NavigationItem>
             <NavigationItem link="/profile" exact>Profile</NavigationItem>
+            <NavigationItem link="/logout" exact>Logout</NavigationItem>
         </ul>
     </nav>
 );

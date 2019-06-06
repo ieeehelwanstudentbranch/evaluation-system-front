@@ -12,22 +12,27 @@ const sideNavigation = (props) => {
             <aside className={props.open? classes.Open : classes.Close}>
                 <nav>
                     <ul>
-                        <NavigationItem link="/create-task">
-                            <FontAwesomeIcon icon={faPlus} />
-                            Create Task
-                        </NavigationItem>
-                        <NavigationItem link="/completed-tasks">
-                            <FontAwesomeIcon icon={faCheck} />
-                            Completed Tasks
-                        </NavigationItem>
-                        <NavigationItem link="/pending-tasks">
-                            <FontAwesomeIcon icon={faFolder} />
-                            Pending Tasks    
-                        </NavigationItem>
-                        <NavigationItem link="/committees">
-                            <FontAwesomeIcon icon={faGopuram} />
-                            Committees    
-                        </NavigationItem>
+                        {props.isAuthenticated ? 
+                            <>
+                                <NavigationItem link="/create-task">
+                                    <FontAwesomeIcon icon={faPlus} />
+                                    Create Task
+                                </NavigationItem>
+                                <NavigationItem link="/completed-tasks">
+                                    <FontAwesomeIcon icon={faCheck} />
+                                    Completed Tasks
+                                </NavigationItem>
+                                <NavigationItem link="/pending-tasks">
+                                    <FontAwesomeIcon icon={faFolder} />
+                                    Pending Tasks    
+                                </NavigationItem>
+                                <NavigationItem link="/committees">
+                                    <FontAwesomeIcon icon={faGopuram} />
+                                    Committees    
+                                </NavigationItem>
+                            </> :
+                            <null />
+                        }
                     </ul>
                 </nav>
             </aside>

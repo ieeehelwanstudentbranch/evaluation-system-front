@@ -84,5 +84,4 @@ export const logoutSuccess = (response) => {
             message: response.data.message
         }
     }
-    
 }

@@ -10,6 +10,7 @@ import PendingTasks from './PendingTasks/PendingTasks';
 import Login from './Auth/Login/Login';
 // import Auth from './Auth/Auth';
 import Registration from './Auth/Registration/Registration';
+import Logout from './Auth/Logout/Logout';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/completed-tasks" component={CompletedTasks}/>
           <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" render={()=><p>Comittees</p>}/>
+          <Route path="/logout" component={Logout}/>
           <Route path="/login" component={Login}/>
           <Route path="/registration" component={Registration}/>
         </Layout>

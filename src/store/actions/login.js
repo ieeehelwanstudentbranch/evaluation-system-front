@@ -2,17 +2,23 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
 
-export const destroyToken = () => {
-    return {
-        type: actionTypes.DESTROY_TOKEN
-    }
-}
-
-export const checkLoginTime = (expirationTime) => {
+export const login = (email, password, remember_me) => {
     return dispatch => {
-        setTimeout(() => {
-            dispatch(destroyToken());
-        }, expirationTime);
+        dispatch(actions.loadingHandler());
+        const loginData = {
+            email: email,
+            password: password,
+            remember_me: remember_me
+        }
+        axios.post('/login', loginData)
+            .then(response=>{
+                dispatch(loginSuccess(response));
+                dispatch(checkLoginTime(response.data.expirationTime));
+            })
+            .catch(error => {
+                dispatch(actions.serverErrorHandler(error));
+            })
+        ;
     }
 }
 
@@ -33,22 +39,50 @@ export const loginSuccess = (response) => {
     }
 }
 
-export const login = (email, password, remember_me) => {
+export const checkLoginTime = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(destroyToken());
+        }, expirationTime);
+    }
+}
+
+export const destroyToken = () => {
+    return {
+        type: actionTypes.DESTROY_TOKEN
+    }
+}
+
+export const logout = (token) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
-        const loginData = {
-            email: email,
-            password: password,
-            remember_me: remember_me
+        let data = {
+            token: token
         }
-        axios.post('/login', loginData)
+        axios.post('/logout', data)
             .then(response=>{
-                dispatch(loginSuccess(response));
-                dispatch(checkLoginTime(response.data.expirationTime));
+                dispatch(logoutSuccess(response));
             })
             .catch(error => {
                 dispatch(actions.serverErrorHandler(error));
             })
         ;
     }
+}
+
+export const logoutSuccess = (response) => {
+    console.log(response.data);
+    if (response.data.success){
+        return {
+            type: actionTypes.LOGOUT_SUCCESS,
+            token: null,
+            response: response.data.response,
+            message: response.data.message
+        }
+    } else {
+        return {
+            message: response.data.message
+        }
+    }
+    
 }

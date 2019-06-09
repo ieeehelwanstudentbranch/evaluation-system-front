@@ -3,7 +3,6 @@ import * as reducers from './repeatedReducers';
 
 const initialState = {
     token: null,
-    response: null,
     message: null,
     error: null,
     loading: false
@@ -12,8 +11,15 @@ const initialState = {
 const loginSuccess = (state, action) => {
     return {
         ...state,
-        token: `bearer ${action.token}`,
-        response: action.response,
+        token: action.token,
+        message: action.message,
+        error: null,
+        loading: false
+    };
+}
+const loginFailed = (state, action) => {
+    return {
+        ...state,
         message: action.message,
         error: null,
         loading: false
@@ -44,6 +50,8 @@ const loginReducer = (state = initialState, action)=>{
             return reducers.loadingHandler(state, action);
         case actionTypes.LOGIN_SUCCESS:
             return loginSuccess(state, action);
+        case actionTypes.LOGIN_FAILED:
+            return loginFailed(state, action);
         case actionTypes.SERVER_ERROR_HANDLER:
             return reducers.serverErrorHandler(state, action);
         case actionTypes.DESTROY_TOKEN:

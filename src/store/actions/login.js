@@ -12,8 +12,17 @@ export const login = (email, password, remember_me) => {
         }
         axios.post('/login', loginData)
             .then(response=>{
-                dispatch(loginSuccess(response));
-                dispatch(checkLoginTime(response.data.expirationTime));
+                let token = null,
+                expirationDate = null;
+                console.log(response, token, expirationDate);
+                if (response.data.hasOwnProperty('token')){
+                    token = `bearer ${response.data.token}`;
+                    expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                    dispatch(loginSuccess(token, response.data.message));
+                    dispatch(checkLoginTime(expirationDate));
+                }else{
+                    dispatch(loginFailed(response.data.message));
+                }
             })
             .catch(error => {
                 dispatch(actions.serverErrorHandler(error));
@@ -22,29 +31,30 @@ export const login = (email, password, remember_me) => {
     }
 }
 
-export const loginSuccess = (response) => {
-    if (response.data.hasOwnProperty('token')){
-        return {
-            type: actionTypes.LOGIN_SUCCESS,
-            token: response.data.token,
-            response: response.data.response,
-            message: response.data.message
-        }
-    } else {
-        return {
-            type: actionTypes.LOGIN_SUCCESS,
-            response: response.data.response,
-            message: response.data.message
-        }
+export const loginSuccess = (token, message) => {
+    return {
+        type: actionTypes.LOGIN_SUCCESS,
+        token: token,
+        message: message
     }
 }
 
-export const checkLoginTime = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(destroyToken());
-        }, expirationTime);
+export const loginFailed = (message) => {
+    return {
+        type: actionTypes.LOGIN_FAILED,
+        message: message
     }
+}
+
+export const checkLoginTime = (expirationDate) => {
+    let currentDate = new Date();
+    setInterval(()=>{
+        if (expirationDate == currentDate){
+            return dispatch => {
+                dispatch(destroyToken());
+            }
+        }
+    }, 1000)
 }
 
 export const destroyToken = () => {

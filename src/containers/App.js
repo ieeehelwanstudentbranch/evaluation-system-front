@@ -8,7 +8,6 @@ import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
 import Login from './Auth/Login/Login';
-// import Auth from './Auth/Auth';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 

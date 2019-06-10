@@ -15,8 +15,6 @@ export const login = (email, password, remember_me) => {
                 if (response.data.hasOwnProperty('token')){
                     // calculate expiration date
                     let expirationDate = new Date(new Date().getTime() + response.data.expirationTime * 1000);
-                    // let expirationDate = new Date(2019, 5, 10, 6, 30, 0, 0);
-
                     // set token and expiration date in local storage
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('expirationDate', expirationDate);
@@ -34,7 +32,6 @@ export const login = (email, password, remember_me) => {
 }
 
 export const loginSuccess = (token, message) => {
-    console.log(token);
     return {
         type: actionTypes.LOGIN_SUCCESS,
         token: `bearer ${token}`,
@@ -63,26 +60,24 @@ export const checkLoginTime = (expirationDate, token) => {
     }
 }
 
-export const logout = (token = null) => {
+export const logout = (token) => {
     return dispatch => {
-        if (token !== null){
-            dispatch(actions.loadingHandler());
-            let data = {
-                token: token
-            }
-            axios.post('/logout', data)
-                .then(response=>{
-                    if (response.data.success){
-                        dispatch(logoutSuccess(response.data.message));
-                    } else {
-                        dispatch(logoutFailed(response.data.message));
-                    }
-                })
-                .catch(error => {
-                    dispatch(actions.serverErrorHandler(error));
-                })
-            ;
+        dispatch(actions.loadingHandler());
+        let data = {
+            token: token
         }
+        axios.post('/logout', data)
+            .then(response=>{
+                if (response.data.success){
+                    dispatch(logoutSuccess(response.data.message));
+                } else {
+                    dispatch(logoutFailed(response.data.message));
+                }
+            })
+            .catch(error => {
+                dispatch(actions.serverErrorHandler(error));
+            })
+        ;
     }
 }
 
@@ -104,7 +99,9 @@ export const logoutFailed = (message) => {
 export const loginCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
-        if (token){
+        if (!token){
+            dispatch(logoutSuccess(null));
+        } else {
             const expirationDate = new Date (localStorage.getItem('expirationDate'));
             if (expirationDate <= new Date()){
                 dispatch(logout(token))

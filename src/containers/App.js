@@ -22,7 +22,7 @@ class App extends Component {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Redirect to="/" />
+        <Redirect to="/login" />
       </Switch>
     );
     if (this.props.isAuthenticated){
@@ -57,8 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch( actions.loginCheckState() )
+    onTryAutoSignup: () => dispatch(actions.loginCheckState())
   };
 };
 
-export default withRouter( connect( mapStateToProps, mapDispatchToProps )( App ) );
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

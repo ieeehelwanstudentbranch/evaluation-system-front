@@ -10,9 +10,9 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 // LOGIN
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
-export const DESTROY_TOKEN = "DESTROY_TOKEN";
 export const LOGOUT = "LOGOUT";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 // committees
 export const ADD_COMMITTEE = "ADD_COMMITTEE";

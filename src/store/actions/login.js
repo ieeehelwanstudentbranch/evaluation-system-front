@@ -20,7 +20,7 @@ export const login = (email, password, remember_me) => {
                     localStorage.setItem('token', token);
                     localStorage.setItem('expirationDate', expirationDate);
                     dispatch(loginSuccess(token, response.data.message));
-                    dispatch(checkLoginTime(expirationDate));
+                    dispatch(checkLoginTime(expirationDate, response.data.token));
                 }else{
                     dispatch(loginFailed(response.data.message));
                 }
@@ -47,53 +47,54 @@ export const loginFailed = (message) => {
     }
 }
 
-export const checkLoginTime = (expirationDate) => {
-    let currentDate = new Date();
-    setInterval(()=>{
-        if (expirationDate == currentDate){
-            return dispatch => {
-                dispatch(destroyToken());
+export const checkLoginTime = (expirationDate, token) => {
+    return dispatch => {
+        let currentDate = new Date();
+        let interval = setInterval(()=>{
+            if (currentDate >= expirationDate){
+                clearInterval(interval);
+                dispatch(logout(token));
+            }else{
+                currentDate = new Date();
             }
-        }
-    }, 1000)
+        }, 1000)
+    }
 }
 
-export const destroyToken = () => {
+export const logout = (token = null) => {
+    return dispatch => {
+        if (token !== null){
+            dispatch(actions.loadingHandler());
+            let data = {
+                token: token
+            }
+            axios.post('/logout', data)
+                .then(response=>{
+                    if (response.data.success){
+                        dispatch(logoutSuccess(response.data.message));
+                    } else {
+                        dispatch(logoutFailed(response.data.message));
+                    }
+                })
+                .catch(error => {
+                    dispatch(actions.serverErrorHandler(error));
+                })
+            ;
+        }
+    }
+}
+
+export const logoutSuccess = (message) => {
     localStorage.clear()
     return {
-        type: actionTypes.DESTROY_TOKEN
+        type: actionTypes.LOGOUT_SUCCESS,
+        token: null,
+        message: message
     }
 }
-
-export const logout = (token) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        let data = {
-            token: token
-        }
-        axios.post('/logout', data)
-            .then(response=>{
-                dispatch(logoutSuccess(response));
-            })
-            .catch(error => {
-                dispatch(actions.serverErrorHandler(error));
-            })
-        ;
-    }
-}
-
-export const logoutSuccess = (response) => {
-    console.log(response.data);
-    if (response.data.success){
-        return {
-            type: actionTypes.LOGOUT_SUCCESS,
-            token: null,
-            response: response.data.response,
-            message: response.data.message
-        }
-    } else {
-        return {
-            message: response.data.message
-        }
+export const logoutFailed = (message) => {
+    return {
+        type: actionTypes.LOGOUT_FAILED,
+        message: message
     }
 }

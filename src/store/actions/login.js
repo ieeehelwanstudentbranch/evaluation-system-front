@@ -12,12 +12,13 @@ export const login = (email, password, remember_me) => {
         }
         axios.post('/login', loginData)
             .then(response=>{
-                let token = null,
-                expirationDate = null;
-                console.log(response, token, expirationDate);
                 if (response.data.hasOwnProperty('token')){
-                    token = `bearer ${response.data.token}`;
-                    expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                    let token = `bearer ${response.data.token}`;
+                    // calculate expiration date
+                    let expirationDate = new Date(new Date().getTime() + response.data.expirationTime * 1000);
+                    // set token and expiration date in local storage
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('expirationDate', expirationDate);
                     dispatch(loginSuccess(token, response.data.message));
                     dispatch(checkLoginTime(expirationDate));
                 }else{
@@ -58,6 +59,7 @@ export const checkLoginTime = (expirationDate) => {
 }
 
 export const destroyToken = () => {
+    localStorage.clear()
     return {
         type: actionTypes.DESTROY_TOKEN
     }

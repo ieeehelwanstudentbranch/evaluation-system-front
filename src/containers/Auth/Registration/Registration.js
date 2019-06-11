@@ -1,238 +1,175 @@
 import React, {Component} from 'react';
-import Input from '../../../components/UI/Input/Input';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {Redirect} from 'react-router-dom';
+import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import InputClasses from '../../../components/UI/Input/Input.module.scss';
 import classes from './Registration.module.scss';
 
 class Registration extends Component{
-    state = {
-        controls: {
-            firstName: {
-                labelName: 'First Name',
-                elementConfig: {
-                    type: 'text',
-                    id: 'firstName',
-                    name: 'firstName',
-                    placeholder: 'First Name',
-                },
-                validation: {
-                    minLength: 2,
-                    maxLength: 15,
-                    required: true,
-                    isEmail: false
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            lastName: {
-                labelName: 'Last Name',
-                elementConfig: {
-                    type: 'text',
-                    id: 'lastName',
-                    name: 'lastName',
-                    placeholder: 'Last Name',
-                },
-                validation: {
-                    minLength: 2,
-                    maxLength: 15,
-                    required: true,
-                    isEmail: false
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            email: {
-                labelName: 'Email',
-                elementConfig: {
-                    type: 'email',
-                    id: 'email',
-                    name: 'email',
-                    placeholder: 'E-Mail',
-                },
-                validation: {
-                    minLength: 5,
-                    maxLength: 50,
-                    required: true,
-                    isEmail: true
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            password: {
-                labelName: 'Password',
-                elementConfig: {
-                    type: 'password',
-                    id: 'password',
-                    name: 'password',
-                    placeholder: 'Password',
-                },
-                validation: {
-                    minLength: 8,
-                    maxLength: 20,
-                    required: true,
-                    isPassword: true
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            passwordConfirm: {
-                labelName: 'Confirm Password',
-                elementConfig: {
-                    type: 'password',
-                    id: 'passwordConfirm',
-                    name: 'passwordConfirm',
-                    placeholder: 'Confirm Password',
-                },
-                validation: {
-                    minLength: 8,
-                    maxLength: 20,
-                    required: true,
-                    isPassword: true
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            DOB: {
-                labelName: 'Date Of Birth',
-                elementConfig: {
-                    type: 'date',
-                    id: 'dob',
-                    name: 'dob'
-                },
-                validation: {
-                    required: false,
-                    isEmail: false
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            faculty: {
-                labelName: 'Faculty',
-                elementConfig: {
-                    type: 'text',
-                    id: 'faculty',
-                    name: 'faculty'
-                },
-                validation: {
-                    required: false,
-                    isEmail: false,
-                    minLength: 4,
-                    maxLength: 15
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-            university: {
-                labelName: 'University',
-                elementConfig: {
-                    type: 'text',
-                    id: 'university',
-                    name: 'university'
-                },
-                validation: {
-                    required: false,
-                    isEmail: false,
-                    minLength: 4,
-                    maxLength: 15
-                },
-                value: '',
-                valid: false,
-                touched: false
-            },
-        },
-        formIsValid: false
-    }
-
-    inputChangedHandler = (event, controlName) => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
-                value: event.target.value,
-                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
-                touched: true,
-            }
-        };
-        let formIsValid = true;
-        for (let controlName in updatedControls){
-            formIsValid = updatedControls[controlName].valid && formIsValid;
-        }
-        this.setState({controls: updatedControls, formIsValid: formIsValid});
-    }
-
-    checkValidity(value, rules) {
-        let isValid = true;
-        if (!rules) {
-            return true;
-        }
-        
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
-        }
-
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isPassword) {
-            const pattern = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-        return isValid;
-    }
-
     render(){
-        const formElementsArray = [];
-        for (let key in this.state.controls){
-            formElementsArray.push({
-                id: key,
-                config: this.state.controls[key]
-            })
+        const validationSchema = Yup.object().shape({
+            firstName: Yup.string()
+                .trim()
+                .min(2, "First Name must be at least 2 characters or longer")
+                .max(20, 'First Name is too long it must be less than or equal 20 characters')
+                .required('First Name is Required'),
+            lastName: Yup.string()
+                .trim()
+                .min(2, "Last Name must be at least 2 characters or longer")
+                .max(20, 'Last Name is too long it must be less than or equal 20 characters')
+                .required('Last Name is Required'),
+            email: Yup.string()
+                .trim()
+                .required('No Email Provided')
+                .email('It doesn\'t seems an valid Email'),
+            password: Yup.string()
+                .trim()
+                .required('No Password Provided')
+                .min(8, 'Password is too short it must be at least 8 characters or longer')
+                .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must contains numbers, capital letters, small letters and special characters '),
+            passwordConfirmation: Yup.string()
+                .trim()
+                .required('No Password Provided')
+                .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+            DOB: Yup.date(),
+            position: Yup.string()
+                .required('Please select your position'),
+            ex_options: Yup.string()
+                .notRequired()
+                .when('position',{
+                    is: (val) => val === 'EX_com',
+                    then: Yup.string()
+                    .required('You must choose your position')
+                }),
+            committee: Yup.string()
+                .required('Please choose your new Family')
+                .when('position',{
+                    is: (value) => value === 'EX_com',
+                    then: Yup.string()
+                    .notRequired()
+                })
+            ,
+            faculty: Yup.string().trim(),
+            university: Yup.string().trim(),
+        });
+        const initialValues= {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            passwordConfirmation: '',
+            DOB: '',
+            position: '',
+            ex_options: '',
+            committee: '',
+            faculty: '',
+            university: ''
         }
-        const form = formElementsArray.map(formElement => (
-            <Input
-                key={formElement.id}
-                labelName={formElement.config.labelName}
-                id={formElement.id}
-                elementConfig={formElement.config.elementConfig}
-                value={formElement.config.value}
-                touched={formElement.config.touched}
-                invalid={!formElement.config.valid}
-                shouldValidate={formElement.config.validation}
-                changed={(event) => this.inputChangedHandler(event, formElement.id)}
-            />
-        ));
-
+        let form;
+        if (this.props.loading){
+            form =  <Spinner />
+        } else {
+            form = <>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={this.handleSubmit}
+                    render={(FormikProps)=>(
+                        <Form className={classes.Form}>
+                            {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
+                            {this.props.message? <span>{this.props.message}</span>: null}
+                            <div className={classes.LeftSection}>
+                                <div className={classes.row}>
+                                    <div className={InputClasses.Input}>
+                                        <Field type="text" id="firstName" name="firstName" placeholder="First Name" className={InputClasses.InputElement}/>
+                                        <ErrorMessage name="firstName" />
+                                    </div>
+                                    <div className={InputClasses.Input}>
+                                        <Field type="text" id="lastName" name="lastName" placeholder="Last Name" className={InputClasses.InputElement}/>
+                                        <ErrorMessage name="lastName" />
+                                    </div>
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="email" id="email" name="email" placeholder="Email" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="email" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="password" id="password" name="password" placeholder="Password" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="password" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="password Confirmation" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="passwordConfirmation" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="date" id="dob" name="DOB" placeholder="Date Of Birth" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="DOB" />
+                                </div>
+                            </div>
+                            <div className={classes.RightSection}>
+                                <div className={InputClasses.Input}>
+                                    <Field component="select" id="position" name="position" className={InputClasses.InputElement}>
+                                        <option value="">Select Your Position</option>
+                                        <option value="EX_com">Ex-com</option>
+                                        <option value="highBoard">High Board</option>
+                                        <option value="volunteer">Volunteer</option>
+                                    </Field>
+                                    <ErrorMessage name="position"/>
+                                </div>
+                                {FormikProps.values.position === 'EX_com'? 
+                                    <div className={InputClasses.Input}>
+                                        <Field component="select" id="ex_options" name="ex_options" className={InputClasses.InputElement} placeholder="Your Position">
+                                            <option value="">Select Your Role</option>
+                                            <option value="chairperson">Chairperson</option>
+                                            <option value="vice_chairperson">Vice Chairperson</option>
+                                            <option value="treasurer">Treasurer</option>
+                                            <option value="secretary">Secretary</option>
+                                            <option value="chairperson_ras">Chairperson RAS</option>
+                                            <option value="chairperson_pes">Chairperson PES</option>
+                                            <option value="chairperson_wie">Chairperson WIE</option>
+                                        </Field>
+                                        <ErrorMessage name="ex_options" />
+                                    </div>:
+                                    null
+                                }
+                                
+                                <div className={InputClasses.Input}>
+                                    <Field component="select" id="committee" name="committee" placeholder="Committee" className={InputClasses.InputElement}>
+                                        <option value="">Select Comittee</option>
+                                        <option value="it">IT</option>
+                                    </Field>
+                                    <ErrorMessage name="committee" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="faculty" id="faculty" name="faculty" placeholder="Faculty" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="faculty" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="university" id="university" name="university" placeholder="University" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="university" />
+                                </div>
+                                <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
+                            </div>
+                        </Form>
+                    )}
+                />
+            </>
+        }
+        let authRedirect = null;
+        if (this.props.isAuthenticated){
+            authRedirect = <Redirect to="/" />
+        }
         return(
-            <div className={classes.Auth}>
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <Button btnType="Default" disabled={!this.state.formIsValid}>Submit</Button>
-                </form>
+            <div>
+                {authRedirect}
+                {form}
+                
             </div>
-        )
-        
+        );
     }
 }
+
 
 export default Registration;

@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {Redirect} from 'react-router-dom';
 import * as Yup from 'yup';
+import * as actions from '../../../store/actions/index';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import InputClasses from '../../../components/UI/Input/Input.module.scss';
 import classes from './Registration.module.scss';
 
 class Registration extends Component{
+
+    handleSubmit = (values, {props = this.props, setSubmitting }) => {
+        props.onRegister(values.firstName, values.lastName,values.email, values.password, values.password_confirmation, values.DOB, values.position, values.ex_options, values.committee, values.faculty, values.university);
+        setSubmitting(false);
+        return;
+    }
+
     render(){
         const validationSchema = Yup.object().shape({
             firstName: Yup.string()
@@ -131,13 +140,14 @@ class Registration extends Component{
                                         </Field>
                                         <ErrorMessage name="ex_options" />
                                     </div>:
-                                    null
+                                    <>
+                                    </>
                                 }
                                 {FormikProps.values.position !== 'EX_com' && FormikProps.values.position !== '' ? 
                                     <div className={InputClasses.Input}>
                                         <Field component="select" id="committee" name="committee" className={InputClasses.InputElement}>
                                             <option value="">Select Comittee</option>
-                                            <option value="it">IT</option>
+                                            <option value="1">IT</option>
                                         </Field>
                                         <ErrorMessage name="committee" />
                                     </div> :
@@ -172,5 +182,14 @@ class Registration extends Component{
     }
 }
 
+const mapStateToProps = state => {
 
-export default Registration;
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onRegister: (firstName, lastName, email, password, password_confirmation, DOB, position, ex_options, committee, faculty, university) => dispatch(actions.register(firstName, lastName, email, password, password_confirmation, DOB, position, ex_options, committee, faculty, university))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

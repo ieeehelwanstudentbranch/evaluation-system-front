@@ -29,7 +29,7 @@ class Registration extends Component{
                 .required('No Password Provided')
                 .min(8, 'Password is too short it must be at least 8 characters or longer')
                 .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must contains numbers, capital letters, small letters and special characters '),
-            passwordConfirmation: Yup.string()
+            password_confirmation: Yup.string()
                 .trim()
                 .required('No Password Provided')
                 .oneOf([Yup.ref('password'), null], 'Passwords must match'),
@@ -58,7 +58,7 @@ class Registration extends Component{
             lastName: '',
             email: '',
             password: '',
-            passwordConfirmation: '',
+            password_confirmation: '',
             DOB: '',
             position: '',
             ex_options: '',
@@ -99,8 +99,8 @@ class Registration extends Component{
                                     <ErrorMessage name="password" />
                                 </div>
                                 <div className={InputClasses.Input}>
-                                    <Field type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="password Confirmation" className={InputClasses.InputElement}/>
-                                    <ErrorMessage name="passwordConfirmation" />
+                                    <Field type="password" id="password_confirmation" name="password_confirmation" placeholder="password Confirmation" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="password_confirmation" />
                                 </div>
                                 <div className={InputClasses.Input}>
                                     <Field type="date" id="dob" name="DOB" placeholder="Date Of Birth" className={InputClasses.InputElement}/>

@@ -1,29 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
-
-export const registerStart = () => {
-    return {
-        type: actionTypes.LOADING_HANDLER
-    }
-}
-
-export const registerSuccess = (registerData) => {
-    return {
-        type: actionTypes.REGISTER_SUCCESS,
-        registerData: registerData
-    }
-}
-
-export const registerFailed = (error) => {
-    return {
-        type: actionTypes.SERVER_ERROR_HANDLER,
-        error: error
-    }
-}
+import * as actions from './repeatedActions';
 
 export const register = (firstName, lastName, email, password, password_confirmation, DOB, faculty, university, position, ex_options, committee) => {
     return dispatch => {
-        dispatch(registerStart());
+        dispatch(actions.loadingHandler());
         const registerData = {
             firstName: firstName,
             lastName: lastName,
@@ -42,7 +23,14 @@ export const register = (firstName, lastName, email, password, password_confirma
                 dispatch(registerSuccess(response.data));
             })
             .catch(error => {
-                dispatch(registerFailed(error));
+                dispatch(actions.serverErrorHandler(error));
             })
+    }
+}
+
+export const registerSuccess = (registerData) => {
+    return {
+        type: actionTypes.REGISTER_SUCCESS,
+        registerData: registerData
     }
 }

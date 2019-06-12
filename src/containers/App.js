@@ -8,6 +8,7 @@ import { Route, withRouter, Redirect,Switch } from 'react-router-dom';
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
+import Committees from './Committees/Comittees';
 import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
@@ -33,7 +34,7 @@ class App extends Component {
           <Route path="/create-task" component={CreateTask}/>
           <Route path="/completed-tasks" component={CompletedTasks}/>
           <Route path="/pending-tasks" component={PendingTasks}/>
-          <Route path="/committees" render={()=><p>Comittees</p>}/>
+          <Route path="/committees" component={Committees}/>
           <Route path="/logout" component={Logout}/>
           <Redirect to="/" />
         </Switch>

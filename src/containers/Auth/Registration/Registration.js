@@ -37,18 +37,17 @@ class Registration extends Component{
             position: Yup.string()
                 .required('Please select your position'),
             ex_options: Yup.string()
-                .notRequired()
                 .when('position',{
-                    is: (val) => val === 'EX_com',
+                    is: 'EX_com',
                     then: Yup.string()
-                    .required('You must choose your position')
+                        .required('You must choose your position'),
+                    otherwise: Yup.string().notRequired()
                 }),
             committee: Yup.string()
-                .required('Please choose your new Family')
                 .when('position',{
-                    is: (value) => value === 'EX_com',
-                    then: Yup.string()
-                    .notRequired()
+                    is: 'EX_com',
+                    then: Yup.string().notRequired(),
+                    otherwise: Yup.string().required('Please choose your new Family')
                 })
             ,
             faculty: Yup.string().trim(),
@@ -81,7 +80,7 @@ class Registration extends Component{
                             {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
                             {this.props.message? <span>{this.props.message}</span>: null}
                             <div className={classes.LeftSection}>
-                                <div className={classes.row}>
+                                <div className={classes.Row}>
                                     <div className={InputClasses.Input}>
                                         <Field type="text" id="firstName" name="firstName" placeholder="First Name" className={InputClasses.InputElement}/>
                                         <ErrorMessage name="firstName" />
@@ -118,7 +117,7 @@ class Registration extends Component{
                                     </Field>
                                     <ErrorMessage name="position"/>
                                 </div>
-                                {FormikProps.values.position === 'EX_com'? 
+                                {FormikProps.values.position === 'EX_com' ? 
                                     <div className={InputClasses.Input}>
                                         <Field component="select" id="ex_options" name="ex_options" className={InputClasses.InputElement} placeholder="Your Position">
                                             <option value="">Select Your Role</option>
@@ -134,14 +133,16 @@ class Registration extends Component{
                                     </div>:
                                     null
                                 }
-                                
-                                <div className={InputClasses.Input}>
-                                    <Field component="select" id="committee" name="committee" placeholder="Committee" className={InputClasses.InputElement}>
-                                        <option value="">Select Comittee</option>
-                                        <option value="it">IT</option>
-                                    </Field>
-                                    <ErrorMessage name="committee" />
-                                </div>
+                                {FormikProps.values.position !== 'EX_com' && FormikProps.values.position !== '' ? 
+                                    <div className={InputClasses.Input}>
+                                        <Field component="select" id="committee" name="committee" className={InputClasses.InputElement}>
+                                            <option value="">Select Comittee</option>
+                                            <option value="it">IT</option>
+                                        </Field>
+                                        <ErrorMessage name="committee" />
+                                    </div> :
+                                    null
+                                }
                                 <div className={InputClasses.Input}>
                                     <Field type="faculty" id="faculty" name="faculty" placeholder="Faculty" className={InputClasses.InputElement}/>
                                     <ErrorMessage name="faculty" />

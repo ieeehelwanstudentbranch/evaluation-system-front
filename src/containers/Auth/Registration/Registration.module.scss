@@ -12,6 +12,10 @@
         @media screen and (max-width: $mobile_landscape_max_width){
             width: 100%
         }
+        .Row{
+            display: flex;
+            justify-content: space-between;
+        }
     }
     .RightSection{
         width: 49%;

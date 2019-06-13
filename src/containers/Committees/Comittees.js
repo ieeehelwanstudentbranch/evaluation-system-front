@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import Committee from '../../components/Committee/Committee';
 import Modal from '../../components/UI/Modal/Modal';
 import CommitteeForm from '../../components/Committee/CommitteeForm/CommitteeForm';
-
+import classes from './Committees.module.scss';
+// import Logo from '../../components/Logo/Logo';
 class Committees extends Component{
     state={
         editing: false
@@ -19,7 +20,7 @@ class Committees extends Component{
     render(){
         return (
             <>
-                <div>
+                <div className={classes.Committees}>
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" editing={this.editingHandler}/>
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
@@ -27,6 +28,7 @@ class Committees extends Component{
                 </div>
                 {
                     <Modal show={this.state.editing} modalClosed={this.editingCancelHandler}>
+                        
                         <CommitteeForm />
                     </Modal>
                 }

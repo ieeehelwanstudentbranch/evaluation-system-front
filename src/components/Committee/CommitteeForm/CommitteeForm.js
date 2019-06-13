@@ -3,6 +3,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import InputClasses from '../../UI/Input/Input.module.scss';
 import Button from '../../UI/Button/Button';
+// import Logo from '../../Logo/Logo';
 class CommitteForm extends Component {
     state={
         isAdding: true

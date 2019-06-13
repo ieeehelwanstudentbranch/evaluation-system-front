@@ -1,12 +1,24 @@
+@import '../../assets/scss/screen_sizes';
 @import '../../assets/scss/color_variables';
 
 .Committee {
+    @media screen and (max-width: $mobile_landscape_max_width){
+        width: calc(100vw);
+    }
+    @media screen and (min-width: $small_tablet_min_width){
+        width: calc(100% / 2.1);
+        margin-right: 10px
+    }
+    @media screen and (min-width: $large_max_width){
+        width: calc(100% / 3.1);
+        margin-right: 10px
+    }
     padding: 15px;
-    width: 450px;
+    width: calc(100vw/4);
     position: relative;
     transition: all 0.5s ease-in-out;
     border: 1px solid $lite_gray;
-
+    margin-bottom: 20px;
     h3 {
         margin-bottom: 10px;
         color: $black
@@ -32,6 +44,7 @@
         align-items: center;
         font-size: 25px;
         color: $black;
+        cursor: pointer;
     }
 
     &:hover {

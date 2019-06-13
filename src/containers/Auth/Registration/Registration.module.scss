@@ -1,0 +1,27 @@
+@import '../../../assets/scss/screen_sizes';
+.Form{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 100%;
+    @media screen and (max-width: $mobile_landscape_max_width){
+        flex-flow: column;
+    }
+    .LeftSection{
+        width: 49%;
+        @media screen and (max-width: $mobile_landscape_max_width){
+            width: 100%
+        }
+        .Row{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .RightSection{
+        width: 49%;
+        @media screen and (max-width: $mobile_landscape_max_width){
+            width: 100%
+        }
+    }
+
+}

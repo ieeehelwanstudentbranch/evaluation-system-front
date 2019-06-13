@@ -6,6 +6,7 @@ import Button from '../../../components/UI/Button/Button';
 import classes from '../../../components/UI/Input/Input.module.scss';
 import * as actions from '../../../store/actions/index';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import {Redirect } from 'react-router-dom';
 
 class Login extends Component{
 
@@ -21,7 +22,6 @@ class Login extends Component{
                 .trim()
                 .required('No Email Provided')
                 .email('It doesn\'t seems an valid Email'),
-                // .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'It doesn\'t seems an valid Email Address'),
             password: Yup.string()
                 .trim()
                 .required('No Password Provided')
@@ -53,7 +53,7 @@ class Login extends Component{
                                 <ErrorMessage name="email" />
                             </div>
                             <div className={classes.Input}>
-                                <label htmlFor="password" className={classes.Label} >Email</label>
+                                <label htmlFor="password" className={classes.Label} >Password</label>
                                 <Field type="password" id="password" name="password" placeholder="Password" className={classes.InputElement}/>
                                 <ErrorMessage name="password" />
                             </div>
@@ -69,10 +69,14 @@ class Login extends Component{
                 />
             </>
         }
-        
+        let authRedirect = null;
+        if (this.props.isAuthenticated){
+            authRedirect = <Redirect to="/" />
+        }
         
         return(
             <div>
+                {authRedirect}
                 {form}
             </div>
         );
@@ -83,8 +87,8 @@ const mapStateToProps = state => {
     return {
         loading: state.login.loading,
         error: state.login.error,
-        response: state.login.response,
-        message: state.login.message
+        message: state.login.message,
+        isAuthenticated: state.login.token !== null
     }
 }
 

@@ -2,37 +2,6 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
 
-export const destroyToken = () => {
-    return {
-        type: actionTypes.DESTROY_TOKEN
-    }
-}
-
-export const checkLoginTime = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(destroyToken());
-        }, expirationTime);
-    }
-}
-
-export const loginSuccess = (response) => {
-    if (response.data.hasOwnProperty('token')){
-        return {
-            type: actionTypes.LOGIN_SUCCESS,
-            token: response.data.token,
-            response: response.data.response,
-            message: response.data.message
-        }
-    } else {
-        return {
-            type: actionTypes.LOGIN_SUCCESS,
-            response: response.data.response,
-            message: response.data.message
-        }
-    }
-}
-
 export const login = (email, password, remember_me) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
@@ -43,12 +12,103 @@ export const login = (email, password, remember_me) => {
         }
         axios.post('/login', loginData)
             .then(response=>{
-                dispatch(loginSuccess(response));
-                dispatch(checkLoginTime(response.data.expirationTime));
+                if (response.data.hasOwnProperty('token')){
+                    // calculate expiration date
+                    let expirationDate = new Date(new Date().getTime() + response.data.expirationTime * 1000);
+                    // set token and expiration date in local storage
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('expirationDate', expirationDate);
+                    dispatch(loginSuccess(response.data.token, response.data.message));
+                    dispatch(checkLoginTime(expirationDate, response.data.token));
+                }else{
+                    dispatch(loginFailed(response.data.message));
+                }
             })
             .catch(error => {
                 dispatch(actions.serverErrorHandler(error));
             })
         ;
+    }
+}
+
+export const loginSuccess = (token, message) => {
+    return {
+        type: actionTypes.LOGIN_SUCCESS,
+        token: `bearer ${token}`,
+        message: message
+    }
+}
+
+export const loginFailed = (message) => {
+    return {
+        type: actionTypes.LOGIN_FAILED,
+        message: message
+    }
+}
+
+export const checkLoginTime = (expirationDate, token) => {
+    return dispatch => {
+        let currentDate = new Date();
+        let interval = setInterval(()=>{
+            if (currentDate >= expirationDate){
+                clearInterval(interval);
+                dispatch(logout(token));
+            }else{
+                currentDate = new Date();
+            }
+        }, 1000)
+    }
+}
+
+export const logout = (token) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        let data = {
+            token: token
+        }
+        axios.post('/logout', data)
+            .then(response=>{
+                if (response.data.success){
+                    dispatch(logoutSuccess(response.data.message));
+                } else {
+                    dispatch(logoutFailed(response.data.message));
+                }
+            })
+            .catch(error => {
+                dispatch(actions.serverErrorHandler(error));
+            })
+        ;
+    }
+}
+
+export const logoutSuccess = (message) => {
+    localStorage.clear()
+    return {
+        type: actionTypes.LOGOUT_SUCCESS,
+        token: null,
+        message: message
+    }
+}
+export const logoutFailed = (message) => {
+    return {
+        type: actionTypes.LOGOUT_FAILED,
+        message: message
+    }
+}
+
+export const loginCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem('token');
+        if (!token){
+            dispatch(logoutSuccess(null));
+        } else {
+            const expirationDate = new Date (localStorage.getItem('expirationDate'));
+            if (expirationDate <= new Date()){
+                dispatch(logout(token))
+            }else {
+                dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically'));
+                dispatch(checkLoginTime(expirationDate, token));
+            }
+        }
     }
 }

@@ -8,8 +8,26 @@ import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import InputClasses from '../../../components/UI/Input/Input.module.scss';
 import classes from './Registration.module.scss';
+import axios from '../../../axios';
 
 class Registration extends Component{
+
+    state={
+        committees: null,
+        error: null
+    }
+
+    componentDidMount(){
+        // this.props.initializeCommittees();
+        axios.get('/register')
+        .then(response=>{
+            let committees = response.data.data.committees;
+            this.setState({committees: committees});
+        })
+        .catch(error => {
+            this.setState({error: error});
+        })
+    }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
         props.onRegister(values.firstName, values.lastName,values.email, values.password, values.password_confirmation, values.DOB, values.position, values.ex_options, values.committee, values.faculty, values.university);
@@ -146,12 +164,17 @@ class Registration extends Component{
                                 {FormikProps.values.position !== 'EX_com' && FormikProps.values.position !== '' ? 
                                     <div className={InputClasses.Input}>
                                         <Field component="select" id="committee" name="committee" className={InputClasses.InputElement}>
-                                            <option value="">Select Comittee</option>
-                                            <option value="1">IT</option>
+                                            <option value="">Select Committee</option>
+                                            { this.state.committees ?
+                                                this.state.committees.map((committee, index)=>{
+                                                return (
+                                                    <option key={index} value={committee}>{committee}</option>
+                                                )
+                                                }): <option value="">failed to get committees, please try again later</option>
+                                            }
                                         </Field>
                                         <ErrorMessage name="committee" />
-                                    </div> :
-                                    null
+                                    </div> : <></>
                                 }
                                 <div className={InputClasses.Input}>
                                     <Field type="faculty" id="faculty" name="faculty" placeholder="Faculty" className={InputClasses.InputElement}/>
@@ -182,14 +205,10 @@ class Registration extends Component{
     }
 }
 
-const mapStateToProps = state => {
-
-}
-
 const mapDispatchToProps = dispatch => {
     return {
         onRegister: (firstName, lastName, email, password, password_confirmation, DOB, position, ex_options, committee, faculty, university) => dispatch(actions.register(firstName, lastName, email, password, password_confirmation, DOB, position, ex_options, committee, faculty, university))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default connect(null, mapDispatchToProps)(Registration);

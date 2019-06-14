@@ -3,7 +3,7 @@ import Committee from '../../components/Committee/Committee';
 import Modal from '../../components/UI/Modal/Modal';
 import CommitteeForm from '../../components/Committee/CommitteeForm/CommitteeForm';
 import classes from './Committees.module.scss';
-// import Logo from '../../components/Logo/Logo';
+import {MdAdd} from 'react-icons/md'
 class Committees extends Component{
     state={
         editing: false
@@ -25,6 +25,7 @@ class Committees extends Component{
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
+                    <MdAdd className={classes.AddCommittee}/>
                 </div>
                 {
                     <Modal show={this.state.editing} modalClosed={this.editingCancelHandler}>

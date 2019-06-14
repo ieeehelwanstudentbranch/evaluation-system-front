@@ -6,15 +6,23 @@ import classes from './Committees.module.scss';
 import {MdAdd} from 'react-icons/md'
 class Committees extends Component{
     state={
-        editing: false
+        editing: false,
+        adding: false
     }
 
     editingHandler = () =>{
         this.setState({editing: true});
     }
 
-    editingCancelHandler=()=>{
-        this.setState({editing: false})
+    CancelHandler=()=>{
+        this.setState({
+            editing: false,
+            adding: false
+        })
+    }
+
+    addCommitteeHandler = () =>{
+        this.setState({adding: true});
     }
 
     render(){
@@ -25,10 +33,10 @@ class Committees extends Component{
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
                     <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
-                    <MdAdd className={classes.AddCommittee}/>
+                    <MdAdd className={classes.AddCommittee} onClick={this.addCommitteeHandler}/>
                 </div>
                 {
-                    <Modal show={this.state.editing} modalClosed={this.editingCancelHandler}>
+                    <Modal show={this.state.editing||this.state.adding} modalClosed={this.CancelHandler}>
                         <CommitteeForm />
                     </Modal>
                 }

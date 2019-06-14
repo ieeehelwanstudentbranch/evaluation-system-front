@@ -19,7 +19,7 @@ class Modal extends Component{
                     }}
                 >
                     <header>
-                        <Logo height="100px" />
+                        <Logo/>
                         <div className={classes.Icon}>
                             <MdClose onClick={this.props.modalClosed}/>
                         </div>

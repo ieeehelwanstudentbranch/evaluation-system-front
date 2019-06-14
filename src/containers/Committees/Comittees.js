@@ -28,7 +28,6 @@ class Committees extends Component{
                 </div>
                 {
                     <Modal show={this.state.editing} modalClosed={this.editingCancelHandler}>
-                        
                         <CommitteeForm />
                     </Modal>
                 }

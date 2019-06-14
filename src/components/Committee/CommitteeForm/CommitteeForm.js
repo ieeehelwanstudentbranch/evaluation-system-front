@@ -3,6 +3,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import InputClasses from '../../UI/Input/Input.module.scss';
 import Button from '../../UI/Button/Button';
+import classes from '../../UI/Input/Input.module.scss';
 // import Logo from '../../Logo/Logo';
 class CommitteForm extends Component {
     state={
@@ -35,7 +36,7 @@ class CommitteForm extends Component {
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
                 render={(FormikProps)=>(
-                    <Form >
+                    <Form style={{justifyContent: 'flex-end'}}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
                         {this.props.message? <span>{this.props.message}</span>: null}
                         <div className={InputClasses.Input}>

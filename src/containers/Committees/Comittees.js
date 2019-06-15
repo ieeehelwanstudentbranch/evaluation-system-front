@@ -10,35 +10,51 @@ import * as actions from '../../store/actions/index'
 class Committees extends Component{
     state={
         editing: false,
-        adding: false
+        adding: false,
+        committeeData: null
     }
+
     componentDidMount(){
         this.props.onInit()
-    }
-
-    editingHandler = () =>{
-        this.setState({editing: true});
-    }
-
-    CancelHandler=()=>{
-        this.setState({
-            editing: false,
-            adding: false
-        })
     }
 
     addCommitteeHandler = () =>{
         this.setState({adding: true});
     }
 
+    editingHandler = () =>{
+        this.setState({
+            editing: true,
+            committeeData: {
+                name: this.name,
+                mentor: this.mentor,
+                director: this.director,
+                hr_od: this.hr_od
+            }
+        });
+    }
+
+    CancelHandler=()=>{
+        this.setState({
+            editing: false,
+            committeeData: null,
+            adding: false
+        })
+    }
+
     render(){
+        let committees = this.props.committees;
+        let committeeComponent;
+        if (committees!==null){
+            committeeComponent = committees.map(committee=>(
+                <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.directo} hr_od={committee.hr_od} editing={this.editingHandler}/>
+            ))
+        }
+
         return (
             <>
                 <div className={classes.Committees}>
-                    <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" editing={this.editingHandler}/>
-                    <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
-                    <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
-                    <Committee mentor="Mahmoud Khaled" director="Mohamed Emad" hr_od="Pola" numberOfVolunteers="20" />
+                    {committeeComponent}
                     <MdAdd className={classes.AddCommittee} onClick={this.addCommitteeHandler}/>
                 </div>
                 {
@@ -50,11 +66,17 @@ class Committees extends Component{
         )
     }
 }
-
+const mapStateToProps = state => {
+    return {
+        committees: state.committees.committees,
+        loading: state.committees.loading,
+        error: state.committees.error
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return{
         onInit: ()=> dispatch(actions.initializeCommittees())
     }
 }
-export default connect(null, mapDispatchToProps)(Committees);
+export default connect(mapStateToProps, mapDispatchToProps)(Committees);

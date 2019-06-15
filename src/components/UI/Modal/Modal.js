@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import classes from './Modal.module.scss';
 import Backdrop from '../Backdrop/Backdrop';
+import Logo from '../../Logo/ColoredLogo';
+import {MdClose} from 'react-icons/md';
 
 class Modal extends Component{
     shouldComponentUpdate(nextProps, nextState){
@@ -13,10 +15,17 @@ class Modal extends Component{
                 <div
                     className={classes.Modal}
                     style={{
-                        transform: this.props.show? 'translateY(0)': 'translateY(-100vh)',
-                        opacity: this.props.show? '1':'0'
+                        display: this.props.show? 'flex': 'none'
                     }}
                 >
+                    <header>
+                        <Logo/>
+                        <div className={classes.Icon}>
+                            <MdClose onClick={this.props.modalClosed}/>
+                        </div>
+                        
+                    </header>
+                    
                     {this.props.children}
                 </div>
             </>

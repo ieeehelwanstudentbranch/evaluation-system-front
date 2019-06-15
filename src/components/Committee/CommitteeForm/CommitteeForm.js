@@ -4,9 +4,6 @@ import * as Yup from 'yup';
 import InputClasses from '../../UI/Input/Input.module.scss';
 import Button from '../../UI/Button/Button';
 class CommitteForm extends Component {
-    state={
-        isAdding: true
-    }
     
     render(){
         const initialValues={
@@ -34,7 +31,7 @@ class CommitteForm extends Component {
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
                 render={(FormikProps)=>(
-                    <Form >
+                    <Form style={{justifyContent: 'flex-end'}}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
                         {this.props.message? <span>{this.props.message}</span>: null}
                         <div className={InputClasses.Input}>
@@ -66,7 +63,7 @@ class CommitteForm extends Component {
                             </Field>
                             <ErrorMessage name="hr_od" />
                         </div>
-                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>{this.state.isAdding?'ADD COMMITTEE': 'EDIT COMMITTEE'}</Button>
+                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>{this.props.adding?'ADD COMMITTEE': 'EDIT COMMITTEE'}</Button>
                     </Form>
                 )}
             />

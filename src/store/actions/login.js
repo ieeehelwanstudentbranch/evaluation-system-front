@@ -14,7 +14,7 @@ export const login = (email, password, remember_me) => {
             .then(response=>{
                 if (response.data.hasOwnProperty('token')){
                     // calculate expiration date
-                    let expirationDate = new Date(new Date().getTime() + response.data.expirationTime * 1000);
+                    let expirationDate = new Date(new Date().getTime() + (response.data.expirationTime * 60) * 1000);
                     // set token and expiration date in local storage
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('expirationDate', expirationDate);

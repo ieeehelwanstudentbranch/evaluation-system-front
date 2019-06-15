@@ -4,9 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers  } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
+import axios from './axios';
 import loginReducer from './store/reducers/login';
 import registerReducer from './store/reducers/register';
+import committeesReducer from './store/reducers/committees';
 
 import './index.css';
 import App from './containers/App';
@@ -15,8 +16,9 @@ import * as serviceWorker from './serviceWorker';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    login: loginReducer ,
-    register: registerReducer
+    login: loginReducer,
+    register: registerReducer,
+    committees: committeesReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
@@ -25,19 +27,20 @@ const store = createStore(rootReducer, composeEnhancers(
 
 // interceptors for Application
 // interceptors for request
-axios.interceptors.request.use(request=>{
-    console.log(request);
-    return request;
+axios.interceptors.request.use((config)=>{
+    const token = localStorage.getItem('token');
+    // request.headers.Authorization =  token;
+    config.headers.Authorization = `bearer ${token}`;
+    return config;
 }, error=>{
     console.log(error);
     return Promise.reject(error)
 });
+
 // interceptors for response
 axios.interceptors.response.use(response=>{
-    console.log(response);
     return response;
 }, error=>{
-    console.log(error);
     return Promise.reject(error)
 });
 

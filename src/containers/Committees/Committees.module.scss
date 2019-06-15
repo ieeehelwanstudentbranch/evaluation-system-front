@@ -1,0 +1,19 @@
+@import '../../assets/scss/color_variables';
+.Committees{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    .AddCommittee{
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: $main_color;
+        color: $white;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}

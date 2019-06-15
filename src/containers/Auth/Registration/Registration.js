@@ -30,7 +30,7 @@ class Registration extends Component{
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        props.onRegister(values.firstName, values.lastName,values.email, values.password, values.password_confirmation, values.DOB, values.position, values.ex_options, values.committee, values.faculty, values.university);
+        props.onRegister(values.firstName, values.lastName,values.email, values.password, values.password_confirmation, values.DOB, values.faculty, values.university, values.position, values.ex_options, values.committee);
         setSubmitting(false);
         return;
     }
@@ -104,8 +104,16 @@ class Registration extends Component{
                     onSubmit={this.handleSubmit}
                     render={(FormikProps)=>(
                         <Form className={classes.Form}>
-                            {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
-                            {this.props.message? <span>{this.props.message}</span>: null}
+                            {this.props.error? 
+                                <span>
+                                    {this.props.error['email']}
+                                </span>: null
+                            }
+                            {this.props.message? 
+                                <span>
+                                    {this.props.message}
+                                </span>: null
+                            }
                             <div className={classes.LeftSection}>
                                 <div className={classes.Row}>
                                     <div className={InputClasses.Input}>
@@ -199,16 +207,21 @@ class Registration extends Component{
             <div>
                 {authRedirect}
                 {form}
-                
             </div>
         );
     }
 }
-
+const mapStateToProps = state => {
+    return{
+        loading: state.register.loading,
+        error: state.register.error,
+        message: state.register.message,
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
-        onRegister: (firstName, lastName, email, password, password_confirmation, DOB, position, ex_options, committee, faculty, university) => dispatch(actions.register(firstName, lastName, email, password, password_confirmation, DOB, position, ex_options, committee, faculty, university))
+        onRegister: (firstName, lastName, email, password, password_confirmation, DOB, faculty, university, position, ex_options, committee)=> dispatch(actions.register(firstName, lastName, email, password, password_confirmation, DOB, faculty, university, position, ex_options, committee))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Registration);
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

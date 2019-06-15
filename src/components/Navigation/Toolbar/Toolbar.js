@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Toolbar.module.scss';
-import Logo from '../../Logo/Logo';
+import Logo from '../../Logo/WhiteLogo';
 import AnonymousNavigation from '../AnonymousNavigation/AnonymousNavigation';
 import Input from '../../UI/Input/Input'
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';

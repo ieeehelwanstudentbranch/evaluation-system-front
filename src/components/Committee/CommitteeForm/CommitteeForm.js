@@ -3,12 +3,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import InputClasses from '../../UI/Input/Input.module.scss';
 import Button from '../../UI/Button/Button';
-import classes from '../../UI/Input/Input.module.scss';
-// import Logo from '../../Logo/Logo';
 class CommitteForm extends Component {
-    state={
-        isAdding: true
-    }
     
     render(){
         const initialValues={
@@ -68,7 +63,7 @@ class CommitteForm extends Component {
                             </Field>
                             <ErrorMessage name="hr_od" />
                         </div>
-                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>{this.state.isAdding?'ADD COMMITTEE': 'EDIT COMMITTEE'}</Button>
+                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>{this.props.adding?'ADD COMMITTEE': 'EDIT COMMITTEE'}</Button>
                     </Form>
                 )}
             />

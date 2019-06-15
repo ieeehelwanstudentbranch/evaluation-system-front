@@ -3,11 +3,17 @@ import Committee from '../../components/Committee/Committee';
 import Modal from '../../components/UI/Modal/Modal';
 import CommitteeForm from '../../components/Committee/CommitteeForm/CommitteeForm';
 import classes from './Committees.module.scss';
-import {MdAdd} from 'react-icons/md'
+import {MdAdd} from 'react-icons/md';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index'
+
 class Committees extends Component{
     state={
         editing: false,
         adding: false
+    }
+    componentDidMount(){
+        this.props.onInit()
     }
 
     editingHandler = () =>{
@@ -37,7 +43,7 @@ class Committees extends Component{
                 </div>
                 {
                     <Modal show={this.state.editing||this.state.adding} modalClosed={this.CancelHandler}>
-                        <CommitteeForm />
+                        <CommitteeForm adding={this.state.adding}/>
                     </Modal>
                 }
             </>
@@ -45,4 +51,10 @@ class Committees extends Component{
     }
 }
 
-export default Committees;
+
+const mapDispatchToProps = dispatch => {
+    return{
+        onInit: ()=> dispatch(actions.initializeCommittees())
+    }
+}
+export default connect(null, mapDispatchToProps)(Committees);

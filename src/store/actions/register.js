@@ -21,21 +21,26 @@ export const register = (firstName, lastName, email, password, password_confirma
         axios.post('/register', registerData)
             .then(response=>{
                 console.log(response)
-
+                dispatch(registerSuccess(response.data.message));
             })
             .catch(error => {
-                console.log(error.response)
-                let Convertederror = JSON.stringify(error);
-                console.log(Convertederror)
-                
-                // dispatch(actions.serverErrorHandler(error));
+                console.log(error.response.data);
+                dispatch(registerFailed(error.response.data));
             })
     }
 }
 
-export const registerSuccess = (registerData) => {
+export const registerSuccess = (message) => {
     return {
         type: actionTypes.REGISTER_SUCCESS,
-        registerData: registerData
+        message: message
+    }
+}
+
+export const registerFailed = (error) => {
+    return {
+        type: actionTypes.REGISTER_FAILED,
+        message: error.message,
+        error: error.errors
     }
 }

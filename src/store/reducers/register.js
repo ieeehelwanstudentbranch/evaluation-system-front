@@ -19,7 +19,7 @@ const registerFailed = (state, action) => {
     return {
         ...state,
         message: action.message,
-        error: null,
+        error: action.error,
         loading: false
     };
 }

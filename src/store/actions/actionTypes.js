@@ -16,10 +16,14 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 // committees
-export const ADD_COMMITTEE = "ADD_COMMITTEE";
-export const EDIT_COMMITTEE = "EDIT_COMMITTEE";
+// fetch committees in committees page
 export const FETCH_COMMITTEES_SUCCESS = "FETCH_COMMITTEES_SUCCESS";
 export const FETCH_COMMITTEES_FAILED = "FETCH_COMMITTEES_FAILED";
+// add committee
+export const ADD_COMMITTEE_SUCCESS = "ADD_COMMITTEE_SUCCESS";
+export const ADD_COMMITTEE_FAILED = "ADD_COMMITTEE_FAILED";
+// edit committee
+export const EDIT_COMMITTEE = "EDIT_COMMITTEE";
 
 // Tasks
 export const ADD_TASK = "ADD_TASK";

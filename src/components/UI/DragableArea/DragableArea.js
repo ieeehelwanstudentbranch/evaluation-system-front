@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import classes from './DragableArea.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
+import {MdCloudUpload} from 'react-icons/md';
 
 class dragableArea extends Component{
     state={
@@ -81,8 +83,8 @@ class dragableArea extends Component{
                             <div {...getRootProps()}>
                                 <input {...getInputProps()} />
                                 <div className={classes.Dropzone}>
-                                    <FontAwesomeIcon icon={faUpload} />
-                                    <p >Drag &amp; drop files here, or click to select files</p>
+                                    <MdCloudUpload/>
+                                    <p>Drag &amp; drop files here, or click to select files</p>
                                 </div>
                             </div>
                         </section>

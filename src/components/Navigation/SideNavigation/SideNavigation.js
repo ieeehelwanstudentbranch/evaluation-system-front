@@ -2,8 +2,7 @@ import React from 'react';
 import classes from './SideNavigation.module.scss';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faCheck, faFolder, faGopuram } from '@fortawesome/free-solid-svg-icons';
+import {MdAdd, MdCheck, MdErrorOutline, MdDeviceHub}from 'react-icons/md';
 
 const sideNavigation = (props) => {
     return(
@@ -15,19 +14,19 @@ const sideNavigation = (props) => {
                         {props.isAuthenticated ? 
                             <>
                                 <NavigationItem link="/create-task">
-                                    <FontAwesomeIcon icon={faPlus} />
+                                    <MdAdd />
                                     Create Task
                                 </NavigationItem>
                                 <NavigationItem link="/completed-tasks">
-                                    <FontAwesomeIcon icon={faCheck} />
+                                    <MdCheck />
                                     Completed Tasks
                                 </NavigationItem>
                                 <NavigationItem link="/pending-tasks">
-                                    <FontAwesomeIcon icon={faFolder} />
+                                    <MdErrorOutline />
                                     Pending Tasks    
                                 </NavigationItem>
                                 <NavigationItem link="/committees">
-                                    <FontAwesomeIcon icon={faGopuram} />
+                                    <MdDeviceHub />
                                     Committees    
                                 </NavigationItem>
                             </> :

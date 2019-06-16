@@ -13,7 +13,7 @@ class Committees extends Component{
     state={
         editing: false,
         adding: false,
-        error: null,
+        error: this.props.error,
         committeeData: {
             name: '',
             mentor: '',
@@ -40,7 +40,6 @@ class Committees extends Component{
     }
 
     editingHandler = (committee) =>{
-        console.log(committee);
         this.setState({
             editing: true,
             committeeData: {
@@ -72,7 +71,7 @@ class Committees extends Component{
         let committeeComponent;
         if(this.props.error){
             committeeComponent = <Modal show={this.state.error} modalClosed={this.CancelHandler}>
-                {this.state.error.message}
+                Network Error, please Try again later
             </Modal>
         } else if (this.props.loading){
             committeeComponent = <Spinner />
@@ -80,7 +79,6 @@ class Committees extends Component{
             if (committees!==null){
                 committeeComponent = committees.map(committee=>(
                     <>
-                    {console.log(committee)}
                     <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} editing={()=>this.editingHandler(committee)}/>
                     </>
                 ))

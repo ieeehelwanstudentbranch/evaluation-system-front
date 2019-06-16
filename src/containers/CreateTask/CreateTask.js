@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import Input from '../../components/UI/Input/Input';
 import classes from './CreateTask.module.scss'
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DragableArea from "../../components/UI/DragableArea/DragableArea";
-import CheckboxTree from 'react-checkbox-tree';
-import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import Button from '../../components/UI/Button/Button';
 
 class CreateTask extends Component {
@@ -79,7 +77,7 @@ class CreateTask extends Component {
                             <Input elementConfig={this.state.TaskForm.deadline.elementConfig} />
                         </div>
                         
-                        <CKEditor
+                        {/* <CKEditor
                             editor={ ClassicEditor }
                             data="<p>write your task details</p>"
                             config={{
@@ -100,17 +98,11 @@ class CreateTask extends Component {
                             onFocus={ editor => {
                                 console.log( 'Focus.', editor );
                             } }
-                        />
+                        /> */}
                         <DragableArea />
                     </div>
                     <div className={classes.rightSection}>
-                        <CheckboxTree
-                            nodes={this.state.nodes}
-                            checked={this.state.checked}
-                            expanded={this.state.expanded}
-                            onCheck={checked => this.setState({ checked })}
-                            onExpand={expanded => this.setState({ expanded })}
-                        />
+                        
                     </div>
                     <Button btnType="Default">Send</Button>
                 </form>

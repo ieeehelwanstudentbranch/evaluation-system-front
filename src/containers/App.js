@@ -5,6 +5,7 @@ import './App.scss';
 import Layout from '../hoc/Layout/Layout';
 import { Route, withRouter, Redirect,Switch } from 'react-router-dom';
 
+import Home from './Home/Home';
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
@@ -29,7 +30,7 @@ class App extends Component {
     if (this.props.isAuthenticated){
       routes = (
         <Switch>
-          <Route path="/" exact render={()=><p>home</p>}/>
+          <Route path="/" exact component={Home}/>
           <Route path="/profile" render={()=><p>profile</p>}/>
           <Route path="/create-task" component={CreateTask}/>
           <Route path="/completed-tasks" component={CompletedTasks}/>

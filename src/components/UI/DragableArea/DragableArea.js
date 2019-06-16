@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import classes from './DragableArea.module.scss';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
 
 import {MdCloudUpload} from 'react-icons/md';
 

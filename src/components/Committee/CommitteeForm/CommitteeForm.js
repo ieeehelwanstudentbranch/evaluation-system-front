@@ -26,7 +26,6 @@ class CommitteForm extends Component {
                 initialValues: initialValues
             })
         }
-        console.log(this.props);
     }
 
     componentDidMount(){

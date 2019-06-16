@@ -11,7 +11,12 @@ class Committees extends Component{
     state={
         editing: false,
         adding: false,
-        committeeData: null
+        committeeData: {
+            name: '',
+            mentor: '',
+            director: '',
+            hr_od: ''
+        }
     }
     // initializing committeess component by calling all committees
     componentDidMount(){
@@ -39,8 +44,13 @@ class Committees extends Component{
     CancelHandler=()=>{
         this.setState({
             editing: false,
-            committeeData: null,
-            adding: false
+            adding: false,
+            committeeData: {
+                name: '',
+                mentor: '',
+                director: '',
+                hr_od: ''
+            },
         })
     }
 

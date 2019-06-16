@@ -6,12 +6,14 @@ import CommitteeForm from '../../components/Committee/CommitteeForm/CommitteeFor
 import classes from './Committees.module.scss';
 import {MdAdd} from 'react-icons/md';
 import {connect} from 'react-redux';
-import * as actions from '../../store/actions/index'
+import * as actions from '../../store/actions/index';
+import Button from '../../components/UI/Button/Button';
 
 class Committees extends Component{
     state={
         editing: false,
         adding: false,
+        error: null,
         committeeData: {
             name: '',
             mentor: '',
@@ -22,6 +24,15 @@ class Committees extends Component{
     // initializing committeess component by calling all committees
     componentDidMount(){
         this.props.onInit()
+    }
+
+    componentDidUpdate(previousProps, previousState){
+        let error = this.props.error;
+        if (previousState.error !== error) {
+            this.setState({
+                error: error
+            })
+        }
     }
 
     addCommitteeHandler = () =>{
@@ -46,6 +57,7 @@ class Committees extends Component{
         this.setState({
             editing: false,
             adding: false,
+            error: null,
             committeeData: {
                 name: '',
                 mentor: '',
@@ -58,7 +70,11 @@ class Committees extends Component{
     render(){
         let committees = this.props.committees;
         let committeeComponent;
-        if (this.props.loading){
+        if(this.props.error){
+            committeeComponent = <Modal show={this.state.error} modalClosed={this.CancelHandler}>
+                {this.state.error.message}
+            </Modal>
+        } else if (this.props.loading){
             committeeComponent = <Spinner />
         } else {
             if (committees!==null){
@@ -69,7 +85,10 @@ class Committees extends Component{
                     </>
                 ))
             } else {
-                committeeComponent = <p>There is no committee yet </p>
+                committeeComponent = 
+                <Modal show={true} modalClosed={this.CancelHandler}>
+                    <p>Some thing went error, please try again later</p>
+                </Modal>
             }
         }
 

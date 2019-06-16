@@ -3,7 +3,7 @@ import Input from '../../components/UI/Input/Input';
 import classes from './CreateTask.module.scss'
 // import CKEditor from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import DragableArea from "../../components/UI/DragableArea/DragableArea";
+import DragableArea from "../../components/DragableArea/DragableArea";
 import Button from '../../components/UI/Button/Button';
 
 class CreateTask extends Component {

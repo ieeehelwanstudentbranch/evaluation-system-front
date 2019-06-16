@@ -1,8 +1,7 @@
 import React from 'react';
 import classes from './Task.module.scss';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import {MdCheckCircle} from 'react-icons/md'
 const task = (props) => {
     return(
         <NavLink className={classes.TaskLink} to={props.link} exact={props.exact}>
@@ -13,8 +12,7 @@ const task = (props) => {
                 {props.taskDescription ? <p>{props.taskDetails.taskDescription} </p> : null}
                 {props.sender ? <p>Sender Name: <span>{props.taskDetails.sender}</span></p> : null}
                 {props.reviever ? <p>Volunteer Name: <span>{props.taskDetails.reviever}</span></p>: null}
-                {props.score ? <span className={classes.TaskStatus}>{props.taskDetails.score}</span>: <span className={classes.TaskStatus}><FontAwesomeIcon icon={faCheck}/></span>}
-                {/* <span className={classes.TaskScore}>90</span> */}
+                {props.score ? <span className={classes.TaskStatus}>{props.taskDetails.score}</span>: <span className={classes.TaskStatus}><MdCheckCircle/></span>}
             </article>
         </NavLink>
         

@@ -29,7 +29,6 @@ class CommitteForm extends Component {
     }
 
     componentDidMount(){
-        // this.props.initializeCommittees();
         axios.get('/addcommittee')
         .then(response=>{
             console.log(response);

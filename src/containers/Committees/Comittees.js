@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import Committee from '../../components/Committee/Committee';
 import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import CommitteeForm from '../../components/Committee/CommitteeForm/CommitteeForm';
 import classes from './Committees.module.scss';
 import {MdAdd} from 'react-icons/md';
@@ -57,15 +58,19 @@ class Committees extends Component{
     render(){
         let committees = this.props.committees;
         let committeeComponent;
-        if (committees!==null){
-            committeeComponent = committees.map(committee=>(
-                <>
-                {console.log(committee)}
-                <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} editing={()=>this.editingHandler(committee)}/>
-                </>
-            ))
+        if (this.props.loading){
+            committeeComponent = <Spinner />
         } else {
-            committeeComponent = <p>There is no committee yet </p>
+            if (committees!==null){
+                committeeComponent = committees.map(committee=>(
+                    <>
+                    {console.log(committee)}
+                    <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} editing={()=>this.editingHandler(committee)}/>
+                    </>
+                ))
+            } else {
+                committeeComponent = <p>There is no committee yet </p>
+            }
         }
 
         return (

@@ -13,7 +13,7 @@ class Committees extends Component{
         adding: false,
         committeeData: null
     }
-
+    // initializing committeess component by calling all committees
     componentDidMount(){
         this.props.onInit()
     }
@@ -22,14 +22,16 @@ class Committees extends Component{
         this.setState({adding: true});
     }
 
-    editingHandler = () =>{
+    editingHandler = (committee) =>{
+        console.log(committee);
         this.setState({
             editing: true,
             committeeData: {
-                name: this.name,
-                mentor: this.mentor,
-                director: this.director,
-                hr_od: this.hr_od
+                id: committee.id,
+                name: committee.name,
+                mentor: committee.mentor.id,
+                director: committee.director,
+                hr_od: committee.hr_od
             }
         });
     }
@@ -47,8 +49,13 @@ class Committees extends Component{
         let committeeComponent;
         if (committees!==null){
             committeeComponent = committees.map(committee=>(
-                <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.directo} hr_od={committee.hr_od} editing={this.editingHandler}/>
+                <>
+                {console.log(committee)}
+                <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} editing={()=>this.editingHandler(committee)}/>
+                </>
             ))
+        } else {
+            committeeComponent = <p>There is no committee yet </p>
         }
 
         return (
@@ -59,7 +66,7 @@ class Committees extends Component{
                 </div>
                 {
                     <Modal show={this.state.editing||this.state.adding} modalClosed={this.CancelHandler}>
-                        <CommitteeForm adding={this.state.adding}/>
+                        <CommitteeForm committeeData={this.state.committeeData} adding={this.state.adding}/>
                     </Modal>
                 }
             </>

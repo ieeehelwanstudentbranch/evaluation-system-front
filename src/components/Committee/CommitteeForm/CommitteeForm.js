@@ -10,13 +10,30 @@ class CommitteForm extends Component {
     state ={
         mentors: null,
         directors: null,
-        hrs_od: null
+        hrs_od: null,
+        initialValues: {
+            name: '',
+            mentor: '',
+            director: '',
+            hr_od: ''
+        }
+    }
+
+    componentDidUpdate(previousProps, previousState) {
+        let initialValues = this.props.committeeData;
+        if (previousState.initialValues !== initialValues) {
+            this.setState({
+                initialValues: initialValues
+            })
+        }
+        console.log(this.props);
     }
 
     componentDidMount(){
         // this.props.initializeCommittees();
         axios.get('/addcommittee')
         .then(response=>{
+            console.log(response);
             let mentors = response.data.data.mentor;
             let directors = response.data.data.director;
             let hrs_od = response.data.data.hr_od;
@@ -35,16 +52,12 @@ class CommitteForm extends Component {
         if(this.props.adding){
             this.props.onAdding(values.name, values.mentor, values.director, values.hr_od);
         } else {
-            this.props.onEditing(this.props.id,values.name, values.mentor, values.director, values.hr_od);
+            this.props.onEditing(this.props.committeeData.id, values.name, values.mentor, values.director, values.hr_od);
         }
     }
+    
     render(){
-        const initialValues={
-            name: this.props.name || '',
-            mentor: this.props.mentor || '',
-            director: this.props.director || '',
-            hr_od: this.props.hr_od || ''
-        }
+        // let initialValues;
         const validationSchema = Yup.object().shape({
             name: Yup.string()
                 .trim()
@@ -52,16 +65,21 @@ class CommitteForm extends Component {
                 .min(3, 'Committee Name is too short it must be at least 3 characters or longer'),
             mentor: Yup.number()
                 .required('Please select the Committee mentor'),
-            director: Yup.string()
-                .trim(),
-            hr_od: Yup.string()
-                .trim()
+            director: Yup.number()
+            .nullable()
+            .notRequired(),
+            hr_od: Yup.number()
+                .notRequired(),
         });
+        const initialValues=this.state.initialValues
+        
         return (
             <Formik
+                enableReinitialize={true}
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
+
                 render={(FormikProps)=>(
                     <Form style={{justifyContent: 'flex-end'}}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
@@ -72,7 +90,7 @@ class CommitteForm extends Component {
                             <ErrorMessage name="name" />
                         </div>
                         <div className={InputClasses.Input}>
-                        <label htmlFor="mentor" className={InputClasses.Label} >Committee Mentor <span className="required">*</span></label>
+                            <label htmlFor="mentor" className={InputClasses.Label} >Committee Mentor <span className="required">*</span></label>
                             <Field component="select" id="mentor" name="mentor" className={InputClasses.InputElement}>
                                 <option value="">Select Committee Mentor</option>
                                 { this.state.mentors ?
@@ -85,34 +103,35 @@ class CommitteForm extends Component {
                             </Field>
                             <ErrorMessage name="mentor" />
                         </div>
-                        <div className={InputClasses.Input}>
-                            <label htmlFor="director" className={InputClasses.Label} >Committee Director</label>
-                            <Field component="select" id="director" name="director" className={InputClasses.InputElement}>
-                                <option value="">Select Committee Director</option>
-                                { this.state.directors ?
-                                    this.state.directors.map((director, index)=>{
-                                    return (
-                                        <option key={index} value={director.id}>{`${director.firstName} ${director.lastName}`}</option>
-                                    )
-                                    }): <option value="">failed to get Directors, please try again later</option>
-                                }
-                            </Field>
-                            <ErrorMessage name="director" />
-                        </div>
-                        <div className={InputClasses.Input}>
-                        <label htmlFor="hr_od" className={InputClasses.Label} >HR-Coordinator</label>
-                            <Field component="select" id="hr_od" name="hr_od" className={InputClasses.InputElement}>
-                                <option value="">Select HR-Coordinator for the committee</option>
-                                { this.state.hrs_od ?
-                                    this.state.hrs_od.map((hr_od, index)=>{
-                                    return (
-                                        <option key={index} value={hr_od.id}>{`${hr_od.firstName} ${hr_od.lastName}`}</option>
-                                    )
-                                    }): <option value="">failed to get HR-Coordinators, please try again later</option>
-                                }
-                            </Field>
-                            <ErrorMessage name="hr_od" />
-                        </div>
+                            <div className={InputClasses.Input}>
+                                <label htmlFor="director" className={InputClasses.Label} >Committee Director</label>
+                                <Field component="select" id="director" name="director" className={InputClasses.InputElement}>
+                                    <option value="">Select Committee Director</option>
+                                    {this.state.directors?
+                                        this.state.directors.map((director, index)=>{
+                                            return (
+                                                <option key={index} value={director.id}>{`${director.firstName} ${director.lastName}`}</option>
+                                            )
+                                        }):<></>
+                                    }
+                                </Field>
+                                <ErrorMessage name="director"/>
+                            </div>
+                            <div className={InputClasses.Input}>
+                                <label htmlFor="hr_od" className={InputClasses.Label} >HR-Coordinator</label>
+                                <Field component="select" id="hr_od" name="hr_od" className={InputClasses.InputElement}>
+                                    <option value="">Select HR-Coordinator for the committee</option>
+                                    { this.state.hrs_od ?
+                                        this.state.hrs_od.map((hr_od, index)=>{
+                                        return (
+                                            <option key={index} value={hr_od.id}>{`${hr_od.firstName} ${hr_od.lastName}`}</option>
+                                        )
+                                        }): <option value="">failed to get HR-Coordinators, please try again later</option>
+                                    }
+                                </Field>
+                                <ErrorMessage name="hr_od" />
+                            </div>
+                        
                         <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>{this.props.adding?'ADD COMMITTEE': 'EDIT COMMITTEE'}</Button>
                     </Form>
                 )}

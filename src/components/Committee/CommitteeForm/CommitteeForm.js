@@ -64,10 +64,12 @@ class CommitteForm extends Component {
             mentor: Yup.number()
                 .required('Please select the Committee mentor'),
             director: Yup.number()
-            .nullable()
-            .notRequired(),
-            hr_od: Yup.number()
+                .nullable()
                 .notRequired(),
+            hr_od: Yup.number()
+                .nullable()
+                .notRequired()
+            ,
         });
         const initialValues=this.state.initialValues
         

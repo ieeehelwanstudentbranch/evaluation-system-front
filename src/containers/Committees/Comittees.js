@@ -45,9 +45,9 @@ class Committees extends Component{
             committeeData: {
                 id: committee.id,
                 name: committee.name,
-                mentor: committee.mentor.id,
-                director: committee.director,
-                hr_od: committee.hr_od
+                mentor: committee.mentor_id,
+                director: committee.director_id,
+                hr_od: committee.hr_coordinator_id
             }
         });
     }
@@ -79,7 +79,8 @@ class Committees extends Component{
             if (committees!==null){
                 committeeComponent = committees.map(committee=>(
                     <>
-                    <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} editing={()=>this.editingHandler(committee)}/>
+                    {console.log(committee)}
+                    <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} numOfVolunteers={committee.numOfVolunteers} editing={()=>this.editingHandler(committee)}/>
                     </>
                 ))
             } else {

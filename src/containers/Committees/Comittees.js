@@ -79,8 +79,7 @@ class Committees extends Component{
             if (committees!==null){
                 committeeComponent = committees.map(committee=>(
                     <>
-                    {console.log(committee)}
-                    <Committee key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} numOfVolunteers={committee.numOfVolunteers} editing={()=>this.editingHandler(committee)}/>
+                    <Committee url={committee.href} key={committee.id} name={committee.name} mentor={committee.mentor} director={committee.director} hr_od={committee.hr_od} numOfVolunteers={committee.numOfVolunteers} editing={()=>this.editingHandler(committee)}/>
                     </>
                 ))
             } else {

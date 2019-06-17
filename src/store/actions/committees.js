@@ -7,7 +7,6 @@ export const initializeCommittees = () => {
         dispatch(actions.loadingHandler());
         axios.get('/committees')
             .then(response=>{
-                console.log(response)
                 let committees = response.data.data;
                 dispatch(fetchCommitteeSuccess(committees));
             }).catch(error=>{

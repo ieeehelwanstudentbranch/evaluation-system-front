@@ -20,11 +20,9 @@ export const register = (firstName, lastName, email, password, password_confirma
         }
         axios.post('/register', registerData)
             .then(response=>{
-                console.log(response)
                 dispatch(registerSuccess(response.data.message));
             })
             .catch(error => {
-                console.log(error.response.data);
                 dispatch(registerFailed(error.response.data));
             })
     }

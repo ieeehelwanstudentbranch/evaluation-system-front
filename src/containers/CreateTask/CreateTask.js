@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import Input from '../../components/UI/Input/Input';
 import classes from './CreateTask.module.scss'
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DragableArea from "../../components/DragableArea/DragableArea";
 import Button from '../../components/UI/Button/Button';
+import RichEditor from '../../components/RichEditor/RichEditor';
 
 class CreateTask extends Component {
     state = {
@@ -76,29 +75,7 @@ class CreateTask extends Component {
                             <Input elementConfig={this.state.TaskForm.title.elementConfig} />
                             <Input elementConfig={this.state.TaskForm.deadline.elementConfig} />
                         </div>
-                        
-                        {/* <CKEditor
-                            editor={ ClassicEditor }
-                            data="<p>write your task details</p>"
-                            config={{
-                                toolbar: ['Heading', 'Link', 'bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote' ],
-                                // ckfinder:{uploadUrl: "/uplaodImageFromEditor"}
-                            }}
-                            onInit={ editor => {
-                                // You can store the "editor" and use when it is needed.
-                                console.log( 'Editor is ready to use!', editor );
-                            } }
-                            onChange={ ( event, editor ) => {
-                                const data = editor.getData();
-                                console.log( { event, editor, data } );
-                            } }
-                            onBlur={ editor => {
-                                console.log( 'Blur.', editor );
-                            } }
-                            onFocus={ editor => {
-                                console.log( 'Focus.', editor );
-                            } }
-                        /> */}
+                        <RichEditor />
                         <DragableArea />
                     </div>
                     <div className={classes.rightSection}>

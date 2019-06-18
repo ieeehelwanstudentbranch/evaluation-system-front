@@ -8,6 +8,7 @@ import axios from './axios';
 import loginReducer from './store/reducers/login';
 import registerReducer from './store/reducers/register';
 import committeesReducer from './store/reducers/committees';
+import richEditorReducer from './store/reducers/richEditor';
 
 import './index.css';
 import App from './containers/App';
@@ -18,7 +19,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
-    committees: committeesReducer
+    committees: committeesReducer,
+    richEditor: richEditorReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

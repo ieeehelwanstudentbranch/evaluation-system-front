@@ -33,11 +33,15 @@ export const EVALUATE_TASK = "EVALUATE_TASK";
 export const FETCH_COMPLETED_TASKS_SUCCESS = "FETCH_COMPLETED_TASKS_SUCCESS";
 export const FETCH_PENDING_TASKS_SUCCESS = "FETCH_PENDING_TASKS_SUCCESS";
 
+// Rich Editor action to handle data in rich editor it used used in posts and tasks
+export const HANDLE_DATA = "HANDLE_DATA";
+
 // Posts
 export const ADD_POST = "ADD_POST";
 export const REMOVE_POST = "REMOVE_POST";
 export const EDIT_POSTS = "EDIT_POSTS";
 export const FETCH_POSTS_SUCEESS = "FETCH_POSTS_SUCEESS";
+export const FETCH_POSTS_FAILED = "FETCH_POSTS_FAILED";
 
 // Profile
 export const FETCH_PROFILE_SUCCESS = "FETCH_PROFILE_SUCCESS";

@@ -7,7 +7,6 @@ import classes from './Committees.module.scss';
 import {MdAdd} from 'react-icons/md';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-import Button from '../../components/UI/Button/Button';
 
 class Committees extends Component{
     state={

@@ -1,5 +1,13 @@
 .Home{
     display: flex;
     justify-content: center;
-    padding: 20px
+    padding: 20px;
+    .Editor{
+        width: 60vw;
+        box-shadow: 7px 7px 24px -1px rgba(0, 0, 0, 0.75);
+        padding: 5px 5px 0px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 4px;
+    }
 }

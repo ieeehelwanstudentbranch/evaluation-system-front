@@ -1,51 +1,45 @@
 import React, { Component } from 'react';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Button from '../UI/Button/Button'
 import { connect } from 'react-redux';
 import classes from './RichEditor.module.scss';
-
+import * as actions from '../../store/actions/index';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 class RichEditor extends Component {
-    state={
-
-    }
-    onSubmit(){
-
-    }
+    modules = {
+        toolbar: [
+          [{ 'header': [1, 2, false] }],
+          ['bold', 'italic', 'underline','strike', 'blockquote'],
+          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+          ['link', 'image'],
+          ['clean']
+        ],
+      }
+    
+      formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image'
+      ]   
     render(){
         return(
             <header className={classes.Editor}>
-                <CKEditor
-                    editor={ ClassicEditor }
-                    onInit={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ editor => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ editor => {
-                        console.log( 'Focus.', editor );
-                    } }
-                />
-                <Button type="submit" btnType="Default">Submit</Button>
+                <ReactQuill value={this.props.data} theme="snow" modules={this.modules} formats={this.formats} onChange={(value)=>this.props.onChange(value)}/>
             </header>
         )
     }
 }
+
 const mapStateToProps = state => {
     return {
+        data: state.richEditor.data
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        onChange: (data)=> dispatch(actions.handleData(data))
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(RichEditor);

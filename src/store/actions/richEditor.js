@@ -12,10 +12,31 @@ export const addPost = data => {
         }
         axios.post('/create-post', post)
             .then(response=>{
-                console.log(response)
+                dispatch(fetchPosts());
             }).catch(error=>{
                 console.log(error.response)
             })
         ;
+    }
+}
+
+export const fetchPosts = () => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        axios.get('/posts')
+            .then(response=>{
+                console.log(response.data.data)
+                dispatch(fetchPostsSucceess(response.data.data))
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        ;
+    }
+}
+
+export const fetchPostsSucceess = (posts) => {
+    return {
+        type: actionTypes.FETCH_POSTS_SUCEESS,
+        posts: posts
     }
 }

@@ -18,6 +18,14 @@ const fetchPostsSucceess = (state, action) => {
     };
 }
 
+const addPostFailed = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        error: action.error,
+    };
+}
+
 const fetchPostsFailed = (state, action) => {
     return {
         ...state,
@@ -34,6 +42,8 @@ const richEditorReducer = (state = initialState, action)=>{
             return reducers.handleData(state, action);
         case actionTypes.FETCH_POSTS_SUCEESS:
             return fetchPostsSucceess(state, action);
+        case actionTypes.ADD_POST_FAILED:
+            return addPostFailed(state, action);
         case actionTypes.FETCH_POSTS_FAILED:
             return fetchPostsFailed(state, action);
         default:

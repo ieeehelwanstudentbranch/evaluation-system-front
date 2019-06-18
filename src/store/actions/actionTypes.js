@@ -37,6 +37,7 @@ export const FETCH_PENDING_TASKS_SUCCESS = "FETCH_PENDING_TASKS_SUCCESS";
 
 // Posts
 export const ADD_POST = "ADD_POST";
+export const ADD_POST_FAILED = "ADD_POST_FAILED";
 export const REMOVE_POST = "REMOVE_POST";
 export const EDIT_POSTS = "EDIT_POSTS";
 export const FETCH_POSTS_SUCEESS = "FETCH_POSTS_SUCEESS";

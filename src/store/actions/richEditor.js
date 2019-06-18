@@ -13,9 +13,17 @@ export const addPost = data => {
             .then(response=>{
                 dispatch(fetchPosts());
             }).catch(error=>{
-                console.log(error.response)
+                console.log(error.response.data);
+                dispatch(addPostFailed());
             })
         ;
+    }
+}
+
+export const addPostFailed = error => {
+    return {
+        type: actionTypes.ADD_POST_FAILED,
+        error: error
     }
 }
 
@@ -45,3 +53,5 @@ export const fetchPostsFailed = (error) => {
         error: 'Something went Wrong, Please Try Again Later'
     }
 }
+
+

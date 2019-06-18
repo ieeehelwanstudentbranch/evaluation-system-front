@@ -25,10 +25,9 @@ export const fetchPosts = () => {
         dispatch(actions.loadingHandler());
         axios.get('/posts')
             .then(response=>{
-                console.log(response.data.data)
                 dispatch(fetchPostsSucceess(response.data.data))
             }).catch(error=>{
-                console.log(error.response)
+                dispatch(fetchPostsFailed(error))
             })
         ;
     }
@@ -38,5 +37,12 @@ export const fetchPostsSucceess = (posts) => {
     return {
         type: actionTypes.FETCH_POSTS_SUCEESS,
         posts: posts
+    }
+}
+
+export const fetchPostsFailed = (error) => {
+    return {
+        type: actionTypes.FETCH_POSTS_FAILED,
+        error: 'Something went Wrong, Please Try Again Later'
     }
 }

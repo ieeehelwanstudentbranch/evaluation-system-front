@@ -7,10 +7,10 @@ import 'react-quill/dist/quill.snow.css';
 class RichEditor extends Component {
     modules = {
         toolbar: [
-          [{ 'header': [1, 2, false] }],
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
           ['bold', 'italic', 'underline','strike', 'blockquote'],
           [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
+          ['link', 'image', 'video'],
           ['clean']
         ],
       }
@@ -19,12 +19,19 @@ class RichEditor extends Component {
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
-        'link', 'image'
+        'link', 'image', 'video'
       ]   
     render(){
         return(
             <header className={classes.Editor}>
-                <ReactQuill value={this.props.data} theme="snow" modules={this.modules} formats={this.formats} onChange={(value)=>this.props.onChange(value)}/>
+                <ReactQuill
+                    placeholder="Write a new post"
+                    theme="snow"
+                    value={this.props.data}
+                    modules={this.modules}
+                    formats={this.formats}
+                    onChange={(value)=>this.props.onChange(value)}
+                />
             </header>
         )
     }

@@ -7,7 +7,6 @@ export const addPost = data => {
     return dispatch => {
         dispatch(actions.loadingHandler());
         const post = {
-            title: 'post title',
             body: data
         }
         axios.post('/create-post', post)

@@ -1,16 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
-// import * as reducers from './repeatedReducers';
+import * as reducers from './repeatedReducers';
 
 const initialState = {
     data: null
 };
 
-const handleData = (state, action) => {
-    return {
-        ...state,
-        data: action.data,
-    };
-}
+
 
 /* const editData = (state, action) => {
     return {
@@ -36,7 +31,7 @@ const deleteData = (state, action) => {
 const richEditorReducer = (state = initialState, action)=>{
     switch (action.type) {
         case actionTypes.HANDLE_DATA:
-            return handleData(state, action);
+            return reducers.handleData(state, action);
         default:
             return state;
     }

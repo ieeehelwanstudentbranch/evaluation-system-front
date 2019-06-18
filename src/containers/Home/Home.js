@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import RichEditor from '../../components/RichEditor/RichEditor';
 import classes from './Home.module.scss';
 import Button from '../../components/UI/Button/Button';
+import {connect} from 'react-redux';
 
 class Home extends Component{
     render(){
@@ -15,5 +16,15 @@ class Home extends Component{
         )
     }
 }
+const mapStateToProps = state => {
+    return{
 
-export default Home
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Home)

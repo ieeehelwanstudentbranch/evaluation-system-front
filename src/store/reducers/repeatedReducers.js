@@ -15,3 +15,10 @@ export const serverErrorHandler = (state, action) => {
         loading: false
     };
 }
+
+export const handleData = (state, action) => {
+    return {
+        ...state,
+        data: action.data,
+    };
+}

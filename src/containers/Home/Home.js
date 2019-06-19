@@ -11,7 +11,7 @@ import Modal from '../../components/UI/Modal/Modal';
 class Home extends Component{
     state={
         error: this.props.error,
-        loading: this.props.loading
+        loading: this.props.loading,
     }
     componentDidUpdate(previousProps, previousState){
         let error = this.props.error;
@@ -19,7 +19,7 @@ class Home extends Component{
         if (previousState.error !== error || previousState.loading !== loading) {
             this.setState({
                 error: error,
-                loading: loading
+                loading: loading,
             })
         }
     }
@@ -37,12 +37,9 @@ class Home extends Component{
             component = <section>
                 {
                     this.props.posts?
-                        this.props.posts.map(post=>{
+                        this.props.posts.map((post,index)=>{
                             return (
-                                <>
-                                {/* {console.log(post)} */}
-                                <Post body={post.body} user_id={post.user_id} post_date_time={post.created_at} />
-                                </>
+                                <Post key={index} body={post.body} postOwner={post.postOwner} post_date_time={post.created_at} />
                             ) 
                         }):
                     <> </>

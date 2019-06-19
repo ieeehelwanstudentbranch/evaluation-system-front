@@ -3,7 +3,7 @@ import axios from '../../axios';
 import * as actions from './repeatedActions';
 
 
-export const addPost = data => {
+export const addPost = (data) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
         const post = {
@@ -14,13 +14,13 @@ export const addPost = data => {
                 dispatch(fetchPosts());
             }).catch(error=>{
                 console.log(error.response.data);
-                dispatch(addPostFailed());
+                dispatch(addPostFailed('Something went wrong, Please try again later'));
             })
         ;
     }
 }
 
-export const addPostFailed = error => {
+export const addPostFailed = (error) => {
     return {
         type: actionTypes.ADD_POST_FAILED,
         error: error
@@ -34,7 +34,8 @@ export const fetchPosts = () => {
             .then(response=>{
                 dispatch(fetchPostsSucceess(response.data.data))
             }).catch(error=>{
-                dispatch(fetchPostsFailed(error))
+                console.log(error)
+                dispatch(actions.serverErrorHandler('Something went Wrong, Please Try Again Later'))
             })
         ;
     }
@@ -46,12 +47,3 @@ export const fetchPostsSucceess = (posts) => {
         posts: posts
     }
 }
-
-export const fetchPostsFailed = (error) => {
-    return {
-        type: actionTypes.FETCH_POSTS_FAILED,
-        error: 'Something went Wrong, Please Try Again Later'
-    }
-}
-
-

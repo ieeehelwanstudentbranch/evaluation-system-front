@@ -39,7 +39,10 @@ class Home extends Component{
                     this.props.posts?
                         this.props.posts.map(post=>{
                             return (
-                                <Post body={post.body} postOwner={post.post_owner} postDateTime={post.created_at} />
+                                <>
+                                {/* {console.log(post)} */}
+                                <Post body={post.body} user_id={post.user_id} post_date_time={post.created_at} />
+                                </>
                             ) 
                         }):
                     <> </>
@@ -65,10 +68,10 @@ class Home extends Component{
 }
 const mapStateToProps = state => {
     return{
-        post: state.richEditor.data,
-        posts: state.richEditor.posts,
-        loading: state.richEditor.loading,
-        error: state.richEditor.error
+        post: state.posts.data,
+        posts: state.posts.posts,
+        loading: state.posts.loading,
+        error: state.posts.error
     }
 }
 

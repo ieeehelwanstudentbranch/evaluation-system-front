@@ -39,7 +39,7 @@ class RichEditor extends Component {
 
 const mapStateToProps = state => {
     return {
-        data: state.richEditor.data
+        data: state.posts.data
     }
 }
 

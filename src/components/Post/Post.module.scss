@@ -13,6 +13,18 @@
         justify-content: space-between;
         margin-bottom: 20px;
         font-size: 18px;
+        .Info{
+            img{
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+            }
+            span{
+                display: block;
+                font-size: 12px;
+                
+            }
+        }
         svg{
             width: 20px;
             height: 20px;

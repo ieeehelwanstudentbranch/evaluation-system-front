@@ -8,7 +8,8 @@ import axios from './axios';
 import loginReducer from './store/reducers/login';
 import registerReducer from './store/reducers/register';
 import committeesReducer from './store/reducers/committees';
-import richEditorReducer from './store/reducers/richEditor';
+import postsReducer from './store/reducers/posts';
+import userReducer from './store/reducers/user';
 
 import './index.css';
 import App from './containers/App';
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     committees: committeesReducer,
-    richEditor: richEditorReducer
+    posts: postsReducer,
+    user: userReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

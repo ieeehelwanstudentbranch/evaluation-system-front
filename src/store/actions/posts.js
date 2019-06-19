@@ -34,7 +34,6 @@ export const fetchPosts = () => {
             .then(response=>{
                 dispatch(fetchPostsSucceess(response.data.data))
             }).catch(error=>{
-                console.log(error)
                 dispatch(actions.serverErrorHandler('Something went Wrong, Please Try Again Later'))
             })
         ;

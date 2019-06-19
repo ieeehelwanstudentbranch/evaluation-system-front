@@ -3,6 +3,7 @@ import * as reducers from './repeatedReducers';
 
 const initialState = {
     token: null,
+    userID: null,
     message: null,
     error: null,
     loading: false
@@ -12,6 +13,7 @@ const loginSuccess = (state, action) => {
     return {
         ...state,
         token: action.token,
+        userID: action.userID,
         message: action.message,
         error: null,
         loading: false

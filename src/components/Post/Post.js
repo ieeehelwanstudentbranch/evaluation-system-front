@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import * as classes from './Post.module.scss';
 import {NavLink} from 'react-router-dom';
 import { MdDelete, MdModeEdit } from "react-icons/md";
-import axios from '../../axios';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class Post extends Component{
     render(){
@@ -25,4 +26,15 @@ class Post extends Component{
     }
 }
 
-export default Post;
+const mapStateToProps = state => {
+    return{
+        
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        
+    }
+}
+export default connect(null,null)(Post)

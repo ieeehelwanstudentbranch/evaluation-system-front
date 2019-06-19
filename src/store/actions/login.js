@@ -13,12 +13,14 @@ export const login = (email, password, remember_me) => {
         axios.post('/login', loginData)
             .then(response=>{
                 if (response.data.hasOwnProperty('token')){
+                    console.log(response);
                     // calculate expiration date
                     let expirationDate = new Date(new Date().getTime() + (response.data.expirationTime * 60) * 1000);
                     // set token and expiration date in local storage
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('expirationDate', expirationDate);
-                    dispatch(loginSuccess(response.data.token, response.data.message));
+                    localStorage.setItem('userID', response.data.userId);
+                    dispatch(loginSuccess(response.data.token, response.data.message, response.data.userId));
                     dispatch(checkLoginTime(expirationDate, response.data.token));
                 }else{
                     dispatch(loginFailed(response.data.message));
@@ -31,11 +33,12 @@ export const login = (email, password, remember_me) => {
     }
 }
 
-export const loginSuccess = (token, message) => {
+export const loginSuccess = (token, message, userID) => {
     return {
         type: actionTypes.LOGIN_SUCCESS,
         token: `bearer ${token}`,
-        message: message
+        message: message,
+        userID: userID
     }
 }
 
@@ -86,6 +89,7 @@ export const logoutSuccess = (message) => {
     return {
         type: actionTypes.LOGOUT_SUCCESS,
         token: null,
+        userID: null,
         message: message
     }
 }

@@ -18,16 +18,6 @@ const fetchPostsSucceess = (state, action) => {
     };
 }
 
-const addOwnerToPosts = (state, action) => {
-    let posts = initialState.posts.map(post=>{
-        post.join(state.userData)
-    })
-    return{
-        ...state,
-        posts: posts
-    }
-}
-
 const addPostFailed = (state, action) => {
     return {
         ...state,
@@ -47,8 +37,6 @@ const postsReducer = (state = initialState, action)=>{
         // handling if fetching posts is success
         case actionTypes.FETCH_POSTS_SUCEESS:
             return fetchPostsSucceess(state, action);
-        // case actionTypes.FETCH_PROFILE_SUCCESS:
-        //     return addOwnerToPosts(state, action);
         // handling adding post is failed
         case actionTypes.ADD_POST_FAILED:
             return addPostFailed(state, action);

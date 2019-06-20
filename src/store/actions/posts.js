@@ -47,19 +47,16 @@ export const fetchPostsSucceess = (posts) => {
     }
 }
 
-// export const deletePost = (id) => {
-//     return dispatch => {
-//         dispatch(actions.loadingHandler());
-//         const data = {
-//             id: id
-//         }
-//         axios.post('/create-post', data)
-//             .then(response=>{
-//                 dispatch(fetchPosts());
-//             }).catch(error=>{
-//                 console.log(error.response.data);
-//                 dispatch(addPostFailed('Something went wrong, Please try again later'));
-//             })
-//         ;
-//     }
-// }
+export const deletePost = (id) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        axios.delete(`/post/${id}`)
+            .then(response=>{
+                console.log(response)
+            }).catch(error=>{
+                console.log(error.response.data);
+                // dispatch(addPostFailed('Something went wrong, Please try again later'));
+            })
+        ;
+    }
+}

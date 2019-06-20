@@ -15,10 +15,10 @@ class Post extends Component{
                         <NavLink to="">{`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}</NavLink>
                         <span>{this.props.postOwner.position}</span>
                     </div>
-                    {   this.props.userID === this.props.postOwner.user_id?
+                    {   this.props.userID == this.props.postOwner.user_id?
                         <div className={classes.Actions}>
                             <MdModeEdit />
-                            <MdDelete />
+                            <MdDelete onClick={()=>this.props.onDelete(this.props.postID)}/>
                         </div>
                         : <></>
                     }
@@ -37,7 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        
+        onDelete: (id)=>dispatch(actions.deletePost(id))
     }
 }
-export default connect(mapStateToProps,null)(Post)
+export default connect(mapStateToProps, mapDispatchToProps)(Post)

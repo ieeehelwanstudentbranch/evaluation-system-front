@@ -10,15 +10,18 @@ class Post extends Component{
         return (
             <article className={classes.Post}>
                 <header>
-                    {/* <div className={classes.Info}>
+                    <div className={classes.Info}>
                         <img src={this.props.postOwner.image} alt={`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}/>
                         <NavLink to="">{`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}</NavLink>
                         <span>{this.props.postOwner.position}</span>
-                    </div> */}
-                    <div className={classes.Actions}>
-                        <MdModeEdit />
-                        <MdDelete />
                     </div>
+                    {   this.props.userID === this.props.postOwner.user_id?
+                        <div className={classes.Actions}>
+                            <MdModeEdit />
+                            <MdDelete />
+                        </div>
+                        : <></>
+                    }
                 </header>
                 <div dangerouslySetInnerHTML={{__html: this.props.body}} className={classes.Content}></div>
             </article>
@@ -28,7 +31,7 @@ class Post extends Component{
 
 const mapStateToProps = state => {
     return{
-        
+        userID: state.login.userID
     }
 }
 
@@ -37,4 +40,4 @@ const mapDispatchToProps = dispatch => {
         
     }
 }
-export default connect(null,null)(Post)
+export default connect(mapStateToProps,null)(Post)

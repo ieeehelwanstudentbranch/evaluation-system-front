@@ -39,7 +39,7 @@ class Home extends Component{
                     this.props.posts?
                         this.props.posts.map((post,index)=>{
                             return (
-                                <Post key={index} body={post.body} postOwner={post.postOwner} post_date_time={post.created_at} />
+                                <Post key={post.id} body={post.body} postOwner={post.post_owner} post_date_time={post.created_at} />
                             ) 
                         }):
                     <> </>

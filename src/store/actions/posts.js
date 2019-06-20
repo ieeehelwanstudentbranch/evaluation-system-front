@@ -46,3 +46,20 @@ export const fetchPostsSucceess = (posts) => {
         posts: posts
     }
 }
+
+// export const deletePost = (id) => {
+//     return dispatch => {
+//         dispatch(actions.loadingHandler());
+//         const data = {
+//             id: id
+//         }
+//         axios.post('/create-post', data)
+//             .then(response=>{
+//                 dispatch(fetchPosts());
+//             }).catch(error=>{
+//                 console.log(error.response.data);
+//                 dispatch(addPostFailed('Something went wrong, Please try again later'));
+//             })
+//         ;
+//     }
+// }

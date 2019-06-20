@@ -37,8 +37,8 @@ export const loginSuccess = (token, message, userID) => {
     return {
         type: actionTypes.LOGIN_SUCCESS,
         token: `bearer ${token}`,
-        message: message,
-        userID: userID
+        userID: userID,
+        message: message
     }
 }
 
@@ -110,7 +110,8 @@ export const loginCheckState = () => {
             if (expirationDate <= new Date()){
                 dispatch(logout(token))
             }else {
-                dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically'));
+                const userID = localStorage.getItem('userID');
+                dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically', userID));
                 dispatch(checkLoginTime(expirationDate, token));
             }
         }

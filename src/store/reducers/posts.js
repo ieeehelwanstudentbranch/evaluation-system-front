@@ -6,6 +6,7 @@ const initialState = {
     posts: null,
     loading: false,
     error: null,
+    editing: false
 };
 
 const fetchPostsSucceess = (state, action) => {
@@ -26,6 +27,36 @@ const addPostFailed = (state, action) => {
     };
 }
 
+const deletePostSuccess = (state, action) => {
+    return{
+        ...state,
+        posts: state.posts.filter(post=>{
+            return post.id !== action.id
+        })
+    }
+}
+
+const editPost = (state, action) => {
+    return{
+        ...state,
+        data: action.data,
+        posts: state.posts.filter(post=>{
+            return post.id !== action.id
+        }),
+        editing: true,
+        postID: action.id
+    }
+}
+
+const editPostSuccess = (state, action) => {
+    return{
+        ...state,
+        data: null,
+        editing: false,
+        postID: null
+    }
+}
+
 const postsReducer = (state = initialState, action)=>{
     switch (action.type) {
         // handling rich editor changes
@@ -40,6 +71,15 @@ const postsReducer = (state = initialState, action)=>{
         // handling adding post is failed
         case actionTypes.ADD_POST_FAILED:
             return addPostFailed(state, action);
+        // handle deleting posts is success
+        case actionTypes.DELETE_POST:
+            return deletePostSuccess(state, action);
+        // handle editing post
+        case actionTypes.EDIT_POST:
+            return editPost(state, action);
+        // handle editing post
+        case actionTypes.EDIT_POST_SUCCESS:
+            return editPostSuccess(state, action);
         // handling if server retairned any error
         case actionTypes.SERVER_ERROR_HANDLER:
             return reducers.serverErrorHandler(state, action);

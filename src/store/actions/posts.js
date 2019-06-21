@@ -52,11 +52,49 @@ export const deletePost = (id) => {
         dispatch(actions.loadingHandler());
         axios.delete(`/post/${id}`)
             .then(response=>{
-                console.log(response)
+                dispatch(deletePostSuccess(id))
             }).catch(error=>{
-                console.log(error.response.data);
-                // dispatch(addPostFailed('Something went wrong, Please try again later'));
+                // console.log(error.response.data.message);
+                dispatch(addPostFailed('Something went wrong, Please try again later'));
             })
         ;
+    }
+}
+
+export const deletePostSuccess = (id) => {
+    return{
+        type: actionTypes.DELETE_POST,
+        id: id
+    }
+}
+
+export const editPost = (id, body) => {
+    return{
+        type: actionTypes.EDIT_POST,
+        id: id,
+        data: body
+    }
+}
+
+export const editPostStart = (id, body) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        let newData = {
+            body: body
+        }
+        axios.put(`/update-post/${id}`, newData)
+            .then(response=>{
+                dispatch(fetchPosts());
+                dispatch(editPostSuccess());
+            }).catch(error=>{
+                dispatch(addPostFailed('Something went wrong, please try again later'));
+            })
+        ;
+    }
+}
+
+export const editPostSuccess = () => {
+    return{
+        type: actionTypes.EDIT_POST_SUCCESS
     }
 }

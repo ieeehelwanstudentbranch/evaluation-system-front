@@ -12,14 +12,20 @@ class Home extends Component{
     state={
         error: this.props.error,
         loading: this.props.loading,
+        editing: this.props.editing,
+        id: this.props.id
     }
     componentDidUpdate(previousProps, previousState){
         let error = this.props.error;
         let loading = this.props.loading;
-        if (previousState.error !== error || previousState.loading !== loading) {
+        let editing = this.props.editing;
+        let id = this.props.id;
+        if (previousState.error !== error || previousState.loading !== loading || previousState.editing !== editing || previousState.id !== id) {
             this.setState({
                 error: error,
                 loading: loading,
+                editing: editing,
+                id: id
             })
         }
     }
@@ -40,8 +46,8 @@ class Home extends Component{
                         this.props.posts.map((post,index)=>{
                             return (
                                 <>
-                                {console.log(post)}
-                                <Post key={index} postID={post.id} body={post.body} postOwner={post.post_owner} post_date_time={post.created_at} />
+                                {/* {console.log(post)} */}
+                                <Post key={index} postID={post.id} body={post.body} postOwner={post.post_owner} date_time={post.created_at} />
                                 </>
                             ) 
                         }):
@@ -59,7 +65,12 @@ class Home extends Component{
             <div className={classes.Home}>
                 <header className={classes.Editor}>
                     <RichEditor />
-                    <Button type="submit" btnType="Default" clicked={()=>this.props.submit(this.props.post)}>Submit</Button>
+                    {
+                        this.state.editing? 
+                        <Button type="submit" btnType="Default" clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>:
+                        <Button type="submit" btnType="Default" clicked={()=>this.props.onAdding(this.props.post)}>ADD POST</Button>
+                    }
+                    
                 </header>
                 {component}
             </div>
@@ -71,14 +82,17 @@ const mapStateToProps = state => {
         post: state.posts.data,
         posts: state.posts.posts,
         loading: state.posts.loading,
-        error: state.posts.error
+        error: state.posts.error,
+        editing: state.posts.editing,
+        id: state.posts.postID
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
         onInit: ()=> dispatch(actions.fetchPosts()),
-        submit: (data) => dispatch(actions.addPost(data))
+        onAdding: (data) => dispatch(actions.addPost(data)),
+        onEditing: (id, data) => dispatch(actions.editPostStart(id, data))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Home)

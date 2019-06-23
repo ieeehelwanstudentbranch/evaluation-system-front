@@ -30,7 +30,7 @@ const sideNavigation = (props) => {
                                     Committees    
                                 </NavigationItem>
                             </> :
-                            <null />
+                            <></>
                         }
                     </ul>
                 </nav>

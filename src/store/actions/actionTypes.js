@@ -43,6 +43,10 @@ export const EDIT_POST = "EDIT_POST";
 export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
 export const FETCH_POSTS_SUCEESS = "FETCH_POSTS_SUCEESS";
 export const FETCH_POSTS_FAILED = "FETCH_POSTS_FAILED";
+// comments
+export const ADD_COMMENT = "ADD_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 // Profile
 export const FETCH_PROFILE_SUCCESS = "FETCH_PROFILE_SUCCESS";

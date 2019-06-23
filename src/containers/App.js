@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import 'normalize.css';
 import './App.scss';
 import Layout from '../hoc/Layout/Layout';
-import { Route, withRouter, Redirect,Switch } from 'react-router-dom';
+import { Route, withRouter, Redirect } from 'react-router-dom';
 
 import Home from './Home/Home';
 import CreateTask from './CreateTask/CreateTask';
@@ -14,6 +14,7 @@ import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
+import SinglePost from '../components/Post/SinglePost/SinglePost'
 
 class App extends Component {
   componentDidMount () {
@@ -21,15 +22,15 @@ class App extends Component {
   }
   render() {
     let routes = (
-      <Switch>
+      <>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
         <Redirect to="/login" />
-      </Switch>
+      </>
     );
     if (this.props.isAuthenticated){
       routes = (
-        <Switch>
+        <>
           <Route path="/" exact component={Home}/>
           <Route path="/profile" render={()=><p>profile</p>}/>
           <Route path="/create-task" component={CreateTask}/>
@@ -37,8 +38,9 @@ class App extends Component {
           <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" component={Committees}/>
           <Route path="/logout" component={Logout}/>
+          <Route path={"/post/:id"} component={SinglePost} />
           <Redirect to="/" />
-        </Switch>
+        </>
       )
     }
     return (

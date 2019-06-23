@@ -4,20 +4,18 @@ import {NavLink} from 'react-router-dom';
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-
 class Post extends Component{
     render(){
         return (
             <article className={classes.Post}>
                 <header>
                     <div className={classes.Info}>
-                        <img src={`http://localhost:8000/uploaded/profile_images/${this.props.postOwner.image}`} alt={`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}/>
+                        <NavLink to=""><img src={`http://localhost:8000/uploaded/profile_images/${this.props.postOwner.image}`} alt={`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}/></NavLink>
                         <div>
                             <NavLink to="">{`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}</NavLink>
                             <span>{this.props.postOwner.position}</span>
                             <time dateTime={this.props.date_time}>{this.props.date_time}</time>
                         </div>
-                        
                     </div>
                     {   
                         // eslint-disable-next-line
@@ -36,7 +34,8 @@ class Post extends Component{
                         : <></>
                     }
                 </header>
-                <div dangerouslySetInnerHTML={{__html: this.props.body}} className={classes.Content}></div>
+                <div dangerouslySetInnerHTML={{__html: this.props.body.substring(0, 500)}} className={classes.Content}></div>
+                <NavLink to={"/post/"+this.props.postID}>View Post</NavLink>
             </article>
         )
     }

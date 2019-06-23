@@ -98,3 +98,11 @@ export const editPostSuccess = () => {
         type: actionTypes.EDIT_POST_SUCCESS
     }
 }
+
+export const editComment = (id, data) => {
+    return{
+        type: actionTypes.EDIT_COMMENT,
+        id: id,
+        comment: data
+    }
+}

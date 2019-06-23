@@ -6,7 +6,9 @@ const initialState = {
     posts: null,
     loading: false,
     error: null,
-    editing: false
+    editing: false,
+    editingComment: false,
+    comment: null
 };
 
 const fetchPostsSucceess = (state, action) => {
@@ -48,6 +50,15 @@ const editPost = (state, action) => {
     }
 }
 
+const editComment = (state, action) => {
+    return{
+        ...state,
+        comment: action.comment,
+        editingComment: true,
+        commentID: action.id
+    }
+}
+
 const editPostSuccess = (state, action) => {
     return{
         ...state,
@@ -80,6 +91,9 @@ const postsReducer = (state = initialState, action)=>{
         // handle editing post
         case actionTypes.EDIT_POST_SUCCESS:
             return editPostSuccess(state, action);
+        // handle editing post
+        case actionTypes.EDIT_COMMENT:
+            return editComment(state, action);
         // handling if server retairned any error
         case actionTypes.SERVER_ERROR_HANDLER:
             return reducers.serverErrorHandler(state, action);

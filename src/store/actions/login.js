@@ -13,7 +13,6 @@ export const login = (email, password, remember_me) => {
         axios.post('/login', loginData)
             .then(response=>{
                 if (response.data.hasOwnProperty('token')){
-                    console.log(response);
                     // calculate expiration date
                     let expirationDate = new Date(new Date().getTime() + (response.data.expirationTime * 60) * 1000);
                     // set token and expiration date in local storage

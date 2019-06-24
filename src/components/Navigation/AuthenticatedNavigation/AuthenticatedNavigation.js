@@ -2,15 +2,28 @@ import React from 'react';
 import classes from './AuthenticatedNavigation.module.scss';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import Profile from '../../Profile/Profile';
+import {connect} from 'react-redux';
 
-const authenticatedNavigation = () => (
-    <nav>
-        <ul className={classes.AuthenticatedNavigation}>
-            <NavigationItem link="/profile" exact><Profile /></NavigationItem>
-            <NavigationItem link="/" exact>Home</NavigationItem>
-            <NavigationItem link="/logout" exact>Logout</NavigationItem>
-        </ul>
-    </nav>
-);
+class AuthenticatedNavigation extends React.Component{
+    render(){
+        return(
+            <nav>
+                <ul className={classes.AuthenticatedNavigation}>
+                    <NavigationItem link={`/user/${this.props.userID}`} exact><Profile /></NavigationItem>
+                    <NavigationItem link="/" exact>Home</NavigationItem>
+                    <NavigationItem link="/logout" exact>Logout</NavigationItem>
+                </ul>
+            </nav>
+        )
+    }
+}
 
-export default authenticatedNavigation;
+const mapStateToProps = state => {
+    if(state.user.userData){
+        return {
+            userID: state.user.userData.id
+        }
+    }
+}
+
+export default connect (mapStateToProps, null)(AuthenticatedNavigation);

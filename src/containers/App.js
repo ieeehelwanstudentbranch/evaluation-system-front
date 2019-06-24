@@ -14,7 +14,8 @@ import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
-import SinglePost from '../components/Post/SinglePost/SinglePost'
+import SinglePost from '../components/Post/SinglePost/SinglePost';
+import SingleProfile from './SingleProfile/SingleProfile';
 
 class App extends Component {
   componentDidMount () {
@@ -25,21 +26,21 @@ class App extends Component {
       <>
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
-        <Redirect to="/login" />
+        {/* <Redirect to="/login" /> */}
       </>
     );
     if (this.props.isAuthenticated){
       routes = (
         <>
           <Route path="/" exact component={Home}/>
-          <Route path="/profile" render={()=><p>profile</p>}/>
+          <Route path="/user/:id" component={SingleProfile}/>
           <Route path="/create-task" component={CreateTask}/>
           <Route path="/completed-tasks" component={CompletedTasks}/>
           <Route path="/pending-tasks" component={PendingTasks}/>
           <Route path="/committees" component={Committees}/>
           <Route path="/logout" component={Logout}/>
           <Route path={"/post/:id"} component={SinglePost} />
-          <Redirect to="/" />
+          {/* <Redirect to="/" /> */}
         </>
       )
     }

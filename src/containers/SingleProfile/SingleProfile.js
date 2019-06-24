@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux';
+import * as classes from './SingleProfile.module.scss';
+import UserImage from './UserImage/UserImage';
 class SingleProfile extends Component {
     render(){
         return(
-            <p>this is the profile of the user</p>
+            <div className={classes.SingleProfile}>
+                <UserImage />
+            </div>
         )
     }
 }

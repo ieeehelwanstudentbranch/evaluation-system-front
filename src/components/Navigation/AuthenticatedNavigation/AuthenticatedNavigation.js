@@ -19,10 +19,8 @@ class AuthenticatedNavigation extends React.Component{
 }
 
 const mapStateToProps = state => {
-    if(state.user.userData){
-        return {
-            userID: state.user.userData.id
-        }
+    return {
+        userID: state.user.userData? state.user.userData.id:null
     }
 }
 

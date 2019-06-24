@@ -22,11 +22,9 @@ class ProfileIcon extends Component {
 }
 
 const mapStateToProps = state => {
-    if(state.user.userData){
-        return {
-            name: state.user.userData.firstName,
-            image: state.user.userData.image
-        }
+    return {
+        name: state.user.userData? state.user.userData.firstName:null,
+        image: state.user.userData? state.user.userData.image:null,
     }
 }
 

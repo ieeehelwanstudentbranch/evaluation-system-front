@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
+import * as profileActions from './user';
 
 export const login = (email, password, remember_me) => {
     return dispatch => {
@@ -21,6 +22,7 @@ export const login = (email, password, remember_me) => {
                     localStorage.setItem('userID', response.data.userId);
                     dispatch(loginSuccess(response.data.token, response.data.message, response.data.userId));
                     dispatch(checkLoginTime(expirationDate, response.data.token));
+                    dispatch(profileActions.fetchUserData(response.data.userId));
                 }else{
                     dispatch(loginFailed(response.data.message));
                 }
@@ -112,6 +114,7 @@ export const loginCheckState = () => {
                 const userID = localStorage.getItem('userID');
                 dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically', userID));
                 dispatch(checkLoginTime(expirationDate, token));
+                dispatch(profileActions.fetchUserData(userID));
             }
         }
     }

@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as classes from './Profile.module.scss'
 class ProfileIcon extends Component {
-    componentDidMount(){
 
-    }
     render(){
         let data;
         if(this.props.name && this.props.image){
@@ -25,12 +23,6 @@ const mapStateToProps = state => {
     return {
         name: state.user.userData? state.user.userData.firstName:null,
         image: state.user.userData? state.user.userData.image:null,
-    }
-}
-
-const mapDispatchToProps = dispatch =>{
-    return{
-
     }
 }
 export default connect(mapStateToProps, null)(ProfileIcon);

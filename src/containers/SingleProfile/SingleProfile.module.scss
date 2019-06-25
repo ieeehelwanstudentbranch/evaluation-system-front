@@ -1,7 +1,27 @@
-.SingleProfile{
+@import '../../assets/scss/color_variables';
+.SingleProfile {
     margin-top: 175px;
     width: 75vw;
     border: 1px solid #ccc;
     display: flex;
     justify-content: center;
+    position: relative;
+    .MainInfo {
+        position: absolute;
+        top: -50%;
+        transform: translateY(-46%);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .data{
+            color: $main_color;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h3, span{
+                margin: 5px 0;
+            }
+        }
+    }
 }

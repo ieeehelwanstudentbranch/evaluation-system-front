@@ -1,0 +1,16 @@
+.Template{
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    width: 100%;
+    margin-right: 5px;
+    span.Label {
+        text-transform: uppercase;
+        margin-top: -5%;
+        background-color: #fff;
+        padding: 3px;
+        width: max-content;
+    }
+}

@@ -1,19 +1,17 @@
 @import '../../assets/scss/color_variables';
 .SingleProfile {
-    margin-top: 175px;
-    width: 75vw;
     border: 1px solid #ccc;
     display: flex;
-    justify-content: center;
-    position: relative;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 175px;
+    width: 75vw;
     .MainInfo {
-        position: absolute;
-        top: -50%;
-        transform: translateY(-46%);
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
+        margin-top: -13%;
         .data{
             color: $main_color;
             display: flex;

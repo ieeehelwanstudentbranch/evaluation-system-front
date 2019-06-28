@@ -1,9 +1,8 @@
-
 import React, {Component} from 'react';
 import * as classes from './AdditionalInfo.module.scss';
 import {GiSettingsKnobs} from 'react-icons/gi';
 import Template from './InformationTemplate/InformationTemplate';
-
+import {connect} from 'react-redux';
 class AdditionalInfo extends Component {
     render(){
         return(
@@ -37,9 +36,24 @@ class AdditionalInfo extends Component {
                         </div>: null
                     }
                 </div>
-                <GiSettingsKnobs />
+                {
+                    this.props.userID === this.props.profileData.id ?
+                        <GiSettingsKnobs />
+                    :null
+                }
             </div>
         )
     }
 }
-export default AdditionalInfo;
+
+const mapStateToProps = state => {
+    return{
+        userID: state.user.userData?state.user.userData.id:null,
+        profileData: state.user.profile?state.user.profile:null,
+    }
+}
+const mapDispatchToProps = dispatch => {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdditionalInfo);

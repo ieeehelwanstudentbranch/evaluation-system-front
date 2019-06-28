@@ -3,4 +3,4 @@ export {register} from './register';
 export {initializeCommittees, addCommittee, editCommittee} from './committees';
 export {handleData} from './repeatedActions';
 export {fetchPosts, addPost, deletePost, editPost, editPostStart, editComment} from './posts';
-export {fetchUserData, editProfileImage, cancelEditing, changeImage, uploadImage} from './user';
+export {fetchUserData, uploadImage, editProfileImage, changeImage, editProfileData, cancelEditing} from './user';

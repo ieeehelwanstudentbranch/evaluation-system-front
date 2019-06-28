@@ -3,6 +3,7 @@ import * as classes from './AdditionalInfo.module.scss';
 import {GiSettingsKnobs} from 'react-icons/gi';
 import Template from './InformationTemplate/InformationTemplate';
 import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index';
 class AdditionalInfo extends Component {
     render(){
         return(
@@ -38,7 +39,7 @@ class AdditionalInfo extends Component {
                 </div>
                 {
                     this.props.userID === this.props.profileData.id ?
-                        <GiSettingsKnobs />
+                        <GiSettingsKnobs onClick={this.props.onChange}/>
                     :null
                 }
             </div>
@@ -53,7 +54,9 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => {
-
+    return{
+        onChange: ()=>dispatch(actions.editProfileData())
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdditionalInfo);

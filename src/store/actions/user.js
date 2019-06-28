@@ -69,6 +69,12 @@ export const uploadImage = (profileID, newImage) => {
     }
 }
 
+export const editProfileData = () => {
+    return{
+        type: actionTypes.EDIT_PROFILE_DATA
+    }
+}
+
 export const cancelEditing = () => {
     return{
         type: actionTypes.CANCEL_EDITING

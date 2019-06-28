@@ -32,7 +32,7 @@ const editProfileImage = (state, action) => {
     return {
         ...state,
         editing: true,
-        editableContent: 'profileImage',
+        editableContent: 'profileImage'
     };
 }
 
@@ -40,6 +40,14 @@ const changeImage = (state, action) => {
     return {
         ...state,
         newImage: action.image
+    };
+}
+
+const editProfileData = (state, action) => {
+    return {
+        ...state,
+        editing: true,
+        editableContent: 'profileData'
     };
 }
 
@@ -59,6 +67,8 @@ const userReducer = (state = initialState, action)=>{
             return fetchProfileSucceess(state, action);
         case actionTypes.EDIT_PROFILE_IMAGE:
             return editProfileImage(state, action);
+        case actionTypes.EDIT_PROFILE_DATA:
+            return editProfileData(state, action);
         case actionTypes.CHANGE_IMAGE:
             return changeImage(state, action);
         case actionTypes.CANCEL_EDITING:

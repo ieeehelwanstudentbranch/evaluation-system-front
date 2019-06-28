@@ -35,7 +35,6 @@ class ImageCropper extends React.Component {
   //   fetch(url)
   //     .then(res => res.blob())
   //     .then(blob => {
-  //       console.log(blob)
   //       this.convertBlobToFormData(blob)
   //     })
   //   ;
@@ -70,18 +69,15 @@ class ImageCropper extends React.Component {
     let blob;
     // return 
     blob = new Blob(byteArrays, { type: contentType });
-    return this.blobToFile(blob, 'test.jpeg')
+    return this.blobToFile(blob, 'test.png')
     
   }
   blobToFile=(theBlob, fileName)=>{
     //A Blob() is almost a File() - it's just missing the two properties below which we will add
     theBlob.lastModifiedDate = new Date();
     theBlob.name = fileName;
-    // return theBlob;
-    console.log(theBlob)
     let data = new FormData();
     data.append('profile_image', theBlob)
-    console.log(this.state.convertedFile)
     return this.setState({
       convertedFile: data
     })
@@ -94,9 +90,7 @@ class ImageCropper extends React.Component {
   onCrop(preview) {
     this.setState({preview})
     // this.convertBase64ToBlob(preview)
-    this.base64toBlob(preview, 'image/jpeg')
-    console.log(this.state.convertedFile)
-    
+    this.base64toBlob(preview, 'image/png')
     if(this.state.convertedFile){
       this.props.onChange(this.state.convertedFile)
     };
@@ -109,7 +103,6 @@ class ImageCropper extends React.Component {
       elem.target.value = "";
     }else{
       this.setState({type: elem.target.files[0].type})
-      // console.log(elem.target.files[0].type)
     };
   }
 

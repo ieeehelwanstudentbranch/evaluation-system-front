@@ -13,7 +13,6 @@ export const addPost = (data) => {
             .then(response=>{
                 dispatch(fetchPosts());
             }).catch(error=>{
-                console.log(error.response.data);
                 dispatch(addPostFailed('Something went wrong, Please try again later'));
             })
         ;
@@ -54,7 +53,6 @@ export const deletePost = (id) => {
             .then(response=>{
                 dispatch(deletePostSuccess(id))
             }).catch(error=>{
-                // console.log(error.response.data.message);
                 dispatch(addPostFailed('Something went wrong, Please try again later'));
             })
         ;

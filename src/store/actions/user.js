@@ -7,7 +7,6 @@ export const fetchUserData = (profileID, userID=null) => {
         dispatch(actions.loadingHandler());
         axios.get('/user/'+profileID)
             .then(response=>{
-                console.log(response);
                 if (profileID == userID){
                     dispatch(fetchUserDataSuccess(response.data.data))
                 } else {
@@ -55,7 +54,6 @@ export const uploadImage = (profileID, newImage) => {
             let data= {
                 profile_image: newImage
             }
-            // console.log(newImage)
             axios.put('/update-profile-image/'+profileID, data,{
                 headers: {
                   'Content-Type': 'multipart/form-data'

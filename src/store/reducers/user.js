@@ -4,9 +4,12 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState ={
     userData: null,
     profile: null,
+    editing: false,
+    editableContent: null,
     loading: false,
     error: null,
-    message: null
+    message: null,
+    newImage: null
 }
 const fetchUserSucceess = (state, action) => {
     return {
@@ -25,12 +28,41 @@ const fetchProfileSucceess = (state, action) => {
     };
 }
 
+const editProfileImage = (state, action) => {
+    return {
+        ...state,
+        editing: true,
+        editableContent: 'profileImage',
+    };
+}
+
+const changeImage = (state, action) => {
+    return {
+        ...state,
+        newImage: action.image
+    };
+}
+
+const cancelEditing = (state, action) => {
+    return {
+        ...state,
+        editing: false,
+        editableContent: null,
+    };
+}
+
 const userReducer = (state = initialState, action)=>{
     switch (action.type) {
         case actionTypes.FETCH_USER_SUCCESS:
             return fetchUserSucceess(state, action);
         case actionTypes.FETCH_PROFILE_SUCCESS:
             return fetchProfileSucceess(state, action);
+        case actionTypes.EDIT_PROFILE_IMAGE:
+            return editProfileImage(state, action);
+        case actionTypes.CHANGE_IMAGE:
+            return changeImage(state, action);
+        case actionTypes.CANCEL_EDITING:
+            return cancelEditing(state, action);
         default:
             return state;
     }

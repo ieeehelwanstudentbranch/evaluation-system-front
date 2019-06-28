@@ -15,7 +15,7 @@ export const fetchUserData = (profileID, userID=null) => {
                 }
                 
             }).catch(error=>{
-                console.log(error);
+                dispatch(actions.serverErrorHandler('Network Error, Please Try Again ater'))
             })
         ;
     }
@@ -27,9 +27,52 @@ export const fetchUserDataSuccess = (response) => {
         data: response
     }
 }
+
 export const fetchProfileDataSuccess = (response) => {
     return {
         type: actionTypes.FETCH_PROFILE_SUCCESS,
         data: response
+    }
+}
+
+export const editProfileImage = () => {
+    return{
+        type: actionTypes.EDIT_PROFILE_IMAGE
+    }
+}
+
+export const changeImage = (newImage) => {
+    return{
+        type: actionTypes.CHANGE_IMAGE,
+        image: newImage
+    }
+}
+
+export const uploadImage = (profileID, newImage) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        if (newImage !== null){
+            let data= {
+                profile_image: newImage
+            }
+            // console.log(newImage)
+            axios.put('/update-profile-image/'+profileID, data,{
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+            }).then(response=>{
+                console.log(response);
+            }).catch(error=>{
+                console.log(error.response)
+                // dispatch(actions.serverErrorHandler('Network Error, Please Try Again ater'))
+            });
+        }
+        
+    }
+}
+
+export const cancelEditing = () => {
+    return{
+        type: actionTypes.CANCEL_EDITING
     }
 }

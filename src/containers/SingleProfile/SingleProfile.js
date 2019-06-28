@@ -51,7 +51,7 @@ class SingleProfile extends Component {
                                 <h3>{this.props.profileData.firstName} {this.props.profileData.lastName}</h3>
                                 {this.props.profileData.committee?<span>{this.props.profileData.committee}</span>:null}
                                 <span>{this.props.profileData.position}</span>
-                                {/* {this.props.profileData.ex_options?<span>{this.props.profileData.ex_options}</span>:null} */}
+                                {this.props.profileData.ex_options?<span>{this.props.profileData.ex_options[0].ex_options.toUpperCase()}</span>:null}
                             </div>
                         </div>
                         <AdditionalInfo email={this.props.profileData.email} faculty={this.props.profileData.faculty} university={this.props.profileData.university} phone={this.props.profileData.phone} address={this.props.profileData.address} DOB={this.props.profileData.DOB} level={this.props.profileData.level} />

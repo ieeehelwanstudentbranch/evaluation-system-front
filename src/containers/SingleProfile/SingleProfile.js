@@ -7,6 +7,7 @@ import AdditionalInfo from './AdditionalInfo/AdditionalInfo';
 import Modal from '../../components/UI/Modal/Modal';
 import ImageCropper from '../../components/ImageCropper/ImageCropper';
 import Button from '../../components/UI/Button/Button';
+import ProfileDataForm from '../../components/ProfileDataForm/ProfileDataForm'
 class SingleProfile extends Component {
 
     state={
@@ -67,6 +68,14 @@ class SingleProfile extends Component {
                                 <>
                                     <ImageCropper image={this.props.profileData.image}/>
                                     <Button type="submit" btnType="Default" clicked={()=>this.props.uploadImage(this.props.userID, this.props.newImage)}>UPLOAD</Button>
+                                </>
+                            :null
+                        :null}
+                        {this.props.editableContent === 'profileData'?
+                            this.props.profileData.image?
+                                <>
+                                    <ProfileDataForm />
+                                    <Button type="submit" btnType="Default">UPDATE</Button>
                                 </>
                             :null
                         :null}

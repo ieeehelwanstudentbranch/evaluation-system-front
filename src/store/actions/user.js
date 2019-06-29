@@ -51,12 +51,12 @@ export const uploadImage = (profileID, newImage) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
         if (newImage !== null){
-            let data= {
-                profile_image: newImage
-            }
-            axios.put('/update-profile-image/'+profileID, data,{
+            let form_data = new FormData();
+            form_data.append('profile_image', newImage)
+            console.log()
+            axios.post('/update-profile-image/'+profileID, form_data, {
                 headers: {
-                  'Content-Type': 'multipart/form-data'
+                  'content-type': 'multipart/form-data'
                 }
             }).then(response=>{
                 console.log(response);

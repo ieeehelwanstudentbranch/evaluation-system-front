@@ -23,64 +23,15 @@ class ImageCropper extends React.Component {
     // this.urltoFile = this.urltoFile.bind(this)
     this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
   }
-
-  // urltoFile=(url, filename, mimeType)=>{
-  //   return (fetch(url)
-  //       .then(function(res){return res.arrayBuffer();})
-  //       .then(function(buf){return new File([buf], filename, {type:mimeType});})
-  //   );
-  // }
-  // code from stack overflow link: https://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript#answer-36183085
-  // convertBase64ToBlob = (url) =>{
-  //   fetch(url)
-  //     .then(res => res.blob())
-  //     .then(blob => {
-  //       this.convertBlobToFormData(blob)
-  //     })
-  //   ;
-  // }
-
-  // convertBlobToFormData = (blob) => {
-  //   let data = new FormData();
-  //   data.append('profile_image', blob)
-  //   this.setState({
-  //     convertedFile: data
-  //   })
-  // }
-  base64toBlob=(base64Data, contentType)=> {
-    contentType = contentType || '';
-    let sliceSize = 1024;
-    
-    let byteCharacters = atob(base64Data.replace(/^data:image\/(png|jpeg|jpg);base64,/, ''));
-    let bytesLength = byteCharacters.length;
-    let slicesCount = Math.ceil(bytesLength / sliceSize);
-    let byteArrays = new Array(slicesCount);
-
-    for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-        let begin = sliceIndex * sliceSize;
-        let end = Math.min(begin + sliceSize, bytesLength);
-
-        let bytes = new Array(end - begin);
-        for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
-            bytes[i] = byteCharacters[offset].charCodeAt(0);
-        }
-        byteArrays[sliceIndex] = new Uint8Array(bytes);
-    }
-    let blob;
-    // return 
-    blob = new Blob(byteArrays, { type: contentType });
-    return this.blobToFile(blob, 'test.png')
-    
-  }
-  blobToFile=(theBlob, fileName)=>{
-    //A Blob() is almost a File() - it's just missing the two properties below which we will add
-    theBlob.lastModifiedDate = new Date();
-    theBlob.name = fileName;
-    let data = new FormData();
-    data.append('profile_image', theBlob)
-    return this.setState({
-      convertedFile: data
-    })
+  // code from stack overflow link: https://stackoverflow.com/questions/16968945/convert-base64-png-data-to-javascript-file-objects/16972036#answer-38936042
+  urltoFile=(url, filename, mimeType)=>{
+    mimeType = mimeType || (url.match(/^data:([^;]+);/)||'')[1];
+    return (fetch(url)
+        .then(function(res){return res.arrayBuffer();})
+        .then(function(buf){
+          return new File([buf], filename, {type:mimeType});
+        })
+    );
   }
 
   onClose() {
@@ -89,11 +40,10 @@ class ImageCropper extends React.Component {
 
   onCrop(preview) {
     this.setState({preview})
-    // this.convertBase64ToBlob(preview)
-    this.base64toBlob(preview, 'image/png')
-    if(this.state.convertedFile){
-      this.props.onChange(this.state.convertedFile)
-    };
+    this.urltoFile(preview, 'a.png')
+      .then((file)=>{
+        return this.props.onChange(file)
+      });
   }
 
   onBeforeFileLoad(elem) {

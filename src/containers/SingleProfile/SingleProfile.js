@@ -74,7 +74,7 @@ class SingleProfile extends Component {
                         {this.props.editableContent === 'profileData'?
                             this.props.profileData.image?
                                 <>
-                                    <ProfileDataForm />
+                                    <ProfileDataForm initialValues={this.props.profileData}/>
                                     <Button type="submit" btnType="Default">UPDATE</Button>
                                 </>
                             :null

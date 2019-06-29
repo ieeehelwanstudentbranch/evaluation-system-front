@@ -5,14 +5,14 @@ import InputClasses from '../UI/Input/Input.module.scss';
 import * as classes from './ProfileDataForm.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-import axios from '../../axios';
+import Button from '../UI/Button/Button';
 class CommitteForm extends Component {
     state ={
         initialValues: this.props.initialValues
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        props.onRegister(values.firstName, values.lastName,values.email, values.DOB, values.faculty, values.university);
+        props.onSubmit(this.props.initialValues.id, values.firstName, values.lastName, values.email, values.DOB, values.level, values.faculty, values.university, values.phone, values.address);
         setSubmitting(false);
         return;
     }
@@ -46,14 +46,14 @@ class CommitteForm extends Component {
                 .string()
                 .nullable()
                 .trim()
-                .min(8, "Your Faculty is very short it must be at least 3 characters or more")
-                .max(15, "Your Faculty is too long it must be less than or equal 30 characters"),
+                .min(3, "Your Faculty is very short it must be at least 3 characters or more")
+                .max(30, "Your Faculty is too long it must be less than or equal 30 characters"),
             university: Yup
                 .string()
                 .nullable()
                 .trim()
-                .min(8, "Your University is very short it must be at least 3 characters or more")
-                .max(15, "Your University is too long it must be less than or equal 30 characters"),
+                .min(3, "Your University is very short it must be at least 3 characters or more")
+                .max(30, "Your University is too long it must be less than or equal 30 characters"),
             phone: Yup
                 .string()
                 .nullable()
@@ -69,15 +69,13 @@ class CommitteForm extends Component {
         });
 
         const initialValues=this.state.initialValues
-        console.log(this.state.initialValues)
-        
+
         return (
             <Formik
                 enableReinitialize={true}
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
-
                 render={(FormikProps)=>(
                     <Form className={classes.Form}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
@@ -124,6 +122,7 @@ class CommitteForm extends Component {
                                 <ErrorMessage name="address" />
                             </div>
                         </div>
+                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>UPDATE</Button>
                     </Form>
                 )}
             />
@@ -140,8 +139,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+        onSubmit: (id, firstName, lastName, email, DOB, level, faculty, university, phone, address)=>dispatch(actions.submitProfileData(id, firstName, lastName, email, DOB, level, faculty, university, phone, address))
     }
 }
 
-export default connect(mapStateToProps, null)(CommitteForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CommitteForm);

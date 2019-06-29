@@ -75,7 +75,6 @@ class SingleProfile extends Component {
                             this.props.profileData.image?
                                 <>
                                     <ProfileDataForm initialValues={this.props.profileData}/>
-                                    <Button type="submit" btnType="Default">UPDATE</Button>
                                 </>
                             :null
                         :null}

@@ -75,6 +75,32 @@ export const editProfileData = () => {
     }
 }
 
+export const submitProfileData = (id, firstName, lastName, email, DOB, level, faculty, university, phone, address) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        const updatedData = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            DOB: DOB,
+            level: level,
+            faculty: faculty,
+            university: university,
+            phone: phone,
+            address: address
+        }
+        axios.put(`/update-profile/${id}`, updatedData)
+            .then(response=>{
+                console.log(response)
+                // dispatch(registerSuccess(response.data.message));
+            })
+            .catch(error => {
+                console.log(error)
+                // dispatch(registerFailed(error.response.data));
+            })
+    }
+}
+
 export const cancelEditing = () => {
     return{
         type: actionTypes.CANCEL_EDITING

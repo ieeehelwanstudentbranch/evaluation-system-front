@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-// import * as reducers from './repeatedReducers';
+import * as reducers from './repeatedReducers';
 
 const initialState ={
     userData: null,
@@ -61,6 +61,8 @@ const cancelEditing = (state, action) => {
 
 const userReducer = (state = initialState, action)=>{
     switch (action.type) {
+        case actionTypes.LOADING_HANDLER:
+            return reducers.loadingHandler(state, action);
         case actionTypes.FETCH_USER_SUCCESS:
             return fetchUserSucceess(state, action);
         case actionTypes.FETCH_PROFILE_SUCCESS:
@@ -73,6 +75,8 @@ const userReducer = (state = initialState, action)=>{
             return changeImage(state, action);
         case actionTypes.CANCEL_EDITING:
             return cancelEditing(state, action);
+        case actionTypes.SERVER_ERROR_HANDLER:
+            return reducers.serverErrorHandler(state, action);
         default:
             return state;
     }

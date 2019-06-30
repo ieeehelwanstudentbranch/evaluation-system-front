@@ -59,10 +59,9 @@ export const uploadImage = (profileID, newImage) => {
                   'content-type': 'multipart/form-data'
                 }
             }).then(response=>{
-                console.log(response);
+                window.location.reload()
             }).catch(error=>{
-                console.log(error.response)
-                // dispatch(actions.serverErrorHandler('Network Error, Please Try Again ater'))
+                dispatch(actions.serverErrorHandler(error.response.data))
             });
         }
         
@@ -91,12 +90,10 @@ export const submitProfileData = (id, firstName, lastName, email, DOB, level, fa
         }
         axios.put(`/update-profile/${id}`, updatedData)
             .then(response=>{
-                console.log(response)
-                // dispatch(registerSuccess(response.data.message));
+                window.location.reload()
             })
             .catch(error => {
-                console.log(error)
-                // dispatch(registerFailed(error.response.data));
+                dispatch(actions.serverErrorHandler(error.response.data));
             })
     }
 }

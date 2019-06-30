@@ -8,13 +8,26 @@ import * as actions from '../../store/actions/index';
 import Button from '../UI/Button/Button';
 class CommitteForm extends Component {
     state ={
-        initialValues: this.props.initialValues
+        initialValues: {
+            id: this.props.initialValues.id,
+            firstName: this.props.initialValues.firstName||'',
+            lastName: this.props.initialValues.lastName||'',
+            email: this.props.initialValues.email||'',
+            DOB: this.props.initialValues.DOB||'',
+            level: this.props.initialValues.level||'',
+            faculty: this.props.initialValues.faculty||'',
+            university: this.props.initialValues.university||'',
+            phone: this.props.initialValues.phone||'',
+            address: this.props.initialValues.address||'',
+        }
     }
 
-    handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        props.onSubmit(this.props.initialValues.id, values.firstName, values.lastName, values.email, values.DOB, values.level, values.faculty, values.university, values.phone, values.address);
-        setSubmitting(false);
-        return;
+    handleSubmit = (values,{props = this.props, setSubmitting, setFieldValue }) => {
+        if (values !== props.initialValues){
+            props.onSubmit(this.state.initialValues.id, values.firstName, values.lastName, values.email, values.DOB, values.level, values.faculty, values.university, values.phone, values.address);
+            setSubmitting(false);
+            return;
+        }
     }
     
     render(){
@@ -36,46 +49,44 @@ class CommitteForm extends Component {
                 .trim()
                 .required('No Email Provided')
                 .email('It doesn\'t seems an valid Email'),
-            DOB: Yup
-                .date()
+            DOB: Yup.date()
                 .nullable(),
-            level: Yup
-                .number()
-                .nullable(),
-            faculty: Yup
-                .string()
+            level: Yup.number()
+                .nullable()
+                .min(0)
+                .max(7, 'I can\'t Recognize on faculty has more than 7 levels')
+                .notRequired(),
+            faculty: Yup.string()
                 .nullable()
                 .trim()
                 .min(3, "Your Faculty is very short it must be at least 3 characters or more")
                 .max(30, "Your Faculty is too long it must be less than or equal 30 characters"),
-            university: Yup
-                .string()
+            university: Yup.string()
                 .nullable()
                 .trim()
                 .min(3, "Your University is very short it must be at least 3 characters or more")
                 .max(30, "Your University is too long it must be less than or equal 30 characters"),
-            phone: Yup
-                .string()
+            phone: Yup.string()
                 .nullable()
                 .min(8, "Your Phone Number is very short it must be at least 8 characters or more")
                 .max(15, "Your Phone Number is too long it must be less than or equal 15 characters") 
                 .matches(phoneRegExp, 'Phone number is not valid'),
-            address: Yup
-                .string()
+            address: Yup.string()
                 .nullable()
                 .min(3, "The Address is very short it must be at least 3 characters or more")
-                .max(50, "The Address is too long it must be less than or equal 50 characters")
+                .max(100, "The Address is too long it must be less than or equal 50 characters")
             ,
         });
 
-        const initialValues=this.state.initialValues
+        let initialValues=this.state.initialValues;
 
         return (
             <Formik
-                enableReinitialize={true}
                 initialValues={initialValues}
+                enableReinitialize={true}
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
+                setFieldValue
                 render={(FormikProps)=>(
                     <Form className={classes.Form}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
@@ -100,7 +111,7 @@ class CommitteForm extends Component {
                         </div>
                         <div className={classes.RightSection}>
                             <div className={InputClasses.Input}>
-                                <Field type="text" id="level" name="level" placeholder="level" className={InputClasses.InputElement}/>
+                                <Field type="number" id="level" name="level" placeholder="level" className={InputClasses.InputElement}/>
                                 <ErrorMessage name="level" />
                             </div>
                             <div className={InputClasses.Input}>

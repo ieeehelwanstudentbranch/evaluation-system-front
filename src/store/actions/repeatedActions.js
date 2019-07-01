@@ -12,10 +12,3 @@ export const serverErrorHandler = (error) => {
         error: error
     }
 }
-
-export const handleData = (data) => {
-    return {
-        type: actionTypes.HANDLE_DATA,
-        data: data
-    }
-}

@@ -71,7 +71,7 @@ const editPostSuccess = (state, action) => {
 const postsReducer = (state = initialState, action)=>{
     switch (action.type) {
         // handling rich editor changes
-        case actionTypes.HANDLE_DATA:
+        case actionTypes.HANDLE_POST_DETAILS:
             return reducers.handleData(state, action);
         // handling loader
         case actionTypes.LOADING_HANDLER:

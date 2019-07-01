@@ -61,7 +61,7 @@ class Home extends Component{
         return(
             <div className={classes.Home}>
                 <header className={classes.Editor}>
-                    <RichEditor />
+                    <RichEditor place="posts"/>
                     {
                         this.state.editing? 
                         <Button type="submit" btnType="Default" clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>:

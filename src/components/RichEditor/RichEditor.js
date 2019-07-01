@@ -37,15 +37,27 @@ class RichEditor extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        data: state.posts.data
+const mapStateToProps = (state, props) => {
+    if (props.place === 'tasks'){
+        return {
+            data: state.tasks.data
+        }
+    } else if(props.place === 'posts'){
+        return {
+            data: state.posts.data
+        }
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onChange: (data)=> dispatch(actions.handleData(data))
+const mapDispatchToProps = (dispatch, props) => {
+    if(props.place === 'tasks'){
+        return {
+            onChange: (data)=> dispatch(actions.handleTaskDetails(data))
+        }
+    } else if(props.place === 'posts') {
+        return {
+            onChange: (data)=> dispatch(actions.handlePostDetails(data))
+        }
     }
 }
 

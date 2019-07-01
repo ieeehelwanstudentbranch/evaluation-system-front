@@ -10,6 +10,7 @@ import registerReducer from './store/reducers/register';
 import committeesReducer from './store/reducers/committees';
 import postsReducer from './store/reducers/posts';
 import userReducer from './store/reducers/user';
+import tasksReducer from './store/reducers/tasks';
 
 import './index.css';
 import App from './containers/App';
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     register: registerReducer,
     committees: committeesReducer,
     posts: postsReducer,
-    user: userReducer
+    user: userReducer,
+    tasks: tasksReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

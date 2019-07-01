@@ -3,8 +3,6 @@
 export const LOADING_HANDLER = "LOADING_HANDLER";
 /// server error: when there is error on the serve
 export const SERVER_ERROR_HANDLER = "SERVER_ERROR_HANDLER";
-/// Rich Editor action to handle data in rich editor it used used in posts and tasks
-export const HANDLE_DATA = "HANDLE_DATA";
 
 // RGISTER
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -28,6 +26,7 @@ export const ADD_COMMITTEE_FAILED = "ADD_COMMITTEE_FAILED";
 export const EDIT_COMMITTEE = "EDIT_COMMITTEE";
 
 // Tasks
+export const HANDLE_TASK_DETAILS = "HANDLE_TASK_DETAILS";
 export const ADD_TASK = "ADD_TASK";
 export const DELIVER_TASK = "DELIVER_TASK";
 export const RESET_TASK = "RESET_TASK";
@@ -36,6 +35,8 @@ export const FETCH_COMPLETED_TASKS_SUCCESS = "FETCH_COMPLETED_TASKS_SUCCESS";
 export const FETCH_PENDING_TASKS_SUCCESS = "FETCH_PENDING_TASKS_SUCCESS";
 
 // Posts
+/// Rich Editor action to handle data in rich editor it used used in posts and tasks
+export const HANDLE_POST_DETAILS = "HANDLE_POST_DETAILS";
 export const ADD_POST = "ADD_POST";
 export const ADD_POST_FAILED = "ADD_POST_FAILED";
 export const DELETE_POST = "DELETE_POST";

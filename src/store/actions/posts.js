@@ -104,3 +104,10 @@ export const editComment = (id, data) => {
         comment: data
     }
 }
+
+export const handlePostDetails = (data) => {
+    return {
+        type: actionTypes.HANDLE_POST_DETAILS,
+        data: data
+    }
+}

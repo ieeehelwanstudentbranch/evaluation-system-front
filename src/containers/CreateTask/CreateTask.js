@@ -129,7 +129,7 @@ class CreateTask extends Component {
                                     <ErrorMessage name="deadline" />
                                 </div>
                             </div>
-                            <RichEditor />
+                            <RichEditor place="tasks"/>
                             <DragableArea />
                         </div>
                         <div className={classes.rightSection}>

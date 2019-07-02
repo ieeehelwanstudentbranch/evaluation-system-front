@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import classes from './DragableArea.module.scss';
-import {MdCloudUpload, MdFileDownload, MdClose} from 'react-icons/md';
+import {MdCloudUpload, MdClose} from 'react-icons/md';
 
 class dragableArea extends Component{
     state={
@@ -106,6 +106,18 @@ class dragableArea extends Component{
     endDrag =() =>{
         return this.setState({drag: false})
     }
+
+    deleteFile = (id) => {
+        this.setState(state=>{
+            let files = state.files.filter((file, index)=>{
+                return index !== id
+            });
+            return{
+                ...state,
+                files: files
+            }
+        })
+    }
     
     render (){
         let dragAreaClasses = [classes.Dropzone];
@@ -136,7 +148,7 @@ class dragableArea extends Component{
                                 <ul className={classes.Files}>
                                     {
                                         this.state.files.map((file, index) => (
-                                            <li key={index}>{file.name} {this.formatBytes(file.size)} <span> <MdFileDownload /> <MdClose /></span></li>
+                                            <li key={index}>{file.name} {this.formatBytes(file.size)} <span><MdClose onClick={()=>this.deleteFile(index)} /></span></li>
                                         ))
                                     }
                                 </ul>: null

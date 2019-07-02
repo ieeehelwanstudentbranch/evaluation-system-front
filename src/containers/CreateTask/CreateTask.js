@@ -56,7 +56,6 @@ class CreateTask extends Component {
                         return {value: director.id, label: `${director.firstName} ${director.lastName}`, disabled:director.id == this.props.userID}
                     })
                 }
-                console.log(ex_com)
                 if(ex_com){
                     this.setState({
                         nodes: [...this.state.nodes, ex_com]

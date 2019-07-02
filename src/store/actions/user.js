@@ -61,7 +61,7 @@ export const uploadImage = (profileID, newImage) => {
             }).then(response=>{
                 window.location.reload()
             }).catch(error=>{
-                dispatch(actions.serverErrorHandler(error.response.data))
+                dispatch(actions.serverErrorHandler('Something Went wrong, please try again later'))
             });
         }
         

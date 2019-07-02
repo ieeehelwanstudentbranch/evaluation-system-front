@@ -70,9 +70,11 @@ class dragableArea extends Component{
                     this.setState({totalUploadedFilesSize: filesSize})
                 })
                 if (currentFileSize <= this.state.maxFileSize && this.state.acceptedFiles.includes(`.${currentFileExt}`) && this.state.maxFilesSize >= filesSize){
-                    if (this.state.files.map(file=>{
-                        return file.name
-                    }) != CurrentFileName){
+                    let filesNames = [] ;
+                    this.state.files.map(file=>{
+                        filesNames.push(file.name)
+                    })
+                    if(!filesNames.includes(CurrentFileName)){
                         this.setState(state=>{
                             let files = state.files.concat(file);
                             return{

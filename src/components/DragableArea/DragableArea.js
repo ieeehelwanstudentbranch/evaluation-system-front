@@ -7,6 +7,7 @@ class dragableArea extends Component{
     state={
         maxFileSize: 1073741824,
         maxFilesSize: 10737418240,
+        totalUploadedFilesSize: 0,
         acceptedFiles: [".docx", ".doc", ".txt", ".csv", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".jpeg", ".jpg", ".png", ".svg", ".gif", ".ps", ".xd", ".ai"],
         errors: [],
         files: [],
@@ -63,16 +64,36 @@ class dragableArea extends Component{
                 const CurrentFileName = file.name,
                 currentFileSize = file.size,
                 currentFileExt = getFileExtension(CurrentFileName).toLowerCase();
-                if (currentFileSize <= this.state.maxFileSize && this.state.acceptedFiles.includes(`.${currentFileExt}`)){
-                    this.setState(state=>{
-                        let files = state.files.concat(file);
-                        return{
-                            ...state,
-                            files: files,
-                            holding: false,
-                            drag: false
-                        }
-                    })
+                let filesSize = currentFileSize;
+                this.state.files.map(file=>{
+                    filesSize += file.size;
+                    this.setState({totalUploadedFilesSize: filesSize})
+                })
+                if (currentFileSize <= this.state.maxFileSize && this.state.acceptedFiles.includes(`.${currentFileExt}`) && this.state.maxFilesSize >= filesSize){
+                    if (this.state.files.map(file=>{
+                        return file.name
+                    }) != CurrentFileName){
+                        this.setState(state=>{
+                            let files = state.files.concat(file);
+                            return{
+                                ...state,
+                                files: files,
+                                holding: false,
+                                drag: false
+                            }
+                        })
+                    } else {
+                        this.setState(state=>{
+                            let errors = state.errors.concat(`${CurrentFileName} is alreay existing`);
+                            return{
+                                ...state,
+                                errors: errors,
+                                holding: false,
+                                drag: false
+                            }
+                        })
+                    }
+                    
                 }
             })
         }
@@ -134,11 +155,11 @@ class dragableArea extends Component{
                                 <p>Max File Size: {this.formatBytes(this.state.maxFileSize)}</p>
                                 <p>Max Files size: {this.formatBytes(this.state.maxFilesSize)}</p>
                             </div>
+                            {this.state.totalUploadedFilesSize?<p>Total Uploaded Size{this.formatBytes(this.state.totalUploadedFilesSize)}</p>:null}
+                            <ul className={classes.Errors}>
+                                {errors}
+                            </ul>
                         </div>
-                        
-                        <ul className={classes.Errors}>
-                            {errors}
-                        </ul>
                     </>
                 )}
             </Dropzone>

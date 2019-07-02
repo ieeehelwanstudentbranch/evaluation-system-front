@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import classes from './Toolbar.module.scss';
 import Logo from '../../Logo/WhiteLogo';
 import AnonymousNavigation from '../AnonymousNavigation/AnonymousNavigation';
-import Input from '../../UI/Input/Input'
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 import DrawerToggle from '../DrawerToggler/DrawerToggler';
 
@@ -34,7 +33,6 @@ class Toolbar extends Component {
                 <div className={classes.DesktopOnly}>
                 {this.props.isAuthenticated ?
                     <>
-                        <Input elementConfig={this.state.searchInput.elementConfig}/> 
                         <AuthenticatedNavigation />
                     </> : <AnonymousNavigation />
                 }

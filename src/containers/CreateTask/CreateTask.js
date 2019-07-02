@@ -119,11 +119,11 @@ class CreateTask extends Component {
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
                 render={(FormikProps)=>(
-                    <Form style={{justifyContent: 'flex-end'}}>
+                    <Form className={classes.TaskForm}>
                         <div className={classes.leftSection}>
                             {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
                             {this.props.message? <span>{this.props.message}</span>: null}
-                            <div className={classes.basicInfo}>
+                            <div className={classes.BasicInfo}>
                                 <div className={InputClasses.Input}>
                                     <label htmlFor="title" className={InputClasses.Label} >Task Title<span className="required">*</span></label>
                                     <Field type="text" id="title" name="title" className={InputClasses.InputElement}/>

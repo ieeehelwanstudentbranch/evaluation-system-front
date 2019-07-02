@@ -1,13 +1,18 @@
-form {
+.TaskForm {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
+    width: 85%;
+    padding: 10px;
     .leftSection{
         width: 70%;
-        padding-right: 10px;
-        .basicInfo {
+        .BasicInfo {
             display: flex;
+            justify-content: space-between;
             margin-bottom: 20px;
+            div{
+                width: 49%
+            }
         }
     }
     .rightSection{

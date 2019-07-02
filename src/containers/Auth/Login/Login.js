@@ -11,7 +11,7 @@ import {Redirect } from 'react-router-dom';
 class Login extends Component{
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        props.onLogin(values.email, values.password, values.remember_me);
+        props.onLogin(values.email, values.password);
         setSubmitting(false);
         return;
     }
@@ -26,13 +26,12 @@ class Login extends Component{
                 .trim()
                 .required('No Password Provided')
                 .min(8, 'Password is too short it must be at least 8 characters or longer')
-                .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must have numbers, capital letters, small letters and special characters '),
-            remember_me: Yup.boolean()
+                .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must have numbers, capital letters, small letters and special characters ')
+            ,
         });
         const initialValues= {
             email: '',
-            password: '',
-            remember_me: false
+            password: ''
         }
         let form;
         if (this.props.loading){
@@ -56,12 +55,6 @@ class Login extends Component{
                                 <label htmlFor="password" className={classes.Label} >Password</label>
                                 <Field type="password" id="password" name="password" placeholder="Password" className={classes.InputElement}/>
                                 <ErrorMessage name="password" />
-                            </div>
-                            <div className={classes.Input}>    
-                                <label htmlFor="remember_me" className={classes.Label}>
-                                    <Field type="checkbox" id="remember_me" name="remember_me" />
-                                    Keep me loged in
-                                </label>
                             </div>
                             <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
                         </Form>
@@ -94,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (email, password, remember_me) => dispatch(actions.login(email, password, remember_me))
+        onLogin: (email, password) => dispatch(actions.login(email, password))
     }
 }
 

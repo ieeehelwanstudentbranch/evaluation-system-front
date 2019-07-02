@@ -21,14 +21,14 @@ import {
   MdInsertDriveFile
 } from "react-icons/md";
 import {connect} from 'react-redux';
-
+import * as actions from '../../store/actions/index';
 
 class CreateTask extends Component {
     state = {
         nodes: [],
         checked: [],
         expanded: [],
-        files: []
+        files: null
     }
     componentDidMount(){
         axios.get('/create-task/')
@@ -71,6 +71,12 @@ class CreateTask extends Component {
                 console.log(error)
             })
         ;
+    }
+
+    handleSubmit = (values, {props = this.props, setSubmitting }) =>{
+        this.props.submitTask(values.title, values.deadline, props.taskDetails, this.state.files, this.state.checked);
+        setSubmitting(false);
+        return;
     }
     
     render(){
@@ -151,7 +157,13 @@ class CreateTask extends Component {
 }
 const mapStateToProps = state => {
     return{
-        userID: state.user.userData?state.user.userData.id:null
+        userID: state.user.userData?state.user.userData.id:null,
+        taskDetails: state.tasks.data? state.tasks.data:null
     }
 }
-export default connect(mapStateToProps)(CreateTask)
+const mapDispatchToProps = dispatch => {
+    return{
+        submitTask: (title, deadline, details, files, receptors)=>dispatch(actions.sendTask(title, deadline, details, files, receptors))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTask)

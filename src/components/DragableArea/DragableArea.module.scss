@@ -4,20 +4,57 @@
     display: flex;
     flex-flow: column;
     margin-top: 20px;
+    border: 1px dashed #000;
+    position: relative;
+    height: 200px;
+    padding: 5px;
+    padding: 20px;
+    &:hover{
+        .HasItems{
+            display: flex;
+        }
+    }
+    .Files{
+        li{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span{
+                font-size: 20px;
+                z-index: 1000000;
+            }
+        }
+    }
+    
     .Dropzone {
-        width: 100%;
+        position: absolute;
+        height: 170px;
+        width: 95%;
         border: 1px dashed #ccc;
         padding: 20px;
-        height: 200px;
-        display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
         align-items: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         svg{
             width: 50px;
             height: 50px;
         }
+    }
+    .HasItems{
+        position: absolute;
+        display: none;
+        transition: all 0.5s ease-in-out;
+    }
+    
+}
+.Draged{
+    .Dropzone {
+        display: flex !important;
     }
 }
 .Validation{
@@ -35,6 +72,7 @@
 
 .Errors{
     list-style-type: none;
-    
+    color: $red;
 }
+
 

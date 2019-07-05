@@ -28,52 +28,95 @@ class CreateTask extends Component {
         nodes: [],
         checked: [],
         expanded: [],
-        files: null
+        files: []
     }
+
     componentDidMount(){
-        axios.get('/create-task/')
-            .then(response=>{
-                console.log(response.data.data);
-                let ex_com ={
-                    value: response.data.data.EX_com.map(member=>{
-                        return(
-                            member.id !== this.props.userID ? member.id : null
-                        )
-                    }),
-                    label: 'EX_COM',
-                    children: response.data.data.EX_com.map(member=>{
-                        return {value: member.id, label: `${member.firstName} ${member.lastName}`, disabled:member.id == this.props.userID}
-                    })
-                }
-                let highBoard ={
-                    value: response.data.data.highBoard.map(director=>{
+        new Promise((resolve, reject) => {
+            axios.get('/create-task/')
+                .then(response=>{
+                    resolve(response.data.data)
+                })
+        }).then(response=>{
+            console.log(response)
+            let ex_com = {
+                value: response.EX_com.map(member=>{
+                    return(
+                        member.id !== this.props.userID ? member.id : null
+                    )
+                }),
+                label: 'EX_COM',    
+                children: response.EX_com.map(member=>{
+                    return {
+                        value: member.id,
+                        label: `${member.firstName} ${member.lastName}`,
+                        disabled:member.id == this.props.userID
+                    }
+                })
+            }
+            if(ex_com){
+                this.setState({
+                    nodes: [...this.state.nodes, ex_com]
+                })
+            }
+            let highBoard ;
+            if(response.highBoard){
+                let highBoardArray = Object.keys(response.highBoard).map((key)=> {
+                    return Number(key), response.highBoard[key];
+                });
+                highBoard = {
+                    value: highBoardArray.map(director=>{
                         return(
                             director.id !== this.props.userID ? director.id : null
                         )
                     }),
                     label: 'Directors',
-                    children: response.data.data.highBoard.map(director=>{
-                        return {value: director.id, label: `${director.firstName} ${director.lastName}`, disabled:director.id == this.props.userID}
+                    children: highBoardArray.map(director=>{
+                        return {
+                            value: director.id,
+                            label: `${director.firstName} ${director.lastName}`,
+                            disabled: director.id == this.props.userID
+                        }
                     })
                 }
-                if(ex_com){
-                    this.setState({
-                        nodes: [...this.state.nodes, ex_com]
-                    })
-                }
-                if(highBoard.children > 0){
-                    this.setState({
-                        nodes: [...this.state.nodes, highBoard]
-                    })
-                }
-            }).catch(error=>{
-                console.log(error)
+            }
+            this.setState({
+                nodes: [...this.state.nodes, highBoard]
             })
+            let committees = response.committee.map((committee)=>{
+                if(committee.volunteers.length>0){
+                    return {
+                        value: committee.volunteers.map((volunteer)=>{
+                            return volunteer.id
+                        }),
+                        label: committee.name,
+                        children: committee.volunteers.map((volunteer)=>{
+                            return {
+                                value: volunteer.id,
+                                label: `${volunteer.name}`,
+                                disabled: volunteer.id == this.props.userID
+                            }
+                        })
+                    }
+                }
+                
+            })
+            if(committees){
+                let finished = committees.filter((committee)=>{
+                    return committee !== undefined 
+                });
+                finished.map(committee=>{
+                    this.setState({
+                        nodes: [...this.state.nodes, committee]
+                    })
+                })
+            }
         ;
+        })
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
-        this.props.submitTask(values.title, values.deadline, props.taskDetails, this.state.files, this.state.checked);
+        this.props.submitTask(values.title, values.deadline, props.taskDetails, props.taskFiles, this.state.checked);
         setSubmitting(false);
         return;
     }
@@ -157,7 +200,8 @@ class CreateTask extends Component {
 const mapStateToProps = state => {
     return{
         userID: state.user.userData?state.user.userData.id:null,
-        taskDetails: state.tasks.data? state.tasks.data:null
+        taskDetails: state.tasks.data? state.tasks.data:null,
+        taskFiles: state.tasks.files? state.tasks.files: null
     }
 }
 const mapDispatchToProps = dispatch => {

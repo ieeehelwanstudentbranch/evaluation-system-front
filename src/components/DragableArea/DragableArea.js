@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import classes from './DragableArea.module.scss';
 import {MdCloudUpload, MdClose} from 'react-icons/md';
-
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 class dragableArea extends Component{
     state={
         maxFileSize: 1073741824,
         maxFilesSize: 10737418240,
         totalUploadedFilesSize: 0,
-        acceptedFiles: [".docx", ".doc", ".txt", ".csv", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".jpeg", ".jpg", ".png", ".svg", ".gif", ".ps", ".xd", ".ai"],
+        acceptedFiles: [".docx", ".doc", ".txt", ".csv", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".jpeg", ".jpg", ".png", ".svg", ".gif", ".ps", ".xd", ".ai", ".zip"],
         errors: [],
         files: [],
         drag: false,
@@ -77,6 +78,7 @@ class dragableArea extends Component{
                     if(!filesNames.includes(CurrentFileName)){
                         this.setState(state=>{
                             let files = state.files.concat(file);
+                            this.props.changeFiles(files);
                             return{
                                 ...state,
                                 files: files,
@@ -180,5 +182,11 @@ class dragableArea extends Component{
         )
     }
 }
-    
-export default dragableArea;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        changeFiles: (files)=>dispatch(actions.handleTaskFiles(files))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(dragableArea);

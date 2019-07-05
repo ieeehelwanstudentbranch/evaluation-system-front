@@ -53,7 +53,6 @@ export const uploadImage = (profileID, newImage) => {
         if (newImage !== null){
             let form_data = new FormData();
             form_data.append('profile_image', newImage)
-            console.log()
             axios.post('/update-profile-image/'+profileID, form_data, {
                 headers: {
                   'content-type': 'multipart/form-data'

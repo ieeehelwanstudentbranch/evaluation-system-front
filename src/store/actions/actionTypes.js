@@ -27,6 +27,7 @@ export const EDIT_COMMITTEE = "EDIT_COMMITTEE";
 
 // Tasks
 export const HANDLE_TASK_DETAILS = "HANDLE_TASK_DETAILS";
+export const HANDLE_TASK_FILES = "HANDLE_TASK_FILES";
 export const ADD_TASK = "ADD_TASK";
 export const DELIVER_TASK = "DELIVER_TASK";
 export const RESET_TASK = "RESET_TASK";

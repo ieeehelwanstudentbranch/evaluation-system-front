@@ -91,40 +91,42 @@ class CommitteForm extends Component {
                     <Form className={classes.Form}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
                         {this.props.message? <span>{this.props.message}</span>: null}
-                        <div className={classes.LeftSection}>
-                            <div className={InputClasses.Input}>
-                                <Field type="text" id="firstName" name="firstName" placeholder="First Name" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="firstName" />
+                        <div style={{display: 'flex'}}>
+                            <div className={classes.LeftSection}>
+                                <div className={InputClasses.Input}>
+                                    <Field type="text" id="firstName" name="firstName" placeholder="First Name" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="firstName" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="text" id="lastName" name="lastName" placeholder="Last Name" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="lastName" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="email" id="email" name="email" placeholder="Email" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="email" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="date" id="dob" name="DOB" placeholder="Date Of Birth" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="DOB" />
+                                </div>
                             </div>
-                            <div className={InputClasses.Input}>
-                                <Field type="text" id="lastName" name="lastName" placeholder="Last Name" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="lastName" />
-                            </div>
-                            <div className={InputClasses.Input}>
-                                <Field type="email" id="email" name="email" placeholder="Email" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="email" />
-                            </div>
-                            <div className={InputClasses.Input}>
-                                <Field type="date" id="dob" name="DOB" placeholder="Date Of Birth" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="DOB" />
-                            </div>
-                        </div>
-                        <div className={classes.RightSection}>
-                            <div className={InputClasses.Input}>
-                                <Field type="number" id="level" name="level" placeholder="level" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="level" />
-                            </div>
-                            <div className={InputClasses.Input}>
-                                <Field type="text" id="faculty" name="faculty" placeholder="Faculty" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="faculty" />
-                            </div>
-                            <div className={InputClasses.Input}>
-                                <Field type="text" id="university" name="university" placeholder="University" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="university" />
-                            </div>
-                            <div className={InputClasses.Input}>
-                                <Field type="tel" id="phone" name="phone" placeholder="Phone Number" className={InputClasses.InputElement}/>
-                                <ErrorMessage name="phone" />
+                            <div className={classes.RightSection}>
+                                <div className={InputClasses.Input}>
+                                    <Field type="number" id="level" name="level" placeholder="level" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="level" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="text" id="faculty" name="faculty" placeholder="Faculty" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="faculty" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="text" id="university" name="university" placeholder="University" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="university" />
+                                </div>
+                                <div className={InputClasses.Input}>
+                                    <Field type="tel" id="phone" name="phone" placeholder="Phone Number" className={InputClasses.InputElement}/>
+                                    <ErrorMessage name="phone" />
+                                </div>
                             </div>
                         </div>
                         <div className={classes.Row}>

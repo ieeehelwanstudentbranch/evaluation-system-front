@@ -60,19 +60,18 @@ class dragableArea extends Component{
             })
         }
         if (files && files.length>0){
-            // eslint-disable-next-line
-            files.map(file=>{
+            files.forEach(file=>{
                 const CurrentFileName = file.name,
                 currentFileSize = file.size,
                 currentFileExt = getFileExtension(CurrentFileName).toLowerCase();
                 let filesSize = currentFileSize;
-                this.state.files.map(file=>{
+                this.state.files.forEach(file=>{
                     filesSize += file.size;
                     this.setState({totalUploadedFilesSize: filesSize})
                 })
                 if (currentFileSize <= this.state.maxFileSize && this.state.acceptedFiles.includes(`.${currentFileExt}`) && this.state.maxFilesSize >= filesSize){
                     let filesNames = [] ;
-                    this.state.files.map(file=>{
+                    this.state.files.forEach(file=>{
                         filesNames.push(file.name)
                     })
                     if(!filesNames.includes(CurrentFileName)){

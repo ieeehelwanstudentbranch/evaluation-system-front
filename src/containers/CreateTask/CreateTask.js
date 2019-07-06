@@ -50,7 +50,7 @@ class CreateTask extends Component {
                     return {
                         value: member.id,
                         label: `${member.firstName} ${member.lastName}`,
-                        disabled:member.id == this.props.userID
+                        disabled:member.id === this.props.userID
                     }
                 })
             }
@@ -62,51 +62,74 @@ class CreateTask extends Component {
             let highBoard ;
             if(response.highBoard){
                 let highBoardArray = Object.keys(response.highBoard).map((key)=> {
-                    return Number(key), response.highBoard[key];
+                    return response.highBoard[key];
                 });
                 highBoard = {
                     value: highBoardArray.map(director=>{
-                        return(
-                            director.id !== this.props.userID ? director.id : null
-                        )
+                        return director.id !== this.props.userID ? director.id : null
                     }),
                     label: 'Directors',
-                    children: highBoardArray.map(director=>{
-                        return {
+                    children: highBoardArray.map(director=>(
+                        {
                             value: director.id,
                             label: `${director.firstName} ${director.lastName}`,
-                            disabled: director.id == this.props.userID
+                            disabled: director.id === this.props.userID
+                        }
+                    ))
+                }
+            }
+            if(highBoard){
+                this.setState({
+                    nodes: [...this.state.nodes, highBoard]
+                })
+            }
+            // let committees = response.committee.map((committee)=>{
+            //     if(committee.volunteers.length>0){
+            //         return {
+            //             value: committee.volunteers.map((volunteer)=>{
+            //                 return volunteer.id
+            //             }),
+            //             label: committee.name,
+            //             children: committee.volunteers.map((volunteer)=>{
+            //                 return {
+            //                     value: volunteer.id,
+            //                     label: `${volunteer.name}`,
+            //                     disabled: volunteer.id === this.props.userID
+            //                 }
+            //             })
+            //         }
+            //     }
+            // })
+            let committees = response.committee.filter((committee)=>{
+                return committee.volunteers.length>0
+            }).map(committee=>{
+                return {
+                    value: committee.volunteers.map((volunteer)=>{
+                        return volunteer.id
+                    }),
+                    label: committee.name,
+                    children: committee.volunteers.map((volunteer)=>{
+                        return {
+                            value: volunteer.id,
+                            label: `${volunteer.name}`,
+                            disabled: volunteer.id === this.props.userID
                         }
                     })
                 }
-            }
-            this.setState({
-                nodes: [...this.state.nodes, highBoard]
-            })
-            let committees = response.committee.map((committee)=>{
-                if(committee.volunteers.length>0){
-                    return {
-                        value: committee.volunteers.map((volunteer)=>{
-                            return volunteer.id
-                        }),
-                        label: committee.name,
-                        children: committee.volunteers.map((volunteer)=>{
-                            return {
-                                value: volunteer.id,
-                                label: `${volunteer.name}`,
-                                disabled: volunteer.id == this.props.userID
-                            }
-                        })
-                    }
-                }
-                
             })
             if(committees){
-                let finished = committees.filter((committee)=>{
+                // let finished = committees.filter((committee)=>{
+                //     return committee !== undefined 
+                // });
+                // finished.forEach(committee=>{
+                //     this.setState({
+                //         nodes: [...this.state.nodes, committee]
+                //     })
+                // })
+                committees.filter((committee)=>{
                     return committee !== undefined 
-                });
-                finished.map(committee=>{
-                    this.setState({
+                }).map(committee=>{
+                    return this.setState({
                         nodes: [...this.state.nodes, committee]
                     })
                 })

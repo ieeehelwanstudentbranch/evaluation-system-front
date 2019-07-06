@@ -30,7 +30,7 @@ export const sendTask = (title, deadline, details, files, receptors) => {
         
         if (files){
             files.map((file, index) => {
-                formData.append(`file${index}`, file);
+                return formData.append(`file${index}`, file);
             });
         }
         

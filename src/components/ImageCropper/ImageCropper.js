@@ -1,11 +1,10 @@
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
 import Avatar from 'react-avatar-edit';
 import * as classes from './ImageCropper.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
-class ImageCropper extends React.Component {
+class ImageCropper extends Component {
 
   constructor(props) {
     super(props)

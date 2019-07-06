@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import 'normalize.css';
 import './App.scss';
 import Layout from '../hoc/Layout/Layout';
-import { Route, withRouter, Redirect } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import Home from './Home/Home';
 import CreateTask from './CreateTask/CreateTask';

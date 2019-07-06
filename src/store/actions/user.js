@@ -7,6 +7,7 @@ export const fetchUserData = (profileID, userID=null) => {
         dispatch(actions.loadingHandler());
         axios.get('/user/'+profileID)
             .then(response=>{
+                // eslint-disable-next-line
                 if (profileID == userID){
                     dispatch(fetchUserDataSuccess(response.data.data))
                 } else {

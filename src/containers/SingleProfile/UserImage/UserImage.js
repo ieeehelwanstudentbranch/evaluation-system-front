@@ -7,7 +7,7 @@ class UserImage extends Component {
     render(){
         return(
             <div className={classes.UserImage}>
-                <img src={`http://localhost:8000/uploaded/profile_images/${this.props.image}`} alt={this.props.alt} />
+                <img src={`http://localhost:8000/storage${this.props.image}`} alt={this.props.alt} />
                 <div className={classes.Overlay}>
                     <MdCameraAlt onClick={this.props.editImage}/>
                 </div>

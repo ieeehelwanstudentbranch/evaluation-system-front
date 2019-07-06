@@ -8,7 +8,7 @@ class ImageCropper extends Component {
 
   constructor(props) {
     super(props)
-    const src = `http://localhost:8000/uploaded/profile_images/${this.props.image}`;
+    const src = `http://localhost:8000/storage${this.props.image}`;
     const mimeTypes= 'jpg,png,jpeg,svg,gif,tiff,tif';
     this.state = {
       preview: null,
@@ -39,7 +39,7 @@ class ImageCropper extends Component {
 
   onCrop(preview) {
     this.setState({preview})
-    this.urltoFile(preview, 'a.png')
+    this.urltoFile(preview, new Date)
       .then((file)=>{
         return this.props.onChange(file)
       });

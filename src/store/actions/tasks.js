@@ -29,13 +29,16 @@ export const sendTask = (title, deadline, details, files, receptors) => {
         }
         
         if (files){
-            files.map((file, index) => {
-                return formData.append(`file${index}`, file);
-            });
+            for( let i = 0; i < files.length; i++ ){
+                let file = files[i];
+                formData.append('files[' + i + ']', file);
+            }
         }
-        
-        axios.post('/create-task/', formData)
-            .then(response=>{
+        axios.post('/create-task/', formData, {
+            headers: {
+              'content-type': 'multipart/form-data'
+            }
+        }).then(response=>{
                 console.log(response);
             }).catch(error=>{
                 console.log(error.response)

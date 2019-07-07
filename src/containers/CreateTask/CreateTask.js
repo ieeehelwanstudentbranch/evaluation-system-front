@@ -36,9 +36,10 @@ class CreateTask extends Component {
             axios.get('/create-task/')
                 .then(response=>{
                     resolve(response.data.data)
+                }).catch(error=>{
+                    reject(error)
                 })
         }).then(response=>{
-            console.log(response)
             let ex_com = {
                 value: response.EX_com.map(member=>{
                     return(
@@ -83,23 +84,6 @@ class CreateTask extends Component {
                     nodes: [...this.state.nodes, highBoard]
                 })
             }
-            // let committees = response.committee.map((committee)=>{
-            //     if(committee.volunteers.length>0){
-            //         return {
-            //             value: committee.volunteers.map((volunteer)=>{
-            //                 return volunteer.id
-            //             }),
-            //             label: committee.name,
-            //             children: committee.volunteers.map((volunteer)=>{
-            //                 return {
-            //                     value: volunteer.id,
-            //                     label: `${volunteer.name}`,
-            //                     disabled: volunteer.id === this.props.userID
-            //                 }
-            //             })
-            //         }
-            //     }
-            // })
             let committees = response.committee.filter((committee)=>{
                 return committee.volunteers.length>0
             }).map(committee=>{
@@ -118,14 +102,6 @@ class CreateTask extends Component {
                 }
             })
             if(committees){
-                // let finished = committees.filter((committee)=>{
-                //     return committee !== undefined 
-                // });
-                // finished.forEach(committee=>{
-                //     this.setState({
-                //         nodes: [...this.state.nodes, committee]
-                //     })
-                // })
                 committees.filter((committee)=>{
                     return committee !== undefined 
                 }).map(committee=>{
@@ -135,6 +111,8 @@ class CreateTask extends Component {
                 })
             }
         ;
+        }).catch(error=>{
+            console.log(error)
         })
     }
 

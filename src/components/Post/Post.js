@@ -10,7 +10,7 @@ class Post extends Component{
             <article className={classes.Post}>
                 <header>
                     <div className={classes.Info}>
-                        <NavLink to="">
+                        <NavLink to={`/user/${this.props.postOwner.user_id}`}>
                             {
                                 this.props.postOwner.image === "default.jpg" ?
                                     <img src={`http://localhost:8000/uploaded/profile_images/${this.props.postOwner.image}`} alt={`${this.props.name}`}/>
@@ -18,7 +18,7 @@ class Post extends Component{
                             }    
                         </NavLink>
                         <div>
-                            <NavLink to="">{`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}</NavLink>
+                            <NavLink to={`/user/${this.props.postOwner.user_id}`}>{`${this.props.postOwner.firstName} ${this.props.postOwner.lastName}`}</NavLink>
                             <span>{this.props.postOwner.position}</span>
                             <time dateTime={this.props.date_time}>{this.props.date_time}</time>
                         </div>

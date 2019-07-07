@@ -39,7 +39,7 @@ class ImageCropper extends Component {
 
   onCrop(preview) {
     this.setState({preview})
-    this.urltoFile(preview, new Date)
+    this.urltoFile(preview, new Date())
       .then((file)=>{
         return this.props.onChange(file)
       });

@@ -42,7 +42,6 @@ class SingleProfile extends Component {
     }
     
     render(){
-        console.log(this.props.profileData);
         let profile;
         if (this.props.profileData){
             profile = <div className={classes.SingleProfile}>

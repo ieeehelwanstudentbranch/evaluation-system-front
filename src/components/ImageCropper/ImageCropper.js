@@ -5,10 +5,10 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 class ImageCropper extends Component {
-
+  
   constructor(props) {
     super(props)
-    const src = `http://localhost:8000/storage${this.props.image}`;
+    const src= `http://localhost:8000/storage${this.props.image}` || `http://localhost:8000/uploaded/profile_images/${this.props.image}`;
     const mimeTypes= 'jpg,png,jpeg,svg,gif,tiff,tif';
     this.state = {
       preview: null,
@@ -19,7 +19,6 @@ class ImageCropper extends Component {
     }
     this.onCrop = this.onCrop.bind(this)
     this.onClose = this.onClose.bind(this)
-    // this.urltoFile = this.urltoFile.bind(this)
     this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
   }
   // code from stack overflow link: https://stackoverflow.com/questions/16968945/convert-base64-png-data-to-javascript-file-objects/16972036#answer-38936042
@@ -56,6 +55,7 @@ class ImageCropper extends Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       <div className={classes.ImageCropper}>
         <Avatar

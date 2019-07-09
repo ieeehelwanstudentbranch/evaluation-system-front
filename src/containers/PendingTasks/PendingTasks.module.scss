@@ -1,5 +1,19 @@
-.Tasks{
+.PendingTasks{
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
+    flex-direction: column;
+    width: 95%;
+    .TasksGroup{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow-x: scroll;
+        height: 25vh;
+        margin-top: 20px;;
+        overflow-y: hidden;
+        .Tasks{
+            display: flex;
+        }
+    }
 }

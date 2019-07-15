@@ -6,7 +6,7 @@ const committee = (props) => {
     return(
         <article className={classes.Committee} >
             <GiSettingsKnobs className={classes.CommitteeSettings} onClick={props.editing}/>
-            <NavLink><h3>COMMITTEE NAME</h3></NavLink>
+            {props.name?<NavLink to={props.url}><h3>{props.name}</h3></NavLink>:null}
             {props.mentor ? <p>Mentor: <span>{props.mentor}</span></p> : null}
             {props.director ? <p>Director: <span>{props.director}</span></p> : null}
             {props.hr_od ? <p>HR-Coordinator: <span>{props.hr_od}</span></p> : null}

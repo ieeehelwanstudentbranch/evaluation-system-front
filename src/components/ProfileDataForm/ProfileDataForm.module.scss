@@ -1,0 +1,12 @@
+.Form{
+    width: 100%;
+    justify-content: center;
+    .LeftSection, .RightSection{
+        width: 50%;
+        padding: 0px 5px;
+    }
+    .Row{
+        width: 100%;
+        padding: 0 5px
+    }
+}

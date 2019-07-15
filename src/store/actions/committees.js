@@ -30,3 +30,41 @@ export const fetchCommitteeFailed = (error) => {
         error: error
     }
 }
+
+export const addCommittee = (name, mentor, director, hr_od) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        let committeeData = {
+            name: name,
+            mentor: mentor,
+            director: director,
+            hr_od: hr_od
+        }
+        axios.post('/addcommittee', committeeData)
+            .then(response=>{
+                dispatch(initializeCommittees());
+            })
+            .catch(error=>{
+                dispatch(actions.serverErrorHandler(error))
+            })
+    }
+}
+
+export const editCommittee = (id, name, mentor, director, hr_od) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        let committeeData = {
+            name: name,
+            mentor: mentor,
+            director: director,
+            hr_od: hr_od
+        }
+        axios.post('/updatecommittee/'+id , committeeData)
+            .then(response=>{
+                dispatch(initializeCommittees());
+            })
+            .catch(error=>{
+                dispatch(actions.serverErrorHandler(error))
+            })
+    }
+}

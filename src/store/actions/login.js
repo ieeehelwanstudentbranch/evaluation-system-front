@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
+import * as profileActions from './user';
 
 export const login = (email, password, remember_me) => {
     return dispatch => {
@@ -18,8 +19,10 @@ export const login = (email, password, remember_me) => {
                     // set token and expiration date in local storage
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('expirationDate', expirationDate);
-                    dispatch(loginSuccess(response.data.token, response.data.message));
+                    localStorage.setItem('userID', response.data.userId);
+                    dispatch(loginSuccess(response.data.token, response.data.message, response.data.userId));
                     dispatch(checkLoginTime(expirationDate, response.data.token));
+                    dispatch(profileActions.fetchUserData(response.data.userId,response.data.userId));
                 }else{
                     dispatch(loginFailed(response.data.message));
                 }
@@ -31,10 +34,11 @@ export const login = (email, password, remember_me) => {
     }
 }
 
-export const loginSuccess = (token, message) => {
+export const loginSuccess = (token, message, userID) => {
     return {
         type: actionTypes.LOGIN_SUCCESS,
         token: `bearer ${token}`,
+        userID: userID,
         message: message
     }
 }
@@ -86,6 +90,7 @@ export const logoutSuccess = (message) => {
     return {
         type: actionTypes.LOGOUT_SUCCESS,
         token: null,
+        userID: null,
         message: message
     }
 }
@@ -106,8 +111,10 @@ export const loginCheckState = () => {
             if (expirationDate <= new Date()){
                 dispatch(logout(token))
             }else {
-                dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically'));
+                const userID = localStorage.getItem('userID');
+                dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically', userID));
                 dispatch(checkLoginTime(expirationDate, token));
+                dispatch(profileActions.fetchUserData(userID, userID));
             }
         }
     }

@@ -4,6 +4,8 @@ main, aside {
     margin-top: 56px;
 }
 main {
+    display: flex;
+    justify-content: center;
     width: 100vw;
     @media (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width) {
         width: 80vw;

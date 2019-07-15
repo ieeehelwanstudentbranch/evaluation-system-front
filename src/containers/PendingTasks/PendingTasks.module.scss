@@ -1,5 +1,23 @@
-.Tasks{
+.PendingTasks{
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
+    width: 95%;
+    .TasksGroup{
+        display: flex;
+        flex-direction: column;
+        width: calc(100%/3);
+        margin-top: 20px;
+        &:not(:first-child){
+            padding: 0 10px;
+        }
+        &:not(:last-child){
+            border-right: 1px solid #ccc
+        }
+    }
+}
+
+.ReactVirtualized__Grid__innerScrollContainer{
+    max-width: none !important;   
+    background-color: #000
 }

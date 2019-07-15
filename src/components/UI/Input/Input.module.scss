@@ -1,38 +1,27 @@
 @import '../../../assets/scss/color_variables';
 .Input {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding: 8px 0;
-    position: relative;
+    margin: 10px 0;
     .Label {
-        font-weight: bold;
-        display: block;
-        margin: 8px 0;
-        text-align: left
+        font-weight: 500;
+        margin-bottom: 8px;
     }
     .InputElement {
-        font: inherit;
         outline: none;
         border: 1px solid $main_color;
         background-color: $white;
         padding: 6px 10px;
-        display: block;
+        display: flex;
         width: 100%;
         border-radius: 5px;
-        height: 2.2rem;
-        &:focus {
-            outline: none;
-        }
-    }
-    .Icon{
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: $main_color
+        height: 2.2rem
     }
 }
 
 .Invalid{
-    border: 1px solid red !important;
+    border: 1px solid $red !important;
 }
 
 .Valid{

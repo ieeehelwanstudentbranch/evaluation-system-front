@@ -28,12 +28,14 @@ export const EDIT_COMMITTEE = "EDIT_COMMITTEE";
 // Tasks
 export const HANDLE_TASK_DETAILS = "HANDLE_TASK_DETAILS";
 export const HANDLE_TASK_FILES = "HANDLE_TASK_FILES";
+export const FETCH_PENDING_TASKS_SUCCESS = "FETCH_PENDING_TASKS_SUCCESS";
+export const FETCH_COMPLETED_TASKS_SUCCESS = "FETCH_COMPLETED_TASKS_SUCCESS";
 export const ADD_TASK = "ADD_TASK";
 export const DELIVER_TASK = "DELIVER_TASK";
 export const RESET_TASK = "RESET_TASK";
 export const EVALUATE_TASK = "EVALUATE_TASK";
-export const FETCH_COMPLETED_TASKS_SUCCESS = "FETCH_COMPLETED_TASKS_SUCCESS";
-export const FETCH_PENDING_TASKS_SUCCESS = "FETCH_PENDING_TASKS_SUCCESS";
+
+
 
 // Posts
 /// Rich Editor action to handle data in rich editor it used used in posts and tasks

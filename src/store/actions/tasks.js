@@ -46,3 +46,27 @@ export const sendTask = (title, deadline, details, files, receptors) => {
         ;
     }
 }
+
+export const fetchPendingTasks = () => {
+    return dispatch =>{
+        dispatch(actions.loadingHandler());
+        axios.get('/pending-tasks/')
+            .then(response=>{
+                console.log(response.data.data)
+                dispatch(fetchPendingTasksSuccess(response.data.data));
+            }).catch(error=>{
+                console.log(error)
+            })
+        ;
+    }
+}
+
+export const fetchPendingTasksSuccess = (tasks) => {
+    return {
+        type: actionTypes.FETCH_PENDING_TASKS_SUCCESS,
+        pendingMentoringTasks: tasks.mentoring_tasks[0],
+        pendingSentTasks: tasks.sent_tasks,
+        pendingPersonalTasks: tasks.personal_tasks,
+        pendingCoordinatingTasks: tasks.coordinating_tasks
+    }
+}

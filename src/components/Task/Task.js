@@ -40,7 +40,7 @@ class Task extends Component {
                     this.setState({receiver_info: responses[1].data.data})
                     this.setState({committee_info: responses[2].data.data})
                 })
-            }, 5000)
+            }, 3000)
             
         }
     }

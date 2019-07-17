@@ -1,0 +1,18 @@
+.SinglePost {
+    width: 95%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    margin: 40px 0px;
+    border: 1px solid #ccc;
+    justify-content: center;
+    .Content{
+        padding-left: 20px;
+        margin-bottom: 40px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

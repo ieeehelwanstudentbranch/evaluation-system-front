@@ -71,8 +71,30 @@ class Task extends Component {
                             <p>Receiver Name: <span>{`${this.state.receiver_info.firstName} ${this.state.receiver_info.lastName}`}</span></p>
                         :null
                     }
-                    {this.props.task_status ? this.props.task_status === 'delivered'?<span className={classes.TaskStatus}><MdCheckCircle/></span>:null:null}
-                    {this.props.committee ? this.props.committee.length>0? <p>Committee: <span>{`${this.props.committee[0].name}`}</span></p>:null:null}
+                    {
+                        this.props.task_status ?
+                            this.props.task_status === 'delivered'? 
+                                <span className={classes.TaskStatus}><MdCheckCircle/></span>
+                            :null
+                        :this.props.status?
+                            this.props.status === 'delivered'?
+                                <span className={classes.TaskStatus}><MdCheckCircle/></span>
+                            :null
+                        :null
+                        
+                    }
+                    {/* {this.props.committee ? this.props.committee.length>0? <p>Committee: <span>{`${this.props.committee[0].name}`}</span></p>:null:null} */}
+                    {
+                        this.props.readyComponent?
+                            this.props.committee?
+                                this.props.committee.length>0?
+                                    <p>Committee: <span>{`${this.props.committee[0].name}`}</span></p>
+                                :null
+                            :null
+                        :this.state.committee_info?
+                            <p>Committee: <span>{`${this.state.committee_info.name}`}</span></p>
+                        :null
+                    }
                 </article>
             </NavLink>
         )

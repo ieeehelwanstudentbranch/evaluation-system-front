@@ -248,7 +248,7 @@ class PendingTasks extends Component{
                                     {
                                         this.state.coordinatingTasks.map(task=>{
                                             return (
-                                                <Task key={task.id} {...task}/>
+                                                <Task key={task.id} readyComponent={true} {...task}/>
                                             )
                                         })
                                     }

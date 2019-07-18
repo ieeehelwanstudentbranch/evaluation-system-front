@@ -31,7 +31,6 @@ class CommitteForm extends Component {
     componentDidMount(){
         axios.get('/addcommittee')
         .then(response=>{
-            console.log(response.data.data)
             let mentors = response.data.data[0].mentor;
             let directors = response.data.data[0].director;
             let hrs_od = response.data.data[0]['hr-od'];
@@ -55,7 +54,6 @@ class CommitteForm extends Component {
     }
     
     render(){
-        console.log(this.props)
         const validationSchema = Yup.object().shape({
             name: Yup.string()
                 .trim()

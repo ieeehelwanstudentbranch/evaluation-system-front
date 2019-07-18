@@ -7,7 +7,7 @@ install:
   - npm i
 before_script:
 script:
-  - npm test
+  # - npm test
   - npm run build
 after_success:
 after_failure:

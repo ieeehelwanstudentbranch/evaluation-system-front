@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import * as classes from './SingleTask.module.scss';
 import axios from '../../axios';
 import {connect} from 'react-redux';
-import InformationHeader from '../../components/UI/InformationHeader/InformationHeader'
+import InformationHeader from '../../components/UI/InformationHeader/InformationHeader';
+import InformationTemplate from '../SingleProfile/AdditionalInfo/InformationTemplate/InformationTemplate';
 class SingleTask extends Component{
     state={
         id: null,
@@ -26,8 +27,8 @@ class SingleTask extends Component{
                 this.setState({
                     id: this.props.match.params.id,
                     title: response.data.data.title,
-                    details: response.data.data.title,
-                    sent_files: response.data.data.sent_files,
+                    details: response.data.data.details,
+                    files: response.data.data.sent_files?response.data.data.sent_files:null,
                     deadline: response.data.data.deadline,
                     created_at: response.data.data.created_at.date,
                     sender_info: response.data.data.sender_info[0],
@@ -41,14 +42,36 @@ class SingleTask extends Component{
     }
     render(){
         let deadline = new Date(this.state.deadline),
-            delivered_at = new Date(this.state.delivered_at);
+            delivered_at = new Date(this.state.delivered_at)
+            ;
         let task= <> </>;
         if (this.state.title){
             task = <div className={classes.SinglePost}>
                 {this.state.sender_info ?
                     <InformationHeader {...this.state.sender_info} created_at={this.state.created_at}/>: <></>
                 }
-                <article dangerouslySetInnerHTML={{__html: this.state.post}} className={classes.Content}></article>
+                {this.state.details?
+                    <div className={classes.Details}>
+                        <span className={classes.Title}>Task Details</span>
+                        <article dangerouslySetInnerHTML = {{__html: this.state.details}}></article>
+                    </div>
+                    :null
+                }
+                {/* {
+                    this.state.files?
+                        <div className={classes.Details}>
+                            <span>Task Files</span>
+                            <ul>
+                                {
+                                    this.state.files.map(file=>{
+                                        console.log(file)
+                                    })
+                                }
+                            </ul>
+                        </div>
+                    :null
+                } */}
+                
             </div>
         }
         return (

@@ -55,11 +55,12 @@ export const editCommittee = (id, name, mentor, director, hr_od) => {
         dispatch(actions.loadingHandler());
         let committeeData = {
             name: name,
-            mentor: mentor,
-            director: director,
-            hr_od: hr_od
+            mentor: mentor.toString(),
+            director: director.toString(),
+            hr_coordinator: hr_od.toString()
         }
-        axios.post('/updatecommittee/'+id , committeeData)
+        console.log(committeeData)
+        axios.put('/updatecommittee/'+id , committeeData)
             .then(response=>{
                 dispatch(initializeCommittees());
             })

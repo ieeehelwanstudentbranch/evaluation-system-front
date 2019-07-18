@@ -31,9 +31,10 @@ class CommitteForm extends Component {
     componentDidMount(){
         axios.get('/addcommittee')
         .then(response=>{
-            let mentors = response.data.data.mentor;
-            let directors = response.data.data.director;
-            let hrs_od = response.data.data.hr_od;
+            console.log(response.data.data)
+            let mentors = response.data.data[0].mentor;
+            let directors = response.data.data[0].director;
+            let hrs_od = response.data.data[0]['hr-od'];
             this.setState({
                 mentors: mentors,
                 directors: directors,
@@ -46,39 +47,40 @@ class CommitteForm extends Component {
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
-        if(this.props.adding){
-            this.props.onAdding(values.name, values.mentor, values.director, values.hr_od);
+        if(props.adding){
+            props.onAdding(values.name, values.mentor, values.director, values.hr_od);
         } else {
-            this.props.onEditing(this.props.committeeData.id, values.name, values.mentor, values.director, values.hr_od);
+            props.onEditing(props.committeeData.id, values.name, values.mentor, values.director, values.hr_od);
         }
     }
     
     render(){
-        // let initialValues;
+        console.log(this.props)
         const validationSchema = Yup.object().shape({
             name: Yup.string()
                 .trim()
                 .required('Committee Name is a Required field')
                 .min(3, 'Committee Name is too short it must be at least 3 characters or longer'),
-            mentor: Yup.number()
+            mentor: Yup
+                .string()
                 .required('Please select the Committee mentor'),
-            director: Yup.number()
+            director: Yup
+                .string()
                 .nullable()
                 .notRequired(),
-            hr_od: Yup.number()
+            hr_od: Yup
+                .string()
                 .nullable()
                 .notRequired()
             ,
         });
-        const initialValues=this.state.initialValues
-        
+        const initialValues=this.state.initialValues;
         return (
             <Formik
                 enableReinitialize={true}
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={this.handleSubmit}
-
                 render={(FormikProps)=>(
                     <Form style={{justifyContent: 'flex-end'}}>
                         {this.props.error? <span>Sorry something went wrong please try again later</span>: null}

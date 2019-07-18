@@ -16,6 +16,7 @@ import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
 import SinglePost from '../components/Post/SinglePost/SinglePost';
 import SingleProfile from './SingleProfile/SingleProfile';
+import SingleTask from './SingleTask/SingleTask';
 
 class App extends Component {
   componentDidMount () {
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path="/committees" component={Committees}/>
           <Route path="/logout" component={Logout}/>
           <Route path={"/post/:id"} component={SinglePost} />
+          <Route path={"/task/:id"} component={SingleTask} />
           {/* <Redirect to="/" /> */}
         </>
       )

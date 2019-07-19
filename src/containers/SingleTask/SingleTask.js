@@ -3,7 +3,6 @@ import * as classes from './SingleTask.module.scss';
 import axios from '../../axios';
 import {connect} from 'react-redux';
 import InformationHeader from '../../components/UI/InformationHeader/InformationHeader';
-import InformationTemplate from '../SingleProfile/AdditionalInfo/InformationTemplate/InformationTemplate';
 class SingleTask extends Component{
     state={
         id: null,
@@ -41,9 +40,8 @@ class SingleTask extends Component{
             })
     }
     render(){
-        let deadline = new Date(this.state.deadline),
-            delivered_at = new Date(this.state.delivered_at)
-            ;
+        // let deadline = new Date(this.state.deadline),
+        //     delivered_at = new Date(this.state.delivered_at);
         let task= <> </>;
         if (this.state.title){
             task = <div className={classes.SinglePost}>

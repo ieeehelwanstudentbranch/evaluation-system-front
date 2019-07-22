@@ -1,0 +1,15 @@
+.Committee{
+    width: 70%;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 20px 0; 
+    thead,tbody,tr,td,th{
+        border: 1px solid #ccc
+    }
+    tbody{
+        img{
+            border-radius: 50%;
+        }
+    }
+}

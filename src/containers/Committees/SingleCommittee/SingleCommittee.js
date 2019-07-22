@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as classes from './SingleCommittee.module.scss';
 import axios from '../../../axios';
+import {NavLink} from 'react-router-dom';
 
 class SingleCommittee extends Component{
     state={
@@ -22,7 +23,7 @@ class SingleCommittee extends Component{
     render(){
         return(
             this.state.members && this.state.members.length?
-            <table>
+            <table className={classes.Committee}>
                 <thead>
                     <tr>
                         <th>avatar</th>
@@ -34,15 +35,18 @@ class SingleCommittee extends Component{
                 <tbody>
                     {this.state.members.map(member=>{
                         return(
-                            <tr>
+                            <tr key={member.id}>
                                 <td>
-                                {
-                                    member.image === "default.jpg" ?
-                                    <img src={`http://localhost:8000/uploaded/profile_images/${member.image}`} alt={`${member.firstName}`} width="100px" height="100px"/>
-                                    :<img src={`http://localhost:8000/storage${member.image}`} alt={`${member.firstName}`} width="100px" height="100px"/>
-                                }
+                                    <NavLink to={`/user/${member.id}`}>
+                                        {
+                                            member.image === "default.jpg" ?
+
+                                            <img src={`http://localhost:8000/uploaded/profile_images/${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
+                                            :<img src={`http://localhost:8000/storage${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
+                                        }
+                                    </NavLink>
                                 </td>
-                                <td><span>{member.firstName} {member.lastName}</span></td>
+                                <td><NavLink to={`/user/${member.id}`}>{member.firstName} {member.lastName}</NavLink></td>
                                 <td><span>{member.position}</span></td>
                                 <td><span>{member.status}</span></td>
                             </tr>

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Task from '../../components/Task/Task';
+import Task from '../../components/TaskCard/TaskCard';
 import classes from './CompletedTasks.module.scss';
 
 class CompletedTasks extends Component{

@@ -1,0 +1,43 @@
+@import '../../assets/scss/color_variables';
+.Task{
+    padding: 5px;
+    // box-shadow: 6px 7px 16px -9px rgba(0,0,0,0.75);
+    width: 98%;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    border: 1px solid $lite_gray;
+    margin-bottom: 15px;
+    a.TaskLink {
+        display: inline-flex;
+        text-decoration: none;
+        color: $main_color;
+    }
+
+    p {
+        font-size: 15px;
+        color: $black;
+        margin-bottom: 5px;
+        >* {
+            font-weight: bold;
+            color: $lite_gray
+        }
+    }
+
+    .TaskStatus {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        color: $black;
+    }
+
+    &:hover {
+        box-shadow: 7px 7px 24px -1px rgba(0, 0, 0, 0.75);
+    }
+}

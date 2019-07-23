@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Task from '../../components/Task/Task';
+import TaskCard from '../../components/TaskCard/TaskCard';
 import classes from './PendingTasks.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
@@ -159,7 +159,7 @@ class PendingTasks extends Component{
                                     {
                                         this.state.sentTasks.map(task=>{
                                             return (
-                                                <Task key={task.id} readyComponent={true} {...task}/>
+                                                <TaskCard key={task.id} {...task}/>
                                             )
                                         })
                                     }
@@ -188,7 +188,7 @@ class PendingTasks extends Component{
                                     {
                                         this.state.mentoringTasks.map(task=>{
                                             return (
-                                                <Task key={task.id} readyComponent={false} {...task}/>
+                                                <TaskCard key={task.id} {...task}/>
                                             )
                                         })
                                     }
@@ -218,7 +218,7 @@ class PendingTasks extends Component{
                                     {
                                         this.state.personalTasks.map(task=>{
                                             return (
-                                                <Task key={task.id} readyComponent={true} {...task}/>
+                                                <TaskCard key={task.id} {...task}/>
                                             )
                                         })
                                     }
@@ -248,7 +248,7 @@ class PendingTasks extends Component{
                                     {
                                         this.state.coordinatingTasks.map(task=>{
                                             return (
-                                                <Task key={task.id} readyComponent={true} {...task}/>
+                                                <TaskCard key={task.id} {...task}/>
                                             )
                                         })
                                     }

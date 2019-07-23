@@ -9,7 +9,7 @@ const task = (props) => {
     let createdTime = new Date(props.create_at);
     let deliveredTime = new Date(props.deliver_at);
     return(
-        <article className={classes.Task}>
+        <article className={classes.Card}>
             <NavLink className={classes.TaskLink} to={`/task/${props.id}`} exact={props.exact} style={{padding: '5px 0'}}>
                 <h3>{props.title.substring(0, 20)}...</h3>
             </NavLink>

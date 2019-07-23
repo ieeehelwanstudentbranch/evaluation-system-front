@@ -46,7 +46,11 @@ class SingleCommittee extends Component{
                                         }
                                     </NavLink>
                                 </td>
-                                <td><NavLink to={`/user/${member.id}`}>{member.firstName} {member.lastName}</NavLink></td>
+                                <td>
+                                    <NavLink to={`/user/${member.id}`}>
+                                        {member.firstName} {member.lastName}
+                                    </NavLink>
+                                </td>
                                 <td><span>{member.position}</span></td>
                                 <td><span>{member.status}</span></td>
                             </tr>

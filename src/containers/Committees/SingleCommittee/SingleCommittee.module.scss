@@ -1,15 +1,23 @@
+@import "../../../assets/scss/color_variables";
 .Committee{
     width: 70%;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid $lite_gray;
     border-collapse: collapse;
     margin: 20px 0; 
     thead,tbody,tr,td,th{
-        border: 1px solid #ccc
+        border: 1px solid $lite_gray;
+        text-transform: uppercase;
+        padding: 5px;
+        a{
+            color: $main_color;
+            text-transform: capitalize
+        }
     }
     tbody{
         img{
             border-radius: 50%;
+            vertical-align: middle
         }
     }
 }

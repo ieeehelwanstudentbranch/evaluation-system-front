@@ -7,6 +7,7 @@ import * as actions from '../../store/actions/index';
 import Post from '../../components/Post/Post';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal';
+import mappingFunction from '../../utilize/mappingFunction';
 
 class Home extends Component{
     state={
@@ -42,13 +43,14 @@ class Home extends Component{
         if(this.props.posts){
             component = <section>
                 {
-                    this.props.posts?
-                        this.props.posts.map((post,index)=>{
-                            return (
-                                <Post key={index} comments={post.comments} postID={post.id} body={post.body} postOwner={post.post_owner} date_time={post.created_at} />
-                            ) 
-                        }):
-                    <> </>
+                    // this.props.posts?
+                    //     this.props.posts.map((post,index)=>{
+                    //         return (
+                    //             <Post key={index} comments={post.comments} postID={post.id} body={post.body} postOwner={post.post_owner} date_time={post.created_at} />
+                    //         ) 
+                    //     }):
+                    // <> </>
+                    mappingFunction(this.props.posts, Post)
                 }
             </section>
         } else {

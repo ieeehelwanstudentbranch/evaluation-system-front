@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import TaskCard from '../../components/TaskCard/TaskCard';
-import classes from './PendingTasks.module.scss';
+import * as classes from '../../assets/scss/TasksPage.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -30,7 +30,7 @@ class PendingTasks extends Component{
     }
 
     loadMore = (type) => {
-        if (this.state.sentTasksArrays && type === 'sentTasks'){
+        if (this.state.sentTasksArrays && (type === 'sentTasks')){
             this.setState(prevState=>{
                 return {
                     ...prevState,
@@ -39,7 +39,7 @@ class PendingTasks extends Component{
                 }
             })
         }
-        if (this.state.mentoringTasksArrays && type === 'mentoringTasks'){
+        if (this.state.mentoringTasksArrays && (type === 'mentoringTasks')){
             this.setState(prevState=>{
                 return {
                     ...prevState,
@@ -48,7 +48,7 @@ class PendingTasks extends Component{
                 }
             })
         }
-        if (this.state.personalTasksArrays && type === 'personalTasks'){
+        if (this.state.personalTasksArrays && (type === 'personalTasks')){
             this.setState(prevState=>{
                 return {
                     ...prevState,
@@ -57,7 +57,7 @@ class PendingTasks extends Component{
                 }
             })
         }
-        if (this.state.coordinatingTasksArrays && type === 'coordinatingTasks'){
+        if (this.state.coordinatingTasksArrays && (type === 'coordinatingTasks')){
             this.setState(prevState=>{
                 return {
                     ...prevState,
@@ -69,7 +69,7 @@ class PendingTasks extends Component{
     }
 
     componentDidMount() {
-        this.props.fetchPendingTasks();
+        this.props.fetchTasks('pending');
         setTimeout(()=>{
             this.loadMore('sentTasks');
             this.loadMore('mentoringTasks');
@@ -118,7 +118,7 @@ class PendingTasks extends Component{
 
     render(){
         return (
-            <div className={classes.PendingTasks}>
+            <div className={classes.TasksPage}>
                 {
                     (this.state.userRole === 'EX_com') || (this.state.userRole === 'director') ?
                         this.state.sentTasksArrays?
@@ -238,7 +238,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        fetchPendingTasks: ()=>dispatch(actions.fetchPendingTasks())
+        fetchTasks: (type)=>dispatch(actions.fetchTasks(type))
     }
 }
 

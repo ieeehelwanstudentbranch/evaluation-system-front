@@ -1,4 +1,4 @@
-.PendingTasks{
+.TasksPage{
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
@@ -15,9 +15,4 @@
             border-right: 1px solid #ccc
         }
     }
-}
-
-.ReactVirtualized__Grid__innerScrollContainer{
-    max-width: none !important;   
-    background-color: #000
 }

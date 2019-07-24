@@ -25,6 +25,16 @@ const fetchPendingTasksSuccess = (state, action) => {
     };
 }
 
+const fetchCompletedTasksSuccess = (state, action) => {
+    return {
+        ...state,
+        completedMentoringTasks: action.completedMentoringTasks,
+        completedSentTasks: action.completedSentTasks,
+        completedPersonalTasks: action.completedPersonalTasks,
+        completedCoordinatingTasks: action.completedCoordinatingTasks
+    };
+}
+
 const tasksReducer = (state = initialState, action)=>{
     switch (action.type) {
         // handle loading handler
@@ -39,6 +49,9 @@ const tasksReducer = (state = initialState, action)=>{
         // fetching pending tasks
         case actionTypes.FETCH_PENDING_TASKS_SUCCESS:
             return fetchPendingTasksSuccess(state, action);
+        // fetching pending tasks
+        case actionTypes.FETCH_COMPLETED_TASKS_SUCCESS:
+            return fetchCompletedTasksSuccess(state, action);
         default:
             return state
     }

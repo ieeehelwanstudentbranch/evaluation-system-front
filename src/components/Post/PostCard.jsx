@@ -28,7 +28,7 @@ class Post extends Component{
                     }
                 </header>
                 <div dangerouslySetInnerHTML={{__html: this.props.body.substring(0, 500)}} className={classes.Content}></div>
-                <NavLink to={"/post/"+this.props.postID}>View Post</NavLink>
+                <NavLink className={classes.PostLink} to={"/post/"+this.props.postID}>View Post</NavLink>
             </article>
         )
     }

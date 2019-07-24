@@ -1,24 +1,7 @@
 .AdditionalInfo {
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    width: 95%;
-    padding: 20px;
-    border: 1px solid #ccc;
+    width: 95% !important;
     margin: 20px 0;
-    position: relative;
-    span.Label {
-        font-weight: bold;
-        text-transform: uppercase;
-        border: 1px solid #ccc;
-        padding: 3px;
-        border-radius: 5px;
-        width: max-content;
-        position: absolute;
-        top: -1rem;
-        background-color: #fff;
-    }
-
     svg {
         position: absolute;
         right: 10px;

@@ -8,7 +8,7 @@ import * as actions from '../../../store/actions/index';
 class AdditionalInfo extends Component {
     render(){
         return(
-            <Template label='Additional Informations'>
+            <Template className={classes.AdditionalInfo} label='Additional Informations'>
                 <div className={classes.Wrapper}>
                     <div className={classes.Row}>
                         <Template label='E-mail'>

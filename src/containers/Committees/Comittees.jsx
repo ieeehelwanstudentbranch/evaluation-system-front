@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Committee from '../../components/Committee/Committee';
+import Committee from '../../components/Committee/CommitteeCard/CommitteeCard';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import CommitteeForm from '../../components/Committee/CommitteeForm/CommitteeForm';

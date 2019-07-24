@@ -9,7 +9,7 @@ import Home from './Home/Home';
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
-import Committees from './Committees/Comittees';
+import Committees from './Committees/Comittees.jsx';
 import SingleCommittee from './Committees/SingleCommittee/SingleCommittee';
 import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';

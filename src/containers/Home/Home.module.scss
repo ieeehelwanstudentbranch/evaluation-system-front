@@ -1,14 +1,27 @@
+@import '../../assets/scss/screen_sizes';
+
 .Home{
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
-    .Editor{
-        width: 60vw;
+    padding: 20px 5px;
+    width: 100%;
+    .Intro{
+        width: 100%;
         box-shadow: 7px 7px 24px -1px rgba(0, 0, 0, 0.75);
         padding: 5px 5px 0px;
         display: flex;
         flex-direction: column;
         border-radius: 4px;
+        @media screen and (max-width: $mobile_landscape_max_width){
+            height: 250px;
+        }
+        @media screen and (min-width: $small_tablet_min_width){
+            width: 90%;
+        }
+        @media screen and (min-width: $large_max_width){
+            width: 70%
+        }
+        max-width: 800px
     }
 }

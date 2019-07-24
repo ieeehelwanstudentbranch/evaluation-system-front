@@ -42,16 +42,7 @@ class Home extends Component{
         let component;
         if(this.props.posts){
             component = <section>
-                {
-                    // this.props.posts?
-                    //     this.props.posts.map((post,index)=>{
-                    //         return (
-                    //             <Post key={index} comments={post.comments} postID={post.id} body={post.body} postOwner={post.post_owner} date_time={post.created_at} />
-                    //         ) 
-                    //     }):
-                    // <> </>
-                    mappingFunction(this.props.posts, Post)
-                }
+                { mappingFunction(this.props.posts, Post) }
             </section>
         } else {
             if(this.state.loading){
@@ -62,14 +53,13 @@ class Home extends Component{
         }
         return(
             <div className={classes.Home}>
-                <header className={classes.Editor}>
+                <header className={classes.Intro}>
                     <RichEditor place="posts"/>
                     {
                         this.state.editing? 
                         <Button type="submit" btnType="Default" clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>:
                         <Button type="submit" btnType="Default" clicked={()=>this.props.onAdding(this.props.post)}>ADD POST</Button>
                     }
-                    
                 </header>
                 {component}
             </div>

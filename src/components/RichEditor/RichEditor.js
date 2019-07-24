@@ -7,32 +7,32 @@ import 'react-quill/dist/quill.snow.css';
 class RichEditor extends Component {
     modules = {
         toolbar: [
-          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-          ['bold', 'italic', 'underline','strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image', 'video'],
-          ['clean']
+            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+            ['bold', 'italic', 'underline','strike', 'blockquote'],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            ['link', 'image', 'video'],
+            ['clean']
         ],
-      }
+    }
     
-      formats = [
+    formats = [
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
         'link', 'image', 'video'
-      ]   
+    ]
+
     render(){
         return(
-            <header className={classes.Editor}>
-                <ReactQuill
-                    placeholder="Write a new post"
-                    theme="snow"
-                    value={this.props.data}
-                    modules={this.modules}
-                    formats={this.formats}
-                    onChange={(value)=>this.props.onChange(value)}
-                />
-            </header>
+            <ReactQuill
+                className={classes.Editor}
+                placeholder="Write a new post"
+                theme="snow"
+                value={this.props.data}
+                modules={this.modules}
+                formats={this.formats}
+                onChange={(value)=>this.props.onChange(value)}
+            />
         )
     }
 }

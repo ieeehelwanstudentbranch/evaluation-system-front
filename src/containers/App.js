@@ -5,7 +5,7 @@ import './App.scss';
 import Layout from '../hoc/Layout/Layout';
 import { Route, withRouter } from 'react-router-dom';
 
-import Home from './Home/Home';
+import Home from './Home/Home.jsx';
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';

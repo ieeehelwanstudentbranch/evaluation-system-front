@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as classes from './AdditionalInfo.module.scss';
 import {GiSettingsKnobs} from 'react-icons/gi';
-import Template from './InformationTemplate/InformationTemplate';
+import Template from '../../../components/UI/InformationTemplate/InformationTemplate.jsx';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 class AdditionalInfo extends Component {

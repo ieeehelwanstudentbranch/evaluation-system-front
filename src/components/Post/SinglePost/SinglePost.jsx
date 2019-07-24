@@ -38,9 +38,7 @@ class SinglePost extends Component{
                     :<></>
                 }
                 <article dangerouslySetInnerHTML={{__html: this.state.post}} className={classes.Content}></article>
-                {
-                    mappingFunction(this.state.comments, Comment)
-                }
+                {mappingFunction(this.state.comments, Comment)}
                 <CommentForm id={this.state.id}/>
             </div>
         }

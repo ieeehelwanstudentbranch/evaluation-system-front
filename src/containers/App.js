@@ -15,7 +15,7 @@ import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
-import SinglePost from '../components/Post/SinglePost/SinglePost';
+import SinglePost from '../components/Post/SinglePost/SinglePost.jsx';
 import SingleProfile from './SingleProfile/SingleProfile.jsx';
 import SingleTask from './SingleTask/SingleTask';
 

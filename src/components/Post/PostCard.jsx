@@ -1,32 +1,19 @@
 import React, { Component } from 'react';
-import * as classes from './Post.module.scss';
+import * as classes from './PostCard.module.scss';
 import {NavLink} from 'react-router-dom';
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import InformationHeader from '../UI/InformationHeader/InformationHeader.jsx'
 class Post extends Component{
     render(){
-        console.log(this.props)
         return (
             <article className={classes.Post}>
                 <header>
-                    <div className={classes.Info}>
-                        <NavLink to={`/user/${this.props.post_owner.user_id}`}>
-                            {
-                                this.props.post_owner.image === "default.jpg" ?
-                                    <img src={`http://localhost:8000/uploaded/profile_images/${this.props.post_owner.image}`} alt={`${this.props.name}`}/>
-                                    :<img src={`http://localhost:8000/storage${this.props.post_owner.image}`} alt={`${this.props.name}`}/>
-                            }    
-                        </NavLink>
-                        <div>
-                            <NavLink to={`/user/${this.props.post_owner.user_id}`}>{`${this.props.post_owner.firstName} ${this.props.post_owner.lastName}`}</NavLink>
-                            <span>{this.props.post_owner.position}</span>
-                            <time dateTime={this.props.created_at}>{this.props.created_at}</time>
-                        </div>
-                    </div>
+                    <InformationHeader {...this.props.post_owner} created_at={this.props.created_at}/>
                     {   
                         // eslint-disable-next-line
-                        this.props.userID == this.props.post_owner.user_id?
+                        this.props.userID == this.props.post_owner.id?
                         <div className={classes.Actions}>
                             {
                                 this.props.editing === false?
@@ -36,7 +23,6 @@ class Post extends Component{
                                     </>
                                 :<></>
                             }
-                            
                         </div>
                         : <></>
                     }

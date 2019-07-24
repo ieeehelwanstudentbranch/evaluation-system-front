@@ -1,3 +1,4 @@
+@import '../../../assets/scss/color_variables';
 .Template{
     border: 1px solid #ccc;
     border-radius: 7px;
@@ -17,5 +18,9 @@
         position: absolute;
         top: -1rem;
         background-color: #fff;
+    }
+    a{
+        color: $main_color;
+        text-decoration: none
     }
 }

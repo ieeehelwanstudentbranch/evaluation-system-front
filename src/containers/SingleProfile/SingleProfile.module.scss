@@ -8,14 +8,6 @@
     align-items: center;
     margin-top: 175px;
     width: 95%;
-    @media screen and (min-width: $small_tablet_min_width){
-        // width: calc(100% / 2.1);
-        // margin-right: 10px
-    }
-    @media screen and (min-width: $large_max_width){
-        // width: calc(100% / 3.1);
-        // margin-right: 10px
-    }
     .MainInfo {
         display: flex;
         justify-content: center;

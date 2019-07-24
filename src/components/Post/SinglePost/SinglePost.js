@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import * as classes from './SinglePost.module.scss';
 import axios from '../../../axios';
-import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Comment from './Comment/Comment';
 import CommentForm from './Comment/CommentForm/CommentForm';
+import InformationHeader from '../../UI/InformationHeader/InformationHeader.jsx';
+import mappingFunction from '../../../utilize/mappingFunction';
 class SinglePost extends Component{
     state={
         post: null,
@@ -31,25 +32,14 @@ class SinglePost extends Component{
         let post= <> </>;
         if (this.state.post){
             post = <div className={classes.SinglePost}>
-                {this.state.postOwner ?
-                    <header>
-                        <div className={classes.Info}>
-                            <NavLink to=""><img src={`http://localhost:8000/uploaded/profile_images/${this.state.postOwner.image}`} alt={`${this.state.postOwner.firstName} ${this.state.postOwner.lastName}`}/></NavLink>
-                            <div>
-                                <NavLink to="">{`${this.state.postOwner.firstName} ${this.state.postOwner.lastName}`}</NavLink>
-                                <span>{this.state.postOwner.position}</span>
-                                <time dateTime={this.state.dateTime}>{this.state.dateTime}</time>
-                            </div>
-                        </div>
-                    </header>: <></>
+                {
+                    this.state.postOwner ?
+                        <InformationHeader {...this.state.postOwner} created_at={this.state.dateTime}/>
+                    :<></>
                 }
                 <article dangerouslySetInnerHTML={{__html: this.state.post}} className={classes.Content}></article>
                 {
-                    this.state.comments?
-                        this.state.comments.map(comment=>(
-                            <Comment key={comment.comment_id} id={comment.comment_id} body={comment.comment_body} commentOwner={comment.comment_owner} date_time={comment.created_at}/>
-                        ))
-                    : <></>
+                    mappingFunction(this.state.comments, Comment)
                 }
                 <CommentForm id={this.state.id}/>
             </div>

@@ -46,6 +46,21 @@ export const fetchPostsSucceess = (posts) => {
     }
 }
 
+export const deleteComment = (id) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        axios.delete(`/post/${id}/destroy-comment/`)
+            .then(response=>{
+                // dispatch(deletePostSuccess(id))
+                console.log(response.data.data)
+            }).catch(error=>{
+                // dispatch(addPostFailed('Something went wrong, Please try again later'));
+                console.log(error.response)
+            })
+        ;
+    }
+}
+
 export const deletePost = (id) => {
     return dispatch => {
         dispatch(actions.loadingHandler());

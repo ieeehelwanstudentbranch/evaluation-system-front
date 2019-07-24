@@ -1,16 +1,38 @@
+// .Template{
+//     border: 1px solid #ccc;
+//     margin: 40px 0px;
+//     padding: 5px 10px;
+//     display: flex;
+//     flex-direction: column;
+//     border-radius: 7px;
+//     width: 100%;
+//     span.Label {
+//         text-transform: uppercase;
+//         margin-top: -5%;
+//         background-color: #fff;
+//         padding: 3px;
+//         width: max-content;
+//     }
+// }
+
 .Template{
     border: 1px solid #ccc;
-    padding: 5px 10px;
+    border-radius: 7px;
+    padding: 20px;
+    margin: 5px 5px;
     display: flex;
     flex-direction: column;
-    border-radius: 7px;
+    position: relative;
     width: 100%;
-    margin-right: 5px;
-    span.Label {
+    span.Label{
+        font-weight: bold;
         text-transform: uppercase;
-        margin-top: -5%;
-        background-color: #fff;
+        border: 1px solid #ccc;
         padding: 3px;
+        border-radius: 5px;
         width: max-content;
+        position: absolute;
+        top: 0.2rem;
+        background-color: #fff;
     }
 }

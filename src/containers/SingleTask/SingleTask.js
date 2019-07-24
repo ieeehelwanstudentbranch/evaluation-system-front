@@ -3,6 +3,8 @@ import * as classes from './SingleTask.module.scss';
 import axios from '../../axios';
 import {connect} from 'react-redux';
 import InformationHeader from '../../components/UI/InformationHeader/InformationHeader';
+import { MdFileDownload } from "react-icons/md";
+
 class SingleTask extends Component{
     state={
         id: null,
@@ -55,20 +57,20 @@ class SingleTask extends Component{
                     </div>
                     :null
                 }
-                {/* {
+                {
                     this.state.files?
                         <div className={classes.Details}>
-                            <span>Task Files</span>
-                            <ul>
+                            <span className={classes.Title}>Task Files</span>
+                            <ul className={classes.Files}>
                                 {
-                                    this.state.files.map(file=>{
-                                        console.log(file)
-                                    })
+                                    this.state.files.map((file,index)=>(
+                                        <li key={index}>{file}<a href={`http://localhost:8000/storage${file}`} download><MdFileDownload /></a></li>
+                                    ))
                                 }
                             </ul>
                         </div>
                     :null
-                } */}
+                }
                 
             </div>
         }

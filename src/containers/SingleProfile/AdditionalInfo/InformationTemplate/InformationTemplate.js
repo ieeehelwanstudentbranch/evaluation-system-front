@@ -5,6 +5,7 @@ const informationTemplate =(props)=>(
     <div className={classes.Template}>
         <span className={classes.Label} style={{marginTop : `${props.marginTop}`}}>{props.label}</span>
         <p>{props.value}</p>
+        {props.children}
     </div>
 )
 

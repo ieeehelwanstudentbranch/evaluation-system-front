@@ -1,12 +1,22 @@
+@import '../../assets/scss/screen_sizes';
+
 .Post {
-    width: 60vw;
+    width: 100%;
+    max-width: 800px;
     box-shadow: 7px 7px 24px -1px rgba(0, 0, 0, 0.75);
     padding: 10px;
     display: flex;
     flex-direction: column;
     border-radius: 4px;
-    margin: 40px 0px;
+    margin: 40px 0px 20px;
     border: 1px solid #ccc;
+    @media screen and (min-width: $small_tablet_min_width){
+        width: 90%;
+    }
+    @media screen and (min-width: $large_max_width){
+        width: 70%
+    }
+    
     header{
         display: flex;
         flex-direction: row;

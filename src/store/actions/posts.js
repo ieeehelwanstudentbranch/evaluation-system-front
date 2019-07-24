@@ -2,6 +2,25 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
 
+export const fetchPosts = () => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        axios.get('/posts')
+            .then(response=>{
+                dispatch(fetchPostsSucceess(response.data.data))
+            }).catch(error=>{
+                dispatch(actions.serverErrorHandler('Something went Wrong, Please Try Again Later'))
+            })
+        ;
+    }
+}
+
+export const fetchPostsSucceess = (posts) => {
+    return {
+        type: actionTypes.FETCH_POSTS_SUCEESS,
+        posts: posts
+    }
+}
 
 export const addPost = (data) => {
     return dispatch => {
@@ -23,61 +42,6 @@ export const addPostFailed = (error) => {
     return {
         type: actionTypes.ADD_POST_FAILED,
         error: error
-    }
-}
-
-export const fetchPosts = () => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        axios.get('/posts')
-            .then(response=>{
-                dispatch(fetchPostsSucceess(response.data.data))
-            }).catch(error=>{
-                dispatch(actions.serverErrorHandler('Something went Wrong, Please Try Again Later'))
-            })
-        ;
-    }
-}
-
-export const fetchPostsSucceess = (posts) => {
-    return {
-        type: actionTypes.FETCH_POSTS_SUCEESS,
-        posts: posts
-    }
-}
-
-export const deleteComment = (id) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        axios.delete(`/post/${id}/destroy-comment/`)
-            .then(response=>{
-                // dispatch(deletePostSuccess(id))
-                console.log(response.data.data)
-            }).catch(error=>{
-                // dispatch(addPostFailed('Something went wrong, Please try again later'));
-                console.log(error.response)
-            })
-        ;
-    }
-}
-
-export const deletePost = (id) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        axios.delete(`/post/${id}`)
-            .then(response=>{
-                dispatch(deletePostSuccess(id))
-            }).catch(error=>{
-                dispatch(addPostFailed('Something went wrong, Please try again later'));
-            })
-        ;
-    }
-}
-
-export const deletePostSuccess = (id) => {
-    return{
-        type: actionTypes.DELETE_POST,
-        id: id
     }
 }
 
@@ -112,11 +76,23 @@ export const editPostSuccess = () => {
     }
 }
 
-export const editComment = (id, data) => {
+export const deletePost = (id) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        axios.delete(`/post/${id}`)
+            .then(response=>{
+                dispatch(deletePostSuccess(id))
+            }).catch(error=>{
+                dispatch(addPostFailed('Something went wrong, Please try again later'));
+            })
+        ;
+    }
+}
+
+export const deletePostSuccess = (id) => {
     return{
-        type: actionTypes.EDIT_COMMENT,
-        id: id,
-        comment: data
+        type: actionTypes.DELETE_POST,
+        id: id
     }
 }
 

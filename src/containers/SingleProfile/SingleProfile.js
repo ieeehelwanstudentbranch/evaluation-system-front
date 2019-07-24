@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as classes from './SingleProfile.module.scss';
 import UserImage from './UserImage/UserImage';
 import * as actions from '../../store/actions/index';
-import AdditionalInfo from './AdditionalInfo/AdditionalInfo';
+import AdditionalInfo from './AdditionalInfo/AdditionalInfo.jsx';
 import Modal from '../../components/UI/Modal/Modal';
 import ImageCropper from '../../components/ImageCropper/ImageCropper';
 import Button from '../../components/UI/Button/Button';

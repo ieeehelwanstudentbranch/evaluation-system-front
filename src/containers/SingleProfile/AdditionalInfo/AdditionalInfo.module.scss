@@ -8,11 +8,15 @@
     margin: 20px 0;
     position: relative;
     span.Label {
+        font-weight: bold;
         text-transform: uppercase;
-        margin-top: -3.5%;
-        background-color: #fff;
+        border: 1px solid #ccc;
         padding: 3px;
+        border-radius: 5px;
         width: max-content;
+        position: absolute;
+        top: -1rem;
+        background-color: #fff;
     }
 
     svg {

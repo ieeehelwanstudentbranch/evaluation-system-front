@@ -54,7 +54,7 @@ class SingleProfile extends Component {
             profile = <div className={classes.SingleProfile}>
                         <div className={classes.MainInfo}>
                             <UserImage image={this.state.profileData.image} alt={`${this.state.profileData.firstName} ${this.state.profileData.lastName}`}/>
-                            <div className={classes.data}>
+                            <div className={classes.Data}>
                                 <h3>{this.state.profileData.firstName} {this.state.profileData.lastName}</h3>
                                 {this.state.profileData.committee?<span>{this.state.profileData.committee.name}</span>:null}
                                 <span>{this.state.profileData.position}</span>

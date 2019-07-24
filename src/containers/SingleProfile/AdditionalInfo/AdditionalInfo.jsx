@@ -4,9 +4,9 @@ import {GiSettingsKnobs} from 'react-icons/gi';
 import Template from '../../../components/UI/InformationTemplate/InformationTemplate.jsx';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
+
 class AdditionalInfo extends Component {
     render(){
-        console.log(this.props)
         return(
             <Template label='Additional Informations'>
                 <div className={classes.Wrapper}>

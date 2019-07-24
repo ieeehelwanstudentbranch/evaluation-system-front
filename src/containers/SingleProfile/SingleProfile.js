@@ -13,7 +13,7 @@ class SingleProfile extends Component {
     state={
         profileID: this.props.match.params.id,
         editing: this.props.editing,
-        editableContent: this.props.editing,
+        editableContent: this.props.editableContent,
         newImage: this.props.newImage,
         profileData: null
     }
@@ -21,13 +21,17 @@ class SingleProfile extends Component {
     componentDidUpdate(previousProps, previousState) {
         let profileID = this.props.match.params.id;
         let editing = this.props.editing;
-        let editableContent= this.props.editing;
+        let editableContent= this.props.editableContent;
         let newImage= this.props.newImage;
         let profileData = this.props.profileData;
-        if (previousState.profileID !== profileID || previousState.profileData !== profileData) {
+        if (previousState.profileData !== profileData){
             this.setState({
-                profileID: profileID,
                 profileData: profileData
+            })
+        }
+        if (previousState.profileID !== profileID) {
+            this.setState({
+                profileID: profileID
             })
             this.props.onInit(this.state.profileID, this.props.userID)
         }
@@ -45,7 +49,6 @@ class SingleProfile extends Component {
     }
     
     render(){
-        console.log(this.state.profileData)
         let profile;
         if (this.state.profileData){
             profile = <div className={classes.SingleProfile}>

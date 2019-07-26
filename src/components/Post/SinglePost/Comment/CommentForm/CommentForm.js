@@ -21,14 +21,15 @@ class CommentForm extends Component{
         }
     }
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        if (this.props.commentID){
+        if (props.commentID){
             this.setState({loading: true});
             let newData = {
                 comment_body: values.comment
             }
-            axios.post(`/post/${this.props.commentID}/update-comment/`, newData)
+            axios.put(`/post/${props.commentID}/update-comment/`, newData)
                 .then(response=>{
-                    window.location.reload();
+                    // window.location.reload();
+                    console.log(response)
                 }).catch(error=>{
                     console.log(error.response);
                 })
@@ -38,7 +39,7 @@ class CommentForm extends Component{
             let comment = {
                 comment_body: values.comment
             }
-            axios.post(`/post/${this.props.id}/add-comment`, comment)
+            axios.post(`/post/${props.id}/add-comment`, comment)
                 .then(response=>{
                     window.location.reload();
                 }).catch(error=>{

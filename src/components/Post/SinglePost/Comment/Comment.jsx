@@ -18,13 +18,13 @@ class Comment extends Component{
                     <div className={classes.Actions}>
                         <>
                             <MdModeEdit onClick={()=>this.props.onEdit(this.props.id, this.props.body)}/>
-                            <MdDelete onClick={()=>this.props.onDelete(this.props.comment_id)}/>
+                            <MdDelete onClick={()=>this.props.onDelete(this.props.id)}/>
                         </>
                     </div>
                     : <></>
                 }
                 </header>
-                <div className={classes.Content}>{this.props.comment_body}</div>
+                <div className={classes.Content}>{this.props.body}</div>
             </article>
         )
     }

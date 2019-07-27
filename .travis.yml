@@ -23,5 +23,5 @@ notifications:
   email:
     recipients:
       - mohamednajiub@ieeehsb.org
-    on_success: never
+    on_success: always
     on_failure: always

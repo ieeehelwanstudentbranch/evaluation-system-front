@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import {connect} from 'react-redux';
 import * as Yup from 'yup';
 import classes from '../../../../UI/Input/Input.module.scss';
 import Spinner from '../../../../UI/Spinner/Spinner';

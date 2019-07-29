@@ -28,7 +28,8 @@ class CreateTask extends Component {
         nodes: [],
         checked: [],
         expanded: [],
-        files: []
+        files: [],
+        error: null
     }
 
     componentDidMount(){
@@ -112,7 +113,7 @@ class CreateTask extends Component {
             }
         ;
         }).catch(error=>{
-            console.log(error)
+            this.setState({error: error})
         })
     }
 
@@ -191,7 +192,7 @@ class CreateTask extends Component {
                                 icons={icons}
                             />
                         </div>
-                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>SEND</Button>
+                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting || !this.props.taskDetails || this.state.checked.length <= 0 }>SEND</Button>
                     </Form>
                 )}
             />

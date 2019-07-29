@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as classes from './Comment.module.scss';
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import {connect} from 'react-redux';
-import * as actions from '../../../../store/actions/index';
 import InformationHeader from '../../../UI/InformationHeader/InformationHeader';
 class Comment extends Component{
 

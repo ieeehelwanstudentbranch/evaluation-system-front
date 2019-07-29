@@ -2,21 +2,6 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
 
-// fetch post comments
-export const fetchComments = (postId) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        axios.get(`/post/${postId}/comments`)
-            .then(response=>{
-                // window.location.reload();
-                console.log(response)
-            }).catch(error=>{
-                console.log(error)
-            })
-        ;
-    }
-}
-
 // add comment functionality
 export const addComment = (postId, body) => {
     return dispatch => {

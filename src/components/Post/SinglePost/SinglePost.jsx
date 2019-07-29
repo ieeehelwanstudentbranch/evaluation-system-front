@@ -7,13 +7,16 @@ import CommentForm from './Comment/CommentForm/CommentForm';
 import InformationHeader from '../../UI/InformationHeader/InformationHeader.jsx';
 import mappingFunction from '../../../utilize/mappingFunction';
 class SinglePost extends Component{
+
     state={
+        id: null,
         post: null,
         dateTime: null,
         postOwner: null,
         comments: null,
-        id: null
+        error: null
     }
+
     componentDidMount(){
         axios.get(`${this.props.location.pathname}`)
             .then(response=>{
@@ -21,13 +24,28 @@ class SinglePost extends Component{
                     post: response.data.data.body,
                     dateTime: response.data.data.created_at,
                     postOwner: response.data.data.post_owner,
-                    comments: response.data.data.comments,
                     id: response.data.data.id
                 })
             }).catch(error=>{
-                console.log(error)
+                this.setState({
+                    error: 'Something went error, Please Try again later.'
+                })
             })
+        ;
+
+        axios.get(`${this.props.location.pathname}/comments`)
+            .then(response=>{
+                this.setState({
+                    comments: response.data.data
+                })
+            }).catch(error=>{
+                this.setState({
+                    error: 'Something went error, Please Try again later.'
+                })
+            })
+        ;
     }
+
     render(){
         let post= <> </>;
         if (this.state.post){
@@ -53,4 +71,5 @@ const mapStateToProps = state => {
         userID: state.login.userID
     }
 }
+
 export default connect(mapStateToProps, null)(SinglePost)

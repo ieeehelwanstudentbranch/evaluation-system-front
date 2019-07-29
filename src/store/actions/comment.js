@@ -26,14 +26,6 @@ export const addCommentSuccess = () => {
     }
 }
 
-export const editComment = (id, data) => {
-    return{
-        type: actionTypes.EDIT_COMMENT,
-        id: id,
-        comment: data
-    }
-}
-
 export const deleteComment = (id) => {
     return dispatch => {
         dispatch(actions.loadingHandler());

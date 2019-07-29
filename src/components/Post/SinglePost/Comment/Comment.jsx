@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import InformationHeader from '../../../UI/InformationHeader/InformationHeader';
 class Comment extends Component{
-    
+
     render(){
         console.log(this.props);
         return (
@@ -17,7 +17,7 @@ class Comment extends Component{
                     this.props.userID == this.props.comment_owner.id?
                     <div className={classes.Actions}>
                         <>
-                            <MdModeEdit onClick={()=>this.props.onEdit(this.props.id, this.props.body)}/>
+                            <MdModeEdit onClick={()=>this.props.editComment(this.props.id)}/>
                             <MdDelete onClick={()=>this.props.onDelete(this.props.id)}/>
                         </>
                     </div>
@@ -35,10 +35,5 @@ const mapStateToProps = state => {
         userID: state.login.userID,
     }
 }
-const mapDispatchToProps = dispatch => {
-    return{
-        onEdit: (id, data)=> dispatch(actions.editComment(id, data)),
-        onDelete: (id)=> dispatch(actions.deleteComment(id))
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Comment)
+
+export default connect(mapStateToProps)(Comment)

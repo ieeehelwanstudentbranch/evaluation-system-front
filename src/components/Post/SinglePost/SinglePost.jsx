@@ -9,10 +9,10 @@ import mappingFunction from '../../../utilize/mappingFunction';
 class SinglePost extends Component{
 
     state={
-        id: null,
-        post: null,
+        post_id: null,
+        post_body: null,
         dateTime: null,
-        postOwner: null,
+        post_owner: null,
         comments: null,
         error: null
     }
@@ -20,11 +20,12 @@ class SinglePost extends Component{
     componentDidMount(){
         axios.get(`${this.props.location.pathname}`)
             .then(response=>{
+                console.log(response);
                 this.setState({
-                    post: response.data.data.body,
+                    post_id: response.data.data.id,
+                    post_body: response.data.data.body,
                     dateTime: response.data.data.created_at,
-                    postOwner: response.data.data.post_owner,
-                    id: response.data.data.id
+                    post_owner: response.data.data.post_owner,
                 })
             }).catch(error=>{
                 this.setState({
@@ -46,18 +47,36 @@ class SinglePost extends Component{
         ;
     }
 
+    editComment = (commentID) => {
+        this.setState(prevState=>{
+            return{
+                ...prevState,
+                comments: prevState.comments.filter(comment=>{
+                    return comment.id !== commentID
+                }),
+            }
+        })
+    }
+
     render(){
         let post= <> </>;
-        if (this.state.post){
+        if (this.state.post_body){
             post = <div className={classes.SinglePost}>
                 {
-                    this.state.postOwner ?
-                        <InformationHeader {...this.state.postOwner} created_at={this.state.dateTime}/>
+                    this.state.post_owner ?
+                        <InformationHeader {...this.state.post_owner} created_at={this.state.dateTime}/>
                     :<></>
                 }
-                <article dangerouslySetInnerHTML={{__html: this.state.post}} className={classes.Content}></article>
-                {mappingFunction(this.state.comments, Comment)}
-                <CommentForm id={this.state.id}/>
+                <article dangerouslySetInnerHTML={{__html: this.state.post_body}} className={classes.Content}></article>
+                {/* {mappingFunction(this.state.comments, Comment} */}
+                    {
+                        this.state.comments?
+                            this.state.comments.map(comment=>(
+                                <Comment key={comment.id} {...comment} editComment={()=>this.editComment(comment.id)}/>
+                            ))
+                        :null
+                    }
+                <CommentForm id={this.state.post_id}/>
             </div>
         }
         return (

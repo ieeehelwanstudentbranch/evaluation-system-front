@@ -25,16 +25,3 @@ export const addCommentSuccess = () => {
         type: actionTypes.ADD_COMMENT_SUCCESS
     }
 }
-
-export const deleteComment = (id) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        axios.delete(`/post/${id}/destroy-comment/`)
-            .then(response=>{
-                window.location.reload();
-            }).catch(error=>{
-                console.log(error.response)
-            })
-        ;
-    }
-}

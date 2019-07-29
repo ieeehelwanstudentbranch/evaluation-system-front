@@ -58,6 +58,24 @@ class SinglePost extends Component{
         })
     }
 
+    deleteComment = (comment_id) => {
+        axios.delete(`/destroy-comment/${comment_id}`)
+            .then(response=>{
+                this.setState(prevState=>{
+                    return{
+                        ...prevState,
+                        comments: prevState.comments.filter(comment=>{
+                            return comment.id !== comment_id
+                        })
+                    }
+                })
+            }).catch(error=>{
+                console.log(error)
+                this.setState({error: 'Deleting comment had failed'});
+            })
+        ;
+    }
+
     render(){
         let post= <> </>;
         if (this.state.post_body){
@@ -68,14 +86,13 @@ class SinglePost extends Component{
                     :<></>
                 }
                 <article dangerouslySetInnerHTML={{__html: this.state.post_body}} className={classes.Content}></article>
-                {/* {mappingFunction(this.state.comments, Comment} */}
-                    {
-                        this.state.comments?
-                            this.state.comments.map(comment=>(
-                                <Comment key={comment.id} {...comment} editComment={()=>this.editComment(comment.id)}/>
-                            ))
-                        :null
-                    }
+                {
+                    this.state.comments?
+                        this.state.comments.map(comment=>(
+                            <Comment key={comment.id} {...comment} editComment={()=>this.editComment(comment.id)} deleteComment={()=>this.deleteComment(comment.id)}/>
+                        ))
+                    :null
+                }
                 <CommentForm id={this.state.post_id}/>
             </div>
         }

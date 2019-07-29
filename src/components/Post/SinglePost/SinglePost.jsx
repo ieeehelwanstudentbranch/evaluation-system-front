@@ -3,9 +3,9 @@ import * as classes from './SinglePost.module.scss';
 import axios from '../../../axios';
 import {connect} from 'react-redux';
 import Comment from './Comment/Comment.jsx';
-import CommentForm from './Comment/CommentForm/CommentForm';
+import CommentForm from './Comment/CommentForm/CommentForm.jsx';
 import InformationHeader from '../../UI/InformationHeader/InformationHeader.jsx';
-import mappingFunction from '../../../utilize/mappingFunction';
+
 class SinglePost extends Component{
 
     state={
@@ -14,7 +14,7 @@ class SinglePost extends Component{
         dateTime: null,
         post_owner: null,
         comments: null,
-        error: null
+        editableComment: null
     }
 
     componentDidMount(){
@@ -53,6 +53,9 @@ class SinglePost extends Component{
                 ...prevState,
                 comments: prevState.comments.filter(comment=>{
                     return comment.id !== commentID
+                }),
+                editableComment: prevState.comments.filter(comment=>{
+                    return comment.id === commentID
                 }),
             }
         })
@@ -93,7 +96,7 @@ class SinglePost extends Component{
                         ))
                     :null
                 }
-                <CommentForm id={this.state.post_id}/>
+                <CommentForm id={this.state.post_id} {...this.state.editableComment}/>
             </div>
         }
         return (

@@ -9,11 +9,10 @@ import axios from '../../../../../axios';
 class CommentForm extends Component{
     state={
         error: null,
-        loading: false,
         comment: ''
     }
     componentDidUpdate(previousProps, previousState) {
-        let comment = this.props.comment;
+        let comment = this.props[0]?this.props[0].body:null;
         if (previousState.comment !== comment) {
             this.setState({
                 comment: comment
@@ -21,21 +20,18 @@ class CommentForm extends Component{
         }
     }
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        if (props.commentID){
-            this.setState({loading: true});
+        if (props[0]){
             let newData = {
                 comment_body: values.comment
             }
-            axios.put(`/post/${props.commentID}/update-comment/`, newData)
+            axios.put(`/update-comment/${props[0].id}`, newData)
                 .then(response=>{
-                    // window.location.reload();
-                    console.log(response)
+                    window.location.reload();
                 }).catch(error=>{
-                    console.log(error.response);
+                    this.setState({error: error})
                 })
             ;
         }else{
-            this.setState({loading: true});
             let comment = {
                 comment_body: values.comment
             }
@@ -72,7 +68,7 @@ class CommentForm extends Component{
                     onSubmit={this.handleSubmit}
                     render={(FormikProps)=>(
                         <Form>
-                            {/* {this.state.error? <span>Sorry something went wrong please try again later</span>: null} */}
+                            {this.state.error? <span>Sorry something went wrong please try again later</span>: null}
                             <div className={classes.Input}>
                                 <Field type="text" id="comment" name="comment" placeholder="Write a comment" className={classes.InputElement}/>
                                 <ErrorMessage name="comment" />
@@ -91,11 +87,4 @@ class CommentForm extends Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        commentID: state.posts.commentID,
-        comment: state.posts.comment
-    }
-}
-
-export default connect(mapStateToProps)(CommentForm);
+export default CommentForm;

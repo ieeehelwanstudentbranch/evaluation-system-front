@@ -7,7 +7,6 @@ import InformationHeader from '../../../UI/InformationHeader/InformationHeader';
 class Comment extends Component{
 
     render(){
-        console.log(this.props);
         return (
             <article className={classes.Comment}>
                 <header>

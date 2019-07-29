@@ -20,7 +20,6 @@ class SinglePost extends Component{
     componentDidMount(){
         axios.get(`${this.props.location.pathname}`)
             .then(response=>{
-                console.log(response);
                 this.setState({
                     post_id: response.data.data.id,
                     post_body: response.data.data.body,
@@ -73,7 +72,6 @@ class SinglePost extends Component{
                     }
                 })
             }).catch(error=>{
-                console.log(error)
                 this.setState({error: 'Deleting comment had failed'});
             })
         ;

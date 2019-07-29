@@ -50,11 +50,12 @@ class CommentForm extends Component{
     render(){
         const validationSchema = Yup.object().shape({
             comment: Yup.string()
-                .trim()
                 .nullable()
+                .trim()
+                
         });
         const initialValues= {
-            comment: this.state.comment,
+            comment: this.state.comment || '',
         }
         let form;
         if (this.state.loading){
@@ -67,7 +68,7 @@ class CommentForm extends Component{
                     validationSchema={validationSchema}
                     onSubmit={this.handleSubmit}
                     render={(FormikProps)=>(
-                        <Form>
+                        <Form autoComplete="off">
                             {this.state.error? <span>Sorry something went wrong please try again later</span>: null}
                             <div className={classes.Input}>
                                 <Field type="text" id="comment" name="comment" placeholder="Write a comment" className={classes.InputElement}/>

@@ -13,9 +13,6 @@
         display: flex;
         flex-direction: column;
         border-radius: 4px;
-        @media screen and (max-width: $mobile_landscape_max_width){
-            height: 250px;
-        }
         @media screen and (min-width: $small_tablet_min_width){
             width: 90%;
         }

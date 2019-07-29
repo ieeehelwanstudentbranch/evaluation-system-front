@@ -1,35 +1,32 @@
 import React, {Component} from 'react';
+import formatBytes from '../../utilize/formatFileSize'
 import Dropzone from 'react-dropzone';
 import classes from './DragableArea.module.scss';
 import {MdCloudUpload, MdClose} from 'react-icons/md';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+
 class dragableArea extends Component{
     state={
         maxFileSize: 1073741824,
         maxFilesSize: 10737418240,
         totalUploadedFilesSize: 0,
-        acceptedFiles: [".docx", ".doc", ".txt", ".csv", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".jpeg", ".jpg", ".png", ".svg", ".gif", ".ps", ".xd", ".ai", ".zip"],
+        acceptedFiles: [
+            ".docx", ".doc", ".txt", ".csv", ".xls", ".xlsx",
+            ".ppt", ".pptx", ".pdf", ".jpeg", ".jpg", ".png",
+            ".svg", ".gif", ".ps", ".xd", ".ai", ".zip"
+        ],
         errors: [],
         files: [],
         drag: false,
         holding: false,
-    }
-    //convert Bytes to differents measures sizes
-    formatBytes = (bytes, decimals = 2) => {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
     handleFiles = (files, rejectedFiles) => {
         function getFileExtension(filename) {
             return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
         }
-        if (rejectedFiles && rejectedFiles.length > 0){
+        if (rejectedFiles && (rejectedFiles.length > 0)){
             // eslint-disable-next-line
             rejectedFiles.map(rejectedFile=>{
                 const CurrentRejectedFileName = rejectedFile.name,
@@ -37,7 +34,7 @@ class dragableArea extends Component{
                 CurrentRejectedFileExt = getFileExtension(CurrentRejectedFileName).toLowerCase();
                 if (CurrentRejectedFileSize > this.state.maxFileSize){
                     this.setState(state=>{
-                        let errors = state.errors.concat(`Maximum file size should be less than ${this.formatBytes(this.state.maxFileSize)}`);
+                        let errors = state.errors.concat(`Maximum file size should be less than ${formatBytes(this.state.maxFileSize)}`);
                         return{
                             ...state,
                             errors: errors,
@@ -69,7 +66,10 @@ class dragableArea extends Component{
                     filesSize += file.size;
                     this.setState({totalUploadedFilesSize: filesSize})
                 })
-                if (currentFileSize <= this.state.maxFileSize && this.state.acceptedFiles.includes(`.${currentFileExt}`) && this.state.maxFilesSize >= filesSize){
+                if ((currentFileSize <= this.state.maxFileSize) &&
+                    this.state.acceptedFiles.includes(`.${currentFileExt}`) &&
+                    (this.state.maxFilesSize >= filesSize)
+                ){
                     let filesNames = [] ;
                     this.state.files.forEach(file=>{
                         filesNames.push(file.name)
@@ -110,15 +110,17 @@ class dragableArea extends Component{
         return this.setState({drag: false})
     }
 
-    deleteFile = (id) => {
-        this.setState(state=>{
-            let files = state.files.filter((file, index)=>{
-                return index !== id
-            });
-            return{
-                ...state,
-                files: files
-            }
+    deleteFile = (i) => {
+        new Promise((resolve) => {
+            let files = this.state.files.filter((fileName, index)=>{
+                return index !== i
+            })
+            resolve(files)
+        }).then(response=>{
+            this.props.changeFiles(response)
+            this.setState({    
+                files: response
+            })
         })
     }
     
@@ -151,7 +153,7 @@ class dragableArea extends Component{
                                 <ul className={classes.Files}>
                                     {
                                         this.state.files.map((file, index) => (
-                                            <li key={index}>{file.name} {this.formatBytes(file.size)} <span><MdClose onClick={()=>this.deleteFile(index)} /></span></li>
+                                            <li key={index}>{file.name} {formatBytes(file.size)} <span><MdClose onClick={()=>this.deleteFile(index)} /></span></li>
                                         ))
                                     }
                                 </ul>: null
@@ -167,10 +169,10 @@ class dragableArea extends Component{
                         <div className={classes.Validation}>
                             <p>Accebtable Files: {this.state.acceptedFiles.sort().join(', ')}</p>
                             <div className={classes.SizeValidation}>
-                                <p>Max File Size: {this.formatBytes(this.state.maxFileSize)}</p>
-                                <p>Max Files size: {this.formatBytes(this.state.maxFilesSize)}</p>
+                                <p>Max File Size: {formatBytes(this.state.maxFileSize)}</p>
+                                <p>Max Files size: {formatBytes(this.state.maxFilesSize)}</p>
                             </div>
-                            {this.state.totalUploadedFilesSize?<p>Total Uploaded Size{this.formatBytes(this.state.totalUploadedFilesSize)}</p>:null}
+                            {this.state.totalUploadedFilesSize?<p>Total Uploaded Size: {formatBytes(this.state.totalUploadedFilesSize)}</p>:null}
                             <ul className={classes.Errors}>
                                 {errors}
                             </ul>

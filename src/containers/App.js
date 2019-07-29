@@ -6,7 +6,7 @@ import Layout from '../hoc/Layout/Layout';
 import { Route, withRouter } from 'react-router-dom';
 
 import Home from './Home/Home.jsx';
-import CreateTask from './CreateTask/CreateTask';
+import CreateTask from './CreateTask/CreateTask.jsx';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
 import Committees from './Committees/Comittees.jsx';

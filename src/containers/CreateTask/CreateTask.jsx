@@ -3,22 +3,22 @@ import classes from './CreateTask.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import InputClasses from '../../components/UI/Input/Input.module.scss';
-import DragableArea from "../../components/DragableArea/DragableArea";
+import DragableArea from "../../components/DragableArea/DragableArea.jsx";
 import Button from '../../components/UI/Button/Button';
 import RichEditor from '../../components/RichEditor/RichEditor';
 import axios from '../../axios';
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import {
-  MdCheckBox,
-  MdCheckBoxOutlineBlank,
-  MdChevronRight,
-  MdKeyboardArrowDown,
-  MdAddBox,
-  MdIndeterminateCheckBox,
-  MdFolder,
-  MdFolderOpen,
-  MdInsertDriveFile
+    MdCheckBox,
+    MdCheckBoxOutlineBlank,
+    MdChevronRight,
+    MdKeyboardArrowDown,
+    MdAddBox,
+    MdIndeterminateCheckBox,
+    MdFolder,
+    MdFolderOpen,
+    MdInsertDriveFile
 } from "react-icons/md";
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';

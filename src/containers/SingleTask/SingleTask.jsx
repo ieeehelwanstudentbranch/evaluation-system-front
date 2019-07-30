@@ -4,6 +4,7 @@ import axios from '../../axios';
 import {connect} from 'react-redux';
 import InformationHeader from '../../components/UI/InformationHeader/InformationHeader.jsx';
 import { MdFileDownload } from "react-icons/md";
+import InformationTemplate from '../../components/UI/InformationTemplate/InformationTemplate'
 
 class SingleTask extends Component{
     state={
@@ -42,25 +43,53 @@ class SingleTask extends Component{
             })
     }
     render(){
-        // let deadline = new Date(this.state.deadline),
-        //     delivered_at = new Date(this.state.delivered_at);
+        let deadline = new Date(this.state.deadline),
+            creating_time = new Date(this.state.created_at),
+            delivered_at = new Date(this.state.delivered_at);
         let task= <> </>;
         if (this.state.title){
             task = <div className={classes.SinglePost}>
-                {this.state.sender_info ?
-                    <InformationHeader {...this.state.sender_info} created_at={this.state.created_at}/>: <></>
+                {
+                    this.state.sender_info ?
+                        <InformationHeader {...this.state.sender_info} created_at={this.state.created_at}/>
+                    :null
                 }
-                {this.state.details?
-                    <div className={classes.Details}>
-                        <span className={classes.Title}>Task Details</span>
-                        <article dangerouslySetInnerHTML = {{__html: this.state.details}}></article>
-                    </div>
+                {
+                    this.state.title?
+                        <InformationTemplate label="Task info">
+                            {
+                                this.state.title ?
+                                    <h2>{this.state.title}</h2>
+                                : null
+                            }
+                            {
+                                this.state.deadline ?
+                                    <p>Creating Time: <time dateTime={creating_time}>{creating_time.getDate()}-{creating_time.getMonth()+1}-{creating_time.getFullYear()} at {creating_time.getHours()}:{creating_time.getMinutes()<9?'0'+creating_time.getMinutes():creating_time.getMinutes()}</time></p>
+                                : null
+                            }
+                            {
+                                this.state.deadline ?
+                                    <p>Deadline: <time dateTime={deadline}>{deadline.getDate()}-{deadline.getMonth()+1}-{deadline.getFullYear()} at {deadline.getHours()}:{deadline.getMinutes()<9?'0'+deadline.getMinutes():deadline.getMinutes()}</time></p>
+                                : null
+                            }
+                            {
+                                this.state.delivered_at ?
+                                    <p>Deleved at: <time dateTime={delivered_at}>{delivered_at.getDate()}-{delivered_at.getMonth()+1}-{delivered_at.getFullYear()} at {delivered_at.getHours()}:{delivered_at.getMinutes()<9?'0'+delivered_at.getMinutes():delivered_at.getMinutes()}</time></p>
+                                : null
+                            }
+                        </InformationTemplate>
+                    :null
+                }
+                {
+                    this.state.details?
+                        <InformationTemplate label="Task Details">
+                            <article dangerouslySetInnerHTML = {{__html: this.state.details}}></article>
+                        </InformationTemplate>
                     :null
                 }
                 {
                     this.state.files?
-                        <div className={classes.Details}>
-                            <span className={classes.Title}>Task Files</span>
+                        <InformationTemplate label="task files">
                             <ul className={classes.Files}>
                                 {
                                     this.state.files.map((file,index)=>(
@@ -68,7 +97,7 @@ class SingleTask extends Component{
                                     ))
                                 }
                             </ul>
-                        </div>
+                        </InformationTemplate>
                     :null
                 }
                 

@@ -16,6 +16,7 @@ class dragableArea extends Component{
             ".ppt", ".pptx", ".pdf", ".jpeg", ".jpg", ".png",
             ".svg", ".gif", ".ps", ".xd", ".ai", ".zip"
         ],
+        acceptedMIMETypes: 'text/csv, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/gif, image/jpeg,image/png,application/pdf, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, image/svg+xml, text/plain, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip, application/postscript, image/vnd.adobe.photoshop',
         errors: [],
         files: [],
         drag: false,
@@ -102,14 +103,6 @@ class dragableArea extends Component{
         }
     }
 
-    DragEvent =()=>{
-        return this.setState({drag: true, holding: true})
-    }
-
-    endDrag =() =>{
-        return this.setState({drag: false})
-    }
-
     deleteFile = (i) => {
         new Promise((resolve) => {
             let files = this.state.files.filter((fileName, index)=>{
@@ -123,8 +116,17 @@ class dragableArea extends Component{
             })
         })
     }
+
+    dragOver =()=>{
+        return this.setState({drag: true, holding: true})
+    }
+
+    dragLeave =()=>{
+        return this.setState({drag: false, holding: false})
+    }
     
     render (){
+        // drop zone area classes
         let dragAreaClasses = [classes.Dropzone];
         if (this.state.files && this.state.files.length>0) {
             dragAreaClasses = [classes.Dropzone, classes.HasItems];
@@ -132,6 +134,7 @@ class dragableArea extends Component{
         if (this.state.files && this.state.files.length>0 && this.state.holding){
             dragAreaClasses = [classes.Dropzone, classes.HasItems];
         }
+        // error handler
         let errors;
         if (this.state.errors && this.state.errors.length>0){
             this.state.errors.map((error, index) => (
@@ -143,11 +146,11 @@ class dragableArea extends Component{
                 onChange={this.handleFiles}
                 maxSize={this.state.maxFileSize}
                 multiple={true}
-                accept={this.state.acceptedFiles}
+                accept={this.state.acceptedMIMETypes}
             >
-                {({getRootProps, getInputProps}) => (
+                {({getRootProps, getInputProps, isDragActive}) => (
                     <>
-                        <section className={this.state.drag?[classes.Container, classes.Draged].join(' '):classes.Container} onDragOver={this.DragEvent} onDragLeave={this.endDrag}>
+                        <section className={isDragActive?[classes.Container, classes.Draged].join(' '):classes.Container} onDragOver={this.dragOver} onDragEnd={this.dragLeave}>
                             {
                                 this.state.files && this.state.files.length>0?
                                 <ul className={classes.Files}>
@@ -160,10 +163,8 @@ class dragableArea extends Component{
                             }
                             <div {...getRootProps()} className={dragAreaClasses.join(' ')} style={this.state.holding?{display: 'flex'}:null}>
                                 <input {...getInputProps()} />
-                                <div >
-                                    <MdCloudUpload/>
-                                    <p>Drag &amp; drop files here, or click to select files</p>
-                                </div>
+                                {!isDragActive && <><MdCloudUpload/> <p>Drag &amp; drop files here, or click to select files</p></>}
+                                {isDragActive && <><MdCloudUpload/> <p>Drop it like it's hot!</p></>}
                             </div>
                         </section>
                         <div className={classes.Validation}>

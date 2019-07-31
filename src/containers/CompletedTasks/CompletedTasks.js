@@ -7,28 +7,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from '../../components/UI/Spinner/Spinner'
 import chunkData from '../../utilize/chunkData';
 import mappingFunction from '../../utilize/mappingFunction';
+import state from '../../utilize/tasksState'
 
 class CompletedTasks extends Component{
 
-    state={
-        // user role for some validation
-        userRole: null,
-        // total tasks 
-        totalPersonalTasks: null,
-        totalMentoringTasks: null,
-        totalSentTasks: null,
-        totalCoordinatingTasks: null,
-        // chunked tasks
-        sentTasksArrays: null,
-        mentoringTasksArrays: null,
-        personalTasksArrays: null,
-        coordinatingTasksArrays: null,
-        // displayed tasks
-        sentTasks: [],
-        mentoringTasks: [],
-        personalTasks: [],
-        coordinatingTasks: []
-    }
+    state={...state}
 
     loadMore = (type) => {
         if (this.state.sentTasksArrays && (type === 'sentTasks')){

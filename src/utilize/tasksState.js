@@ -1,21 +1,39 @@
 const state={
-    // user role for some validation
-    userRole: null,
-    // total tasks 
-    totalPersonalTasks: null,
-    totalMentoringTasks: null,
-    totalSentTasks: null,
-    totalCoordinatingTasks: null,
-    // chunked tasks
-    sentTasksArrays: null,
-    mentoringTasksArrays: null,
-    personalTasksArrays: null,
-    coordinatingTasksArrays: null,
-    // displayed tasks
-    sentTasks: [],
-    mentoringTasks: [],
-    personalTasks: [],
-    coordinatingTasks: []
+    // // total tasks 
+    // totalPersonalTasks: [],
+    // totalMentoringTasks: [],
+    // totalSentTasks: [],
+    // totalCoordinatingTasks: [],
+    // // chunked tasks
+    // sentTasksArrays: [],
+    // mentoringTasksArrays: [],
+    // personalTasksArrays: [],
+    // coordinatingTasksArrays: [],
+    // // displayed tasks
+    // sentTasks: [],
+    // mentoringTasks: [],
+    // personalTasks: [],
+    // coordinatingTasks: []
+    sentTasks: {
+        totalSentTasks: [],
+        sentTasksArrays: [],
+        sentTasks: [],
+    },
+    personalTasks: {
+        totalPersonalTasks: [],
+        personalTasksArrays: [],
+        personalTasks: [],
+    },
+    mentoringTasks: {
+        totalMentoringTasks: [],
+        mentoringTasksArrays: [],
+        mentoringTasks: [],
+    },
+    coordinatingTasks: {
+        totalCoordinatingTasks: [],
+        coordinatingTasksArrays: [],
+        coordinatingTasks: [],
+    }
 }
 
 export default state

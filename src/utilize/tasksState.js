@@ -15,24 +15,24 @@ const state={
     // personalTasks: [],
     // coordinatingTasks: []
     sentTasks: {
-        totalSentTasks: [],
-        sentTasksArrays: [],
-        sentTasks: [],
+        totalTasks: [],
+        tasksArrays: [],
+        tasks: [],
     },
     personalTasks: {
-        totalPersonalTasks: [],
-        personalTasksArrays: [],
-        personalTasks: [],
+        totalTasks: [],
+        tasksArrays: [],
+        tasks: [],
     },
     mentoringTasks: {
-        totalMentoringTasks: [],
-        mentoringTasksArrays: [],
-        mentoringTasks: [],
+        totalTasks: [],
+        tasksArrays: [],
+        tasks: [],
     },
     coordinatingTasks: {
-        totalCoordinatingTasks: [],
-        coordinatingTasksArrays: [],
-        coordinatingTasks: [],
+        totalTasks: [],
+        tasksArrays: [],
+        tasks: [],
     }
 }
 

@@ -20,4 +20,17 @@
             }
         }
     }
+    .DeliverTask{
+        text-decoration: none;
+        padding: 10px 20px;
+        background-color: $main_color;
+        color: $white;
+        margin: 10px;
+        display: flex;
+        border-radius: 5px;
+        width: 8rem;
+        align-items: flex-end;
+        align-content: center;
+        align-self: flex-end;
+    }
 }

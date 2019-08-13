@@ -77,19 +77,19 @@ class PendingTasks extends Component{
                 })
             ;
         }
+        console.log(this.state)
     }
 
     render(){
         return (
             <div className={classes.TasksPage}>
                 {
-                    (this.state.userRole === 'EX_com') || (this.state.userRole === 'director') ?
-                        this.state.sentTasks.tasksArrays?
+                    (this.state.userRole === 'EX_com') || (this.state.userRole === 'highBoard') ?
+                        this.state.sentTasks.tasksArrays && this.state.sentTasks.tasksArrays.length>0?
                             <section className={classes.TasksGroup}>
                                 <h2>Sent Tasks</h2>
                                 <InfiniteScroll
                                     dataLength={this.state.sentTasks.tasks}
-                                    // next={()=>loadMore(this.state, this.state.sentTasks, 'sentTasks')}
                                     next={()=>this.setState(loadMore(this.state, this.state.sentTasks, 'sentTasks'))}
                                     hasMore={this.state.sentTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
@@ -108,7 +108,7 @@ class PendingTasks extends Component{
                 }
                 {
                     (this.state.userRole === 'EX_com')?
-                        this.state.mentoringTasks.tasksArrays?
+                        this.state.mentoringTasks.tasksArrays && this.state.mentoringTasks.tasksArrays.length>0?
                             <section className={classes.TasksGroup}>
                                 <h2>Mentoring Tasks</h2>
                                 <InfiniteScroll
@@ -132,9 +132,8 @@ class PendingTasks extends Component{
                     :<></>
                 }
                 {
-                (this.state.userRole === 'EX_com') || (this.state.userRole === 'director') || (this.state.userRole === 'volunteer') ?
-                    this.state.personalTasks.totalTasks?
-                        this.state.personalTasks.totalTasks.length>0?
+                    (this.state.userRole === 'EX_com') || (this.state.userRole === 'highBoard') || (this.state.userRole === 'volunteer') ?
+                        this.state.personalTasks.totalTasks && this.state.personalTasks.totalTasks.length>0?
                             <section className={classes.TasksGroup}>
                                 <h2>Personal Tasks</h2>
                                 <InfiniteScroll
@@ -156,7 +155,6 @@ class PendingTasks extends Component{
                             </section>
                         :<></>
                     :<></>
-                :<></>
                 }
                 {
                     this.state.coordinatingTasks.tasks.length>0?

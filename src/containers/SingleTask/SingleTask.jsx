@@ -4,7 +4,9 @@ import axios from '../../axios';
 import {connect} from 'react-redux';
 import InformationHeader from '../../components/UI/InformationHeader/InformationHeader';
 import { MdFileDownload } from "react-icons/md";
-import InformationTemplate from '../../components/UI/InformationTemplate/InformationTemplate'
+import InformationTemplate from '../../components/UI/InformationTemplate/InformationTemplate';
+// import Button from '../../components/UI/Button/Button';
+import {Link} from 'react-router-dom';
 
 class SingleTask extends Component{
     state={
@@ -16,7 +18,7 @@ class SingleTask extends Component{
         deadline: null,
         created_at: null,
         sender_info: null,
-        reciever_info: null,
+        receiver_info: null,
         // deliverd details
         delivered_details: null,
         delivered_files: null,
@@ -36,13 +38,15 @@ class SingleTask extends Component{
                     sender_info: response.data.data.sender_info[0],
                     delivered_files: response.data.data.delivered_files?response.data.data.delivered_files:null,
                     delivered_details: response.data.data.delivered_details?response.data.data.delivered_details:null,
-                    reciever_info: response.data.data.reciever_info? response.data.data.reciever_info[0]: null,
+                    receiver_info: response.data.data.receiver_info? response.data.data.receiver_info[0]: null,
                 })
             }).catch(error=>{
                 console.log(error)
             })
     }
     render(){
+        console.log(this.state.receiver_info, this.props.userID)
+
         let deadline = new Date(this.state.deadline),
             creating_time = new Date(this.state.created_at),
             delivered_at = new Date(this.state.delivered_at);
@@ -93,14 +97,20 @@ class SingleTask extends Component{
                             <ul className={classes.Files}>
                                 {
                                     this.state.files.map((file,index)=>(
-                                        <li key={index}>{file}<a href={`http://localhost:8000/storage${file}`} download><MdFileDownload /></a></li>
+                                        <li key={index}>{file}<a href={`http://localhost:8000/storage/tasks_sent/${file}`} download={true}><MdFileDownload /></a></li>
                                     ))
                                 }
                             </ul>
                         </InformationTemplate>
                     :null
                 }
-                
+                {
+                    this.state.receiver_info.id === this.props.userID ?
+                        <Link to="/deliver-task" className={classes.DeliverTask}>
+                            Deliver Task
+                        </Link>
+                    :<p>You are not authorized to deliver task</p>
+                }
             </div>
         }
         return (
@@ -111,7 +121,7 @@ class SingleTask extends Component{
 
 const mapStateToProps = state => {
     return{
-        userID: state.login.userID
+        userID: parseInt(state.login.userID)
     }
 }
 export default connect(mapStateToProps, null)(SingleTask)

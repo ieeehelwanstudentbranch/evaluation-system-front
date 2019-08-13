@@ -31,11 +31,12 @@ class PendingTasks extends Component{
     }
 
     componentDidUpdate(previousProps, previousState) {
-        let totalMentoringTasks = this.props.pendingMentoringTasks,
-            totalPersonalTasks =  this.props.pendingPersonalTasks,
-            totalSentTasks = this.props.pendingSentTasks,
-            totalCoordinatingTasks = this.props.pendingCoordinatingTasks,
-            userRole = this.props.role;
+        let props = this.props;
+        let totalMentoringTasks = props.pendingMentoringTasks,
+            totalPersonalTasks =  props.pendingPersonalTasks,
+            totalSentTasks = props.pendingSentTasks,
+            totalCoordinatingTasks = props.pendingCoordinatingTasks,
+            userRole = props.role;
 
         if (previousState.mentoringTasks.totalTasks !== totalMentoringTasks ||
             previousState.personalTasks.totalTasks !== totalPersonalTasks ||
@@ -88,7 +89,8 @@ class PendingTasks extends Component{
                                 <h2>Sent Tasks</h2>
                                 <InfiniteScroll
                                     dataLength={this.state.sentTasks.tasks}
-                                    next={()=>this.loadMore(this.state, this.state.sentTasks)}
+                                    // next={()=>loadMore(this.state, this.state.sentTasks, 'sentTasks')}
+                                    next={()=>this.setState(loadMore(this.state, this.state.sentTasks, 'sentTasks'))}
                                     hasMore={this.state.sentTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
@@ -98,9 +100,7 @@ class PendingTasks extends Component{
                                     }
                                     height={'80vh'}
                                 >
-                                    {
-                                        mappingFunction(this.state.sentTasks.tasks, TaskCard)
-                                    }
+                                    { mappingFunction(this.state.sentTasks.tasks, TaskCard) }
                                 </InfiniteScroll>
                             </section>:
                         <></>
@@ -113,7 +113,7 @@ class PendingTasks extends Component{
                                 <h2>Mentoring Tasks</h2>
                                 <InfiniteScroll
                                     dataLength={this.state.mentoringTasks.tasks}
-                                    next={()=>this.loadMore('mentoringTasks')}
+                                    next={()=>this.setState(loadMore(this.state, this.state.mentoringTasks, 'mentoringTasks'))}
                                     hasMore={this.state.mentoringTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
@@ -139,7 +139,7 @@ class PendingTasks extends Component{
                                 <h2>Personal Tasks</h2>
                                 <InfiniteScroll
                                     dataLength={this.state.personalTasks.tasks}
-                                    next={()=>this.loadMore('personalTasks')}
+                                    next={()=>this.setState(loadMore(this.state, this.state.personalTasks, 'personalTasks'))}
                                     hasMore={this.state.personalTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
@@ -165,7 +165,7 @@ class PendingTasks extends Component{
                                 <h2>Coordinating Tasks</h2>
                                 <InfiniteScroll
                                     dataLength={this.state.coordinatingTasks.tasks}
-                                    next={()=>this.loadMore('coordinatingTasks')}
+                                    next={()=>this.setState(loadMore(this.state, this.state.coordinatingTasks, 'coordinatingTasks'))}
                                     hasMore={this.state.coordinatingTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import * as classes from './SinglePost.module.scss';
 import axios from '../../../axios';
 import {connect} from 'react-redux';
-import Comment from './Comment/Comment.jsx';
-import CommentForm from './Comment/CommentForm/CommentForm.jsx';
-import InformationHeader from '../../UI/InformationHeader/InformationHeader.jsx';
+import Comment from './Comment/Comment';
+import CommentForm from './Comment/CommentForm/CommentForm';
+import InformationHeader from '../../UI/InformationHeader/InformationHeader';
 
 class SinglePost extends Component{
 

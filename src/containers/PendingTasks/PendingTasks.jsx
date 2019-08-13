@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import TaskCard from '../../components/TaskCard/TaskCard.jsx';
+import TaskCard from '../../components/TaskCard/TaskCard';
 import * as classes from '../../assets/scss/TasksPage.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
@@ -7,72 +7,41 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from '../../components/UI/Spinner/Spinner'
 import chunkData from '../../utilize/chunkData';
 import mappingFunction from '../../utilize/mappingFunction';
-import state from '../../utilize/tasksState'
+import state from '../../utilize/tasksState';
+import loadMore from '../../utilize/loadMore';
 
 class PendingTasks extends Component{
 
-    state={...state}
-
-    loadMore = (type) => {
-        if (this.state.sentTasksArrays && (type === 'sentTasks')){
-            this.setState(prevState=>{
-                return {
-                    ...prevState,
-                    sentTasks: prevState.sentTasks.concat(prevState.sentTasksArrays[0]),
-                    sentTasksArrays: prevState.sentTasksArrays.filter((array, index)=>index!==0)
-                }
-            })
-        }
-        if (this.state.mentoringTasksArrays && (type === 'mentoringTasks')){
-            this.setState(prevState=>{
-                return {
-                    ...prevState,
-                    mentoringTasks: prevState.mentoringTasks.concat(prevState.mentoringTasksArrays[0]),
-                    mentoringTasksArrays: prevState.mentoringTasksArrays.filter((array, index)=>index!==0)
-                }
-            })
-        }
-        if (this.state.personalTasksArrays && (type === 'personalTasks')){
-            this.setState(prevState=>{
-                return {
-                    ...prevState,
-                    personalTasks: prevState.personalTasks.concat(prevState.personalTasksArrays[0]),
-                    personalTasksArrays: prevState.personalTasksArrays.filter((array, index)=>index!==0)
-                }
-            })
-        }
-        if (this.state.coordinatingTasksArrays && (type === 'coordinatingTasks')){
-            this.setState(prevState=>{
-                return {
-                    ...prevState,
-                    coordinatingTasks: prevState.coordinatingTasks.concat(prevState.coordinatingTasksArrays[0]),
-                    coordinatingTasksArrays: prevState.coordinatingTasksArrays.filter((array, index)=>index!==0)
-                }
-            })
-        }
+    state={
+        // user role for some validation
+        userRole: null,
+        ...state
     }
 
     componentDidMount() {
         this.props.fetchTasks('pending');
-        setTimeout(()=>{
-            this.loadMore('sentTasks');
-            this.loadMore('mentoringTasks');
-            this.loadMore('personalTasks')
-            this.loadMore('coordinatingTasks')
-        },2000)
+        return (
+            setTimeout(()=>{
+                this.setState(loadMore(this.state, this.state.sentTasks, 'sentTasks'));
+                this.setState(loadMore(this.state, this.state.personalTasks, 'personalTasks'));
+                this.setState(loadMore(this.state, this.state.mentoringTasks, 'mentoringTasks'));
+                this.setState(loadMore(this.state, this.state.coordinatingTasks, 'coordinatingTasks'));
+            },2000)
+        )
     }
 
     componentDidUpdate(previousProps, previousState) {
-        let totalMentoringTasks = this.props.pendingMentoringTasks,
-            totalPersonalTasks =  this.props.pendingPersonalTasks,
-            totalSentTasks = this.props.pendingSentTasks,
-            totalCoordinatingTasks = this.props.pendingCoordinatingTasks,
-            userRole = this.props.role;
+        let props = this.props;
+        let totalMentoringTasks = props.pendingMentoringTasks,
+            totalPersonalTasks =  props.pendingPersonalTasks,
+            totalSentTasks = props.pendingSentTasks,
+            totalCoordinatingTasks = props.pendingCoordinatingTasks,
+            userRole = props.role;
 
-        if (previousState.totalMentoringTasks !== totalMentoringTasks ||
-            previousState.totalPersonalTasks !== totalPersonalTasks ||
-            previousState.totalSentTasks !== totalSentTasks ||
-            previousState.totalCoordinatingTasks !== totalCoordinatingTasks ||
+        if (previousState.mentoringTasks.totalTasks !== totalMentoringTasks ||
+            previousState.personalTasks.totalTasks !== totalPersonalTasks ||
+            previousState.sentTasks.totalTasks !== totalSentTasks ||
+            previousState.coordinatingTasks.totalTasks !== totalCoordinatingTasks ||
             previousState.userRole !== userRole
             ) {
                 let sentTasksArrays = chunkData(totalSentTasks, 5),
@@ -82,21 +51,31 @@ class PendingTasks extends Component{
                 this.setState(prevState=>{
                     return {
                         ...prevState,
-                        // set total pending tasks
-                        totalMentoringTasks: totalMentoringTasks,
-                        totalSentTasks: totalSentTasks,
-                        totalPersonalTasks: totalPersonalTasks,
-                        totalCoordinatingTasks: totalCoordinatingTasks,
-
-                        // set chunked tasks array
-                        sentTasksArrays: sentTasksArrays,
-                        mentoringTasksArrays: mentoringTasksArrays,
-                        personalTasksArrays: personalTasksArrays,
-                        coordinatingTasks: coordinatingTasksArrays,
-
-                        userRole: userRole
+                        userRole: userRole,
+                        // set tasks
+                        mentoringTasks: {
+                            ...prevState.mentoringTasks,
+                            totalTasks: totalMentoringTasks,
+                            tasksArrays: mentoringTasksArrays
+                        },
+                        sentTasks: {
+                            ...prevState.sentTasks,
+                            totalTasks: totalSentTasks,
+                            tasksArrays: sentTasksArrays,
+                        },
+                        personalTasks: {
+                            ...prevState.personalTasks,
+                            totalTasks: totalPersonalTasks,
+                            tasksArrays: personalTasksArrays,
+                        },
+                        coordinatingTasks: {
+                            ...prevState.coordinatingTasks,
+                            totalTasks: totalCoordinatingTasks,
+                            tasksArrays: coordinatingTasksArrays,
+                        }
                     }
                 })
+            ;
         }
     }
 
@@ -105,13 +84,14 @@ class PendingTasks extends Component{
             <div className={classes.TasksPage}>
                 {
                     (this.state.userRole === 'EX_com') || (this.state.userRole === 'director') ?
-                        this.state.sentTasksArrays?
+                        this.state.sentTasks.tasksArrays?
                             <section className={classes.TasksGroup}>
                                 <h2>Sent Tasks</h2>
                                 <InfiniteScroll
-                                    dataLength={this.state.sentTasks}
-                                    next={()=>this.loadMore('sentTasks')}
-                                    hasMore={this.state.sentTasksArrays.length>0}
+                                    dataLength={this.state.sentTasks.tasks}
+                                    // next={()=>loadMore(this.state, this.state.sentTasks, 'sentTasks')}
+                                    next={()=>this.setState(loadMore(this.state, this.state.sentTasks, 'sentTasks'))}
+                                    hasMore={this.state.sentTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
                                         <p style={{textAlign: 'center'}}>
@@ -120,9 +100,7 @@ class PendingTasks extends Component{
                                     }
                                     height={'80vh'}
                                 >
-                                    {
-                                        mappingFunction(this.state.sentTasks, TaskCard)
-                                    }
+                                    { mappingFunction(this.state.sentTasks.tasks, TaskCard) }
                                 </InfiniteScroll>
                             </section>:
                         <></>
@@ -130,13 +108,13 @@ class PendingTasks extends Component{
                 }
                 {
                     (this.state.userRole === 'EX_com')?
-                        this.state.mentoringTasksArrays?
+                        this.state.mentoringTasks.tasksArrays?
                             <section className={classes.TasksGroup}>
                                 <h2>Mentoring Tasks</h2>
                                 <InfiniteScroll
-                                    dataLength={this.state.mentoringTasks}
-                                    next={()=>this.loadMore('mentoringTasks')}
-                                    hasMore={this.state.mentoringTasksArrays.length>0}
+                                    dataLength={this.state.mentoringTasks.tasks}
+                                    next={()=>this.setState(loadMore(this.state, this.state.mentoringTasks, 'mentoringTasks'))}
+                                    hasMore={this.state.mentoringTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
                                         <p style={{textAlign: 'center'}}>
@@ -146,7 +124,7 @@ class PendingTasks extends Component{
                                     height={'80vh'}
                                 >
                                     {
-                                        mappingFunction(this.state.mentoringTasks, TaskCard)
+                                        mappingFunction(this.state.mentoringTasks.tasks, TaskCard)
                                     }
                                 </InfiniteScroll>
                             </section>
@@ -155,14 +133,14 @@ class PendingTasks extends Component{
                 }
                 {
                 (this.state.userRole === 'EX_com') || (this.state.userRole === 'director') || (this.state.userRole === 'volunteer') ?
-                    this.state.totalPersonalTasks?
-                        this.state.totalPersonalTasks.length>0?
+                    this.state.personalTasks.totalTasks?
+                        this.state.personalTasks.totalTasks.length>0?
                             <section className={classes.TasksGroup}>
                                 <h2>Personal Tasks</h2>
                                 <InfiniteScroll
-                                    dataLength={this.state.mentoringTasks}
-                                    next={()=>this.loadMore('personalTasks')}
-                                    hasMore={this.state.personalTasksArrays.length>0}
+                                    dataLength={this.state.personalTasks.tasks}
+                                    next={()=>this.setState(loadMore(this.state, this.state.personalTasks, 'personalTasks'))}
+                                    hasMore={this.state.personalTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
                                         <p style={{textAlign: 'center'}}>
@@ -172,7 +150,7 @@ class PendingTasks extends Component{
                                     height={'80vh'}
                                 >
                                     {
-                                        mappingFunction(this.state.personalTasks, TaskCard)
+                                        mappingFunction(this.state.personalTasks.tasks, TaskCard)
                                     }
                                 </InfiniteScroll>
                             </section>
@@ -181,14 +159,14 @@ class PendingTasks extends Component{
                 :<></>
                 }
                 {
-                    this.state.totalCoordinatingTasks?
-                        (this.state.totalCoordinatingTasks.length > 0)?
+                    this.state.coordinatingTasks.tasks.length>0?
+                        (this.state.coordinatingTasks.totalTasks.length > 0)?
                             <section className={classes.TasksGroup}>
-                                <h2>Personal Tasks</h2>
+                                <h2>Coordinating Tasks</h2>
                                 <InfiniteScroll
-                                    dataLength={this.state.coordinatingTasks}
-                                    next={()=>this.loadMore('coordinatingTasks')}
-                                    hasMore={this.state.coordinatingTasksArrays.length>0}
+                                    dataLength={this.state.coordinatingTasks.tasks}
+                                    next={()=>this.setState(loadMore(this.state, this.state.coordinatingTasks, 'coordinatingTasks'))}
+                                    hasMore={this.state.coordinatingTasks.tasksArrays.length>0}
                                     loader={<Spinner />}
                                     endMessage={
                                         <p style={{textAlign: 'center'}}>
@@ -198,7 +176,7 @@ class PendingTasks extends Component{
                                     height={'80vh'}
                                 >
                                     {
-                                        mappingFunction(this.state.coordinatingTasks, TaskCard)
+                                        mappingFunction(this.state.coordinatingTasks.tasks, TaskCard)
                                     }
                                 </InfiniteScroll>
                             </section>

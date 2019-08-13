@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as classes from './AdditionalInfo.module.scss';
 import {GiSettingsKnobs} from 'react-icons/gi';
-import Template from '../../../components/UI/InformationTemplate/InformationTemplate.jsx';
+import Template from '../../../components/UI/InformationTemplate/InformationTemplate';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 

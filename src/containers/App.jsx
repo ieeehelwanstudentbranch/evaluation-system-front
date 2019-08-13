@@ -5,19 +5,19 @@ import './App.scss';
 import Layout from '../hoc/Layout/Layout';
 import { Route, withRouter } from 'react-router-dom';
 
-import Home from './Home/Home.jsx';
-import CreateTask from './CreateTask/CreateTask.jsx';
+import Home from './Home/Home';
+import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
-import Committees from './Committees/Comittees.jsx';
+import Committees from './Committees/Comittees';
 import SingleCommittee from './Committees/SingleCommittee/SingleCommittee';
 import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
-import SinglePost from '../components/Post/SinglePost/SinglePost.jsx';
-import SingleProfile from './SingleProfile/SingleProfile.jsx';
-import SingleTask from './SingleTask/SingleTask.jsx';
+import SinglePost from '../components/Post/SinglePost/SinglePost';
+import SingleProfile from './SingleProfile/SingleProfile';
+import SingleTask from './SingleTask/SingleTask';
 
 
 class App extends Component {

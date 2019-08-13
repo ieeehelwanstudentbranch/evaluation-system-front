@@ -1,39 +1,55 @@
 import React, {Component} from 'react';
 import * as classes from './AdditionalInfo.module.scss';
 import {GiSettingsKnobs} from 'react-icons/gi';
-import Template from './InformationTemplate/InformationTemplate';
+import Template from '../../../components/UI/InformationTemplate/InformationTemplate.jsx';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
+
 class AdditionalInfo extends Component {
     render(){
         return(
-            <div className={classes.AdditionalInfo}>
-                <span className={classes.Label}>Additional Informations</span>
+            <Template className={classes.AdditionalInfo} label='Additional Informations'>
                 <div className={classes.Wrapper}>
                     <div className={classes.Row}>
-                        <Template marginTop="-5%" label='E-mail' value={this.props.email}/>
+                        <Template label='E-mail'>
+                            <a href={`mailto:${this.props.email}`}>{this.props.email}</a>
+                        </Template>
                         {
                             this.props.phone?
-                            <Template marginTop="-5%" label='Phone Number' value={this.props.phone}/>: null
+                                <Template label='Phone Number'>
+                                    <a href={`tel:${this.props.phone}`}>{this.props.phone}</a>
+                                </Template>
+                            : null
                         }
                     </div>
                     <div className={classes.Row}>
                         {
                             this.props.faculty?
-                            <Template marginTop="-8%" label='Faculty' value={this.props.faculty}/>: null
+                                <Template label='Faculty'>
+                                    <p>{this.props.faculty}</p>
+                                </Template>
+                            : null
                         }
                         {
                             this.props.university?
-                            <Template marginTop="-8%" label='University' value={this.props.university}/>: null
+                                <Template label='University'>
+                                    <p>{this.props.university}</p>
+                                </Template>
+                            : null
                         }
                         {
                             this.props.level?
-                            <Template marginTop="-8%" label='Level' value={this.props.level}/>: null
+                                <Template label='Level'>
+                                    <p>{this.props.level}</p>
+                                </Template>
+                            :null
                         }
                     </div>
                     {this.props.address?
                         <div className={classes.Row}>
-                            <Template marginTop="-2.5%" label='address' value={this.props.address}/>
+                            <Template label='address'>
+                                <p>{this.props.address}</p>
+                            </Template>
                         </div>: null
                     }
                 </div>
@@ -42,7 +58,7 @@ class AdditionalInfo extends Component {
                         <GiSettingsKnobs onClick={this.props.onChange}/>
                     :null
                 }
-            </div>
+            </Template>
         )
     }
 }

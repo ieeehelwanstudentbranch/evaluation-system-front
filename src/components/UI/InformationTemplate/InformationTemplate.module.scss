@@ -1,0 +1,30 @@
+@import '../../../assets/scss/color_variables';
+.Template{
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 20px;
+    margin: 5px 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    span.Label{
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 1px solid #ccc;
+        padding: 3px;
+        border-radius: 5px;
+        width: max-content;
+        position: absolute;
+        top: -1rem;
+        background-color: #fff;
+    }
+    img{
+        width: max-content;
+        height: max-content
+    }
+    a{
+        color: $main_color;
+        text-decoration: none
+    }
+}

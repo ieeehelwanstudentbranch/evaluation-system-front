@@ -15,6 +15,7 @@ export const fetchUserData = (profileID, userID=null) => {
                 }
                 
             }).catch(error=>{
+                // console.log(error.response)
                 dispatch(actions.serverErrorHandler('Network Error, Please Try Again ater'))
             })
         ;

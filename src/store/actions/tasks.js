@@ -61,6 +61,30 @@ export const fetchPendingTasks = () => {
     }
 }
 
+export const fetchTasks = (type) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler());
+        if (type === 'pending'){
+            axios.get('/pending-tasks/')
+            .then(response=>{
+                console.log(response.data.data)
+                dispatch(fetchPendingTasksSuccess(response.data.data));
+            }).catch(error=>{
+                console.log(error)
+            });
+        }
+        if (type === 'completed'){
+            axios.get('/complete-tasks/')
+            .then(response=>{
+                console.log(response.data.data)
+                dispatch(fetchCompletedTasksSuccess(response.data.data));
+            }).catch(error=>{
+                console.log(error)
+            });
+        }
+    }
+}
+
 export const fetchPendingTasksSuccess = (tasks) => {
     return {
         type: actionTypes.FETCH_PENDING_TASKS_SUCCESS,
@@ -68,5 +92,15 @@ export const fetchPendingTasksSuccess = (tasks) => {
         pendingSentTasks: tasks.sent_tasks,
         pendingPersonalTasks: tasks.personal_tasks,
         pendingCoordinatingTasks: tasks.coordinating_tasks
+    }
+}
+
+export const fetchCompletedTasksSuccess = (tasks) => {
+    return {
+        type: actionTypes.FETCH_COMPLETED_TASKS_SUCCESS,
+        completedMentoringTasks: tasks.mentoring_tasks[0],
+        completedSentTasks: tasks.sent_tasks,
+        completedPersonalTasks: tasks.personal_tasks,
+        completedCoordinatingTasks: tasks.coordinating_tasks
     }
 }

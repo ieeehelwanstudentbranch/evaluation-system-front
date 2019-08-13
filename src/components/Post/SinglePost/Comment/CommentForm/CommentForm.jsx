@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import {connect} from 'react-redux';
 import * as Yup from 'yup';
 import classes from '../../../../UI/Input/Input.module.scss';
 import Spinner from '../../../../UI/Spinner/Spinner';
@@ -9,11 +8,10 @@ import axios from '../../../../../axios';
 class CommentForm extends Component{
     state={
         error: null,
-        loading: false,
         comment: ''
     }
     componentDidUpdate(previousProps, previousState) {
-        let comment = this.props.comment;
+        let comment = this.props[0]?this.props[0].body:null;
         if (previousState.comment !== comment) {
             this.setState({
                 comment: comment
@@ -21,24 +19,22 @@ class CommentForm extends Component{
         }
     }
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
-        if (this.props.commentID){
-            this.setState({loading: true});
+        if (props[0]){
             let newData = {
                 comment_body: values.comment
             }
-            axios.post(`/post/${this.props.commentID}/update-comment/`, newData)
+            axios.put(`/update-comment/${props[0].id}`, newData)
                 .then(response=>{
                     window.location.reload();
                 }).catch(error=>{
-                    console.log(error.response);
+                    this.setState({error: error})
                 })
             ;
         }else{
-            this.setState({loading: true});
             let comment = {
                 comment_body: values.comment
             }
-            axios.post(`/post/${this.props.id}/add-comment`, comment)
+            axios.post(`/post/${props.id}/add-comment`, comment)
                 .then(response=>{
                     window.location.reload();
                 }).catch(error=>{
@@ -53,11 +49,12 @@ class CommentForm extends Component{
     render(){
         const validationSchema = Yup.object().shape({
             comment: Yup.string()
-                .trim()
                 .nullable()
+                .trim()
+                
         });
         const initialValues= {
-            comment: this.state.comment,
+            comment: this.state.comment || '',
         }
         let form;
         if (this.state.loading){
@@ -70,8 +67,8 @@ class CommentForm extends Component{
                     validationSchema={validationSchema}
                     onSubmit={this.handleSubmit}
                     render={(FormikProps)=>(
-                        <Form>
-                            {/* {this.state.error? <span>Sorry something went wrong please try again later</span>: null} */}
+                        <Form autoComplete="off">
+                            {this.state.error? <span>Sorry something went wrong please try again later</span>: null}
                             <div className={classes.Input}>
                                 <Field type="text" id="comment" name="comment" placeholder="Write a comment" className={classes.InputElement}/>
                                 <ErrorMessage name="comment" />
@@ -90,11 +87,4 @@ class CommentForm extends Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        commentID: state.posts.commentID,
-        comment: state.posts.comment
-    }
-}
-
-export default connect(mapStateToProps)(CommentForm);
+export default CommentForm;

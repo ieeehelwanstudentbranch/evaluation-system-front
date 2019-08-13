@@ -3,7 +3,6 @@ import * as classes from './InformationHeader.module.scss';
 import {NavLink} from 'react-router-dom';
 
 const InformationHeader = (props) => {
-    console.log(props)
     let created_at = new Date(props.created_at);
     return(
         <header>

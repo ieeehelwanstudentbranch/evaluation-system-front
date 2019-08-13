@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Committee.module.scss';
+import classes from './CommitteeCard.module.scss';
 import { NavLink } from 'react-router-dom';
 import { GiSettingsKnobs } from "react-icons/gi";
 const committee = (props) => {

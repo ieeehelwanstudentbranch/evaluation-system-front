@@ -1,20 +1,9 @@
-.AdditionalInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 95%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    margin: 20px 0;
-    position: relative;
-    span.Label {
-        text-transform: uppercase;
-        margin-top: -3.5%;
-        background-color: #fff;
-        padding: 3px;
-        width: max-content;
-    }
+@import '../../../assets/scss/screen_sizes';
 
+.AdditionalInfo {
+    justify-content: space-between;
+    width: 95% !important;
+    margin: 30px 0 !important;
     svg {
         position: absolute;
         right: 10px;
@@ -22,16 +11,20 @@
         font-size: 50px;
         cursor: pointer
     }
-
     .Wrapper {
         display: flex;
         flex-direction: column;
         margin-top: 50px;
+
         .Row{
             display: flex;
-            justify-content: center;
-            justify-content: space-between;
-            margin: 10px 0;
+            flex-direction: column;
+            @media screen and (min-width: $small_tablet_min_width){
+                flex-direction: row;
+                justify-content: center;
+                justify-content: space-between;
+                margin: 10px 0;
+            }
         }
     }
 }

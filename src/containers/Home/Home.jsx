@@ -4,9 +4,10 @@ import classes from './Home.module.scss';
 import Button from '../../components/UI/Button/Button';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-import Post from '../../components/Post/Post';
+import Post from '../../components/Post/PostCard.jsx';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal';
+import mappingFunction from '../../utilize/mappingFunction';
 
 class Home extends Component{
     state={
@@ -40,17 +41,7 @@ class Home extends Component{
     render(){
         let component;
         if(this.props.posts){
-            component = <section>
-                {
-                    this.props.posts?
-                        this.props.posts.map((post,index)=>{
-                            return (
-                                <Post key={index} comments={post.comments} postID={post.id} body={post.body} postOwner={post.post_owner} date_time={post.created_at} />
-                            ) 
-                        }):
-                    <> </>
-                }
-            </section>
+            component = mappingFunction(this.props.posts, Post)
         } else {
             if(this.state.loading){
                 component = <Spinner />
@@ -60,14 +51,14 @@ class Home extends Component{
         }
         return(
             <div className={classes.Home}>
-                <header className={classes.Editor}>
+                <header className={classes.Intro}>
                     <RichEditor place="posts"/>
                     {
                         this.state.editing? 
-                        <Button type="submit" btnType="Default" clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>:
-                        <Button type="submit" btnType="Default" clicked={()=>this.props.onAdding(this.props.post)}>ADD POST</Button>
+                            <Button type="submit" btnType="Default" clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>
+                        :
+                            <Button type="submit" btnType="Default" clicked={()=>this.props.onAdding(this.props.post)}>ADD POST</Button>
                     }
-                    
                 </header>
                 {component}
             </div>

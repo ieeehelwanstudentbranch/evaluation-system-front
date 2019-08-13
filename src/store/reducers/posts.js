@@ -50,15 +50,6 @@ const editPost = (state, action) => {
     }
 }
 
-const editComment = (state, action) => {
-    return{
-        ...state,
-        comment: action.comment,
-        editingComment: true,
-        commentID: action.id
-    }
-}
-
 const editPostSuccess = (state, action) => {
     return{
         ...state,
@@ -73,30 +64,35 @@ const postsReducer = (state = initialState, action)=>{
         // handling rich editor changes
         case actionTypes.HANDLE_POST_DETAILS:
             return reducers.handleData(state, action);
+        
         // handling loader
         case actionTypes.LOADING_HANDLER:
             return reducers.loadingHandler(state, action);
-        // handling if fetching posts is success
+        
+        // handling if fetching posts success
         case actionTypes.FETCH_POSTS_SUCEESS:
             return fetchPostsSucceess(state, action);
-        // handling adding post is failed
+        
+        // handling adding post failed
         case actionTypes.ADD_POST_FAILED:
             return addPostFailed(state, action);
-        // handle deleting posts is success
+        
+        // handle deleting posts success
         case actionTypes.DELETE_POST:
             return deletePostSuccess(state, action);
+        
         // handle editing post
         case actionTypes.EDIT_POST:
             return editPost(state, action);
-        // handle editing post
+        
+        // handle editing post success
         case actionTypes.EDIT_POST_SUCCESS:
             return editPostSuccess(state, action);
-        // handle editing post
-        case actionTypes.EDIT_COMMENT:
-            return editComment(state, action);
+        
         // handling if server retairned any error
         case actionTypes.SERVER_ERROR_HANDLER:
             return reducers.serverErrorHandler(state, action);
+        
         // default state
         default:
             return state;

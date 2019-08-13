@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as classes from './SingleProfile.module.scss';
 import UserImage from './UserImage/UserImage';
 import * as actions from '../../store/actions/index';
-import AdditionalInfo from './AdditionalInfo/AdditionalInfo';
+import AdditionalInfo from './AdditionalInfo/AdditionalInfo.jsx';
 import Modal from '../../components/UI/Modal/Modal';
 import ImageCropper from '../../components/ImageCropper/ImageCropper';
 import Button from '../../components/UI/Button/Button';
@@ -13,18 +13,25 @@ class SingleProfile extends Component {
     state={
         profileID: this.props.match.params.id,
         editing: this.props.editing,
-        editableContent: this.props.editing,
-        newImage: this.props.newImage
+        editableContent: this.props.editableContent,
+        newImage: this.props.newImage,
+        profileData: null
     }
 
     componentDidUpdate(previousProps, previousState) {
         let profileID = this.props.match.params.id;
         let editing = this.props.editing;
-        let editableContent= this.props.editing;
+        let editableContent= this.props.editableContent;
         let newImage= this.props.newImage;
+        let profileData = this.props.profileData;
+        if (previousState.profileData !== profileData){
+            this.setState({
+                profileData: profileData
+            })
+        }
         if (previousState.profileID !== profileID) {
             this.setState({
-                profileID: profileID,
+                profileID: profileID
             })
             this.props.onInit(this.state.profileID, this.props.userID)
         }
@@ -43,18 +50,18 @@ class SingleProfile extends Component {
     
     render(){
         let profile;
-        if (this.props.profileData){
+        if (this.state.profileData){
             profile = <div className={classes.SingleProfile}>
                         <div className={classes.MainInfo}>
-                            <UserImage image={this.props.profileData.image} alt={`${this.props.profileData.firstName} ${this.props.profileData.lastName}`}/>
-                            <div className={classes.data}>
-                                <h3>{this.props.profileData.firstName} {this.props.profileData.lastName}</h3>
-                                {this.props.profileData.committee?<span>{this.props.profileData.committee}</span>:null}
-                                <span>{this.props.profileData.position}</span>
-                                {this.props.profileData.ex_options?<span>{this.props.profileData.ex_options[0].ex_options.toUpperCase()}</span>:null}
+                            <UserImage image={this.state.profileData.image} alt={`${this.state.profileData.firstName} ${this.state.profileData.lastName}`}/>
+                            <div className={classes.Data}>
+                                <h3>{this.state.profileData.firstName} {this.state.profileData.lastName}</h3>
+                                {this.state.profileData.committee?<span>{this.state.profileData.committee.name}</span>:null}
+                                <span>{this.state.profileData.position}</span>
+                                {this.state.profileData.ex_options.length>0?<span>{this.state.profileData.ex_options[0].ex_options.toUpperCase()}</span>:null}
                             </div>
                         </div>
-                        <AdditionalInfo email={this.props.profileData.email} faculty={this.props.profileData.faculty} university={this.props.profileData.university} phone={this.props.profileData.phone} address={this.props.profileData.address} DOB={this.props.profileData.DOB} level={this.props.profileData.level} />
+                        <AdditionalInfo {...this.state.profileData} />
                     </div>
         }
         return(

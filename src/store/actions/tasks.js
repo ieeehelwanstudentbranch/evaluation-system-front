@@ -9,6 +9,13 @@ export const handleTaskDetails = (data) => {
     }
 }
 
+export const handleDeliveringTaskDetails = (data) => {
+    return {
+        type: actionTypes.HANDLE_DELIVERING_TASK_DETAILS,
+        data: data
+    }
+}
+
 export const handleTaskFiles = (files) => {
     return {
         type: actionTypes.HANDLE_TASK_FILES,
@@ -35,6 +42,33 @@ export const sendTask = (title, deadline, details, files, receptors) => {
             }
         }
         axios.post('/create-task/', formData, {
+            headers: {
+              'content-type': 'multipart/form-data'
+            }
+        }).then(response=>{
+                console.log(response);
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        ;
+    }
+}
+
+export const deliverTask = (taskId, details, files) => {
+    return dispatch => {
+        console.log(taskId, details, files)
+        dispatch(actions.loadingHandler());
+
+        let formData = new FormData();
+        formData.append('body', details);
+        
+        if (files){
+            for( let i = 0; i < files.length; i++ ){
+                let file = files[i];
+                formData.append('files[' + i + ']', file);
+            }
+        }
+        axios.post(`/deliver-task/${taskId}`, formData, {
             headers: {
               'content-type': 'multipart/form-data'
             }

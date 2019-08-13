@@ -38,26 +38,46 @@ class RichEditor extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-    if (props.place === 'tasks'){
-        return {
-            data: state.tasks.data
-        }
-    } else if(props.place === 'posts'){
-        return {
-            data: state.posts.data
-        }
+    switch (props.place) {
+        case 'tasks':
+            return {
+                data: state.tasks.data
+            }
+        ;
+        case 'posts':
+            return {
+                data: state.posts.data
+            }
+        ;
+        case 'deliverTask':
+            return {
+                data: state.posts.data
+            }
+        ;
+        default:
+            break;
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-    if(props.place === 'tasks'){
-        return {
-            onChange: (data)=> dispatch(actions.handleTaskDetails(data))
-        }
-    } else if(props.place === 'posts') {
-        return {
-            onChange: (data)=> dispatch(actions.handlePostDetails(data))
-        }
+    switch (props.place) {
+        case 'tasks':
+            return {
+                onChange: (data)=> dispatch(actions.handleTaskDetails(data))
+            }
+        ;
+        case 'posts':
+            return {
+                onChange: (data)=> dispatch(actions.handlePostDetails(data))
+            }
+        ;
+        case 'deliverTask':
+            return {
+                onChange: (data)=> dispatch(actions.handleDeliveringTaskDetails(data))
+            }
+        ;
+        default:
+            break;
     }
 }
 

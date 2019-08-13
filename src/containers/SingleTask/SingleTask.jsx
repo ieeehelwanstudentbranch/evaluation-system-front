@@ -45,7 +45,6 @@ class SingleTask extends Component{
             })
     }
     render(){
-        console.log(this.state.receiver_info, this.props.userID)
 
         let deadline = new Date(this.state.deadline),
             creating_time = new Date(this.state.created_at),
@@ -106,7 +105,13 @@ class SingleTask extends Component{
                 }
                 {
                     this.state.receiver_info.id === this.props.userID ?
-                        <Link to="/deliver-task" className={classes.DeliverTask}>
+                    // to={`/deliver-task/${this.state.id}`}
+                        <Link to={{
+                                pathname: `/deliver-task/${this.state.id}`,
+                                state: {title: this.state.title}
+                            }}
+                            className={classes.DeliverTask}
+                        >
                             Deliver Task
                         </Link>
                     :<p>You are not authorized to deliver task</p>

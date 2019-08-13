@@ -18,6 +18,7 @@ import * as actions from '../store/actions/index';
 import SinglePost from '../components/Post/SinglePost/SinglePost';
 import SingleProfile from './SingleProfile/SingleProfile';
 import SingleTask from './SingleTask/SingleTask';
+import DeliverTask from './DeliverTask/DeliverTask';
 
 
 class App extends Component {
@@ -45,6 +46,7 @@ class App extends Component {
           <Route path={"/post/:id"} component={SinglePost} />
           <Route path={"/task/:id"} component={SingleTask} />
           <Route path={"/committee/:id"} component={SingleCommittee} />
+          <Route path={"/deliver-task/:id"} component={DeliverTask}/>
           {/* <Redirect to="/" /> */}
         </>
       )

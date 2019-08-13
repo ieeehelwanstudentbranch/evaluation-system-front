@@ -3,7 +3,7 @@ import classes from './CreateTask.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import InputClasses from '../../components/UI/Input/Input.module.scss';
-import DragableArea from "../../components/DragableArea/DragableArea.jsx";
+import DragableArea from "../../components/DragableArea/DragableArea";
 import Button from '../../components/UI/Button/Button';
 import RichEditor from '../../components/RichEditor/RichEditor';
 import axios from '../../axios';

@@ -4,7 +4,7 @@ import classes from './Home.module.scss';
 import Button from '../../components/UI/Button/Button';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-import Post from '../../components/Post/PostCard.jsx';
+import Post from '../../components/Post/PostCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal';
 import mappingFunction from '../../utilize/mappingFunction';

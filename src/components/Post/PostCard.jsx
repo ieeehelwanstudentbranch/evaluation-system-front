@@ -4,11 +4,11 @@ import {NavLink} from 'react-router-dom';
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
-import InformationHeader from '../UI/InformationHeader/InformationHeader.jsx'
+import InformationHeader from '../UI/InformationHeader/InformationHeader'
 class Post extends Component{
     render(){
         return (
-            <article className={classes.Post}>
+            <article className={[classes.Post, this.props.className].join(' ')}>
                 <header>
                     <InformationHeader {...this.props.post_owner} created_at={this.props.created_at}/>
                     {   

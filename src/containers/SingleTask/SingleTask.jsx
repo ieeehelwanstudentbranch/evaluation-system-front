@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as classes from './SingleTask.module.scss';
 import axios from '../../axios';
 import {connect} from 'react-redux';
-import InformationHeader from '../../components/UI/InformationHeader/InformationHeader.jsx';
+import InformationHeader from '../../components/UI/InformationHeader/InformationHeader';
 import { MdFileDownload } from "react-icons/md";
 import InformationTemplate from '../../components/UI/InformationTemplate/InformationTemplate'
 

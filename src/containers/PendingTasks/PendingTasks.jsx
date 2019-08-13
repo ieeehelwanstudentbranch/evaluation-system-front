@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import TaskCard from '../../components/TaskCard/TaskCard.jsx';
+import TaskCard from '../../components/TaskCard/TaskCard';
 import * as classes from '../../assets/scss/TasksPage.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';

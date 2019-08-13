@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import * as classes from '../../assets/scss/TasksPage.module.scss';
-import TaskCard from '../../components/TaskCard/TaskCard.jsx';
+import TaskCard from '../../components/TaskCard/TaskCard';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import InfiniteScroll from 'react-infinite-scroll-component';

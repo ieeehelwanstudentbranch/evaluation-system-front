@@ -1,14 +1,21 @@
 const loadMore = (oldState, collection, type) => {
+    let newObject;
+    if(collection.tasksArrays){
+        newObject = {
+            tasks: collection.tasks.concat(collection.tasksArrays[0]),
+            tasksArrays: collection.tasksArrays.filter((array, index)=>{
+                return index !== 0
+            })
+        }
+    };
+    
     switch (type) {
         case 'sentTasks':
             return {
                 ...oldState,
                 sentTasks: {
                     ...collection,
-                    tasks: collection.tasks.concat(collection.tasksArrays[0]),
-                    tasksArrays: collection.tasksArrays.filter((array, index)=>{
-                        return index !== 0
-                    })
+                    ...newObject
                 }
             };
         case 'personalTasks':
@@ -16,10 +23,7 @@ const loadMore = (oldState, collection, type) => {
                 ...oldState,
                 personalTasks: {
                     ...collection,
-                    tasks: collection.tasks.concat(collection.tasksArrays[0]),
-                    tasksArrays: collection.tasksArrays.filter((array, index)=>{
-                        return index !== 0
-                    })
+                    ...newObject
                 }
             };
         case 'mentoringTasks':
@@ -27,26 +31,17 @@ const loadMore = (oldState, collection, type) => {
                 ...oldState,
                 mentoringTasks: {
                     ...collection,
-                    tasks: collection.tasks.concat(collection.tasksArrays[0]),
-                    tasksArrays: collection.tasksArrays.filter((array, index)=>{
-                        return index !== 0
-                    })
+                    ...newObject
                 }
             };
         default:
-            if(collection.tasksArrays){
-                return {
-                    ...oldState,
-                    coordinatingTasks: {
-                        ...collection,
-                        tasks: collection.tasks.concat(collection.tasksArrays[0]),
-                        tasksArrays: collection.tasksArrays.filter((array, index)=>{
-                            return index !== 0
-                        })
-                    }
-                };
-            }
-        ;
+            return {
+                ...oldState,
+                coordinatingTasks: {
+                    ...collection,
+                    ...newObject
+                }
+            };
     }
 };
 

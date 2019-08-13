@@ -72,7 +72,7 @@ class PendingTasks extends Component{
                             ...prevState.coordinatingTasks,
                             totalTasks: totalCoordinatingTasks,
                             tasksArrays: coordinatingTasksArrays,
-                        },
+                        }
                     }
                 })
             ;

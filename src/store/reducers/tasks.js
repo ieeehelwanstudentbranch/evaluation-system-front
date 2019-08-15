@@ -5,7 +5,7 @@ const initialState ={
     data: null,
     files: null,
     error: null,
-    message: null,
+    message: null
 }
 
 const handleTaskFiles = (state, action) => {
@@ -40,21 +40,31 @@ const tasksReducer = (state = initialState, action)=>{
         // handle loading handler
         case actionTypes.LOADING_HANDLER:
             return reducers.loadingHandler(state, action);
+
         // handling rich editor changes
         case actionTypes.HANDLE_TASK_DETAILS:
             return reducers.handleData(state, action);
+
         // handling rich editor changes
         case actionTypes.HANDLE_DELIVERING_TASK_DETAILS:
-                return reducers.handleData(state, action);
+            return reducers.handleData(state, action);
+
+        // handling rich editor changes
+        case actionTypes.HANDLE_EVALUATING_TASK_DETAILS:
+            return reducers.handleData(state, action);
+
         // handle Task Files
         case actionTypes.HANDLE_TASK_FILES:
             return handleTaskFiles(state, action);
+
         // fetching pending tasks
         case actionTypes.FETCH_PENDING_TASKS_SUCCESS:
             return fetchPendingTasksSuccess(state, action);
+
         // fetching pending tasks
         case actionTypes.FETCH_COMPLETED_TASKS_SUCCESS:
             return fetchCompletedTasksSuccess(state, action);
+
         default:
             return state
     }

@@ -1,23 +1,50 @@
 @import '../../assets/scss/color_variables';
-.SinglePost {
-    width: 95%;
-    padding: 10px;
+@import '../../assets/scss/screen_sizes';
+.DetailsContainer{
     display: flex;
-    flex-direction: column;
-    border-radius: 4px;
-    margin: 40px 0px;
-    border: 1px solid #ccc;
-    justify-content: center;
-    .Files{
-        list-style-type: none;
+    @media screen and (max-width: $large_tablet_max_width ){
+        flex-direction: column;
+    }
+    .TaskDetails {
+        width: calc(100%/2);
+        padding: 10px;
         display: flex;
         flex-direction: column;
-        li{
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        &:first-of-type{
+            margin-right: 10px;
+        }
+        &:last-of-type{
+            margin-left: 10px;
+        }
+        @media screen and (max-width: $large_tablet_max_width ){
+            width: 95%;
+            margin: 10px auto
+        }
+        .Files{
+            list-style-type: none;
             display: flex;
-            justify-content: space-between;
-            a{
-                color: $main_color
+            flex-direction: column;
+            li{
+                display: flex;
+                justify-content: space-between;
+                a{
+                    color: $main_color
+                }
             }
+        }
+    }
+}
+.Actions{
+    display: flex;
+    justify-content: flex-end;
+    button{
+        &:first-of-type{
+            margin-right: 10px;
+        }
+        &:last-of-type{
+            margin-left: 10px;
         }
     }
     .DeliverTask{
@@ -25,7 +52,7 @@
         padding: 10px 20px;
         background-color: $main_color;
         color: $white;
-        margin: 10px;
+        margin: 10px 0;
         display: flex;
         border-radius: 5px;
         width: 8rem;

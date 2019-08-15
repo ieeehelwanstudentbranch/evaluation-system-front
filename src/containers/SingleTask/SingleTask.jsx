@@ -175,7 +175,7 @@ class SingleTask extends Component{
             {task}
             {
                 <Modal show={this.state.review} modalClosed={this.cancelReviewing}>
-                    <ReviewTask/>
+                    <ReviewTask taskID={this.state.id}/>
                 </Modal>
             }
             </>

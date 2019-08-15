@@ -23,13 +23,6 @@ export const handleDeliveringTaskDetails = (data) => {
     }
 }
 
-export const handleEvaluatingTaskDetails = (data) => {
-    return {
-        type: actionTypes.HANDLE_EVALUATING_TASK_DETAILS,
-        data: data
-    }
-}
-
 export const sendTask = (title, deadline, details, files, receptors) => {
     return dispatch => {
         dispatch(actions.loadingHandler());

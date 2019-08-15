@@ -15,7 +15,7 @@ class ReviewTask extends Component {
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
-        props.submitTask(props.match.params.id, props.taskDetails, props.taskFiles);
+        props.submitEvaluation(props.taskID, values.mark, props.evaluationDetails);
         setSubmitting(false);
         return;
     }
@@ -61,13 +61,12 @@ class ReviewTask extends Component {
 const mapStateToProps = state => {
     return{
         userID: state.user.userData?state.user.userData.id:null,
-        evaluationDetails: state.tasks.data? state.tasks.data:null,
-        taskFiles: state.tasks.files? state.tasks.files: null
+        evaluationDetails: state.evaluateTask.data? state.evaluateTask.data:null,
     }
 }
 const mapDispatchToProps = dispatch => {
     return{
-        submitEvaluation: (id, details, files)=>dispatch(actions.deliverTask(id, details, files))
+        submitEvaluation: (id, mark, details)=>dispatch(actions.evaluatingTask(id, mark, details))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewTask)

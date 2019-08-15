@@ -51,7 +51,12 @@ const mapStateToProps = (state, props) => {
         ;
         case 'deliverTask':
             return {
-                data: state.posts.data
+                data: state.tasks.data
+            }
+        ;
+        case 'evaluateTask':
+            return {
+                data: state.evaluateTask.data
             }
         ;
         default:
@@ -74,6 +79,11 @@ const mapDispatchToProps = (dispatch, props) => {
         case 'deliverTask':
             return {
                 onChange: (data)=> dispatch(actions.handleDeliveringTaskDetails(data))
+            }
+        ;
+        case 'evaluateTask':
+            return {
+                onChange: (data)=> dispatch(actions.handleEvaluatingTaskDetails(data))
             }
         ;
         default:

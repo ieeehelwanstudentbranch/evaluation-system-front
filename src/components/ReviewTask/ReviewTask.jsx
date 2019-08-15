@@ -51,7 +51,7 @@ class ReviewTask extends Component {
                             <RichEditor place="evaluateTask"/>
                         </div>
                         
-                        <Button type="submit" btnType="Default" disabled={FormikProps.isSubmitting || !this.props.taskDetails}>SEND</Button>
+                        <Button type="submit" btnType="Default" disabled={FormikProps.isSubmitting || !this.props.evaluationDetails}>SEND</Button>
                     </Form>
                 )}
             />
@@ -61,7 +61,7 @@ class ReviewTask extends Component {
 const mapStateToProps = state => {
     return{
         userID: state.user.userData?state.user.userData.id:null,
-        taskDetails: state.tasks.data? state.tasks.data:null,
+        evaluationDetails: state.tasks.data? state.tasks.data:null,
         taskFiles: state.tasks.files? state.tasks.files: null
     }
 }

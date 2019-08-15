@@ -49,10 +49,6 @@ const tasksReducer = (state = initialState, action)=>{
         case actionTypes.HANDLE_DELIVERING_TASK_DETAILS:
             return reducers.handleData(state, action);
 
-        // handling rich editor changes
-        case actionTypes.HANDLE_EVALUATING_TASK_DETAILS:
-            return reducers.handleData(state, action);
-
         // handle Task Files
         case actionTypes.HANDLE_TASK_FILES:
             return handleTaskFiles(state, action);

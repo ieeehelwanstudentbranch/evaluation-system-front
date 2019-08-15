@@ -11,6 +11,7 @@ import committeesReducer from './store/reducers/committees';
 import postsReducer from './store/reducers/posts';
 import userReducer from './store/reducers/user';
 import tasksReducer from './store/reducers/tasks';
+import evaluateTaskReducer from './store/reducers/evaluateTask';
 
 import './index.css';
 import App from './containers/App';
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     committees: committeesReducer,
     posts: postsReducer,
     user: userReducer,
-    tasks: tasksReducer
+    tasks: tasksReducer,
+    evaluateTask: evaluateTaskReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

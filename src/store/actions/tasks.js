@@ -9,6 +9,13 @@ export const handleTaskDetails = (data) => {
     }
 }
 
+export const handleTaskFiles = (files) => {
+    return {
+        type: actionTypes.HANDLE_TASK_FILES,
+        files: files
+    }
+}
+
 export const handleDeliveringTaskDetails = (data) => {
     return {
         type: actionTypes.HANDLE_DELIVERING_TASK_DETAILS,
@@ -20,13 +27,6 @@ export const handleEvaluatingTaskDetails = (data) => {
     return {
         type: actionTypes.HANDLE_EVALUATING_TASK_DETAILS,
         data: data
-    }
-}
-
-export const handleTaskFiles = (files) => {
-    return {
-        type: actionTypes.HANDLE_TASK_FILES,
-        files: files
     }
 }
 

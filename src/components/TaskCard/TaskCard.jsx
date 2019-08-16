@@ -39,6 +39,11 @@ const task = (props) => {
                 :null
             }
             {
+                props.task_rate?
+                    <span className={classes.TaskRate}>{props.task_rate}</span>
+                :null
+            }
+            {
                 props.committee ?
                     props.committee.length>0 ?
                         <p>Committee: <NavLink className={classes.TaskLink} to={`/committee/${props.committee[0].id}`}>

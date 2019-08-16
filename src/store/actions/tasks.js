@@ -109,6 +109,7 @@ export const fetchTasks = (type) => {
         if (type === 'completed'){
             axios.get('/complete-tasks/')
             .then(response=>{
+                console.log(response.data.data)
                 dispatch(fetchCompletedTasksSuccess(response.data.data));
             }).catch(error=>{
                 console.log(error.response)

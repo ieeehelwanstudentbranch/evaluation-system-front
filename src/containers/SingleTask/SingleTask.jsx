@@ -148,6 +148,16 @@ class SingleTask extends Component{
                     }
                 </div>
             </div>
+            {
+                this.state.status === "accepted"?
+                    <InformationTemplate label="Evaluation" className={classes.Evaluation}>
+                        <span className={(this.state.rate>60)?[classes.EvaluationRate, classes.Success].join(' '):(this.state.rate<50)?[classes.EvaluationRate, classes.Failed].join(' '):null}>
+                            {this.state.rate}
+                        </span>
+                        <div dangerouslySetInnerHTML={{__html: this.state.evaluation}} className={classes.EvaluationContent}></div>
+                    </InformationTemplate>
+                :<></>
+            }
             <div className={classes.Actions}>
             {
                 (this.state.sender_info[0].id === this.props.userID ) && (this.state.status === 'deliver')?

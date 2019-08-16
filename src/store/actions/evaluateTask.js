@@ -18,7 +18,7 @@ export const evaluatingTask = (id, mark, details) => {
         }
         axios.post(`/accept-task/${id}`, evaluation)
             .then(response=>{
-                console.log(response);
+                window.location.replace('/')
             }).catch(error=>{
                 console.log(error.response)
             })

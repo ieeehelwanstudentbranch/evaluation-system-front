@@ -3,15 +3,14 @@ import {connect} from 'react-redux';
 import 'normalize.css';
 import './App.scss';
 import Layout from '../hoc/Layout/Layout';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
 
-import Home from './Home/Home';
+import HomeApp from './Home/Home';
 import CreateTask from './CreateTask/CreateTask';
 import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
 import Committees from './Committees/Comittees';
 import SingleCommittee from './Committees/SingleCommittee/SingleCommittee';
-import Login from './Auth/Login/Login';
 import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
@@ -19,7 +18,9 @@ import SinglePost from '../components/Post/SinglePost/SinglePost';
 import SingleProfile from './SingleProfile/SingleProfile';
 import SingleTask from './SingleTask/SingleTask';
 import DeliverTask from './DeliverTask/DeliverTask';
-import PublicLayout from '../hoc/PublicLayout/PublicLayout'
+import PublicLayout from '../hoc/PublicLayout/PublicLayout';
+
+import Home from './PublicHome/Home';
 
 
 class App extends Component {
@@ -36,7 +37,7 @@ class App extends Component {
     if (this.props.isAuthenticated){
       routes = (
         <>
-          <Route path="/" exact component={Home}/>
+          <Route path="/app" exact component={HomeApp}/>
           <Route path="/user/:id" component={SingleProfile}/>
           <Route path="/create-task" component={CreateTask}/>
           <Route path="/completed-tasks" component={CompletedTasks}/>
@@ -59,8 +60,11 @@ class App extends Component {
             {routes}
           </Layout>
           :<PublicLayout >
-            <Route path="/login" component={Login} />
-            <Route path="/registration" component={Registration} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Home} />
+              <Route path="/registration" component={Registration} />
+            </Switch>
           </PublicLayout>
         }
         

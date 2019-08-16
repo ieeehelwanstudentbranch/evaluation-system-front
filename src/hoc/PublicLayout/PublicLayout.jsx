@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import * as classes from './Layout.module.scss';
+import * as classes from './PublicLayout.module.scss';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import SideNavigation from '../../components/Navigation/SideNavigation/SideNavigation';
+import PublicSideNav from './PublicSideNav/PublicSideNav';
 import { connect } from 'react-redux';
 class Layout extends Component {
     state={
@@ -21,17 +21,18 @@ class Layout extends Component {
     }
     render(){
         return(
-            <>
-                <Toolbar isAuthenticated={this.props.isAuthenticated} MobileMenuOpen={this.state.MobileMenuOpen} drawerToggleClicked={this.sideDrawerToggleHandler}/>
-                <SideNavigation
-                    isAuthenticated={this.props.isAuthenticated}
+            <div className={classes.PublicLayout}>
+                <div className="container">
+                    <Toolbar className={classes.PublicToolBar}  MobileMenuOpen={this.state.MobileMenuOpen} drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                </div>
+                <PublicSideNav
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler}
                 />
-                <main className={classes.MainApp}>
+                <main className={classes.PublicMain}>
                     {this.props.children}
                 </main>
-            </>
+            </div>
         )
     }
 }

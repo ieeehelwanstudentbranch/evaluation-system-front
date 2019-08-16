@@ -1,9 +1,9 @@
 @import '../../assets/scss/screen_sizes';
 
-main, aside {
+.MainApp, aside {
     margin-top: 56px;
 }
-main {
+.MainApp {
     display: flex;
     justify-content: center;
     width: 100vw;

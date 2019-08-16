@@ -6,28 +6,9 @@ import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNav
 import DrawerToggle from '../DrawerToggler/DrawerToggler';
 
 class Toolbar extends Component {
-    state = {
-        searchInput: {
-            elementConfig: {
-                type: 'search',
-                placeholder: 'Search',
-                id: 'search',
-                name: 'search',
-                icon: {name: 'faSearch', position: 'Right'}
-            },
-            value: '',
-            validation: {
-                minLength: 3,
-                maxLength: 50
-            },
-            valid: true,
-            touched: false
-        }
-    }
-
     render(){
         return (
-            <header className={classes.Toolbar}>
+            <header className={[classes.Toolbar, this.props.className].join(' ')}>
                 <Logo height="80%"/>
                 <DrawerToggle MobileMenuOpen={this.props.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
                 <div className={classes.DesktopOnly}>

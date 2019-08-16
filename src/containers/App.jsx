@@ -19,6 +19,7 @@ import SinglePost from '../components/Post/SinglePost/SinglePost';
 import SingleProfile from './SingleProfile/SingleProfile';
 import SingleTask from './SingleTask/SingleTask';
 import DeliverTask from './DeliverTask/DeliverTask';
+import PublicLayout from '../hoc/PublicLayout/PublicLayout'
 
 
 class App extends Component {
@@ -28,8 +29,7 @@ class App extends Component {
   render() {
     let routes = (
       <>
-        <Route path="/login" component={Login} />
-        <Route path="/registration" component={Registration} />
+        
         {/* <Redirect to="/login" /> */}
       </>
     );
@@ -53,9 +53,18 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Layout>
-          {routes}
-        </Layout>
+        {
+          this.props.isAuthenticated?
+          <Layout>
+            {routes}
+          </Layout>
+          :<PublicLayout >
+            <Route path="/login" component={Login} />
+            <Route path="/registration" component={Registration} />
+          </PublicLayout>
+        }
+        
+
       </div>
     );
   }

@@ -16,7 +16,7 @@
     @media screen and (min-width: $large_max_width){
         width: 70%
     }
-    header{
+    .PostHeader{
         display: flex;
         flex-direction: row;
         justify-content: space-between;

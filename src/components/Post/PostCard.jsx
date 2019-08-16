@@ -9,7 +9,7 @@ class Post extends Component{
     render(){
         return (
             <article className={[classes.Post, this.props.className].join(' ')}>
-                <header>
+                <header className={classes.PostHeader}>
                     <InformationHeader {...this.props.post_owner} created_at={this.props.created_at}/>
                     {   
                         // eslint-disable-next-line

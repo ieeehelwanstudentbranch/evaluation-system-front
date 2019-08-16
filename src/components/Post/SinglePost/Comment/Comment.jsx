@@ -8,7 +8,7 @@ class Comment extends Component{
     render(){
         return (
             <article className={classes.Comment}>
-                <header>
+                <header className={classes.CommentHeader}>
                     <InformationHeader {...this.props.comment_owner} created_at={this.props.created_at}/>
                     {
                     // eslint-disable-next-line

@@ -13,15 +13,24 @@
     align-items: center;
     padding: 0 20px;
     z-index: 90;
-    @media screen and (max-width: $small_tablet_max_width){
-        .ToolbarLogo{
-            height: auto;
-            margin-right: 20px;
-            img{
-                width: 100%
-            }
+
+    .ToolbarLogo {
+        width: 20%;
+        height: auto;
+        margin-right: 20px;
+        img{
+            width: 100%
+        }
+
+        @media screen and (max-width: $small_tablet_max_width) {
+            width: auto;
+        }
+
+        @media screen and (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width) {
+            width: 30%;
         }
     }
+
     .DesktopOnly {
         @media (max-width: $small_tablet_max_width) {
             display: none;
@@ -38,6 +47,6 @@
                     }
                 }
             }
-        }   
+        }
     }
 }

@@ -30,11 +30,9 @@
         width: 25vw;
         border-radius: 15px;
         max-width: 500px;
-        @media screen and(max-width: $small_tablet_max_width){
-            order: 1;
-        }
         @media screen and (max-width: $small_tablet_max_width ){
             width: 100%;
+            order: 1;
         }
         @media screen and (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width){
             width: 40vw;

@@ -1,14 +1,40 @@
 @import '../../assets/scss/color_variables';
 @import '../../assets/scss/screen_sizes';
 .HomeHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and(max-width: $small_tablet_max_width){
+        flex-direction: column;
+    }
+    .Intro{
+        color: $white;
+        width: 42vw;
+        @media screen and(max-width: $small_tablet_max_width){
+            order: 2;
+            width: 100%;
+        }
+        h3{
+            font-size: 30px;
+            margin: 20px 0;
+        }
+        p{
+            font-size: 20px;
+            opacity: 0.75;
+            margin: 20px 0;
+        }
+    }
     .Login{
         background-color: $white;
         padding: 20px;
         width: 25vw;
         border-radius: 15px;
         max-width: 500px;
+        @media screen and(max-width: $small_tablet_max_width){
+            order: 1;
+        }
         @media screen and (max-width: $small_tablet_max_width ){
-            width: 95vw;
+            width: 100%;
         }
         @media screen and (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width){
             width: 40vw;

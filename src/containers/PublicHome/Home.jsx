@@ -6,7 +6,6 @@ import Registration from '../Auth/Registration/Registration';
 class Home extends Component{
     
     render(){
-        console.log(this.props)
         return(
             <header style={{width: '100%'}}>
                 <div className={`${classes.HomeHeader} container`}>

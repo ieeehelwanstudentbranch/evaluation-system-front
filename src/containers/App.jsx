@@ -20,6 +20,7 @@ import DeliverTask from './DeliverTask/DeliverTask';
 import PublicLayout from '../hoc/PublicLayout/PublicLayout';
 
 import Home from './PublicHome/Home';
+import PrivateRouter from '../components/PrivateRoute/PrivateRoute';
 
 
 class App extends Component {
@@ -27,36 +28,27 @@ class App extends Component {
     this.props.onTryAutoSignup();
   }
   render() {
-    let routes = (
-      <>
-        {/* <Redirect to="/login" /> */}
-      </>
-    );
-    if (this.props.isAuthenticated){
-      routes = (
-        <>
-          <Route path="/app" exact component={HomeApp}/>
-          <Route path="/user/:id" component={SingleProfile}/>
-          <Route path="/create-task" component={CreateTask}/>
-          <Route path="/completed-tasks" component={CompletedTasks}/>
-          <Route path="/pending-tasks" component={PendingTasks}/>
-          <Route path="/committees" component={Committees}/>
-          <Route path="/logout" component={Logout}/>
-          <Route path={"/post/:id"} component={SinglePost} />
-          <Route path={"/task/:id"} component={SingleTask} />
-          <Route path={"/committee/:id"} component={SingleCommittee} />
-          <Route path={"/deliver-task/:id"} component={DeliverTask}/>
-          <Route exact path="/" component={Home} />
-          {/* <Redirect to="/" /> */}
-        </>
-      )
-    }
     return (
       <div className="App">
         {
           this.props.isAuthenticated?
           <Layout>
-            {routes}
+            <Switch>
+              <PrivateRouter path='/home' exact={true} component={HomeApp} isAuthenticated={this.props.isAuthenticated}/>
+              <PrivateRouter path={"/post/:id"} isAuthenticated={this.props.isAuthenticated} component={SinglePost} />
+              
+              <PrivateRouter path={"/task/:id"} isAuthenticated={this.props.isAuthenticated} component={SingleTask} />
+              <PrivateRouter path="/create-task" isAuthenticated={this.props.isAuthenticated} component={CreateTask}/>
+              <PrivateRouter path={"/deliver-task/:id"} isAuthenticated={this.props.isAuthenticated} component={DeliverTask}/>
+              <PrivateRouter path="/pending-tasks" isAuthenticated={this.props.isAuthenticated} component={PendingTasks}/>
+              <PrivateRouter path="/completed-tasks" isAuthenticated={this.props.isAuthenticated} component={CompletedTasks}/>
+              
+              <PrivateRouter path="/committees" isAuthenticated={this.props.isAuthenticated} component={Committees}/>
+              <PrivateRouter path={"/committee/:id"} isAuthenticated={this.props.isAuthenticated} component={SingleCommittee} />
+              
+              <PrivateRouter path="/user/:id" isAuthenticated={this.props.isAuthenticated} component={SingleProfile}/>
+              <PrivateRouter path="/logout" isAuthenticated={this.props.isAuthenticated} component={Logout}/>
+            </Switch>
           </Layout>
           :<PublicLayout>
             <Switch>
@@ -66,8 +58,6 @@ class App extends Component {
             </Switch>
           </PublicLayout>
         }
-        
-
       </div>
     );
   }

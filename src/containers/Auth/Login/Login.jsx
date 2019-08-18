@@ -65,7 +65,7 @@ class Login extends Component{
         }
         let authRedirect = null;
         if (this.props.isAuthenticated){
-            authRedirect = <Redirect to="/" />
+            authRedirect = <Redirect to="/home" />
         }
         
         return(

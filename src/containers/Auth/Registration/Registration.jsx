@@ -9,7 +9,6 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import InputClasses from '../../../components/UI/Input/Input.module.scss';
 import classes from './Registration.module.scss';
 import axios from '../../../axios';
-import Modal from '../../../components/UI/Modal/Modal';
 
 class Registration extends Component{
 

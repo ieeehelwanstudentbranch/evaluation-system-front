@@ -10,7 +10,7 @@ class AuthenticatedNavigation extends React.Component{
             <nav>
                 <ul className={classes.AuthenticatedNavigation}>
                     <NavigationItem link={`/user/${this.props.userID}`} exact><Profile /></NavigationItem>
-                    <NavigationItem link="/" exact>Home</NavigationItem>
+                    <NavigationItem link="/home" exact>Home</NavigationItem>
                     <NavigationItem link="/logout" exact>Logout</NavigationItem>
                 </ul>
             </nav>

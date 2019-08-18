@@ -23,6 +23,7 @@ export const login = (email, password, remember_me) => {
                     dispatch(loginSuccess(response.data.token, response.data.message, response.data.userId));
                     dispatch(checkLoginTime(expirationDate, response.data.token));
                     dispatch(profileActions.fetchUserData(response.data.userId,response.data.userId));
+                    window.location.href = '/home'
                 }else{
                     dispatch(loginFailed(response.data.message));
                 }
@@ -74,6 +75,7 @@ export const logout = (token) => {
             .then(response=>{
                 if (response.data.success){
                     dispatch(logoutSuccess(response.data.message));
+                    window.location.href = '/'
                 } else {
                     dispatch(logoutFailed(response.data.message));
                 }

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import 'normalize.css';
 import './App.scss';
 import Layout from '../hoc/Layout/Layout';
-import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 
 import HomeApp from './Home/Home';
 import CreateTask from './CreateTask/CreateTask';
@@ -11,7 +11,6 @@ import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
 import Committees from './Committees/Comittees';
 import SingleCommittee from './Committees/SingleCommittee/SingleCommittee';
-// import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
 import SinglePost from '../components/Post/SinglePost/SinglePost';
@@ -30,7 +29,6 @@ class App extends Component {
   render() {
     let routes = (
       <>
-        
         {/* <Redirect to="/login" /> */}
       </>
     );

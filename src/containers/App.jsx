@@ -11,7 +11,7 @@ import CompletedTasks from './CompletedTasks/CompletedTasks';
 import PendingTasks from './PendingTasks/PendingTasks';
 import Committees from './Committees/Comittees';
 import SingleCommittee from './Committees/SingleCommittee/SingleCommittee';
-import Registration from './Auth/Registration/Registration';
+// import Registration from './Auth/Registration/Registration';
 import Logout from './Auth/Logout/Logout';
 import * as actions from '../store/actions/index';
 import SinglePost from '../components/Post/SinglePost/SinglePost';
@@ -48,6 +48,7 @@ class App extends Component {
           <Route path={"/task/:id"} component={SingleTask} />
           <Route path={"/committee/:id"} component={SingleCommittee} />
           <Route path={"/deliver-task/:id"} component={DeliverTask}/>
+          <Route exact path="/" component={Home} />
           {/* <Redirect to="/" /> */}
         </>
       )
@@ -59,11 +60,11 @@ class App extends Component {
           <Layout>
             {routes}
           </Layout>
-          :<PublicLayout >
+          :<PublicLayout>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Home} />
-              <Route path="/registration" component={Registration} />
+              <Route path="/registration" component={Home} />
             </Switch>
           </PublicLayout>
         }

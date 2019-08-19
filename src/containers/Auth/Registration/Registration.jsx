@@ -14,7 +14,8 @@ class Registration extends Component{
 
     state={
         committees: null,
-        error: null
+        error: null,
+        registration: false
     }
 
     componentDidMount(){
@@ -36,6 +37,7 @@ class Registration extends Component{
     }
 
     render(){
+        console.log(this.props)
         const validationSchema = Yup.object().shape({
             firstName: Yup.string()
                 .trim()
@@ -207,6 +209,9 @@ class Registration extends Component{
             <div>
                 {authRedirect}
                 {form}
+                {/* <Modal show={this.state.registration}>
+                    {form}
+                </Modal> */}
             </div>
         );
     }

@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
-import classes from '../../../components/UI/Input/Input.module.scss';
+import * as classes from './Login.module.scss';
 import * as actions from '../../../store/actions/index';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import {Redirect } from 'react-router-dom';
-
+import Logo from '../../../components/Logo/ColoredLogo'
 class Login extends Component{
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
@@ -38,6 +38,7 @@ class Login extends Component{
             form =  <Spinner />
         } else {
             form = <>
+                <Logo className={classes.LoginLogo}/>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -56,7 +57,7 @@ class Login extends Component{
                                 <Field type="password" id="password" name="password" placeholder="Password" className={classes.InputElement}/>
                                 <ErrorMessage name="password" />
                             </div>
-                            <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Submit</Button>
+                            <Button type="submit" btnType="Default" className={classes.LoginButton} disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Login</Button>
                         </Form>
                     )}
                 />
@@ -64,11 +65,11 @@ class Login extends Component{
         }
         let authRedirect = null;
         if (this.props.isAuthenticated){
-            authRedirect = <Redirect to="/" />
+            authRedirect = <Redirect to="/home" />
         }
         
         return(
-            <div>
+            <div className={this.props.className}>
                 {authRedirect}
                 {form}
             </div>

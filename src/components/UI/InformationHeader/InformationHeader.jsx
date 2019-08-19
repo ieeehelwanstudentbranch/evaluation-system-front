@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom';
 const InformationHeader = (props) => {
     let created_at = new Date(props.created_at);
     return(
-        <header>
+        <header className={classes.InformationHeader}>
             <div className={classes.Info}>
                 <NavLink to={`/user/${props.id}`}>
                     {props.image === "default.jpg" ?

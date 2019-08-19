@@ -91,7 +91,11 @@ class Committees extends Component{
             <>
                 <div className={classes.Committees}>
                     {committeeComponent}
-                    <MdAdd className={classes.AddCommittee} onClick={this.addCommitteeHandler}/>
+                    {
+                        this.props.role === 'EX_com' ?
+                            <MdAdd className={classes.AddCommittee} onClick={this.addCommitteeHandler}/>
+                        :null
+                    }
                 </div>
                 {
                     <Modal show={this.state.editing||this.state.adding} modalClosed={this.CancelHandler}>
@@ -106,7 +110,8 @@ const mapStateToProps = state => {
     return {
         committees: state.committees.committees,
         loading: state.committees.loading,
-        error: state.committees.error
+        error: state.committees.error,
+        role: state.user.userData? state.user.userData.position:null
     }
 }
 

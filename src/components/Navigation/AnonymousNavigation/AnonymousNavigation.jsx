@@ -6,7 +6,12 @@ const AnonymousNavigation = () => (
     <nav>
         <ul className={classes.AnonymousNavigation}>
             <NavigationItem link="/login" exact>Login</NavigationItem>
-            <NavigationItem link="/registration" exact>Registration</NavigationItem>
+            <NavigationItem
+                href={{pathname: '/registration', query: { mode: 'registration' }}}
+                as={`/`}
+                link="/registration"
+                exact
+            >Registration</NavigationItem>
         </ul>
     </nav>
 );

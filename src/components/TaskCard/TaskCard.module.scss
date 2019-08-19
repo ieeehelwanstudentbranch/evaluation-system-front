@@ -35,6 +35,13 @@
         font-size: 25px;
         color: $black;
     }
+    .TaskRate{
+        @extend .TaskStatus;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        top: 10px;
+        right: 10px
+    }
 
     &:hover {
         box-shadow: 7px 7px 24px -1px rgba(0, 0, 0, 0.75);

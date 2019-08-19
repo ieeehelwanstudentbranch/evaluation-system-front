@@ -1,0 +1,56 @@
+@import '../../assets/scss/screen_sizes';
+@import '../../assets/scss/color_variables';
+
+.PublicLayout {
+    background-image: repeating-linear-gradient(-60deg, #006CD8, #006CD8 70px, #2984DE 70px, #2984DE 200px);
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+
+    .PublicToolBar {
+        background-color: transparent;
+        position: relative;
+        top: auto;
+        left: auto;
+        padding: 0;
+        z-index: auto;
+
+        nav {
+            ul {
+                li {
+                    margin: 0 5px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    a {
+                        background-color: transparent;
+                        color: $white;
+                        border: none;
+                        padding: 10px 25px;
+                        &:hover,
+                        &:active,
+                        &.active,
+                        &[aria-current]{
+                            background-color: $main_color;
+                            color: $white;
+                            border-radius: 25px;
+                        }
+
+                        &::after {
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+
+    .PublicMain {
+        display: flex;
+        justify-content: center;
+        margin-top: 56px;
+    }
+}

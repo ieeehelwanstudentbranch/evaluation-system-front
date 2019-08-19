@@ -16,6 +16,13 @@ export const handleTaskFiles = (files) => {
     }
 }
 
+export const handleDeliveringTaskDetails = (data) => {
+    return {
+        type: actionTypes.HANDLE_DELIVERING_TASK_DETAILS,
+        data: data
+    }
+}
+
 export const sendTask = (title, deadline, details, files, receptors) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
@@ -35,6 +42,33 @@ export const sendTask = (title, deadline, details, files, receptors) => {
             }
         }
         axios.post('/create-task/', formData, {
+            headers: {
+              'content-type': 'multipart/form-data'
+            }
+        }).then(response=>{
+                console.log(response);
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        ;
+    }
+}
+
+export const deliverTask = (taskId, details, files) => {
+    return dispatch => {
+        console.log(taskId, details, files)
+        dispatch(actions.loadingHandler());
+
+        let formData = new FormData();
+        formData.append('body', details);
+        
+        if (files){
+            for( let i = 0; i < files.length; i++ ){
+                let file = files[i];
+                formData.append('files[' + i + ']', file);
+            }
+        }
+        axios.post(`/deliver-task/${taskId}`, formData, {
             headers: {
               'content-type': 'multipart/form-data'
             }
@@ -67,10 +101,9 @@ export const fetchTasks = (type) => {
         if (type === 'pending'){
             axios.get('/pending-tasks/')
             .then(response=>{
-                console.log(response.data.data)
                 dispatch(fetchPendingTasksSuccess(response.data.data));
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response)
             });
         }
         if (type === 'completed'){
@@ -79,7 +112,7 @@ export const fetchTasks = (type) => {
                 console.log(response.data.data)
                 dispatch(fetchCompletedTasksSuccess(response.data.data));
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response)
             });
         }
     }
@@ -88,19 +121,19 @@ export const fetchTasks = (type) => {
 export const fetchPendingTasksSuccess = (tasks) => {
     return {
         type: actionTypes.FETCH_PENDING_TASKS_SUCCESS,
-        pendingMentoringTasks: tasks.mentoring_tasks[0],
-        pendingSentTasks: tasks.sent_tasks,
-        pendingPersonalTasks: tasks.personal_tasks,
-        pendingCoordinatingTasks: tasks.coordinating_tasks
+        pendingMentoringTasks: tasks.mentoring_tasks?tasks.mentoring_tasks[0]:null,
+        pendingSentTasks: tasks.sent_tasks?tasks.sent_tasks :null,
+        pendingPersonalTasks: tasks.personal_tasks? tasks.personal_tasks:null,
+        pendingCoordinatingTasks: tasks.coordinating_tasks?tasks.coordinating_tasks:null
     }
 }
 
 export const fetchCompletedTasksSuccess = (tasks) => {
     return {
         type: actionTypes.FETCH_COMPLETED_TASKS_SUCCESS,
-        completedMentoringTasks: tasks.mentoring_tasks[0],
-        completedSentTasks: tasks.sent_tasks,
-        completedPersonalTasks: tasks.personal_tasks,
-        completedCoordinatingTasks: tasks.coordinating_tasks
+        completedMentoringTasks: tasks.mentoring_tasks?tasks.mentoring_tasks[0]:null,
+        completedSentTasks: tasks.sent_tasks?tasks.sent_tasks :null,
+        completedPersonalTasks: tasks.personal_tasks? tasks.personal_tasks:null,
+        completedCoordinatingTasks: tasks.coordinating_tasks?tasks.coordinating_tasks:null
     }
 }

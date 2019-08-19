@@ -14,7 +14,7 @@ const sideNavigation = (props) => {
                         {props.isAuthenticated ? 
                             <>
                                 {
-                                    props.role === 'EX_com' || props.role === 'director'?
+                                    props.role === 'EX_com' || props.role === 'highBoard'?
                                         <NavigationItem link="/create-task">
                                             <MdAdd />
                                             Create Task

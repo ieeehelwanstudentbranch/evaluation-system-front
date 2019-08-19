@@ -114,6 +114,7 @@ class CreateTask extends Component {
         ;
         }).catch(error=>{
             this.setState({error: error})
+            // console.log(error)
         })
     }
 
@@ -157,6 +158,8 @@ class CreateTask extends Component {
             deadline: ''
         };
         return (
+            this.props.role === 'EX_com' || this.props.role === 'highBoard' ?
+
             <Formik
                 enableReinitialize={true}
                 initialValues={initialValues}
@@ -196,6 +199,7 @@ class CreateTask extends Component {
                     </Form>
                 )}
             />
+            :<p>You are not authoriezed</p>
         )
     }
 }
@@ -203,7 +207,8 @@ const mapStateToProps = state => {
     return{
         userID: state.user.userData?state.user.userData.id:null,
         taskDetails: state.tasks.data? state.tasks.data:null,
-        taskFiles: state.tasks.files? state.tasks.files: null
+        taskFiles: state.tasks.files? state.tasks.files: null,
+        role: state.user.userData? state.user.userData.position:null
     }
 }
 const mapDispatchToProps = dispatch => {

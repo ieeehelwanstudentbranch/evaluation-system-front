@@ -25,7 +25,8 @@ class CommentForm extends Component{
             }
             axios.put(`/update-comment/${props[0].id}`, newData)
                 .then(response=>{
-                    window.location.reload();
+                    console.log(response)
+                    // window.location.reload();
                 }).catch(error=>{
                     this.setState({error: error})
                 })
@@ -36,7 +37,8 @@ class CommentForm extends Component{
             }
             axios.post(`/post/${props.id}/add-comment`, comment)
                 .then(response=>{
-                    window.location.reload();
+                    console.log(response)
+                    // window.location.reload();
                 }).catch(error=>{
                     this.setState({error: error})
                 })

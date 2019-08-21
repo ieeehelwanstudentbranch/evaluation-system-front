@@ -33,6 +33,7 @@ class SinglePost extends Component{
             })
         ;
 
+    
         axios.get(`${this.props.location.pathname}/comments`)
             .then(response=>{
                 this.setState({
@@ -105,7 +106,7 @@ class SinglePost extends Component{
 
 const mapStateToProps = state => {
     return{
-        userID: state.login.userID
+        userID: state.login.userID,
     }
 }
 

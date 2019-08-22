@@ -1,27 +1,36 @@
 @import '../../../assets/scss/screen_sizes';
 .Form{
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     justify-content: space-between;
     width: 100%;
     @media screen and (max-width: $mobile_landscape_max_width){
         flex-flow: column;
     }
-    .LeftSection{
-        width: 49%;
-        @media screen and (max-width: $mobile_landscape_max_width){
-            width: 100%
+    .FormContainer{
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        .LeftSection{
+            width: 49%;
+            @media screen and (max-width: $mobile_landscape_max_width){
+                width: 100%
+            }
+            .Row{
+                display: flex;
+                justify-content: space-between;
+            }
         }
-        .Row{
+        .RightSection{
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            width: 49%;
+            @media screen and (max-width: $mobile_landscape_max_width){
+                width: 100%
+            }
+        }
+        .RegButton{
+            align-self: flex-end;
         }
     }
-    .RightSection{
-        width: 49%;
-        @media screen and (max-width: $mobile_landscape_max_width){
-            width: 100%
-        }
-    }
-
 }

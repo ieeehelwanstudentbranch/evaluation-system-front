@@ -39,15 +39,16 @@ class SinglePost extends Component{
         // let eventSourcer = new EventSourcePolyfill(`http://localhost:8000/api${this.props.location.pathname}/comments`,  {
         //     headers: {
         //         withCredentials: true,
-        //         'Content-Type': 'text/event-stream',
+        //         // 'Content-Type': 'text/event-stream',
         //         'Authorization': `Bearer ${localStorage.getItem('token')}`
         //     }}
         // );
         // eventSourcer.onopen = function(e){
         //     console.log('opend')
-        //     console.log(e.target)
         // }
-
+        // eventSourcer.onmessage = function (event) {
+        //     console.log(event)
+        // };
         axios.get(`${this.props.location.pathname}/comments`)
             .then(response=>{
                 this.setState({

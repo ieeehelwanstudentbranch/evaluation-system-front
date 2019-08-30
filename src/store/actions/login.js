@@ -3,13 +3,12 @@ import axios from '../../axios';
 import * as actions from './repeatedActions';
 import * as profileActions from './user';
 
-export const login = (email, password, remember_me) => {
+export const login = (email, password) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
         const loginData = {
             email: email,
             password: password,
-            remember_me: remember_me
         }
         axios.post('/login', loginData)
             .then(response=>{

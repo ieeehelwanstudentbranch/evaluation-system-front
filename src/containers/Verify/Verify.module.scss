@@ -1,0 +1,23 @@
+.Verify{
+    background-color: #fff;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px ;
+    border-radius: 5px;
+    .VerificationMessage{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .Actions{
+            display: flex;
+            justify-content: space-between;
+            .Action{
+                margin: 20px;
+            }
+        }
+    }
+}

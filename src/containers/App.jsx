@@ -19,6 +19,7 @@ import SingleTask from './SingleTask/SingleTask';
 import DeliverTask from './DeliverTask/DeliverTask';
 import PublicLayout from '../hoc/PublicLayout/PublicLayout';
 import NotFound from '../components/404/404';
+import Verify from './Verify/Verify';
 
 import Home from './PublicHome/Home';
 import PrivateRouter from '../components/PrivateRoute/PrivateRoute';
@@ -31,7 +32,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
         {
           this.props.isAuthenticated?
           <Layout>
@@ -50,8 +50,9 @@ class App extends Component {
               
               <PrivateRouter path="/user/:id" isAuthenticated={this.props.isAuthenticated} component={SingleProfile}/>
               <PrivateRouter path="/logout" isAuthenticated={this.props.isAuthenticated} component={Logout}/>
-              <Redirect from="/" to="home" />
+              <Route path="/verify/:code" component={Verify}/>
               <Route path="*"  component={NotFound} />
+              <Redirect from="/" to="home" />
             </Switch>
           </Layout>
           :<PublicLayout>
@@ -59,6 +60,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Home} />
               <Route path="/registration" component={Home} />
+              <Route path="/verify/:code" component={Verify}/>
               <Route path="*"  component={NotFound} />
             </Switch>
           </PublicLayout>

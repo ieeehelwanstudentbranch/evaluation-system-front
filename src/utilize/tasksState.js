@@ -1,19 +1,4 @@
 const state={
-    // // total tasks 
-    // totalPersonalTasks: [],
-    // totalMentoringTasks: [],
-    // totalSentTasks: [],
-    // totalCoordinatingTasks: [],
-    // // chunked tasks
-    // sentTasksArrays: [],
-    // mentoringTasksArrays: [],
-    // personalTasksArrays: [],
-    // coordinatingTasksArrays: [],
-    // // displayed tasks
-    // sentTasks: [],
-    // mentoringTasks: [],
-    // personalTasks: [],
-    // coordinatingTasks: []
     sentTasks: {
         totalTasks: [],
         tasksArrays: [],

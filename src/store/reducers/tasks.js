@@ -33,11 +33,29 @@ const fetchCompletedTasksSuccess = (state, action) => {
     };
 }
 
+const addingTaskSuccess = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        message: action.message,
+        data: null,
+        files: null
+    };
+}
+
 const tasksReducer = (state = initialState, action)=>{
     switch (action.type) {
-        // handle loading handler
+        // handle Fetching tasks
         case actionTypes.FETCH_TASKS_START:
             return reducers.loadingHandler(state, action);
+
+        // handle adding tasks
+        case actionTypes.ADD_TASK_START:
+            return reducers.loadingHandler(state, action);
+
+        // handle Success of sending tasks
+        case actionTypes.ADDING_TASK_SUCCESS:
+            return addingTaskSuccess(state, action);
 
         // handling rich editor changes
         case actionTypes.HANDLE_TASK_DETAILS:

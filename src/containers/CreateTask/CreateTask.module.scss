@@ -13,40 +13,38 @@
     @media screen and (max-width: $large_tablet_max_width){
         width: 90%;
     }
-    // @media screen and (min-width: $small_tablet_min_width){
-    // }
-    // @media screen and (min-width: $large_max_width){
-    //     width: calc(100% / 3.1);
-    //     margin-right: 10px
-    // }
-    .leftSection{
-        width: 70%;
-        @media screen and (max-width: $large_tablet_max_width){
-            flex-flow: column;
-            width: 100%;
-        }
-        .BasicInfo {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+    .TaskFormContainer{
+        display: flex;
+        .leftSection{
+            width: 70%;
             @media screen and (max-width: $large_tablet_max_width){
                 flex-flow: column;
                 width: 100%;
             }
-            div{
-                width: 49%;
+            .BasicInfo {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
                 @media screen and (max-width: $large_tablet_max_width){
+                    flex-flow: column;
                     width: 100%;
+                }
+                div{
+                    width: 49%;
+                    @media screen and (max-width: $large_tablet_max_width){
+                        width: 100%;
+                    }
                 }
             }
         }
-    }
-    .rightSection{
-        width: 30%;
-        @media screen and (max-width: $large_tablet_max_width){
-            flex-flow: column;
-            width: 100%;
-            margin-top: 20px
+        .rightSection{
+            width: 30%;
+            @media screen and (max-width: $large_tablet_max_width){
+                flex-flow: column;
+                width: 100%;
+                margin-top: 20px
+            }
         }
     }
+    
 }

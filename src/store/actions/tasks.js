@@ -46,11 +46,18 @@ export const sendTask = (title, deadline, details, files, receptors) => {
               'content-type': 'multipart/form-data'
             }
         }).then(response=>{
-                console.log(response);
-            }).catch(error=>{
-                console.log(error.response)
-            })
-        ;
+            console.log(response);
+            dispatch(sendTaskSuccess(response.data.success));
+        }).catch(error=>{
+            dispatch(sendTaskSuccess(error));
+        });
+    }
+}
+
+export const sendTaskSuccess = (response) => {
+    return{
+        type: actionTypes.ADDING_TASK_SUCCESS,
+        message: response
     }
 }
 

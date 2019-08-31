@@ -39,15 +39,15 @@ class App extends Component {
               <PrivateRouter path='/home' exact={true} component={HomeApp} isAuthenticated={this.props.isAuthenticated}/>
               <PrivateRouter path={"/post/:id"} isAuthenticated={this.props.isAuthenticated} component={SinglePost} />
               
-              <PrivateRouter path={"/task/:id"} isAuthenticated={this.props.isAuthenticated} component={SingleTask} />
+              <PrivateRouter path="/task/:id" isAuthenticated={this.props.isAuthenticated} component={SingleTask} />
               <PrivateRouter path="/create-task" isAuthenticated={this.props.isAuthenticated} component={CreateTask}/>
-              <PrivateRouter path={"/deliver-task/:id"} isAuthenticated={this.props.isAuthenticated} component={DeliverTask}/>
+              <PrivateRouter path="/deliver-task/:id" isAuthenticated={this.props.isAuthenticated} component={DeliverTask}/>
               <PrivateRouter path="/pending-tasks" isAuthenticated={this.props.isAuthenticated} component={PendingTasks}/>
               <PrivateRouter path="/completed-tasks" isAuthenticated={this.props.isAuthenticated} component={CompletedTasks}/>
               
               <PrivateRouter path="/committees" isAuthenticated={this.props.isAuthenticated} component={Committees}/>
-              <PrivateRouter path={"/committee/:id"} isAuthenticated={this.props.isAuthenticated} component={SingleCommittee} />
-              
+              <PrivateRouter path="/committee/:id" isAuthenticated={this.props.isAuthenticated} component={SingleCommittee} />
+
               <PrivateRouter path="/user/:id" isAuthenticated={this.props.isAuthenticated} component={SingleProfile}/>
               <PrivateRouter path="/logout" isAuthenticated={this.props.isAuthenticated} component={Logout}/>
               <Route path="/verify/:code" component={Verify}/>

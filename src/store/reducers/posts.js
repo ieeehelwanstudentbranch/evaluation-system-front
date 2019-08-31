@@ -5,7 +5,8 @@ const initialState = {
     data: null,
     posts: null,
     editingComment: false,
-    comment: null
+    comment: null,
+    editing: false
 };
 
 const fetchPostsSucceess = (state, action) => {

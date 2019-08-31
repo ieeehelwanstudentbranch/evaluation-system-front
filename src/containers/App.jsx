@@ -51,8 +51,8 @@ class App extends Component {
               <PrivateRouter path="/user/:id" isAuthenticated={this.props.isAuthenticated} component={SingleProfile}/>
               <PrivateRouter path="/logout" isAuthenticated={this.props.isAuthenticated} component={Logout}/>
               <Route path="/verify/:code" component={Verify}/>
+              <Redirect exact from="/" to="/home" />
               <Route path="*"  component={NotFound} />
-              <Redirect from="/" to="home" />
             </Switch>
           </Layout>
           :<PublicLayout>

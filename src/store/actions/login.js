@@ -6,14 +6,13 @@ import * as LogoutFunctions from './logout'
 
 export const login = (email, password) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.LOGIN_START));
         const loginData = {
             email: email,
             password: password,
         }
         axios.post('/login', loginData)
             .then(response=>{
-                console.log(response.data)
                 if (response.data.hasOwnProperty('token')){
                     // calculate expiration date
                     let expirationDate = new Date(new Date().getTime() + (response.data.expirationTime * 60) * 1000);
@@ -30,8 +29,8 @@ export const login = (email, password) => {
                 }
             })
             .catch(error => {
-                console.log(error)
-                dispatch(actions.FailerHandler(error));
+                console.log(error.response.data)
+                dispatch(actions.FailerHandler(error.response.data));
             })
         ;
     }

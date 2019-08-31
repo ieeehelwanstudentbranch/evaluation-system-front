@@ -25,7 +25,7 @@ export const handleDeliveringTaskDetails = (data) => {
 
 export const sendTask = (title, deadline, details, files, receptors) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.ADD_TASK_START));
         let formData = new FormData();
         formData.append('title', title);
         formData.append('deadline', deadline);
@@ -57,7 +57,7 @@ export const sendTask = (title, deadline, details, files, receptors) => {
 export const deliverTask = (taskId, details, files) => {
     return dispatch => {
         console.log(taskId, details, files)
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.DELIVER_TASK_START));
 
         let formData = new FormData();
         formData.append('body', details);

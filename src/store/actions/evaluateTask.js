@@ -11,7 +11,7 @@ export const handleEvaluatingTaskDetails = (data) => {
 
 export const evaluatingTask = (id, mark, details) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.EVALUATING_TASK_START));
         let evaluation ={
             rate: mark,
             evaluation: details

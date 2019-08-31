@@ -77,7 +77,7 @@ export const editProfileData = () => {
 
 export const submitProfileData = (id, firstName, lastName, email, DOB, level, faculty, university, phone, address) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.EDITING_PROFILE_DATA_START));
         const updatedData = {
             firstName: firstName,
             lastName: lastName,

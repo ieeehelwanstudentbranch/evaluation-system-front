@@ -4,7 +4,7 @@ import * as actions from './repeatedActions';
 
 export const fetchPosts = () => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.FETCH_POSTS_START));
         axios.get('/posts')
             .then(response=>{
                 dispatch(fetchPostsSucceess(response.data.data))
@@ -24,7 +24,7 @@ export const fetchPostsSucceess = (posts) => {
 
 export const addPost = (data) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.ADD_POST_START));
         const post = {
             body: data
         }
@@ -55,7 +55,7 @@ export const editPost = (id, body) => {
 
 export const editPostStart = (id, body) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.EDIT_POST_START));
         let newData = {
             body: body
         }
@@ -78,7 +78,7 @@ export const editPostSuccess = () => {
 
 export const deletePost = (id) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.DELETE_POST_START));
         axios.delete(`/post/${id}`)
             .then(response=>{
                 dispatch(deletePostSuccess(id))

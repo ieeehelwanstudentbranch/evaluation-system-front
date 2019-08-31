@@ -4,7 +4,7 @@ import * as actions from './repeatedActions';
 
 export const logout = (token) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.LOGOUT_START));
         let data = {
             token: token
         }

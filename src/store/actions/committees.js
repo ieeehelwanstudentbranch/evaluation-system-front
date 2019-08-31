@@ -33,7 +33,7 @@ export const fetchCommitteeFailed = (error) => {
 
 export const addCommittee = (name, mentor, director, hr_od) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.ADD_COMMITTEE_START));
         let committeeData = {
             name: name,
             mentor: mentor,
@@ -52,7 +52,7 @@ export const addCommittee = (name, mentor, director, hr_od) => {
 
 export const editCommittee = (id, name, mentor, director, hr_od) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.EDIT_COMMITTEE_START));
         let committeeData = {
             name: name,
             mentor: mentor.toString(),

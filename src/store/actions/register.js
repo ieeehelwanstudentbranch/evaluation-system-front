@@ -4,7 +4,7 @@ import * as actions from './repeatedActions';
 
 export const register = (firstName, lastName, email, password, password_confirmation, DOB, faculty, university, position, ex_options, committee) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.REGISTRATION_START));
         const registerData = {
             firstName: firstName,
             lastName: lastName,

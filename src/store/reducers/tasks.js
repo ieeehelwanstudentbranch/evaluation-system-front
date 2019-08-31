@@ -16,6 +16,7 @@ const handleTaskFiles = (state, action) => {
 const fetchPendingTasksSuccess = (state, action) => {
     return {
         ...state,
+        loading: false,
         pendingMentoringTasks: action.pendingMentoringTasks,
         pendingSentTasks: action.pendingSentTasks,
         pendingPersonalTasks: action.pendingPersonalTasks,
@@ -26,6 +27,7 @@ const fetchPendingTasksSuccess = (state, action) => {
 const fetchCompletedTasksSuccess = (state, action) => {
     return {
         ...state,
+        loading: false,
         completedMentoringTasks: action.completedMentoringTasks,
         completedSentTasks: action.completedSentTasks,
         completedPersonalTasks: action.completedPersonalTasks,

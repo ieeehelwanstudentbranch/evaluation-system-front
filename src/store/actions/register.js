@@ -23,7 +23,7 @@ export const register = (firstName, lastName, email, password, password_confirma
                 dispatch(registerSuccess(response.data.message));
             })
             .catch(error => {
-                dispatch(registerFailed(error.response.data));
+                dispatch(registerFailed(error));
             })
     }
 }

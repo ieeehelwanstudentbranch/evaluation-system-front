@@ -3,12 +3,7 @@ import * as reducers from './repeatedReducers';
 
 const initialState ={
     data: null,
-    loading: false,
-    error: null,
-    message: null
 }
-
-
 
 const evaluateTaskReducer = (state = initialState, action)=>{
     switch (action.type) {

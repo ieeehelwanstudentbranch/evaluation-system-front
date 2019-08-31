@@ -81,23 +81,9 @@ export const deliverTask = (taskId, details, files) => {
     }
 }
 
-export const fetchPendingTasks = () => {
-    return dispatch =>{
-        dispatch(actions.loadingHandler());
-        axios.get('/pending-tasks/')
-            .then(response=>{
-                console.log(response.data.data)
-                dispatch(fetchPendingTasksSuccess(response.data.data));
-            }).catch(error=>{
-                console.log(error)
-            })
-        ;
-    }
-}
-
 export const fetchTasks = (type) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.FETCH_TASKS_START));
         if (type === 'pending'){
             axios.get('/pending-tasks/')
             .then(response=>{

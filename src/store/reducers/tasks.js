@@ -4,8 +4,6 @@ import * as reducers from './repeatedReducers';
 const initialState ={
     data: null,
     files: null,
-    error: null,
-    message: null
 }
 
 const handleTaskFiles = (state, action) => {
@@ -38,7 +36,7 @@ const fetchCompletedTasksSuccess = (state, action) => {
 const tasksReducer = (state = initialState, action)=>{
     switch (action.type) {
         // handle loading handler
-        case actionTypes.LOADING_HANDLER:
+        case actionTypes.FETCH_TASKS_START:
             return reducers.loadingHandler(state, action);
 
         // handling rich editor changes

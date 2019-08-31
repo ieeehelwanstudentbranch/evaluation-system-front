@@ -4,7 +4,7 @@ import * as actions from './repeatedActions';
 
 export const initializeCommittees = () => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.FETCH_COMMITTEES_START));
         axios.get('/committees')
             .then(response=>{
                 let committees = response.data.data;
@@ -45,7 +45,7 @@ export const addCommittee = (name, mentor, director, hr_od) => {
                 dispatch(initializeCommittees());
             })
             .catch(error=>{
-                dispatch(actions.serverErrorHandler(error))
+                dispatch(actions.FailerHandler(error))
             })
     }
 }
@@ -65,7 +65,7 @@ export const editCommittee = (id, name, mentor, director, hr_od) => {
                 dispatch(initializeCommittees());
             })
             .catch(error=>{
-                dispatch(actions.serverErrorHandler(error))
+                dispatch(actions.FailerHandler(error))
             })
     }
 }

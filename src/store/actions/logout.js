@@ -18,7 +18,7 @@ export const logout = (token) => {
                 }
             })
             .catch(error => {
-                dispatch(actions.serverErrorHandler(error));
+                dispatch(actions.FailerHandler(error));
             })
         ;
     }

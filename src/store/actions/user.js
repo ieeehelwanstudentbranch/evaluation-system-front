@@ -4,7 +4,7 @@ import * as actions from './repeatedActions';
 
 export const fetchUserData = (profileID, userID=null) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.FETCH_USER_START));
         axios.get('/user/'+profileID)
             .then(response=>{
                 // eslint-disable-next-line
@@ -16,7 +16,7 @@ export const fetchUserData = (profileID, userID=null) => {
                 
             }).catch(error=>{
                 // console.log(error.response)
-                dispatch(actions.serverErrorHandler('Network Error, Please Try Again ater'))
+                dispatch(actions.FailerHandler('Network Error, Please Try Again ater'))
             })
         ;
     }
@@ -62,7 +62,7 @@ export const uploadImage = (profileID, newImage) => {
             }).then(response=>{
                 window.location.reload()
             }).catch(error=>{
-                dispatch(actions.serverErrorHandler('Something Went wrong, please try again later'))
+                dispatch(actions.FailerHandler('Something Went wrong, please try again later'))
             });
         }
         
@@ -94,7 +94,7 @@ export const submitProfileData = (id, firstName, lastName, email, DOB, level, fa
                 window.location.reload()
             })
             .catch(error => {
-                dispatch(actions.serverErrorHandler(error.response.data));
+                dispatch(actions.FailerHandler(error.response.data));
             })
     }
 }

@@ -26,14 +26,14 @@ const registerFailed = (state, action) => {
 
 const registerReducer = (state = initialState, action)=>{
     switch (action.type) {
-        case actionTypes.LOADING_HANDLER:
+        case actionTypes.REGISTRATION_START:
             return reducers.loadingHandler(state, action);
         case actionTypes.REGISTER_SUCCESS:
             return registerSuccess(state, action);
         case actionTypes.REGISTER_FAILED:
             return registerFailed(state, action);
         case actionTypes.SERVER_ERROR_HANDLER:
-            return reducers.serverErrorHandler(state, action);
+            return reducers.FailerHandler(state, action);
         default:
             return state;
     }

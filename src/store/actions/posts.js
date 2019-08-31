@@ -9,7 +9,7 @@ export const fetchPosts = () => {
             .then(response=>{
                 dispatch(fetchPostsSucceess(response.data.data))
             }).catch(error=>{
-                dispatch(actions.serverErrorHandler('Something went Wrong, Please Try Again Later'))
+                dispatch(actions.FailerHandler('Something went Wrong, Please Try Again Later'))
             })
         ;
     }

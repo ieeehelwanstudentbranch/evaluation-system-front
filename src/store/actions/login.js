@@ -13,6 +13,7 @@ export const login = (email, password) => {
         }
         axios.post('/login', loginData)
             .then(response=>{
+                console.log(response.data)
                 if (response.data.hasOwnProperty('token')){
                     // calculate expiration date
                     let expirationDate = new Date(new Date().getTime() + (response.data.expirationTime * 60) * 1000);
@@ -29,7 +30,8 @@ export const login = (email, password) => {
                 }
             })
             .catch(error => {
-                dispatch(actions.serverErrorHandler(error));
+                console.log(error)
+                dispatch(actions.FailerHandler(error));
             })
         ;
     }

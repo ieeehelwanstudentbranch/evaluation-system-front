@@ -6,7 +6,7 @@ export const loadingHandler = (type = actionTypes.LOADING_HANDLER) => {
     }
 }
 
-export const FailerHandler = (errorType = actionTypes.SERVER_ERROR_HANDLER, error) => {
+export const FailerHandler = (errorType = actionTypes.SERVER_ERROR_HANDLER, error="Something went error, Please try again later.") => {
     return {
         type: errorType,
         error: error

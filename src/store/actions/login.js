@@ -29,8 +29,7 @@ export const login = (email, password) => {
                 }
             })
             .catch(error => {
-                console.log(error.response.data)
-                dispatch(actions.FailerHandler(error.response.data));
+                dispatch(actions.FailerHandler(actionTypes.SERVER_ERROR_HANDLER, "Network Error!"));
             })
         ;
     }

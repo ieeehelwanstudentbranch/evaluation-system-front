@@ -45,7 +45,7 @@ class Login extends Component{
                     onSubmit={this.handleSubmit}
                     render={(FormikProps)=>(
                         <Form >
-                            {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
+                            {this.props.error? <span>{this.props.error}</span>: null}
                             {this.props.message? <span>{this.props.message}</span>: null}
                             <div className={classes.Input}>
                                 <label htmlFor="loginEmail" className={classes.Label} >Email</label>

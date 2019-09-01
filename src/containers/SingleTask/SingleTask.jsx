@@ -6,7 +6,7 @@ import InformationHeader from '../../components/UI/InformationHeader/Information
 import { MdFileDownload } from "react-icons/md";
 import InformationTemplate from '../../components/UI/InformationTemplate/InformationTemplate';
 import Button from '../../components/UI/Button/Button';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Modal from '../../components/UI/Modal/Modal';
 import ReviewTask from '../../components/ReviewTask/ReviewTask'
 
@@ -24,7 +24,10 @@ class SingleTask extends Component{
                     ...response.data.data
                 })
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response.status)
+                if (error.response.status === 404){
+                    this.setState({error: 404});
+                }
             })
     }
     reviewingStart=()=>{
@@ -184,6 +187,10 @@ class SingleTask extends Component{
                 margin: '20px auto',
                 textTransform: 'uppercase'
             }}>{this.state.error}</p>
+        } else if (this.state.error && this.state.error === 404){
+            return (
+                <Redirect to="/404" />
+            )
         }
         return (
             <>

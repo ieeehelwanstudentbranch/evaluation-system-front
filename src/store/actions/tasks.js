@@ -136,21 +136,49 @@ export const fetchTasks = (type) => {
 }
 
 export const fetchPendingTasksSuccess = (tasks) => {
+    let coordinating_tasks_array = [];
+    if(tasks.coordinating_tasks&&tasks.coordinating_tasks.length > 0){
+        // eslint-disable-next-line
+        tasks.coordinating_tasks.map(array=>{
+            if(typeof array === 'object'){
+                // eslint-disable-next-line
+                array.map(item=>{
+                    coordinating_tasks_array.push(item)
+                })
+            }else {
+                coordinating_tasks_array.push(array)
+            }
+        })
+    }
     return {
         type: actionTypes.FETCH_PENDING_TASKS_SUCCESS,
         pendingMentoringTasks: tasks.mentoring_tasks?tasks.mentoring_tasks[0]:null,
         pendingSentTasks: tasks.sent_tasks?tasks.sent_tasks :null,
         pendingPersonalTasks: tasks.personal_tasks? tasks.personal_tasks:null,
-        pendingCoordinatingTasks: tasks.coordinating_tasks?tasks.coordinating_tasks:null
+        pendingCoordinatingTasks: tasks.coordinating_tasks?coordinating_tasks_array:null
     }
 }
 
 export const fetchCompletedTasksSuccess = (tasks) => {
+    let coordinating_tasks_array = [];
+    if(tasks.coordinating_tasks&&tasks.coordinating_tasks.length > 0){
+        // eslint-disable-next-line
+        tasks.coordinating_tasks.map(array=>{
+            if(typeof array === 'object'){
+                // eslint-disable-next-line
+                array.map(item=>{
+                    coordinating_tasks_array.push(item)
+                })
+            }else {
+                coordinating_tasks_array.push(array)
+            }
+        })
+    }
     return {
         type: actionTypes.FETCH_COMPLETED_TASKS_SUCCESS,
         completedMentoringTasks: tasks.mentoring_tasks?tasks.mentoring_tasks[0]:null,
         completedSentTasks: tasks.sent_tasks?tasks.sent_tasks :null,
         completedPersonalTasks: tasks.personal_tasks? tasks.personal_tasks:null,
-        completedCoordinatingTasks: tasks.coordinating_tasks?tasks.coordinating_tasks:null
+        completedCoordinatingTasks: tasks.coordinating_tasks?coordinating_tasks_array:null
     }
 }

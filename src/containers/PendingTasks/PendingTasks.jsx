@@ -43,7 +43,7 @@ class PendingTasks extends Component{
             previousState.sentTasks.totalTasks !== totalSentTasks ||
             previousState.coordinatingTasks.totalTasks !== totalCoordinatingTasks ||
             previousState.userRole !== userRole
-            ) {
+            ) { 
                 let sentTasksArrays = chunkData(totalSentTasks, 5),
                     mentoringTasksArrays = chunkData(totalMentoringTasks, 5),
                     personalTasksArrays = chunkData(totalPersonalTasks, 5),
@@ -148,6 +148,7 @@ class PendingTasks extends Component{
                                     height={'80vh'}
                                 >
                                     {
+
                                         mappingFunction(this.state.personalTasks.tasks, TaskCard)
                                     }
                                 </InfiniteScroll>

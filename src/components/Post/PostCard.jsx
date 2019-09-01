@@ -8,7 +8,6 @@ import InformationHeader from '../UI/InformationHeader/InformationHeader'
 class Post extends Component{
     
     render(){
-        console.log(this.props)
         return (
             <article className={[classes.Post, this.props.className].join(' ')}>
                 <header className={classes.PostHeader}>

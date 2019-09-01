@@ -59,7 +59,6 @@ export const editCommittee = (id, name, mentor, director, hr_od) => {
             director: director? director.toString():null,
             hr_coordinator: hr_od?hr_od.toString():null
         }
-        console.log(committeeData)
         axios.put('/updatecommittee/'+id , committeeData)
             .then(response=>{
                 window.location.reload()

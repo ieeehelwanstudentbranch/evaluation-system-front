@@ -18,7 +18,6 @@ class SingleTask extends Component{
     componentDidMount(){
         axios.get(`${this.props.location.pathname}`)
             .then(response=>{
-                console.log(response)
                 this.setState({
                     id: this.props.match.params.id,
                     ...response.data.data
@@ -38,7 +37,6 @@ class SingleTask extends Component{
         });
     }
     refuseTask=(id)=>{
-        console.log(id)
         axios.post(`/refuse-task/${id}`)
             .then(response=>{
                 console.log(response.data)

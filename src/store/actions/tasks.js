@@ -46,10 +46,30 @@ export const sendTask = (title, deadline, details, files, receptors) => {
               'content-type': 'multipart/form-data'
             }
         }).then(response=>{
-            console.log(response);
             dispatch(sendTaskSuccess(response.data.success));
         }).catch(error=>{
-            dispatch(sendTaskSuccess(error));
+            let convertedErrors = Object.keys(error.response.data.errors).map((key) =>{
+                return [error.response.data.errors[key]];
+            });
+            let errorsArray = [];
+            // eslint-disable-next-line
+            convertedErrors.map((error, index)=>{
+                if(typeof error === 'object'){
+                    // eslint-disable-next-line
+                    error.map((err, index)=>{
+                        if(typeof err === 'object'){
+                            err.map((err, index)=>(
+                                errorsArray.push(err)
+                            ))
+                        }else{
+                            errorsArray.push(err)
+                        }
+                    })
+                }else{
+                    errorsArray.push(error)
+                }
+            })
+            dispatch(sendTaskFailed(errorsArray));
         });
     }
 }
@@ -61,9 +81,15 @@ export const sendTaskSuccess = (response) => {
     }
 }
 
+export const sendTaskFailed = (error) => {
+    return{
+        type: actionTypes.ADDING_TASK_FAILED,
+        error: error
+    }
+}
+
 export const deliverTask = (taskId, details, files) => {
     return dispatch => {
-        console.log(taskId, details, files)
         dispatch(actions.loadingHandler(actionTypes.DELIVER_TASK_START));
 
         let formData = new FormData();
@@ -80,11 +106,10 @@ export const deliverTask = (taskId, details, files) => {
               'content-type': 'multipart/form-data'
             }
         }).then(response=>{
-                console.log(response);
-            }).catch(error=>{
-                console.log(error.response)
-            })
-        ;
+            console.log(response);
+        }).catch(error=>{
+            console.log(error.response)
+        });
     }
 }
 
@@ -102,7 +127,6 @@ export const fetchTasks = (type) => {
         if (type === 'completed'){
             axios.get('/complete-tasks/')
             .then(response=>{
-                console.log(response.data.data)
                 dispatch(fetchCompletedTasksSuccess(response.data.data));
             }).catch(error=>{
                 console.log(error.response)

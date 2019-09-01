@@ -115,7 +115,6 @@ class CreateTask extends Component {
         ;
         }).catch(error=>{
             this.setState({error: error})
-            // console.log(error)
         })
     }
 
@@ -173,7 +172,21 @@ class CreateTask extends Component {
                         onSubmit={this.handleSubmit}
                         render={(FormikProps)=>(
                             <Form className={classes.TaskForm}>
-                                {this.props.error? <p style={{textTransform: 'capitalize', margin: '20px auto', color: "#ca0000"}}>Sorry something went wrong please try again later</p>:null}
+                                {
+                                    this.props.error? 
+                                        (typeof this.props.error === "object")?
+                                            <ul>
+                                                {
+                                                    this.props.error.map((err,index)=>{
+                                                        return <li style={{listStyleType: 'none', color: '#ca0000'}} key={index}>{err}</li>
+                                                    })
+                                                }
+                                            </ul>
+                                        :<p style={{textTransform: 'capitalize', margin: '20px auto', color: "#ca0000"}}>
+                                            {this.props.error}
+                                        </p>
+                                    :null
+                                }
                                 {this.props.message? <p style={{textTransform: 'capitalize', margin: '20px auto', color: "#8bc24c"}}>{this.props.message}</p>: null}
                                 <div className={classes.TaskFormContainer}>
                                     <div className={classes.leftSection}>
@@ -190,7 +203,7 @@ class CreateTask extends Component {
                                             </div>
                                         </div>
                                         <RichEditor place="tasks"/>
-                                        <DragableArea />
+                                        <DragableArea files={this.props.taskFiles}/>
                                     </div>
                                     <div className={classes.rightSection}>
                                         <CheckboxTree

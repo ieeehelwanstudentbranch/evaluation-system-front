@@ -16,7 +16,6 @@ class Verify extends Component {
                     this.setState({Redirect: true})
                 }
             }).catch(error=>{
-                console.log(error.response)
                 this.setState({error: error.response.date})
             })
     }

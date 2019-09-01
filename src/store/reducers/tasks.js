@@ -3,7 +3,6 @@ import * as reducers from './repeatedReducers';
 
 const initialState ={
     data: null,
-    files: null,
 }
 
 const handleTaskFiles = (state, action) => {
@@ -45,6 +44,14 @@ const addingTaskSuccess = (state, action) => {
     };
 }
 
+const addingTaskFailed = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        error: action.error
+    };
+}
+
 const tasksReducer = (state = initialState, action)=>{
     switch (action.type) {
         // handle Fetching tasks
@@ -58,6 +65,10 @@ const tasksReducer = (state = initialState, action)=>{
         // handle Success of sending tasks
         case actionTypes.ADDING_TASK_SUCCESS:
             return addingTaskSuccess(state, action);
+
+        // handle Success of sending tasks
+        case actionTypes.ADDING_TASK_FAILED:
+            return addingTaskFailed(state, action);
 
         // handling rich editor changes
         case actionTypes.HANDLE_TASK_DETAILS:

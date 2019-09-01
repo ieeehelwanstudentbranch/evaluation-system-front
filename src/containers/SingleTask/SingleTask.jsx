@@ -18,6 +18,7 @@ class SingleTask extends Component{
     componentDidMount(){
         axios.get(`${this.props.location.pathname}`)
             .then(response=>{
+                console.log(response);
                 this.setState({
                     id: this.props.match.params.id,
                     ...response.data.data
@@ -177,6 +178,12 @@ class SingleTask extends Component{
             </div>
             
         </div>
+        } else if (this.state.error && typeof this.state.error === 'string'){
+            task = <p style={{
+                color: '#ca0000',
+                margin: '20px auto',
+                textTransform: 'uppercase'
+            }}>{this.state.error}</p>
         }
         return (
             <>

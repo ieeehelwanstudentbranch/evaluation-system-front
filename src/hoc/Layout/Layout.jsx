@@ -7,6 +7,7 @@ class Layout extends Component {
     state={
         showSideDrawer: false,
         MobileMenuOpen: false,
+        showNotifications: false
     }
     sideDrawerClosedHandler = () =>{
         this.setState({showSideDrawer: false, MobileMenuOpen: false,})
@@ -14,15 +15,24 @@ class Layout extends Component {
     sideDrawerToggleHandler = () =>{
         this.setState((prevState) => {
             return {
+                ...prevState,
                 showSideDrawer: !prevState.showSideDrawer,
                 MobileMenuOpen: !prevState.MobileMenuOpen
+            }
+        })
+    }
+    NotificationsHandler = () =>{
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                showNotifications: !prevState.showNotifications
             }
         })
     }
     render(){
         return(
             <>
-                <Toolbar isAuthenticated={this.props.isAuthenticated} MobileMenuOpen={this.state.MobileMenuOpen} drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                <Toolbar isAuthenticated={this.props.isAuthenticated} MobileMenuOpen={this.state.MobileMenuOpen} drawerToggleClicked={this.sideDrawerToggleHandler} notificationsClicked={this.NotificationsHandler}/>
                 <SideNavigation
                     isAuthenticated={this.props.isAuthenticated}
                     role={this.props.role}

@@ -18,13 +18,12 @@ class SingleTask extends Component{
     componentDidMount(){
         axios.get(`${this.props.location.pathname}`)
             .then(response=>{
-                console.log(response);
                 this.setState({
                     id: this.props.match.params.id,
                     ...response.data.data
                 })
             }).catch(error=>{
-                console.log(error.response.status)
+                console.log(error)
                 if (error.response.status === 404){
                     this.setState({error: 404});
                 }

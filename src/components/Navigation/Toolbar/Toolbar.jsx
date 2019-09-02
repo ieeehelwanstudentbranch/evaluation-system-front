@@ -4,7 +4,7 @@ import Logo from '../../Logo/WhiteLogo';
 import AnonymousNavigation from '../AnonymousNavigation/AnonymousNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 import DrawerToggle from '../DrawerToggler/DrawerToggler';
-
+import Notifications from '../../UI/Notifications/Notifications';
 class Toolbar extends Component {
     render(){
         return (
@@ -15,6 +15,7 @@ class Toolbar extends Component {
                 {this.props.isAuthenticated ?
                     <>
                         <AuthenticatedNavigation />
+                        <Notifications NumberOfNotifications={5}/>
                     </> : <AnonymousNavigation />
                 }
                 </div>

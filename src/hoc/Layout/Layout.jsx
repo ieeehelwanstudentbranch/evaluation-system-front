@@ -3,6 +3,7 @@ import * as classes from './Layout.module.scss';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideNavigation from '../../components/Navigation/SideNavigation/SideNavigation';
 import { connect } from 'react-redux';
+import NotificationsContainer from '../../components/UI/Notifications/NotificationsContainer/NotificationsContainer';
 class Layout extends Component {
     state={
         showSideDrawer: false,
@@ -22,7 +23,7 @@ class Layout extends Component {
         })
     }
     NotificationsHandler = () =>{
-        this.setState((prevState) => {
+        this.setState(prevState => {
             return {
                 ...prevState,
                 showNotifications: !prevState.showNotifications
@@ -39,6 +40,7 @@ class Layout extends Component {
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler}
                 />
+                <NotificationsContainer open={this.state.showNotifications}/>
                 <main className={classes.MainApp}>
                     {this.props.children}
                 </main>

@@ -23,7 +23,7 @@ class Registration extends Component{
             .then(response=>{
                 this.setState({committees: response.data.data.committees})
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response)
             })
         ;
     }

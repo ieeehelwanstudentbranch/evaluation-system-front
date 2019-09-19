@@ -48,28 +48,29 @@ export const sendTask = (title, deadline, details, files, receptors) => {
         }).then(response=>{
             dispatch(sendTaskSuccess(response.data.success));
         }).catch(error=>{
-            let convertedErrors = Object.keys(error.response.data.errors).map((key) =>{
-                return [error.response.data.errors[key]];
-            });
-            let errorsArray = [];
-            // eslint-disable-next-line
-            convertedErrors.map((error, index)=>{
-                if(typeof error === 'object'){
-                    // eslint-disable-next-line
-                    error.map((err, index)=>{
-                        if(typeof err === 'object'){
-                            err.map((err, index)=>(
-                                errorsArray.push(err)
-                            ))
-                        }else{
-                            errorsArray.push(err)
-                        }
-                    })
-                }else{
-                    errorsArray.push(error)
-                }
-            })
-            dispatch(sendTaskFailed(errorsArray));
+            console.log(error.response)
+            // let convertedErrors = Object.keys(error.response.data.errors).map((key) =>{
+            //     return [error.response.data.errors[key]];
+            // });
+            // let errorsArray = [];
+            // // eslint-disable-next-line
+            // convertedErrors.map((error, index)=>{
+            //     if(typeof error === 'object'){
+            //         // eslint-disable-next-line
+            //         error.map((err, index)=>{
+            //             if(typeof err === 'object'){
+            //                 err.map((err, index)=>(
+            //                     errorsArray.push(err)
+            //                 ))
+            //             }else{
+            //                 errorsArray.push(err)
+            //             }
+            //         })
+            //     }else{
+            //         errorsArray.push(error)
+            //     }
+            // })
+            // dispatch(sendTaskFailed(errorsArray));
         });
     }
 }

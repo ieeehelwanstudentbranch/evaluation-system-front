@@ -31,9 +31,9 @@ class CommitteForm extends Component {
     componentDidMount(){
         axios.get('/addcommittee')
         .then(response=>{
-            let mentors = response.data.data[0].mentor;
-            let directors = response.data.data[0].director;
-            let hrs_od = response.data.data[0]['hr-od'];
+            let mentors = response.data.data.mentor;
+            let directors = response.data.data.director;
+            let hrs_od = response.data.data['hr-od'];
             this.setState({
                 mentors: mentors,
                 directors: directors,
@@ -42,6 +42,7 @@ class CommitteForm extends Component {
         })
         .catch(error => {
             this.setState({error: error});
+            console.log(error)
         })
     }
 

@@ -4,7 +4,7 @@ import * as actions from './repeatedActions';
 
 export const register = (firstName, lastName, email, password, password_confirmation, DOB, faculty, university, position, ex_options, committee) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.REGISTRATION_START));
         const registerData = {
             firstName: firstName,
             lastName: lastName,
@@ -23,7 +23,7 @@ export const register = (firstName, lastName, email, password, password_confirma
                 dispatch(registerSuccess(response.data.message));
             })
             .catch(error => {
-                dispatch(registerFailed(error.response.data));
+                dispatch(registerFailed(error));
             })
     }
 }

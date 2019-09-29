@@ -2,14 +2,14 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
 import * as profileActions from './user';
+import * as LogoutFunctions from './logout'
 
-export const login = (email, password, remember_me) => {
+export const login = (email, password) => {
     return dispatch => {
-        dispatch(actions.loadingHandler());
+        dispatch(actions.loadingHandler(actionTypes.LOGIN_START));
         const loginData = {
             email: email,
             password: password,
-            remember_me: remember_me
         }
         axios.post('/login', loginData)
             .then(response=>{
@@ -29,7 +29,7 @@ export const login = (email, password, remember_me) => {
                 }
             })
             .catch(error => {
-                dispatch(actions.serverErrorHandler(error));
+                dispatch(actions.FailerHandler(actionTypes.SERVER_ERROR_HANDLER, "Network Error!"));
             })
         ;
     }
@@ -57,7 +57,7 @@ export const checkLoginTime = (expirationDate, token) => {
         let interval = setInterval(()=>{
             if (currentDate >= expirationDate){
                 clearInterval(interval);
-                dispatch(logout(token));
+                dispatch(LogoutFunctions.logout(token));
             }else{
                 currentDate = new Date();
             }
@@ -65,53 +65,15 @@ export const checkLoginTime = (expirationDate, token) => {
     }
 }
 
-export const logout = (token) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler());
-        let data = {
-            token: token
-        }
-        axios.post('/logout', data)
-            .then(response=>{
-                if (response.data.success){
-                    dispatch(logoutSuccess(response.data.message));
-                    window.location.href = '/'
-                } else {
-                    dispatch(logoutFailed(response.data.message));
-                }
-            })
-            .catch(error => {
-                dispatch(actions.serverErrorHandler(error));
-            })
-        ;
-    }
-}
-
-export const logoutSuccess = (message) => {
-    localStorage.clear()
-    return {
-        type: actionTypes.LOGOUT_SUCCESS,
-        token: null,
-        userID: null,
-        message: message
-    }
-}
-export const logoutFailed = (message) => {
-    return {
-        type: actionTypes.LOGOUT_FAILED,
-        message: message
-    }
-}
-
 export const loginCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
         if (!token){
-            dispatch(logoutSuccess(null));
+            dispatch(LogoutFunctions.logoutSuccess(null));
         } else {
             const expirationDate = new Date (localStorage.getItem('expirationDate'));
             if (expirationDate <= new Date()){
-                dispatch(logout(token))
+                dispatch(LogoutFunctions.logout(token))
             }else {
                 const userID = localStorage.getItem('userID');
                 dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically', userID));

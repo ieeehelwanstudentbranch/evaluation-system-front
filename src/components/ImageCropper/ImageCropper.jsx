@@ -8,7 +8,7 @@ class ImageCropper extends Component {
   
   constructor(props) {
     super(props)
-    const src= `http://localhost:8000/storage${this.props.image}` || `http://localhost:8000/uploaded/profile_images/${this.props.image}`;
+    const src= this.props.image === 'default.jpg' ? `http://localhost:8000/uploaded/profile_images/${this.props.image}` : `http://localhost:8000/storage${this.props.image}`;
     const mimeTypes= 'jpg,png,jpeg,svg,gif,tiff,tif';
     this.state = {
       preview: null,
@@ -55,12 +55,12 @@ class ImageCropper extends Component {
   }
 
   render () {
-    console.log(this.props);
     return (
       <div className={classes.ImageCropper}>
         <Avatar
-          width={500}
-          height={500}
+          width={450}
+          imageHeight={450}
+          height={300}
           cropColor={'black'}
           closeIconColor={'black'}
           shadingColor={'black'}

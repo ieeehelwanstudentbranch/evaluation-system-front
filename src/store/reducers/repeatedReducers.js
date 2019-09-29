@@ -7,7 +7,7 @@ export const loadingHandler = (state, action) => {
     };
 }
 
-export const serverErrorHandler = (state, action) => {
+export const FailerHandler = (state, action) => {
     return {
         ...state,
         error: action.error,

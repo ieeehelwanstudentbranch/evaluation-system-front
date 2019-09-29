@@ -1,14 +1,14 @@
 import * as actionTypes from './actionTypes';
 
-export const loadingHandler = () => {
+export const loadingHandler = (type = actionTypes.LOADING_HANDLER) => {
     return {
-        type: actionTypes.LOADING_HANDLER
+        type: type
     }
 }
 
-export const serverErrorHandler = (error) => {
+export const FailerHandler = (errorType = actionTypes.SERVER_ERROR_HANDLER, error="Something went error, Please try again later.") => {
     return {
-        type: actionTypes.SERVER_ERROR_HANDLER,
+        type: errorType,
         error: error
     }
 }

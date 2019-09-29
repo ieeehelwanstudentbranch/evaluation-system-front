@@ -10,9 +10,7 @@ import * as actions from '../../store/actions/index';
 
 class ReviewTask extends Component {
 
-    componentDidMount(){
-        console.log(this.props)
-    }
+    componentDidMount(){}
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
         props.submitEvaluation(props.taskID, values.mark, props.evaluationDetails);

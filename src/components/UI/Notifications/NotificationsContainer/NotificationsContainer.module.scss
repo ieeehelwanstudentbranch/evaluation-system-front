@@ -1,0 +1,20 @@
+.NotificationsContainer{
+    background-color: #fff;
+    box-shadow: 2px 0px 12px -2px rgba(0,0,0,0.75);
+    height: auto;
+    width: 300px;
+    position: absolute;
+    top: 58px;
+    right: 16px;
+    border-radius: 5px;
+    min-height: 400px;
+    max-height: 700px;
+    overflow-y: scroll;
+    z-index: 99;
+}
+.Open{
+    display: block;
+}
+.Close{
+    display: none
+}

@@ -3,8 +3,6 @@ import * as reducers from './repeatedReducers';
 
 const initialState = {
     committees: null,
-    error: false,
-    loading: false
 };
 
 const fetchCommitteeSuccess = (state, action) => {
@@ -25,7 +23,7 @@ const fetchCommitteeFailed = (state, action) => {
 
 const committeesReducer = (state = initialState, action)=>{
     switch (action.type) {
-        case actionTypes.LOADING_HANDLER:
+        case actionTypes.FETCH_COMMITTEES_START:
             return reducers.loadingHandler(state, action);
         case actionTypes.FETCH_COMMITTEES_SUCCESS:
             return fetchCommitteeSuccess(state, action);

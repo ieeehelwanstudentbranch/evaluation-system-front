@@ -6,14 +6,14 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import InformationHeader from '../UI/InformationHeader/InformationHeader'
 class Post extends Component{
+    
     render(){
         return (
             <article className={[classes.Post, this.props.className].join(' ')}>
                 <header className={classes.PostHeader}>
                     <InformationHeader {...this.props.post_owner} created_at={this.props.created_at}/>
-                    {   
-                        // eslint-disable-next-line
-                        this.props.userID == this.props.post_owner.id?
+                    {
+                        this.props.userID === this.props.post_owner.id?
                         <div className={classes.Actions}>
                             {
                                 this.props.editing === false?
@@ -36,7 +36,7 @@ class Post extends Component{
 
 const mapStateToProps = state => {
     return{
-        userID: state.login.userID,
+        userID: parseInt(state.login.userID),
         editing: state.posts.editing
     }
 }

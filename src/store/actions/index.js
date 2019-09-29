@@ -1,4 +1,5 @@
-export {login, logout, loginCheckState} from './login';
+export {login, loginCheckState} from './login';
+export {logout} from './logout'
 export {register} from './register';
 export {initializeCommittees, addCommittee, editCommittee} from './committees';
 export {fetchPosts, addPost, deletePost, editPost, editPostStart, handlePostDetails} from './posts';

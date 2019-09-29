@@ -6,9 +6,6 @@ const initialState ={
     profile: null,
     editing: false,
     editableContent: null,
-    loading: false,
-    error: null,
-    message: null,
     newImage: null
 }
 const fetchUserSucceess = (state, action) => {
@@ -61,22 +58,30 @@ const cancelEditing = (state, action) => {
 
 const userReducer = (state = initialState, action)=>{
     switch (action.type) {
-        case actionTypes.LOADING_HANDLER:
+
+        case actionTypes.FETCH_USER_START:
             return reducers.loadingHandler(state, action);
+
         case actionTypes.FETCH_USER_SUCCESS:
             return fetchUserSucceess(state, action);
+
         case actionTypes.FETCH_PROFILE_SUCCESS:
             return fetchProfileSucceess(state, action);
+
         case actionTypes.EDIT_PROFILE_IMAGE:
             return editProfileImage(state, action);
+
         case actionTypes.EDIT_PROFILE_DATA:
             return editProfileData(state, action);
+
         case actionTypes.CHANGE_IMAGE:
             return changeImage(state, action);
+
         case actionTypes.CANCEL_EDITING:
             return cancelEditing(state, action);
+
         case actionTypes.SERVER_ERROR_HANDLER:
-            return reducers.serverErrorHandler(state, action);
+            return reducers.FailerHandler(state, action);
         default:
             return state;
     }

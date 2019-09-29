@@ -11,7 +11,6 @@ class SingleCommittee extends Component{
     componentDidMount(){
         axios.get(`/committee/${this.props.match.params.id}`)
             .then(response=>{
-                console.log(response.data.data)
                 this.setState({
                     members: response.data.data.members
                 })

@@ -23,7 +23,7 @@ class Registration extends Component{
             .then(response=>{
                 this.setState({committees: response.data.data.committees})
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response)
             })
         ;
     }
@@ -175,10 +175,7 @@ class Registration extends Component{
                                                 { this.state.committees && this.state.committees.length>0?
                                                     this.state.committees.map((committee, index)=>{
                                                     return (
-                                                        <>
-                                                            {console.log(committee)}
-                                                            <option key={index} value={committee.id}>{committee.name}</option>
-                                                        </>
+                                                        <option key={index} value={committee.id}>{committee.name}</option>
                                                     )
                                                     }): <option value="">failed to get committees, please try again later</option>
                                                 }

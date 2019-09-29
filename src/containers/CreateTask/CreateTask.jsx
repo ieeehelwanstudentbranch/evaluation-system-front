@@ -22,6 +22,7 @@ import {
 } from "react-icons/md";
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 class CreateTask extends Component {
     state = {
@@ -114,7 +115,6 @@ class CreateTask extends Component {
         ;
         }).catch(error=>{
             this.setState({error: error})
-            // console.log(error)
         })
     }
 
@@ -158,57 +158,83 @@ class CreateTask extends Component {
             deadline: ''
         };
         return (
-            this.props.role === 'EX_com' || this.props.role === 'highBoard' ?
+            <>
+                {
+                    this.props.loading === true?
+                        <Spinner />
+                    :
+                    this.props.role === 'EX_com' || this.props.role === 'highBoard' ?
 
-            <Formik
-                enableReinitialize={true}
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={this.handleSubmit}
-                render={(FormikProps)=>(
-                    <Form className={classes.TaskForm}>
-                        <div className={classes.leftSection}>
-                            {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
-                            {this.props.message? <span>{this.props.message}</span>: null}
-                            <div className={classes.BasicInfo}>
-                                <div className={InputClasses.Input}>
-                                    <label htmlFor="title" className={InputClasses.Label} >Task Title<span className="required">*</span></label>
-                                    <Field type="text" id="title" name="title" className={InputClasses.InputElement}/>
-                                    <ErrorMessage name="title" />
+                    <Formik
+                        enableReinitialize={true}
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={this.handleSubmit}
+                        render={(FormikProps)=>(
+                            <Form className={classes.TaskForm}>
+                                {
+                                    this.props.error? 
+                                        (typeof this.props.error === "object")?
+                                            <ul>
+                                                {
+                                                    this.props.error.map((err,index)=>{
+                                                        return <li style={{listStyleType: 'none', color: '#ca0000'}} key={index}>{err}</li>
+                                                    })
+                                                }
+                                            </ul>
+                                        :<p style={{textTransform: 'capitalize', margin: '20px auto', color: "#ca0000"}}>
+                                            {this.props.error}
+                                        </p>
+                                    :null
+                                }
+                                {this.props.message? <p style={{textTransform: 'capitalize', margin: '20px auto', color: "#8bc24c"}}>{this.props.message}</p>: null}
+                                <div className={classes.TaskFormContainer}>
+                                    <div className={classes.leftSection}>
+                                        <div className={classes.BasicInfo}>
+                                            <div className={InputClasses.Input}>
+                                                <label htmlFor="title" className={InputClasses.Label} >Task Title<span className="required">*</span></label>
+                                                <Field type="text" id="title" name="title" className={InputClasses.InputElement}/>
+                                                <ErrorMessage name="title" />
+                                            </div>
+                                            <div className={InputClasses.Input}>
+                                                <label htmlFor="deadline" className={InputClasses.Label} >Deadline<span className="required">*</span></label>
+                                                <Field type="datetime-local" id="deadline" name="deadline" className={InputClasses.InputElement}/>
+                                                <ErrorMessage name="deadline" />
+                                            </div>
+                                        </div>
+                                        <RichEditor place="tasks"/>
+                                        <DragableArea files={this.props.taskFiles}/>
+                                    </div>
+                                    <div className={classes.rightSection}>
+                                        <CheckboxTree
+                                            nodes={this.state.nodes}
+                                            checked={this.state.checked}
+                                            expanded={this.state.expanded}
+                                            onCheck={checked => this.setState({ checked })}
+                                            onExpand={expanded => this.setState({ expanded })}
+                                            icons={icons}
+                                        />
+                                    </div>
                                 </div>
-                                <div className={InputClasses.Input}>
-                                    <label htmlFor="deadline" className={InputClasses.Label} >Deadline<span className="required">*</span></label>
-                                    <Field type="datetime-local" id="deadline" name="deadline" className={InputClasses.InputElement}/>
-                                    <ErrorMessage name="deadline" />
-                                </div>
-                            </div>
-                            <RichEditor place="tasks"/>
-                            <DragableArea />
-                        </div>
-                        <div className={classes.rightSection}>
-                            <CheckboxTree
-                                nodes={this.state.nodes}
-                                checked={this.state.checked}
-                                expanded={this.state.expanded}
-                                onCheck={checked => this.setState({ checked })}
-                                onExpand={expanded => this.setState({ expanded })}
-                                icons={icons}
-                            />
-                        </div>
-                        <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting || !this.props.taskDetails || this.state.checked.length <= 0 }>SEND</Button>
-                    </Form>
-                )}
-            />
-            :<p>You are not authoriezed</p>
+                                <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting || !this.props.taskDetails || this.state.checked.length <= 0 }>SEND</Button>
+                            </Form>
+                        )}
+                    />
+                    :<p>You are not authoriezed to access this page</p>
+                }
+            </>   
         )
     }
 }
 const mapStateToProps = state => {
     return{
-        userID: state.user.userData?state.user.userData.id:null,
-        taskDetails: state.tasks.data? state.tasks.data:null,
-        taskFiles: state.tasks.files? state.tasks.files: null,
-        role: state.user.userData? state.user.userData.position:null
+        userID: state.user.userData?state.user.userData.id : null,
+        taskDetails: state.tasks.data? state.tasks.data : null,
+        taskFiles: state.tasks.files? state.tasks.files : null,
+        role: state.user.userData? state.user.userData.position : null,
+        message: state.tasks.message? state.tasks.message : null,
+        loading: state.tasks.loading? state.tasks.loading : null,
+        error: state.tasks.error? state.tasks.error : null,
     }
 }
 const mapDispatchToProps = dispatch => {

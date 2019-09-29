@@ -3,9 +3,6 @@ import * as reducers from './repeatedReducers';
 
 const initialState ={
     data: null,
-    files: null,
-    error: null,
-    message: null
 }
 
 const handleTaskFiles = (state, action) => {
@@ -18,6 +15,7 @@ const handleTaskFiles = (state, action) => {
 const fetchPendingTasksSuccess = (state, action) => {
     return {
         ...state,
+        loading: false,
         pendingMentoringTasks: action.pendingMentoringTasks,
         pendingSentTasks: action.pendingSentTasks,
         pendingPersonalTasks: action.pendingPersonalTasks,
@@ -28,6 +26,7 @@ const fetchPendingTasksSuccess = (state, action) => {
 const fetchCompletedTasksSuccess = (state, action) => {
     return {
         ...state,
+        loading: false,
         completedMentoringTasks: action.completedMentoringTasks,
         completedSentTasks: action.completedSentTasks,
         completedPersonalTasks: action.completedPersonalTasks,
@@ -35,11 +34,41 @@ const fetchCompletedTasksSuccess = (state, action) => {
     };
 }
 
+const addingTaskSuccess = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        message: action.message,
+        data: null,
+        files: null
+    };
+}
+
+const addingTaskFailed = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        error: action.error
+    };
+}
+
 const tasksReducer = (state = initialState, action)=>{
     switch (action.type) {
-        // handle loading handler
-        case actionTypes.LOADING_HANDLER:
+        // handle Fetching tasks
+        case actionTypes.FETCH_TASKS_START:
             return reducers.loadingHandler(state, action);
+
+        // handle adding tasks
+        case actionTypes.ADD_TASK_START:
+            return reducers.loadingHandler(state, action);
+
+        // handle Success of sending tasks
+        case actionTypes.ADDING_TASK_SUCCESS:
+            return addingTaskSuccess(state, action);
+
+        // handle Success of sending tasks
+        case actionTypes.ADDING_TASK_FAILED:
+            return addingTaskFailed(state, action);
 
         // handling rich editor changes
         case actionTypes.HANDLE_TASK_DETAILS:

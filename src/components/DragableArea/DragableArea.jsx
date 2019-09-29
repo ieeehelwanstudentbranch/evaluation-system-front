@@ -18,7 +18,7 @@ class dragableArea extends Component{
         ],
         acceptedMIMETypes: 'text/csv, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/gif, image/jpeg,image/png,application/pdf, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, image/svg+xml, text/plain, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip, application/postscript, image/vnd.adobe.photoshop',
         errors: [],
-        files: [],
+        files: this.props.files? this.props.files: [],
         drag: false,
         holding: false,
     }

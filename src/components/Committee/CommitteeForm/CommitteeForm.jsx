@@ -31,9 +31,9 @@ class CommitteForm extends Component {
     componentDidMount(){
         axios.get('/addcommittee')
         .then(response=>{
-            let mentors = response.data.data[0].mentor;
-            let directors = response.data.data[0].director;
-            let hrs_od = response.data.data[0]['hr-od'];
+            let mentors = response.data.data.mentor;
+            let directors = response.data.data.director;
+            let hrs_od = response.data.data['hr-od'];
             this.setState({
                 mentors: mentors,
                 directors: directors,
@@ -42,6 +42,7 @@ class CommitteForm extends Component {
         })
         .catch(error => {
             this.setState({error: error});
+            console.log(error)
         })
     }
 
@@ -59,15 +60,13 @@ class CommitteForm extends Component {
                 .trim()
                 .required('Committee Name is a Required field')
                 .min(3, 'Committee Name is too short it must be at least 3 characters or longer'),
-            mentor: Yup
-                .string()
-                .required('Please select the Committee mentor'),
-            director: Yup
-                .string()
+            mentor: Yup.string()
                 .nullable()
                 .notRequired(),
-            hr_od: Yup
-                .string()
+            director: Yup.string()
+                .nullable()
+                .notRequired(),
+            hr_od: Yup.string()
                 .nullable()
                 .notRequired()
             ,

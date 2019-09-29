@@ -13,9 +13,7 @@ import * as actions from '../../store/actions/index';
 
 class CreateTask extends Component {
 
-    componentDidMount(){
-        console.log(this.props)
-    }
+    componentDidMount(){}
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
         props.submitTask(props.match.params.id, props.taskDetails, props.taskFiles);

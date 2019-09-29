@@ -1,0 +1,23 @@
+@import '../../../assets/scss/color_variables';
+.Notifications{
+    position: relative;
+    svg{
+        font-size: 30px;
+        color: $white
+    }
+    .NotificationsNumber{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        top: -7px;
+        right: -7px;
+        background-color: $red;
+        color: $white;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        padding: 10px
+    }
+}

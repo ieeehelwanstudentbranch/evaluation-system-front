@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import Comment from './Comment/Comment';
 import CommentForm from './Comment/CommentForm/CommentForm';
 import InformationHeader from '../../UI/InformationHeader/InformationHeader';
+// import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill';
 
 class SinglePost extends Component{
-
+        
     state={
         post_id: null,
         post_body: null,
@@ -33,6 +34,21 @@ class SinglePost extends Component{
             })
         ;
 
+        // const EventSource = NativeEventSource || EventSourcePolyfill;
+
+        // let eventSourcer = new EventSourcePolyfill(`http://localhost:8000/api${this.props.location.pathname}/comments`,  {
+        //     headers: {
+        //         withCredentials: true,
+        //         // 'Content-Type': 'text/event-stream',
+        //         'Authorization': `Bearer ${localStorage.getItem('token')}`
+        //     }}
+        // );
+        // eventSourcer.onopen = function(e){
+        //     console.log('opend')
+        // }
+        // eventSourcer.onmessage = function (event) {
+        //     console.log(event)
+        // };
         axios.get(`${this.props.location.pathname}/comments`)
             .then(response=>{
                 this.setState({
@@ -105,7 +121,7 @@ class SinglePost extends Component{
 
 const mapStateToProps = state => {
     return{
-        userID: state.login.userID
+        userID: state.login.userID,
     }
 }
 

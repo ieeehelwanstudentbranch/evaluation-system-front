@@ -216,7 +216,7 @@ class CreateTask extends Component {
                                         />
                                     </div>
                                 </div>
-                                <Button type="submit" btnType="Default" disabled={!FormikProps.isValid || FormikProps.isSubmitting || !this.props.taskDetails || this.state.checked.length <= 0 }>SEND</Button>
+                                <Button type="submit" btnType="Default" className={classes.SubmitButton} disabled={!FormikProps.isValid || FormikProps.isSubmitting || !this.props.taskDetails || this.state.checked.length <= 0 }>SEND</Button>
                             </Form>
                         )}
                     />

@@ -1,7 +1,7 @@
 @import '../../assets/scss/screen_sizes';
 .TaskForm {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     flex-wrap: wrap;
     width: 85%;
     padding: 10px;
@@ -46,5 +46,8 @@
             }
         }
     }
-    
+    .SubmitButton{
+        width: fit-content;
+        align-self: flex-end;
+    }
 }

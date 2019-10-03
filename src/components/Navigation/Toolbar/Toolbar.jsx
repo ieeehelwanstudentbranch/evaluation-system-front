@@ -15,7 +15,7 @@ class Toolbar extends Component {
                 {this.props.isAuthenticated ?
                     <>
                         <AuthenticatedNavigation />
-                        <Notifications clicked={this.props.notificationsClicked} NumberOfNotifications={5}/>
+                        <Notifications clicked={this.props.notificationsClicked} NumberOfNotifications={this.props.numberOfNotifications}/>
                     </> : <AnonymousNavigation />
                 }
                 </div>

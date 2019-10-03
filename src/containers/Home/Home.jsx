@@ -55,9 +55,9 @@ class Home extends Component{
                     <RichEditor place="posts"/>
                     {
                         this.state.editing? 
-                            <Button type="submit" btnType="Default" clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>
+                            <Button type="submit" btnType="Default" disabled={this.state.loading} clicked={()=>this.props.onEditing(this.state.id, this.props.post)}>POST EDITING</Button>
                         :
-                            <Button type="submit" btnType="Default" clicked={()=>this.props.onAdding(this.props.post)}>ADD POST</Button>
+                            <Button type="submit" btnType="Default" disabled={this.state.loading} clicked={()=>this.props.onAdding(this.props.post)}>ADD POST</Button>
                     }
                 </header>
                 {component}

@@ -36,7 +36,7 @@ class SinglePost extends Component{
 
         // const EventSource = NativeEventSource || EventSourcePolyfill;
 
-        // let eventSourcer = new EventSourcePolyfill(`http://localhost:8000/api${this.props.location.pathname}/comments`,  {
+        // let eventSourcer = new EventSourcePolyfill(`http://api.evaluation-system.ieeehsb.org/api${this.props.location.pathname}/comments`,  {
         //     headers: {
         //         withCredentials: true,
         //         // 'Content-Type': 'text/event-stream',

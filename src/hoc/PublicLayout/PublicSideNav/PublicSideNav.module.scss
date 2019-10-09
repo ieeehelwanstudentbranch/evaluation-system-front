@@ -1,3 +1,4 @@
+@import '../../../assets/scss/color_variables';
 .PublicSideDrawer{
     position: fixed;
     width: 280px;
@@ -6,7 +7,7 @@
     left: 0;
     top: 0;
     z-index: 200;
-    background-color: #fff;
+    background-color: $main_color;
     padding: 32px 16px;
     transition: transform 0.3s ease-out;
     .SideDrawerNavigation{

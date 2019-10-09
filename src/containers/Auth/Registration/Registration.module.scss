@@ -11,6 +11,9 @@
         display: flex;
         flex-flow: row;
         justify-content: space-between;
+        @media screen and (max-width: $mobile_landscape_max_width){
+            flex-flow: column;
+        }
         .LeftSection{
             width: 49%;
             @media screen and (max-width: $mobile_landscape_max_width){

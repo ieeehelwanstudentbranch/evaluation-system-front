@@ -8,7 +8,9 @@ class ImageCropper extends Component {
   
   constructor(props) {
     super(props)
-    const src= this.props.image === 'default.jpg' ? `http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}` : `http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`;
+    const src= this.props.image === 'default.jpg' ?
+      `http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}`
+      :`http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`;
     const mimeTypes= 'jpg,png,jpeg,svg,gif,tiff,tif';
     this.state = {
       preview: null,
@@ -24,11 +26,13 @@ class ImageCropper extends Component {
   // code from stack overflow link: https://stackoverflow.com/questions/16968945/convert-base64-png-data-to-javascript-file-objects/16972036#answer-38936042
   urltoFile=(url, filename, mimeType)=>{
     mimeType = mimeType || (url.match(/^data:([^;]+);/)||'')[1];
-    return (fetch(url)
+    return (
+      fetch(url)
         .then(function(res){return res.arrayBuffer();})
         .then(function(buf){
           return new File([buf], filename, {type:mimeType});
         })
+        
     );
   }
 
@@ -45,8 +49,9 @@ class ImageCropper extends Component {
   }
 
   onBeforeFileLoad(elem) {
-    // size in kiloByte
-    if(elem.target.files[0].size > 500000){
+    // size in bytes
+    console.log(elem.target.files[0].size)
+    if(elem.target.files[0].size > 10000000){
       alert("File is too big!");
       elem.target.value = "";
     }else{
@@ -61,8 +66,8 @@ class ImageCropper extends Component {
           width={450}
           imageHeight={450}
           height={300}
-          cropColor={'black'}
-          closeIconColor={'black'}
+          cropColor={'white'}
+          closeIconColor={'white'}
           shadingColor={'black'}
           shadingOpacity={0.5}
           mimeTypes={this.state.mimeTypes}

@@ -66,7 +66,7 @@ class ImageCropper extends Component {
     return (
       <div className={classes.ImageCropper}>
         <Avatar
-          width={450}
+          width={'100%'}
           imageHeight={450}
           height={300}
           cropColor={'white'}

@@ -3,6 +3,7 @@ import Avatar from 'react-avatar-edit';
 import * as classes from './ImageCropper.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
+import formatFileSize from '../../utilize/formatFileSize';
 
 class ImageCropper extends Component {
   
@@ -12,12 +13,14 @@ class ImageCropper extends Component {
       `http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}`
       :`http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`;
     const mimeTypes= 'jpg,png,jpeg,svg,gif,tiff,tif';
+    const maxFileSize= 10490000;
     this.state = {
       preview: null,
       type: null,
       convertedFile: null,
       mimeTypes,
       src,
+      maxFileSize
     }
     this.onCrop = this.onCrop.bind(this)
     this.onClose = this.onClose.bind(this)
@@ -51,7 +54,7 @@ class ImageCropper extends Component {
   onBeforeFileLoad(elem) {
     // size in bytes
     console.log(elem.target.files[0].size)
-    if(elem.target.files[0].size > 10000000){
+    if(elem.target.files[0].size > this.state.maxFileSize){
       alert("File is too big!");
       elem.target.value = "";
     }else{
@@ -76,7 +79,11 @@ class ImageCropper extends Component {
           onBeforeFileLoad={this.onBeforeFileLoad}
           src={this.state.src}
         />
-        <p className={classes.Types}>ALLOWED TYPES: {this.state.mimeTypes}</p>
+        <div className={classes.InformationContainer}>
+          <p className={classes.Types}>ALLOWED TYPES: {this.state.mimeTypes}</p>
+          <p>Max File Size: {formatFileSize(this.state.maxFileSize)}</p>
+        </div>
+        
       </div>
     )
   }

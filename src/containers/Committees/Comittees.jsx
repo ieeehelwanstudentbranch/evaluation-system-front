@@ -77,7 +77,7 @@ class Committees extends Component{
         } else {
             if (committees!==null){
                 committeeComponent = committees.map(committee=>(
-                    <Committee key={committee.id} {...committee} editing={()=>this.editingHandler(committee)}/>
+                    <Committee role={this.props.role} position={this.props.position} key={committee.id} {...committee} editing={()=>this.editingHandler(committee)}/>
                 ))
             } else {
                 committeeComponent = 

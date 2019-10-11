@@ -86,6 +86,7 @@ class Layout extends Component {
                     role={this.props.role}
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler}
+                    userID={this.props.userID}
                 />
                 <NotificationsContainer open={this.state.showNotifications} notifications={this.state.notifications}/>
                 <main className={classes.MainApp}>
@@ -98,7 +99,8 @@ class Layout extends Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.login.token !== null,
-        role: state.user.userData? state.user.userData.position:null
+        role: state.user.userData? state.user.userData.position:null,
+        userID: state.user.userData? state.user.userData.id:null
     }
 }
 export default connect(mapStateToProps)(Layout);

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './NavigationItem.module.scss';
 const navigationItem = (props) => (
-    <li className={classes.NavigationItem}>
+    <li className={[classes.NavigationItem, props.className].join(' ')}>
         <NavLink 
             to={props.link}
             exact={props.exact}

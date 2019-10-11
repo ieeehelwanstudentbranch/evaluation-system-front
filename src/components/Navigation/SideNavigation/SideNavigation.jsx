@@ -14,7 +14,7 @@ const sideNavigation = (props) => {
                     <ul>
                         {props.isAuthenticated ? 
                             <>
-                                <NavigationItem link={`/user/${props.userID}`} exact><Profile /></NavigationItem>
+                                <NavigationItem link={`/user/${props.userID}`} className={classes.MobileOnly} exact><Profile /></NavigationItem>
                                 <NavigationItem link="/home" className={classes.MobileOnly}>
                                     <MdHome />
                                     Home

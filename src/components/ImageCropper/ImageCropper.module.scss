@@ -1,8 +1,29 @@
 @import '../../assets/scss/color_variables';
 .ImageCropper{
     padding: 0px 5px;
-    .Types{
-        text-transform: uppercase;
-        color: $gray;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    canvas{
+        width: 100% !important;
+        object-fit: contain !important
+    }
+    div{
+        div{
+            div{
+                width: 100%;
+            }
+        }
+    }
+    .InformationContainer{
+        display: flex;
+        flex-direction: column;
+        font-size: 15px;
+        .Types{
+            text-transform: uppercase;
+            color: $gray;
+        }
     }
 }

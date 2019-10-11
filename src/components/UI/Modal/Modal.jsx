@@ -18,8 +18,8 @@ class Modal extends Component{
                         display: this.props.show? 'flex': 'none'
                     }}
                 >
-                    <header>
-                        <Logo/>
+                    <header className={classes.ModalHeader}>
+                        <Logo height='100%'/>
                         <div className={classes.Icon}>
                             <MdClose onClick={this.props.modalClosed}/>
                         </div>

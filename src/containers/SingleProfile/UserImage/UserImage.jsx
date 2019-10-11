@@ -12,11 +12,23 @@ class UserImage extends Component {
                         <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}`} alt={`${this.props.name}`}/>
                         :<img src={`http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`} alt={`${this.props.name}`}/>
                 }
-                <div className={classes.Overlay}>
-                    <MdCameraAlt onClick={this.props.editImage}/>
-                </div>
+                {
+                    this.props.userID === this.props.profileData.id ?
+                        <div className={classes.Overlay}>
+                            <MdCameraAlt onClick={this.props.editImage}/>
+                        </div>
+                    :null
+                }
             </div>
         )
+    }
+}
+
+
+const mapStateToProps = state => {
+    return{
+        userID: state.user.userData?state.user.userData.id:null,
+        profileData: state.user.profile?state.user.profile:null,
     }
 }
 
@@ -25,4 +37,4 @@ const mapDispatchToProps = dispatch => {
         editImage: ()=>dispatch(actions.editProfileImage())
     }
 }
-export default connect(null, mapDispatchToProps)(UserImage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserImage);

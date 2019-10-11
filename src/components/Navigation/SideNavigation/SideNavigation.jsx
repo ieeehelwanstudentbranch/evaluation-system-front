@@ -1,8 +1,9 @@
 import React from 'react';
-import classes from './SideNavigation.module.scss';
+import * as classes from './SideNavigation.module.scss';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-import {MdAdd, MdCheck, MdErrorOutline, MdDeviceHub, MdExitToApp}from 'react-icons/md';
+import Profile from '../../Profile/Profile';
+import {MdHome, MdAdd, MdCheck, MdErrorOutline, MdDeviceHub, MdExitToApp}from 'react-icons/md';
 
 const sideNavigation = (props) => {
     return(
@@ -13,6 +14,11 @@ const sideNavigation = (props) => {
                     <ul>
                         {props.isAuthenticated ? 
                             <>
+                                <NavigationItem link={`/user/${props.userID}`} className={classes.MobileOnly} exact><Profile /></NavigationItem>
+                                <NavigationItem link="/home" className={classes.MobileOnly}>
+                                    <MdHome />
+                                    Home
+                                </NavigationItem>
                                 {
                                     props.role === 'EX_com' || props.role === 'highBoard'?
                                         <NavigationItem link="/create-task">

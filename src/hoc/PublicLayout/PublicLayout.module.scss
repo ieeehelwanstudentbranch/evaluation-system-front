@@ -9,17 +9,14 @@
 
     .PublicToolBar {
         background-color: transparent;
-        position: relative;
-        top: auto;
-        left: auto;
-        padding: 0;
-        z-index: auto;
+        @media (max-width: $mobile_landscape_max_width) {
+            background-color: $main_color;
+        }
 
         nav {
             ul {
                 li {
                     margin: 0 5px;
-
                     &:last-child {
                         margin-right: 0;
                     }

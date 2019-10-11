@@ -77,7 +77,7 @@ class Committees extends Component{
         } else {
             if (committees!==null){
                 committeeComponent = committees.map(committee=>(
-                    <Committee key={committee.id} {...committee} editing={()=>this.editingHandler(committee)}/>
+                    <Committee role={this.props.role} position={this.props.position} key={committee.id} {...committee} editing={()=>this.editingHandler(committee)}/>
                 ))
             } else {
                 committeeComponent = 
@@ -92,7 +92,7 @@ class Committees extends Component{
                 <div className={classes.Committees}>
                     {committeeComponent}
                     {
-                        this.props.role === 'EX_com' ?
+                        this.props.position === 'EX_com' && this.props.role === 'chairperson' ?
                             <MdAdd className={classes.AddCommittee} onClick={this.addCommitteeHandler}/>
                         :null
                     }
@@ -111,7 +111,8 @@ const mapStateToProps = state => {
         committees: state.committees.committees,
         loading: state.committees.loading,
         error: state.committees.error,
-        role: state.user.userData? state.user.userData.position:null
+        position: state.user.userData? state.user.userData.position:null,
+        role: state.user.userData? state.user.userData.ex_options[0].ex_options:null
     }
 }
 

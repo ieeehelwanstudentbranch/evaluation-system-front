@@ -22,3 +22,11 @@ code {
   margin: auto;
   padding: 0 20px;
 }
+
+
+/* #avatar_container{
+  width: 100% !important
+} */
+.konvajs-content{
+  width: 100% !important;
+}

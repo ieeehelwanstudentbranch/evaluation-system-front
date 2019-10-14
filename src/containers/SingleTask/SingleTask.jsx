@@ -97,7 +97,7 @@ class SingleTask extends Component{
                                 <ul className={classes.Files}>
                                     {
                                         this.state.sent_files.map((file,index)=>(
-                                            <li key={index}>{file}<a href={`http://api.evaluation-system.ieeehsb.org/storage/tasks_sent/${file}`} download={true}><MdFileDownload /></a></li>
+                                            <li key={index}>{file}<a href={`http://localhost:8000/storage/tasks_sent/${file}`} download={true}><MdFileDownload /></a></li>
                                         ))
                                     }
                                 </ul>
@@ -138,7 +138,7 @@ class SingleTask extends Component{
                                 <ul className={classes.Files}>
                                     {
                                         this.state.delivered_files.map((file,index)=>(
-                                            <li key={index}>{file}<a href={`http://api.evaluation-system.ieeehsb.org/storage/tasks_delivered/${file}`} download={true}><MdFileDownload /></a></li>
+                                            <li key={index}>{file}<a href={`http://localhost:8000/storage/tasks_delivered/${file}`} download={true}><MdFileDownload /></a></li>
                                         ))
                                     }
                                 </ul>

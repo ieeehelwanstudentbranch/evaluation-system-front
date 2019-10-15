@@ -61,6 +61,7 @@ class App extends Component {
               <Route path="/login" component={Home} />
               <Route path="/registration" component={Home} />
               <Route path="/verify/:code" component={Verify}/>
+              <Redirect exact from="/home" to="/" />
               <Route path="*"  component={NotFound} />
             </Switch>
           </PublicLayout>

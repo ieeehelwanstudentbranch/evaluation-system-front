@@ -65,20 +65,45 @@ export const checkLoginTime = (expirationDate, token) => {
     }
 }
 
+
+export const checkAutherization = (id, token) => {
+    return dispatch => {
+        dispatch(actions.loadingHandler(actionTypes.LOGIN_START));
+        let userID = parseInt(id);
+        console.log(userID)
+        axios.get(`/check-token/${userID}/${token}`)
+            .then(response=>{
+                // eslint-disable-next-line
+                if(response.data.response == 'Success'){
+                    return false
+                } else{
+                    dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+        ;
+    }
+}
+
 export const loginCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
+        const userID = localStorage.getItem('userID');
         if (!token){
             dispatch(LogoutFunctions.logoutSuccess(null));
         } else {
             const expirationDate = new Date (localStorage.getItem('expirationDate'));
             if (expirationDate <= new Date()){
-                dispatch(LogoutFunctions.logout(token))
+                dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
             }else {
-                const userID = localStorage.getItem('userID');
-                dispatch(loginSuccess(token, 'Your token is still valid, you had loggedin automatically', userID));
-                dispatch(checkLoginTime(expirationDate, token));
-                dispatch(profileActions.fetchUserData(userID, userID));
+                if(dispatch(checkAutherization(userID, token))){
+                    dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
+                }else {
+                    dispatch(loginSuccess(token, 'Your token is still valid, you had logged in automatically', userID));
+                    dispatch(checkLoginTime(expirationDate, token));
+                    dispatch(profileActions.fetchUserData(userID, userID));
+                }
             }
         }
     }

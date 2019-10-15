@@ -33,22 +33,6 @@ class SinglePost extends Component{
                 })
             })
         ;
-
-        // const EventSource = NativeEventSource || EventSourcePolyfill;
-
-        // let eventSourcer = new EventSourcePolyfill(`http://api.evaluation-system.ieeehsb.org/api${this.props.location.pathname}/comments`,  {
-        //     headers: {
-        //         withCredentials: true,
-        //         // 'Content-Type': 'text/event-stream',
-        //         'Authorization': `Bearer ${localStorage.getItem('token')}`
-        //     }}
-        // );
-        // eventSourcer.onopen = function(e){
-        //     console.log('opend')
-        // }
-        // eventSourcer.onmessage = function (event) {
-        //     console.log(event)
-        // };
         axios.get(`${this.props.location.pathname}/comments`)
             .then(response=>{
                 this.setState({

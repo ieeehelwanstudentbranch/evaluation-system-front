@@ -9,8 +9,8 @@ const InformationHeader = (props) => {
             <div className={classes.Info}>
                 <NavLink to={`/user/${props.id}`}>
                     {props.image === "default.jpg" ?
-                        <img src={`http://localhost:8000/uploaded/profile_images/${props.image}`} alt={`${props.firstName} ${props.lastName}`}/>
-                        :<img src={`http://localhost:8000/storage${props.image}`} alt={`${props.firstName} ${props.lastName}`}/>
+                        <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${props.image}`} alt={`${props.firstName} ${props.lastName}`}/>
+                        :<img src={`http://api.evaluation-system.ieeehsb.org/storage${props.image}`} alt={`${props.firstName} ${props.lastName}`}/>
                     } 
                 </NavLink>
                 <div>

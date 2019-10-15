@@ -9,8 +9,8 @@ class ProfileIcon extends Component {
             data = <div className={classes.ProfileIcon}>
                 {
                     this.props.image === "default.jpg" ?
-                        <img src={`http://localhost:8000/uploaded/profile_images/${this.props.image}`} alt={`${this.props.name}`}/>
-                        :<img src={`http://localhost:8000/storage${this.props.image}`} alt={`${this.props.name}`}/>
+                        <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}`} alt={`${this.props.name}`}/>
+                        :<img src={`http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`} alt={`${this.props.name}`}/>
                 }
                 <p>{this.props.name}</p>
             </div>

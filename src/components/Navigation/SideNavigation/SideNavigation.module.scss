@@ -10,11 +10,6 @@ aside {
     @media (min-width: $large_tablet_min_width) {
         transform: translateX(0) !important; 
     }
-    .MobileOnly{
-        @media (min-width: $mobile_landscape_max_width) {
-            display: none;
-        }
-    }
 }
 .Backdrop{
     @media (min-width: $large_tablet_min_width) {

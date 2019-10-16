@@ -1,3 +1,4 @@
+@import './assets/scss/screen_sizes';
 *,*::after, *::before{
   box-sizing: border-box;
   margin: 0;
@@ -29,4 +30,10 @@ code {
 } */
 .konvajs-content{
   width: 100% !important;
+}
+
+.MobileOnly{
+  @media (min-width: $mobile_landscape_max_width) {
+    display: none;
+  }
 }

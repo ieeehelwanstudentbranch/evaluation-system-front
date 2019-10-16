@@ -14,7 +14,7 @@ import tasksReducer from './store/reducers/tasks';
 import evaluateTaskReducer from './store/reducers/evaluateTask';
 import logoutReducer from './store/reducers/logout'
 
-import './index.css';
+import './index.scss';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 

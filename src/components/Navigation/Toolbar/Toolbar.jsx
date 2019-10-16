@@ -10,6 +10,7 @@ class Toolbar extends Component {
         return (
             <header className={[classes.Toolbar, this.props.className].join(' ')}>
                 <Logo className={classes.ToolbarLogo}/>
+                <Notifications  className='MobileOnly' clicked={this.props.notificationsClicked} NumberOfNotifications={this.props.numberOfNotifications}/>
                 <DrawerToggle MobileMenuOpen={this.props.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
                 <div className={classes.DesktopOnly}>
                 {this.props.isAuthenticated ?

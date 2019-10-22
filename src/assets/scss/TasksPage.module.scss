@@ -2,45 +2,40 @@
 @import './color_variables';
 .TasksPage{
     display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
     width: 100%;
+    @media screen and (max-width: $large_tablet_max_width) {
+        flex-direction: column;
+        width: 95vw;
+    }
     @media screen and (min-width: $large_min_width) {
         justify-content: space-between;
     }
     .TasksGroup{
         display: flex;
         flex-direction: column;
-        width: calc(100%/3);
-        margin-top: 20px;
+        margin: 20px auto;
+        padding: 0 10px;
+        border-right: 1px solid #ccc;
         article{
             width: 100%
-        }
-        &:not(:last-child){
-            border-right: 1px solid #ccc
         }
         h2{
             padding: 10px 0;
             border-bottom: 3px solid $gray;
             margin-bottom: 20px;
         }
-        @media screen and (max-width: $small_tablet_max_width) {
-            width: 100%;
+        @media screen and (max-width: $large_tablet_max_width) {
             border: 1px solid #ccc;
             padding: 10px;
-            
-        }
-        @media screen and (min-width: $large_tablet_min_width ) and (max-width: $large_tablet_max_width) {
-            width: calc(100%/2.1);
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 5px;
-            
+            width: 95%; 
         }
         @media screen and (min-width: $large_min_width) {
-            width: calc(100%/3.1);
-            &:not(:last-child){
-                padding-right: 10px
+            &:first-child{
+                padding-left: 0;
+            }
+            &:last-child{
+                border-right: 0;
+                padding-right: 0;
             }
         }
     }

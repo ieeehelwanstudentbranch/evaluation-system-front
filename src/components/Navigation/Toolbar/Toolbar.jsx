@@ -5,12 +5,18 @@ import AnonymousNavigation from '../AnonymousNavigation/AnonymousNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 import DrawerToggle from '../DrawerToggler/DrawerToggler';
 import Notifications from '../../UI/Notifications/Notifications';
+import {connect} from 'react-redux';
 class Toolbar extends Component {
     render(){
         return (
             <header className={[classes.Toolbar, this.props.className].join(' ')}>
                 <Logo className={classes.ToolbarLogo}/>
-                <Notifications  className='MobileOnly' clicked={this.props.notificationsClicked} NumberOfNotifications={this.props.numberOfNotifications}/>
+                {
+                    this.props.isAuthenticated?
+                        <Notifications  className='MobileOnly' clicked={this.props.notificationsClicked} NumberOfNotifications={this.props.numberOfNotifications}/>
+                    :null
+                }
+                
                 <DrawerToggle MobileMenuOpen={this.props.MobileMenuOpen} clicked={this.props.drawerToggleClicked}/>
                 <div className={classes.DesktopOnly}>
                 {this.props.isAuthenticated ?
@@ -25,4 +31,9 @@ class Toolbar extends Component {
     }
 }
 
-export default Toolbar;
+const mapStateToProps = (state) =>{
+    return {
+        isAuthenticated: state.login.token !== null
+    };
+};
+export default connect(mapStateToProps)(Toolbar);

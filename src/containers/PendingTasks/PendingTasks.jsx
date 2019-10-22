@@ -84,76 +84,82 @@ class PendingTasks extends Component{
             <div className={classes.TasksPage}>
                 {
                     (this.state.userRole === 'EX_com') || (this.state.userRole === 'highBoard') ?
-                        this.state.sentTasks.totalTasks && this.state.sentTasks.totalTasks.length>0?
-                            <section className={classes.TasksGroup}>
-                                <h2>Sent Tasks</h2>
-                                <InfiniteScroll
-                                    dataLength={this.state.sentTasks.tasks}
-                                    next={()=>this.setState(loadMore(this.state, this.state.sentTasks, 'sentTasks'))}
-                                    hasMore={this.state.sentTasks.tasksArrays.length>0}
-                                    loader={<Spinner />}
-                                    endMessage={
-                                        <p style={{textAlign: 'center'}}>
-                                            <b>There is no more tasks to show</b>
-                                        </p>
-                                    }
-                                    height={'80vh'}
-                                >
-                                    { mappingFunction(this.state.sentTasks.tasks, TaskCard) }
-                                </InfiniteScroll>
-                            </section>
-                        :<></>
+                        <section className={classes.TasksGroup}>
+                            <h2>Sent Tasks</h2>
+                            {
+                                this.state.sentTasks.totalTasks && this.state.sentTasks.totalTasks.length>0?
+                                    <InfiniteScroll
+                                        dataLength={this.state.sentTasks.tasks}
+                                        next={()=>this.setState(loadMore(this.state, this.state.sentTasks, 'sentTasks'))}
+                                        hasMore={this.state.sentTasks.tasksArrays.length>0}
+                                        loader={<Spinner />}
+                                        endMessage={
+                                            <p style={{textAlign: 'center'}}>
+                                                <b>There is no more tasks to show</b>
+                                            </p>
+                                        }
+                                        height={'80vh'}
+                                    >
+                                        { mappingFunction(this.state.sentTasks.tasks, TaskCard) }
+                                    </InfiniteScroll>
+                                :<p>No tasks had sent yet.</p>
+                            }
+                        </section>
                     :<></>
                 }
                 {
                     (this.state.userRole === 'EX_com')?
-                        this.state.mentoringTasks.totalTasks && this.state.mentoringTasks.totalTasks.length>0?
-                            <section className={classes.TasksGroup}>
-                                <h2>Mentoring Tasks</h2>
-                                <InfiniteScroll
-                                    dataLength={this.state.mentoringTasks.tasks}
-                                    next={()=>this.setState(loadMore(this.state, this.state.mentoringTasks, 'mentoringTasks'))}
-                                    hasMore={this.state.mentoringTasks.tasksArrays.length>0}
-                                    loader={<Spinner />}
-                                    endMessage={
-                                        <p style={{textAlign: 'center'}}>
-                                            <b>There is no more tasks to show</b>
-                                        </p>
-                                    }
-                                    height={'80vh'}
-                                >
-                                    {
-                                        mappingFunction(this.state.mentoringTasks.tasks, TaskCard)
-                                    }
-                                </InfiniteScroll>
-                            </section>
-                        :<></>
+                        <section className={classes.TasksGroup}>
+                            <h2>Mentoring Tasks</h2>
+                            {
+                                this.state.mentoringTasks.totalTasks && this.state.mentoringTasks.totalTasks.length>0?
+                                    <InfiniteScroll
+                                        dataLength={this.state.mentoringTasks.tasks}
+                                        next={()=>this.setState(loadMore(this.state, this.state.mentoringTasks, 'mentoringTasks'))}
+                                        hasMore={this.state.mentoringTasks.tasksArrays.length>0}
+                                        loader={<Spinner />}
+                                        endMessage={
+                                            <p style={{textAlign: 'center'}}>
+                                                <b>There is no more tasks to show</b>
+                                            </p>
+                                        }
+                                        height={'80vh'}
+                                    >
+                                        {
+                                            mappingFunction(this.state.mentoringTasks.tasks, TaskCard)
+                                        }
+                                    </InfiniteScroll>
+                                :<p>There is no tasks had sent in the committees you mentoring</p>
+                            }
+                        </section>
                     :<></>
                 }
                 {
                     (this.state.userRole === 'EX_com') || (this.state.userRole === 'highBoard') || (this.state.userRole === 'volunteer') ?
-                        this.state.personalTasks.totalTasks && this.state.personalTasks.totalTasks.length>0?
-                            <section className={classes.TasksGroup}>
-                                <h2>Personal Tasks</h2>
-                                <InfiniteScroll
-                                    dataLength={this.state.personalTasks.tasks}
-                                    next={()=>this.setState(loadMore(this.state, this.state.personalTasks, 'personalTasks'))}
-                                    hasMore={this.state.personalTasks.tasksArrays.length>0}
-                                    loader={<Spinner />}
-                                    endMessage={
-                                        <p style={{textAlign: 'center'}}>
-                                            <b>There is no more tasks to show</b>
-                                        </p>
-                                    }
-                                    height={'80vh'}
-                                >
-                                    {
+                        <section className={classes.TasksGroup}>
+                            <h2>Personal Tasks</h2>
+                            {
+                                this.state.personalTasks.totalTasks && this.state.personalTasks.totalTasks.length>0?
+                                    <InfiniteScroll
+                                        dataLength={this.state.personalTasks.tasks}
+                                        next={()=>this.setState(loadMore(this.state, this.state.personalTasks, 'personalTasks'))}
+                                        hasMore={this.state.personalTasks.tasksArrays.length>0}
+                                        loader={<Spinner />}
+                                        endMessage={
+                                            <p style={{textAlign: 'center'}}>
+                                                <b>There is no more tasks to show</b>
+                                            </p>
+                                        }
+                                        height={'80vh'}
+                                    >
+                                        {
 
-                                        mappingFunction(this.state.personalTasks.tasks, TaskCard)
-                                    }
-                                </InfiniteScroll>
-                            </section>
-                        :<></>
+                                            mappingFunction(this.state.personalTasks.tasks, TaskCard)
+                                        }
+                                    </InfiniteScroll>
+                                :<p>Good job you don't have any pendding tasks. Keep Going</p>
+                            }
+                        </section>
                     :<></>
                 }
                 {

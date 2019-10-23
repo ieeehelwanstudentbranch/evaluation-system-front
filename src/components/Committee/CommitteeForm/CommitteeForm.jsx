@@ -8,9 +8,6 @@ import * as actions from '../../../store/actions/index';
 import axios from '../../../axios';
 class CommitteForm extends Component {
     state ={
-        mentors: null,
-        directors: null,
-        hrs_od: null,
         initialValues: {
             name: '',
             mentor: '',

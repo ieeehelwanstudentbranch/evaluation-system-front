@@ -30,20 +30,18 @@ class CommitteForm extends Component {
 
     componentDidMount(){
         axios.get('/addcommittee')
-        .then(response=>{
-            let mentors = response.data.data.mentor;
-            let directors = response.data.data.director;
-            let hrs_od = response.data.data['hr-od'];
-            this.setState({
-                mentors: mentors,
-                directors: directors,
-                hrs_od: hrs_od
-            });
-        })
-        .catch(error => {
-            this.setState({error: error});
-            console.log(error)
-        })
+            .then(response=>{
+                this.setState({
+                    mentors: response.data.data[0].mentor,
+                    directors: response.data.data[0].director,
+                    hrs_od: response.data.data[0]['hr-od']
+                });
+            })
+            .catch(error => {
+                this.setState({error: error});
+                console.log(error)
+            })
+        ;
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
@@ -93,10 +91,10 @@ class CommitteForm extends Component {
                                 <option value="">Select Committee Mentor</option>
                                 { this.state.mentors ?
                                     this.state.mentors.map((mentor, index)=>{
-                                    return (
-                                        <option key={index} value={mentor.id}>{`${mentor.firstName} ${mentor.lastName}`}</option>
-                                    )
-                                    }): <option value="">failed to get mentors, please try again later</option>
+                                        return (
+                                            <option key={index} value={mentor.id}>{`${mentor.firstName} ${mentor.lastName}`}</option>
+                                        )
+                                    }): <option value="">Failed to get mentors, please try again later</option>
                                 }
                             </Field>
                             <ErrorMessage name="mentor" />
@@ -110,7 +108,7 @@ class CommitteForm extends Component {
                                             return (
                                                 <option key={index} value={director.id}>{`${director.firstName} ${director.lastName}`}</option>
                                             )
-                                        }):<></>
+                                        }): <option value="">Failed to get directors, please try again later</option>
                                     }
                                 </Field>
                                 <ErrorMessage name="director"/>
@@ -124,7 +122,7 @@ class CommitteForm extends Component {
                                         return (
                                             <option key={index} value={hr_od.id}>{`${hr_od.firstName} ${hr_od.lastName}`}</option>
                                         )
-                                        }): <option value="">failed to get HR-Coordinators, please try again later</option>
+                                        }): <option value="">Failed to get HR-Coordinators, please try again later</option>
                                     }
                                 </Field>
                                 <ErrorMessage name="hr_od" />

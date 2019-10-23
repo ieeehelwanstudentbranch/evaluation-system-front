@@ -43,26 +43,26 @@ class CreateTask extends Component {
                 })
         }).then(response=>{
             let ex_com = {
-                value: response.EX_com.map(member=>{
+                value: response.EX_com.map(mentor=>{
                     return(
-                        member.id !== this.props.userID ? member.id : null
+                        mentor.id !== this.props.userID ? mentor.id : null
                     )
                 }),
                 label: 'EX_COM',    
-                children: response.EX_com.map(member=>{
+                children: response.EX_com.map(mentor=>{
                     return {
-                        value: member.id,
-                        label: `${member.firstName} ${member.lastName}`,
-                        disabled:member.id === this.props.userID
+                        value: mentor.id,
+                        label: `${mentor.firstName} ${mentor.lastName}`,
+                        disabled:mentor.id === this.props.userID
                     }
                 })
             }
-            if(ex_com){
+            if(ex_com.children.length>0){
                 this.setState({
                     nodes: [...this.state.nodes, ex_com]
                 })
             }
-            let highBoard ;
+            let highBoard;
             if(response.highBoard){
                 let highBoardArray = Object.keys(response.highBoard).map((key)=> {
                     return response.highBoard[key];
@@ -125,6 +125,7 @@ class CreateTask extends Component {
     }
     
     render(){
+        console.log(this.state.nodes);
         const icons = {
             check: <MdCheckBox className="rct-icon rct-icon-check" />,
             uncheck: <MdCheckBoxOutlineBlank className="rct-icon rct-icon-uncheck" />,

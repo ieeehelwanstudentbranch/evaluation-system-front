@@ -192,7 +192,7 @@ class SingleTask extends Component{
             <>
             {this.props.loading? <Spinner /> : task}
             {
-                <Modal show={this.state.review} modalClosed={this.cancelReviewing}>
+                <Modal title="Review Task" show={this.state.review} modalClosed={this.cancelReviewing}>
                     <ReviewTask taskID={this.state.id}/>
                 </Modal>
             }

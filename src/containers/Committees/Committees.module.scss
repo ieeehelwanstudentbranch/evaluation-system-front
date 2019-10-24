@@ -3,16 +3,14 @@
 .Committees{
     display: flex;
     flex-direction: column;
-    padding: 20px;
     width: 100%;
-    position: relative;
     min-height: 90%;
     @media screen and (min-width: $large_tablet_min_width) {
         flex-direction: row;
         flex-wrap: wrap;
     }
     .AddCommittee{
-        position: absolute;
+        position: fixed;
         bottom: 20px;
         right: 20px;
         width: 50px;

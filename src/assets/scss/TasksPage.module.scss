@@ -2,35 +2,26 @@
 @import './color_variables';
 .TasksPage{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    @media screen and (max-width: $large_tablet_max_width) {
-        flex-direction: column;
-        width: 95vw;
-    }
     @media screen and (min-width: $large_min_width) {
+        flex-direction: row;
         justify-content: space-between;
     }
     .TasksGroup{
         display: flex;
         flex-direction: column;
-        margin: 20px 0;
-        padding: 0 10px;
-        border-right: 1px solid #ccc;
-        article{
-            width: 100%
-        }
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 10px 10px;
+        margin-bottom: 20px;
         h2{
-            padding: 10px 0;
             border-bottom: 3px solid $gray;
             margin-bottom: 20px;
         }
-        @media screen and (max-width: $large_tablet_max_width) {
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 95%; 
-        }
         @media screen and (min-width: $large_min_width) {
+            border: none;
+            border-right: 1px solid #ccc;
             &:first-child{
                 padding-left: 0;
             }

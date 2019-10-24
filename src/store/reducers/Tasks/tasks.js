@@ -74,6 +74,24 @@ const deliveringTasksFailed = (state, action) => {
     }
 }
 
+const refuseTasksSuccess = (state, action) => {
+    return{
+        ...state,
+        loading: false,
+        error: null,
+        message: action.message
+    }
+}
+
+const refuseTasksFailed = (state, action) => {
+    return{
+        ...state,
+        loading: false,
+        error: action.error,
+        message: null
+    }
+}
+
 const tasksReducer = (state = initialState, action)=>{
     switch (action.type) {
         // handle Fetching tasks
@@ -118,6 +136,18 @@ const tasksReducer = (state = initialState, action)=>{
 
         case actionTypes.DELIVER_TASK_SUCCESS:
             return deliveringTasksSuccess(state, action);
+
+        // Refuse Task
+        case actionTypes.REFUSE_TASK_START:
+            return reducers.loadingHandler(state, action);
+
+        //// handle Success of Refuseing tasks
+        case actionTypes.REFUSE_TASK_SUCCESS:
+            return refuseTasksSuccess(state, action);
+
+        //// handle refusing tasks failer
+        case actionTypes.REFUSE_TASK_FAILED:
+            return refuseTasksFailed(state, action);
 
         default:
             return state

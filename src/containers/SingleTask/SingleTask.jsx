@@ -8,7 +8,9 @@ import InformationTemplate from '../../components/UI/InformationTemplate/Informa
 import Button from '../../components/UI/Button/Button';
 import {Link, Redirect} from 'react-router-dom';
 import Modal from '../../components/UI/Modal/Modal';
-import ReviewTask from '../../components/ReviewTask/ReviewTask'
+import ReviewTask from '../../components/ReviewTask/ReviewTask';
+import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 class SingleTask extends Component{
     state={
@@ -39,15 +41,7 @@ class SingleTask extends Component{
             review: false,
         });
     }
-    refuseTask=(id)=>{
-        axios.post(`/refuse-task/${id}`)
-            .then(response=>{
-                console.log(response)
-            }).catch(error=>{
-                console.log(error.response)
-            })
-        ;
-    }
+
     render(){
         let deadline = new Date(this.state.deadline),
             creating_time = this.state.created_at? new Date(this.state.created_at.date):null,
@@ -55,6 +49,10 @@ class SingleTask extends Component{
         let task;
         if (this.state.title){
             task = <>
+            <div>
+                {this.props.error? <span>{this.props.error}</span>: null}
+                {this.props.message? <span>{this.props.message}</span>: null}
+            </div>
             <div className={classes.DetailsContainer}>
                 <div className={classes.TaskDetails}>
                     {
@@ -162,7 +160,7 @@ class SingleTask extends Component{
                 (this.state.sender_info[0].id === this.props.userID ) && (this.state.status === 'deliver')?
                     <div className={classes.Actions}>
                         <Button type="submit" btnType="Success" clicked={this.reviewingStart}>Accept task</Button>
-                        <Button type="submit" btnType="Danger" clicked={()=>this.refuseTask(this.state.id)}>Refuse task</Button>
+                        <Button type="submit" btnType="Danger" clicked={()=>this.props.refuseTask(this.state.id)}>Refuse task</Button>
                     </div>
                 :(this.state.receiver_info[0].id === this.props.userID) && (this.state.status === 'pending')?
                     <div className={classes.Actions}>
@@ -192,7 +190,7 @@ class SingleTask extends Component{
         }
         return (
             <>
-            {task}
+            {this.props.loading? <Spinner /> : task}
             {
                 <Modal show={this.state.review} modalClosed={this.cancelReviewing}>
                     <ReviewTask taskID={this.state.id}/>
@@ -205,7 +203,17 @@ class SingleTask extends Component{
 
 const mapStateToProps = state => {
     return{
-        userID: parseInt(state.login.userID)
+        userID: parseInt(state.login.userID),
+        loading: state.tasks?state.tasks.loading:null,
+        error: state.tasks?state.tasks.error:null,
+        message: state.tasks?state.tasks.message:null
     }
 }
-export default connect(mapStateToProps, null)(SingleTask)
+
+const mapDispatchToProps = dispatch => {
+    return{
+        refuseTask: (taskID)=>dispatch(actions.refuseTask(taskID))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTask)

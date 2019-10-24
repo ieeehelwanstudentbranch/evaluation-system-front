@@ -126,7 +126,7 @@ export const deliverTaskSuccess = (response) => {
 export const deliverTaskFailed = (response) => {
     return{
         type: actionTypes.DELIVER_TASK_FAILED,
-        message: response
+        error: response
     }
 }
 
@@ -197,5 +197,36 @@ export const fetchCompletedTasksSuccess = (tasks) => {
         completedSentTasks: tasks.sent_tasks?tasks.sent_tasks :null,
         completedPersonalTasks: tasks.personal_tasks? tasks.personal_tasks:null,
         completedCoordinatingTasks: tasks.coordinating_tasks?coordinating_tasks_array:null
+    }
+}
+
+export const refuseTask=(id)=>{
+    return dispatch => {
+        dispatch(actions.loadingHandler(actionTypes.REFUSE_TASK_START));
+        axios.post(`/refuse-task/${id}`)
+            .then(response=>{
+                console.log(response)
+                if(response.status === 200){
+                    dispatch(refuseTaskSuccess(response.data.message))
+                }
+                
+            }).catch(error=>{
+                console.log(error.response)
+            })
+        ;
+    }
+}
+
+export const refuseTaskSuccess = (response) => {
+    return{
+        type: actionTypes.REFUSE_TASK_SUCCESS,
+        message: response
+    }
+}
+
+export const refuseTaskFailed = (response) => {
+    return{
+        type: actionTypes.REFUSE_TASK_FAILED,
+        error: response
     }
 }

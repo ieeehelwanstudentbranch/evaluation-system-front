@@ -24,10 +24,6 @@ code {
   padding: 0 20px;
 }
 
-
-/* #avatar_container{
-  width: 100% !important
-} */
 .konvajs-content{
   width: 100% !important;
 }
@@ -36,4 +32,8 @@ code {
   @media (min-width: $mobile_landscape_max_width) {
     display: none;
   }
+}
+
+.ql-container.ql-snow{
+  min-height: 90px;
 }

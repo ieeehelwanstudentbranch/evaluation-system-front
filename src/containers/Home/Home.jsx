@@ -46,7 +46,7 @@ class Home extends Component{
             if(this.state.loading){
                 component = <Spinner />
             } else if(this.props.error){
-                component = <Modal show={this.state.error} modalClosed={this.CancelHandler}>{this.state.error}</Modal>
+                component = <Modal title="Error Handler" show={this.state.error} modalClosed={this.CancelHandler}>{this.state.error}</Modal>
             }
         }
         return(

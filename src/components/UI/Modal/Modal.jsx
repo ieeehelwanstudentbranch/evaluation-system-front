@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Modal.module.scss';
 import Backdrop from '../Backdrop/Backdrop';
-import Logo from '../../Logo/ColoredLogo';
 import {MdClose} from 'react-icons/md';
 
 class Modal extends Component{
@@ -19,7 +18,7 @@ class Modal extends Component{
                     }}
                 >
                     <header className={classes.ModalHeader}>
-                        <Logo height='100%'/>
+                        {this.props.title? <h3>{this.props.title}</h3>:null}
                         <div className={classes.Icon}>
                             <MdClose onClick={this.props.modalClosed}/>
                         </div>

@@ -49,13 +49,13 @@ class SingleTask extends Component{
         ;
     }
     render(){
-
+        console.log(this.state.deadline)
         let deadline = new Date(this.state.deadline),
             creating_time = this.state.created_at? new Date(this.state.created_at.date):null,
             delivered_at = this.state.delivered_at? new Date(this.state.delivered_at.date):null;
-        let task= <> </>;
+        let task;
         if (this.state.title){
-            task = <div>
+            task = <>
             <div className={classes.DetailsContainer}>
                 <div className={classes.TaskDetails}>
                     {
@@ -159,27 +159,27 @@ class SingleTask extends Component{
                     </InformationTemplate>
                 :<></>
             }
-            <div className={classes.Actions}>
             {
                 (this.state.sender_info[0].id === this.props.userID ) && (this.state.status === 'deliver')?
-                    <>
+                    <div className={classes.Actions}>
                         <Button type="submit" btnType="Success" clicked={this.reviewingStart}>Accept task</Button>
                         <Button type="submit" btnType="Danger" clicked={()=>this.refuseTask(this.state.id)}>Refuse task</Button>
-                    </>
+                    </div>
                 :(this.state.receiver_info[0].id === this.props.userID) && (this.state.status === 'pending')?
-                    <Link to={{
+                    <div className={classes.Actions}>
+                        <Link to={{
                             pathname: `/deliver-task/${this.state.id}`,
                             state: {title: this.state.title}
                         }}
                         className={classes.DeliverTask}
-                    >
-                        Deliver Task
-                    </Link>
-                :<></>
+                        >
+                            Deliver Task
+                        </Link>
+                    </div>
+                :null
             }
-            </div>
             
-        </div>
+        </>
         } else if (this.state.error && typeof this.state.error === 'string'){
             task = <p style={{
                 color: '#ca0000',

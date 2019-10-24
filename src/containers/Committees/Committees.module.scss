@@ -1,9 +1,14 @@
 @import '../../assets/scss/color_variables';
+@import '../../assets/scss/screen_sizes';
 .Committees{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     padding: 20px;
     width: 100%;
+    @media screen and (min-width: $large_tablet_min_width) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
     .AddCommittee{
         position: absolute;
         bottom: 20px;

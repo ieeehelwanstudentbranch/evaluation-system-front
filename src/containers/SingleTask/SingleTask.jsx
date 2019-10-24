@@ -49,7 +49,6 @@ class SingleTask extends Component{
         ;
     }
     render(){
-        console.log(this.state.deadline)
         let deadline = new Date(this.state.deadline),
             creating_time = this.state.created_at? new Date(this.state.created_at.date):null,
             delivered_at = this.state.delivered_at? new Date(this.state.delivered_at.date):null;
@@ -108,7 +107,7 @@ class SingleTask extends Component{
                 <div className={classes.TaskDetails}>
                     {
                         this.state.receiver_info ?
-                            <InformationHeader {...this.state.receiver_info[0]} created_at={this.state.delivered_at}/>
+                            <InformationHeader {...this.state.receiver_info[0]} created_at={this.state.delivered_details?this.state.delivered_at.date:null}/>
                         :null
                     }
                     {

@@ -43,6 +43,7 @@
 .Actions{
     display: flex;
     justify-content: flex-end;
+    align-self: flex-end;
     button{
         &:first-of-type{
             margin-right: 10px;

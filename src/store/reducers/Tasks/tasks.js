@@ -62,7 +62,7 @@ const deliveringTasksSuccess = (state, action) => {
         message: action.message
     }
 }
-
+// eslint-disable-next-line
 const deliveringTasksFailed = (state, action) => {
     return{
         ...state,

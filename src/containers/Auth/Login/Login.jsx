@@ -7,7 +7,6 @@ import * as classes from './Login.module.scss';
 import * as actions from '../../../store/actions/index';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import {Redirect } from 'react-router-dom';
-import Logo from '../../../components/Logo/ColoredLogo'
 class Login extends Component{
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
@@ -38,7 +37,6 @@ class Login extends Component{
             form =  <Spinner />
         } else {
             form = <>
-                <Logo className={classes.LoginLogo}/>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}

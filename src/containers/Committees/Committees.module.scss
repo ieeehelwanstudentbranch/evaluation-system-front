@@ -5,6 +5,8 @@
     flex-direction: column;
     padding: 20px;
     width: 100%;
+    position: relative;
+    min-height: 90%;
     @media screen and (min-width: $large_tablet_min_width) {
         flex-direction: row;
         flex-wrap: wrap;

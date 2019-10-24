@@ -1,23 +1,32 @@
 @import "../../../assets/scss/color_variables";
+@import "../../../assets/scss/screen_sizes";
 .Committee{
-    width: 70%;
-    text-align: center;
-    border: 1px solid $lite_gray;
-    border-collapse: collapse;
-    margin: 20px 0; 
-    thead,tbody,tr,td,th{
+    display: flex;
+    justify-content: center;
+    overflow-x: scroll;
+    width: 100%;
+    .CommitteeTable{
+        width: 100%;
+        text-align: center;
         border: 1px solid $lite_gray;
-        text-transform: uppercase;
-        padding: 5px;
-        a{
-            color: $main_color;
-            text-transform: capitalize
+        border-collapse: collapse;
+        @media (min-width: $large_min_width) {
+            width: 70%;
         }
-    }
-    tbody{
-        img{
-            border-radius: 50%;
-            vertical-align: middle
+        thead,tbody,tr,td,th{
+            border: 1px solid $lite_gray;
+            text-transform: uppercase;
+            padding: 5px;
+            a{
+                color: $main_color;
+                text-transform: capitalize
+            }
+        }
+        tbody{
+            img{
+                border-radius: 50%;
+                vertical-align: middle
+            }
         }
     }
 }

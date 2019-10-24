@@ -33,6 +33,11 @@ code {
     display: none;
   }
 }
+.DesktopOnly {
+  @media (max-width: $small_tablet_max_width) {
+    display: none;
+  }
+}
 
 .ql-container.ql-snow{
   min-height: 90px;

@@ -42,7 +42,7 @@ class SingleTask extends Component{
     refuseTask=(id)=>{
         axios.post(`/refuse-task/${id}`)
             .then(response=>{
-                console.log(response.data)
+                console.log(response)
             }).catch(error=>{
                 console.log(error.response)
             })

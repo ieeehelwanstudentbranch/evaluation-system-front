@@ -10,7 +10,7 @@ import registerReducer from './store/reducers/register';
 import committeesReducer from './store/reducers/committees';
 import postsReducer from './store/reducers/posts';
 import userReducer from './store/reducers/user';
-import tasksReducer from './store/reducers/tasks';
+import tasksReducer from './store/reducers/Tasks/tasks';
 import evaluateTaskReducer from './store/reducers/evaluateTask';
 import logoutReducer from './store/reducers/logout'
 

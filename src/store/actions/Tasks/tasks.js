@@ -1,6 +1,6 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios';
-import * as actions from './repeatedActions';
+import * as actionTypes from '../actionTypes';
+import axios from '../../../axios';
+import * as actions from '../repeatedActions';
 
 export const handleTaskDetails = (data) => {
     return {
@@ -49,28 +49,28 @@ export const sendTask = (title, deadline, details, files, receptors) => {
             dispatch(sendTaskSuccess(response.data.success));
         }).catch(error=>{
             console.log(error.response)
-            // let convertedErrors = Object.keys(error.response.data.errors).map((key) =>{
-            //     return [error.response.data.errors[key]];
-            // });
-            // let errorsArray = [];
-            // // eslint-disable-next-line
-            // convertedErrors.map((error, index)=>{
-            //     if(typeof error === 'object'){
-            //         // eslint-disable-next-line
-            //         error.map((err, index)=>{
-            //             if(typeof err === 'object'){
-            //                 err.map((err, index)=>(
-            //                     errorsArray.push(err)
-            //                 ))
-            //             }else{
-            //                 errorsArray.push(err)
-            //             }
-            //         })
-            //     }else{
-            //         errorsArray.push(error)
-            //     }
-            // })
-            // dispatch(sendTaskFailed(errorsArray));
+            let convertedErrors = Object.keys(error.response.data.errors).map((key) =>{
+                return [error.response.data.errors[key]];
+            });
+            let errorsArray = [];
+            // eslint-disable-next-line
+            convertedErrors.map((error, index)=>{
+                if(typeof error === 'object'){
+                    // eslint-disable-next-line
+                    error.map((err, index)=>{
+                        if(typeof err === 'object'){
+                            err.map((err, index)=>(
+                                errorsArray.push(err)
+                            ))
+                        }else{
+                            errorsArray.push(err)
+                        }
+                    })
+                }else{
+                    errorsArray.push(error)
+                }
+            })
+            dispatch(sendTaskFailed(errorsArray));
         });
     }
 }
@@ -92,7 +92,6 @@ export const sendTaskFailed = (error) => {
 export const deliverTask = (taskId, details, files) => {
     return dispatch => {
         dispatch(actions.loadingHandler(actionTypes.DELIVER_TASK_START));
-
         let formData = new FormData();
         formData.append('body', details);
         
@@ -107,10 +106,27 @@ export const deliverTask = (taskId, details, files) => {
               'content-type': 'multipart/form-data'
             }
         }).then(response=>{
-            console.log(response);
+            if(response.status === 200){
+                console.log(response)
+                dispatch(deliverTaskSuccess(response.data.message));
+            }
         }).catch(error=>{
             console.log(error.response)
         });
+    }
+}
+
+export const deliverTaskSuccess = (response) => {
+    return{
+        type: actionTypes.DELIVER_TASK_SUCCESS,
+        message: response
+    }
+}
+
+export const deliverTaskFailed = (response) => {
+    return{
+        type: actionTypes.DELIVER_TASK_FAILED,
+        message: response
     }
 }
 

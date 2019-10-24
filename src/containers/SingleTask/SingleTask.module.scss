@@ -3,8 +3,7 @@
 .DetailsContainer{
     display: flex;
     flex-direction: column;
-    width: 95%;
-    margin: 20px 0;
+    width: 100%;
     @media screen and (min-width: $large_min_width){
         flex-direction: row;
         justify-content: space-between;

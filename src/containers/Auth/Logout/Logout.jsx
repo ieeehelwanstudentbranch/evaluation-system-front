@@ -10,7 +10,7 @@ class Logout extends Component {
         this.props.onLogout(token)
     }
     render() {
-        return <Redirect to="/login" />        
+        return <Redirect to="/" />        
     }
 }
 const mapStateToProps = state => {

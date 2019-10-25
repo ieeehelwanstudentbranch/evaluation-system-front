@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import classes from '../../../../UI/Input/Input.module.scss';
+import classes from '../../../../../assets/scss/Input.module.scss';
 import Spinner from '../../../../UI/Spinner/Spinner';
 import axios from '../../../../../axios';
 

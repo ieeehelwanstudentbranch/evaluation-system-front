@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import InputClasses from '../../UI/Input/Input.module.scss';
+import InputClasses from '../../../assets/scss/Input.module.scss';
 import Button from '../../UI/Button/Button';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';

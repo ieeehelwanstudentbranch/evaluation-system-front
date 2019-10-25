@@ -1,13 +1,15 @@
 @import '../../assets/scss/color_variables';
+@import '../../assets/scss/screen_sizes';
 .Committees{
     display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
     width: 100%;
+    @media screen and (min-width: $large_tablet_min_width) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
     .AddCommittee{
-        position: absolute;
+        position: fixed;
         bottom: 20px;
         right: 20px;
         width: 50px;

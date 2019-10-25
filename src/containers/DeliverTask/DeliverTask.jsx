@@ -1,42 +1,39 @@
 import React, {Component} from "react";
 import classes from './DeliverTask.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
-import {Redirect} from 'react-router-dom';
 
 import InputClasses from '../../components/UI/Input/Input.module.scss';
 import DragableArea from "../../components/DragableArea/DragableArea";
 import Button from '../../components/UI/Button/Button';
 import RichEditor from '../../components/RichEditor/RichEditor';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 class CreateTask extends Component {
 
-    componentDidMount(){}
-
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
-        props.submitTask(props.match.params.id, props.taskDetails, props.taskFiles);
+        props.submitTask(props.taskID, props.taskDetails, props.taskFiles);
         setSubmitting(false);
         return;
     }
     
     render(){
-        if (!this.props.location.state){
-            return <Redirect to="/"/>
-        }
         const initialValues={
-            title: this.props.location.state.title,
+            title: this.props.taskTitle || '',
         };
         return (
-            <Formik
+            this.props.loading?
+                <Spinner />
+            :<Formik
                 enableReinitialize={true}
                 initialValues={initialValues}
                 onSubmit={this.handleSubmit}
                 render={(FormikProps)=>(
                     <Form className={classes.TaskForm}>
                         <div className={classes.leftSection}>
-                            {this.props.error? <span>Sorry something went wrong please try again later</span>: null}
+                            {this.props.error? <span>{this.props.error}</span>: null}
                             {this.props.message? <span>{this.props.message}</span>: null}
                             <div className={classes.BasicInfo}>
                                 <div className={InputClasses.Input}>
@@ -59,6 +56,11 @@ class CreateTask extends Component {
 const mapStateToProps = state => {
     return{
         userID: state.user.userData?state.user.userData.id:null,
+
+        loading: state.tasks?state.tasks.loading:null,
+        error: state.tasks?state.tasks.error:null,
+        message: state.tasks?state.tasks.message:null,
+
         taskDetails: state.tasks.data? state.tasks.data:null,
         taskFiles: state.tasks.files? state.tasks.files: null
     }

@@ -1,53 +1,43 @@
 @import '../../assets/scss/screen_sizes';
 .TaskForm {
     display: flex;
-    flex-flow: column;
-    flex-wrap: wrap;
-    width: 85%;
-    padding: 10px;
-    @media screen and (max-width: $small_tablet_max_width){
-        flex-flow: column;
-        width: 100%;
-    }
-
-    @media screen and (max-width: $large_tablet_max_width){
-        width: 90%;
-    }
+    flex-direction: column;
     .TaskFormContainer{
         display: flex;
+        flex-direction: column;
         .leftSection{
-            width: 70%;
-            @media screen and (max-width: $large_tablet_max_width){
-                flex-flow: column;
-                width: 100%;
-            }
             .BasicInfo {
                 display: flex;
-                justify-content: space-between;
-                margin-bottom: 20px;
-                @media screen and (max-width: $large_tablet_max_width){
-                    flex-flow: column;
-                    width: 100%;
-                }
-                div{
-                    width: 49%;
-                    @media screen and (max-width: $large_tablet_max_width){
-                        width: 100%;
-                    }
-                }
+                flex-flow: column;
             }
         }
         .rightSection{
-            width: 30%;
-            @media screen and (max-width: $large_tablet_max_width){
-                flex-flow: column;
-                width: 100%;
-                margin-top: 20px
+            margin-top: 20px
+        }
+        @media screen and (min-width: $large_min_width){
+            flex-direction: row;
+            justify-content: space-between;
+            .leftSection{
+                width: 70%;
+                .BasicInfo{
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                    div{
+                        width: 49%;
+                    }
+                }
+            }
+            .rightSection{
+                width: 30%;
             }
         }
     }
     .SubmitButton{
         width: fit-content;
         align-self: flex-end;
+    }
+    @media screen and (min-width: $large_min_width){
+        width: 90%;
     }
 }

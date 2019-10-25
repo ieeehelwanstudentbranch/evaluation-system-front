@@ -1,9 +1,9 @@
 @import '../../../assets/scss/Input.module.scss';
-.LoginLogo{
-    img{
-        width: 100%
-    }
-}
+@import '../../../assets/scss/color_variables';
 .LoginButton{
     width: 100%
+}
+.CreateAccountLink{
+    color: $main_color;;
+    cursor: pointer;
 }

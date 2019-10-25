@@ -8,7 +8,10 @@ import InformationTemplate from '../../components/UI/InformationTemplate/Informa
 import Button from '../../components/UI/Button/Button';
 import {Link, Redirect} from 'react-router-dom';
 import Modal from '../../components/UI/Modal/Modal';
-import ReviewTask from '../../components/ReviewTask/ReviewTask'
+import ReviewTask from '../../components/ReviewTask/ReviewTask';
+import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import DeliverTask from '../DeliverTask/DeliverTask';
 
 class SingleTask extends Component{
     state={
@@ -23,7 +26,7 @@ class SingleTask extends Component{
                     ...response.data.data
                 })
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response)
                 if (error.response.status === 404){
                     this.setState({error: 404});
                 }
@@ -39,23 +42,18 @@ class SingleTask extends Component{
             review: false,
         });
     }
-    refuseTask=(id)=>{
-        axios.post(`/refuse-task/${id}`)
-            .then(response=>{
-                console.log(response.data)
-            }).catch(error=>{
-                console.log(error.response)
-            })
-        ;
-    }
-    render(){
 
+    render(){
         let deadline = new Date(this.state.deadline),
             creating_time = this.state.created_at? new Date(this.state.created_at.date):null,
             delivered_at = this.state.delivered_at? new Date(this.state.delivered_at.date):null;
-        let task= <> </>;
+        let task;
         if (this.state.title){
-            task = <div>
+            task = <>
+            <div>
+                {this.props.error? <span>{this.props.error}</span>: null}
+                {this.props.message? <span>{this.props.message}</span>: null}
+            </div>
             <div className={classes.DetailsContainer}>
                 <div className={classes.TaskDetails}>
                     {
@@ -108,7 +106,7 @@ class SingleTask extends Component{
                 <div className={classes.TaskDetails}>
                     {
                         this.state.receiver_info ?
-                            <InformationHeader {...this.state.receiver_info[0]} created_at={this.state.delivered_at}/>
+                            <InformationHeader {...this.state.receiver_info[0]} created_at={this.state.delivered_details?this.state.delivered_at.date:null}/>
                         :null
                     }
                     {
@@ -159,27 +157,27 @@ class SingleTask extends Component{
                     </InformationTemplate>
                 :<></>
             }
-            <div className={classes.Actions}>
             {
                 (this.state.sender_info[0].id === this.props.userID ) && (this.state.status === 'deliver')?
-                    <>
+                    <div className={classes.Actions}>
                         <Button type="submit" btnType="Success" clicked={this.reviewingStart}>Accept task</Button>
-                        <Button type="submit" btnType="Danger" clicked={()=>this.refuseTask(this.state.id)}>Refuse task</Button>
-                    </>
+                        <Button type="submit" btnType="Danger" clicked={()=>this.props.refuseTask(this.state.id)}>Refuse task</Button>
+                    </div>
                 :(this.state.receiver_info[0].id === this.props.userID) && (this.state.status === 'pending')?
-                    <Link to={{
+                    <div className={classes.Actions}>
+                        <Link to={{
                             pathname: `/deliver-task/${this.state.id}`,
                             state: {title: this.state.title}
                         }}
                         className={classes.DeliverTask}
-                    >
-                        Deliver Task
-                    </Link>
-                :<></>
+                        >
+                            Deliver Task
+                        </Link>
+                    </div>
+                :null
             }
-            </div>
             
-        </div>
+        </>
         } else if (this.state.error && typeof this.state.error === 'string'){
             task = <p style={{
                 color: '#ca0000',
@@ -193,12 +191,25 @@ class SingleTask extends Component{
         }
         return (
             <>
-            {task}
-            {
-                <Modal show={this.state.review} modalClosed={this.cancelReviewing}>
-                    <ReviewTask taskID={this.state.id}/>
-                </Modal>
-            }
+                {this.props.loading? <Spinner /> : task}
+                {
+                    this.state.receiver_info?
+                        (this.state.receiver_info[0].id === this.props.userID) && (this.state.status === 'pending')?
+                            <Modal title="Deliver Task" show={this.props.history.location.pathname===`/deliver-task/${this.state.id}`} modalClosed={()=>this.props.history.goBack()}>
+                                <DeliverTask taskID={this.state.id} taskTitle={this.state.title}/>
+                            </Modal>
+                        :null
+                    :null
+                }
+                {
+                    this.state.sender_info?
+                        (this.state.sender_info[0].id === this.props.userID) && (this.state.status === 'deliver')?
+                            <Modal title="Review Task" show={this.state.review} modalClosed={this.cancelReviewing}>
+                                <ReviewTask taskID={this.state.id}/>
+                            </Modal>
+                        :null
+                    :null
+                }
             </>
         )
     }
@@ -206,7 +217,17 @@ class SingleTask extends Component{
 
 const mapStateToProps = state => {
     return{
-        userID: parseInt(state.login.userID)
+        userID: parseInt(state.login.userID),
+        loading: state.tasks?state.tasks.loading:null,
+        error: state.tasks?state.tasks.error:null,
+        message: state.tasks?state.tasks.message:null
     }
 }
-export default connect(mapStateToProps, null)(SingleTask)
+
+const mapDispatchToProps = dispatch => {
+    return{
+        refuseTask: (taskID)=>dispatch(actions.refuseTask(taskID))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTask)

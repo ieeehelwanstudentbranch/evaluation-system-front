@@ -68,7 +68,7 @@ class SingleProfile extends Component {
             <>
                 {profile}
                 {
-                    <Modal show={this.state.editing} modalClosed={this.props.cancelEditing}>
+                    <Modal title="Edit Profile" show={this.state.editing} modalClosed={this.props.cancelEditing}>
                         {this.props.editableContent === 'profileImage'?
                             this.props.profileData.image?
                                 <>

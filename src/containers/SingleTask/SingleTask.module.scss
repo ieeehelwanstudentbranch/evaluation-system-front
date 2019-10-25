@@ -2,25 +2,29 @@
 @import '../../assets/scss/screen_sizes';
 .DetailsContainer{
     display: flex;
-    @media screen and (max-width: $large_tablet_max_width ){
-        flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    @media screen and (min-width: $large_min_width){
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+        width: 100%;
     }
     .TaskDetails {
-        width: calc(100%/2);
-        padding: 10px;
         display: flex;
         flex-direction: column;
+        padding: 10px;
         border-radius: 4px;
         border: 1px solid #ccc;
-        &:first-of-type{
-            margin-right: 10px;
-        }
-        &:last-of-type{
-            margin-left: 10px;
-        }
-        @media screen and (max-width: $large_tablet_max_width ){
-            width: 95%;
-            margin: 10px auto
+        width: 100%;
+        margin-bottom: 20px;
+        @media screen and (min-width: $large_min_width){
+            &:first-child{
+                margin-right: 10px;
+            }
+            &:last-child{
+                margin-left: 10px;
+            }
         }
         .Files{
             list-style-type: none;
@@ -39,6 +43,7 @@
 .Actions{
     display: flex;
     justify-content: flex-end;
+    align-self: flex-end;
     button{
         &:first-of-type{
             margin-right: 10px;

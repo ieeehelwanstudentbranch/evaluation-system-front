@@ -168,7 +168,7 @@ class dragableArea extends Component{
                             </div>
                         </section>
                         <div className={classes.Validation}>
-                            <p>Accebtable Files: {this.state.acceptedFiles.sort().join(', ')}</p>
+                            <p>Acceptable Files: {this.state.acceptedFiles.sort().join(', ')}</p>
                             <div className={classes.SizeValidation}>
                                 <p>Max File Size: {formatBytes(this.state.maxFileSize)}</p>
                                 <p>Max Files size: {formatBytes(this.state.maxFilesSize)}</p>

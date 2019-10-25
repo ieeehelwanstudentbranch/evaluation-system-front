@@ -26,7 +26,17 @@ class RichEditor extends Component {
         return(
             <ReactQuill
                 className={classes.Editor}
-                placeholder="Write a new post"
+                placeholder= {
+                    this.props.place ==='tasks'?
+                        "Please, Write the task details it should contain a full clear description of the task that helps volunteer to complete the task and increase the maximum value of volunteering."
+                    :this.props.place ==='posts'?
+                        "Write your post details, it might contain and image, video, links, etc.."
+                    :this.props.place ==='deliverTask'?
+                        "Be specific and clear while delivering your task remember everything you will write will be a part of your evaluation."
+                    :this.props.place ==='evaluateTask'?
+                        "Write a full evaluation to the volunteer that helps volunteer to develop his self and gain maximum value of volunteering."
+                    :" write details"
+                }
                 theme="snow"
                 value={this.props.data}
                 modules={this.modules}

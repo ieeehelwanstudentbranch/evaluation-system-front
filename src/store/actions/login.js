@@ -70,7 +70,6 @@ export const checkAutherization = (id, token) => {
     return dispatch => {
         dispatch(actions.loadingHandler(actionTypes.LOGIN_START));
         let userID = parseInt(id);
-        console.log(userID)
         axios.get(`/check-token/${userID}/${token}`)
             .then(response=>{
                 // eslint-disable-next-line

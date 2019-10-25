@@ -5,16 +5,20 @@
 }
 .MainApp {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    align-content: center;
     width: 100vw;
-    @media (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width) {
+    padding: 10px 10px;
+    @media (min-width: $large_tablet_min_width) {
         width: 80vw;
         margin-left: 20vw;
+        padding-left: 20px
     }
     @media (min-width: $large_min_width){
         width: 85vw;
         margin-left: 15vw;
-        padding: 20px 30px;
     }
 }
 aside {

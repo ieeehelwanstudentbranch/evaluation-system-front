@@ -16,7 +16,6 @@ import * as actions from '../store/actions/index';
 import SinglePost from '../components/Post/SinglePost/SinglePost';
 import SingleProfile from './SingleProfile/SingleProfile';
 import SingleTask from './SingleTask/SingleTask';
-import DeliverTask from './DeliverTask/DeliverTask';
 import PublicLayout from '../hoc/PublicLayout/PublicLayout';
 import NotFound from '../components/404/404';
 import Verify from './Verify/Verify';

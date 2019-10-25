@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import classes from './DeliverTask.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
-import {Redirect} from 'react-router-dom';
 
 import InputClasses from '../../components/UI/Input/Input.module.scss';
 import DragableArea from "../../components/DragableArea/DragableArea";

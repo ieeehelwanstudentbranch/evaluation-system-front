@@ -7,6 +7,7 @@ import * as classes from './Login.module.scss';
 import * as actions from '../../../store/actions/index';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import {Redirect } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 class Login extends Component{
 
     handleSubmit = (values, {props = this.props, setSubmitting }) => {
@@ -56,6 +57,13 @@ class Login extends Component{
                                 <ErrorMessage name="loginPassword" />
                             </div>
                             <Button type="submit" btnType="Default" className={classes.LoginButton} disabled={!FormikProps.isValid || FormikProps.isSubmitting}>Login</Button>
+                            <p>Didn't have an Account?! <Link
+                                href={{pathname: '/registration', query: { mode: 'registration' }}}
+                                as={`/`}
+                                to="/registration"
+                                exact
+                                className={classes.CreateAccountLink}
+                            >Create an Account</Link></p>
                         </Form>
                     )}
                 />

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import classes from './DeliverTask.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 
-import InputClasses from '../../components/UI/Input/Input.module.scss';
+import InputClasses from '../../assets/scss/Input.module.scss';
 import DragableArea from "../../components/DragableArea/DragableArea";
 import Button from '../../components/UI/Button/Button';
 import RichEditor from '../../components/RichEditor/RichEditor';

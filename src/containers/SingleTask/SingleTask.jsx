@@ -10,7 +10,8 @@ import {Link, Redirect} from 'react-router-dom';
 import Modal from '../../components/UI/Modal/Modal';
 import ReviewTask from '../../components/ReviewTask/ReviewTask';
 import * as actions from '../../store/actions/index';
-import Spinner from '../../components/UI/Spinner/Spinner'
+import Spinner from '../../components/UI/Spinner/Spinner';
+import DeliverTask from '../DeliverTask/DeliverTask';
 
 class SingleTask extends Component{
     state={
@@ -191,11 +192,14 @@ class SingleTask extends Component{
         return (
             <>
             {this.props.loading? <Spinner /> : task}
-            {
+            
+                <Modal title="Deliver Task" show={this.props.history.location.pathname===`/deliver-task/${this.state.id}`} modalClosed={()=>this.props.history.push(`/task/${this.state.id}`)}>
+                    <DeliverTask taskID={this.state.id} taskTitle={this.state.title}/>
+                </Modal>
                 <Modal title="Review Task" show={this.state.review} modalClosed={this.cancelReviewing}>
                     <ReviewTask taskID={this.state.id}/>
                 </Modal>
-            }
+            
             </>
         )
     }

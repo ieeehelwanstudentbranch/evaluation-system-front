@@ -94,7 +94,6 @@ export const deliverTask = (taskId, details, files) => {
         dispatch(actions.loadingHandler(actionTypes.DELIVER_TASK_START));
         let formData = new FormData();
         formData.append('body', details);
-        
         if (files){
             for( let i = 0; i < files.length; i++ ){
                 let file = files[i];
@@ -112,6 +111,7 @@ export const deliverTask = (taskId, details, files) => {
             }
         }).catch(error=>{
             console.log(error.response)
+            dispatch(actions.FailerHandler(actionTypes.DELIVER_TASK_FAILED, error.response.data.message))
         });
     }
 }
@@ -120,13 +120,6 @@ export const deliverTaskSuccess = (response) => {
     return{
         type: actionTypes.DELIVER_TASK_SUCCESS,
         message: response
-    }
-}
-
-export const deliverTaskFailed = (response) => {
-    return{
-        type: actionTypes.DELIVER_TASK_FAILED,
-        error: response
     }
 }
 

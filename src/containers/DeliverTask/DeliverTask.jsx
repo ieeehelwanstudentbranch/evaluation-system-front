@@ -14,20 +14,15 @@ import * as actions from '../../store/actions/index';
 
 class CreateTask extends Component {
 
-    componentDidMount(){}
-
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
-        props.submitTask(props.match.params.id, props.taskDetails, props.taskFiles);
+        props.submitTask(props.taskID, props.taskDetails, props.taskFiles);
         setSubmitting(false);
         return;
     }
     
     render(){
-        if (!this.props.location.state){
-            return <Redirect to="/"/>
-        }
         const initialValues={
-            title: this.props.location.state.title,
+            title: this.props.taskTitle || '',
         };
         return (
             this.props.loading?

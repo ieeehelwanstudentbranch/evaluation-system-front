@@ -41,7 +41,7 @@ class App extends Component {
               
               <PrivateRouter path="/task/:id" isAuthenticated={this.props.isAuthenticated} component={SingleTask} />
               <PrivateRouter path="/create-task" isAuthenticated={this.props.isAuthenticated} component={CreateTask}/>
-              <PrivateRouter path="/deliver-task/:id" isAuthenticated={this.props.isAuthenticated} component={DeliverTask}/>
+              <PrivateRouter path="/deliver-task/:id" isAuthenticated={this.props.isAuthenticated} component={SingleTask}/>
               <PrivateRouter path="/pending-tasks" isAuthenticated={this.props.isAuthenticated} component={PendingTasks}/>
               <PrivateRouter path="/completed-tasks" isAuthenticated={this.props.isAuthenticated} component={CompletedTasks}/>
               

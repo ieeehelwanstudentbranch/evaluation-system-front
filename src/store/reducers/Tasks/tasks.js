@@ -62,7 +62,7 @@ const deliveringTasksSuccess = (state, action) => {
         message: action.message
     }
 }
-// eslint-disable-next-line
+
 const deliveringTasksFailed = (state, action) => {
     return{
         ...state,
@@ -136,6 +136,9 @@ const tasksReducer = (state = initialState, action)=>{
 
         case actionTypes.DELIVER_TASK_SUCCESS:
             return deliveringTasksSuccess(state, action);
+
+        case actionTypes.DELIVER_TASK_FAILED:
+            return deliveringTasksFailed(state, action);
 
         // Refuse Task
         case actionTypes.REFUSE_TASK_START:

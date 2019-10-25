@@ -37,4 +37,7 @@
         width: fit-content;
         align-self: flex-end;
     }
+    @media screen and (min-width: $large_min_width){
+        width: 90%;
+    }
 }

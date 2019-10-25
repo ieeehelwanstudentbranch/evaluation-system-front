@@ -23,7 +23,8 @@
         }
 
         @media screen and (max-width: $small_tablet_max_width) {
-            width: auto;
+            width: 190px;
+            margin: 0;
         }
 
         @media screen and (min-width: $large_tablet_min_width) and (max-width: $large_tablet_max_width) {

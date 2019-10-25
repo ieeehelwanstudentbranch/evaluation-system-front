@@ -14,7 +14,7 @@ class Modal extends Component{
                 <div
                     className={classes.Modal}
                     style={{
-                        display: this.props.show? 'flex': 'none'
+                        display: this.props.show? 'block': 'none'
                     }}
                 >
                     <header className={classes.ModalHeader}>

@@ -2,6 +2,7 @@
 .Modal {
     z-index: 500;
     width: 90%;
+    height: 70%;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -14,7 +15,7 @@
     align-items: center;
     box-shadow: 1px 1px 1px black;
     padding: 5px 15px;
-    overflow: hidden;
+    overflow-y: scroll;
     .ModalHeader{
         display: flex;
         justify-content: space-between;
@@ -49,5 +50,6 @@
     }
     @media screen and (min-width: $large_min_width){
         width: 50%;
+        height: auto;
     }
 }

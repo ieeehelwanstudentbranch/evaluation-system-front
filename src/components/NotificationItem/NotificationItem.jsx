@@ -8,8 +8,8 @@ const NotificationItem = (props) =>{
             <Link to={`/user/${props.from.id}`}>
                 {
                     props.from.image === "default.jpg" ?
-                        <img src={`http://localhost:8000/uploaded/profile_images/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
-                        :<img src={`http://localhost:8000/storage/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
+                        <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
+                        :<img src={`http://api.evaluation-system.ieeehsb.org/storage/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
                 }
             </Link>
             <Link to={`/post/${props.parent_id}`}>

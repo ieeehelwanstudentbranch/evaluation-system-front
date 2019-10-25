@@ -61,7 +61,6 @@ class Login extends Component{
                                 href={{pathname: '/registration', query: { mode: 'registration' }}}
                                 as={`/`}
                                 to="/registration"
-                                exact
                                 className={classes.CreateAccountLink}
                             >Create an Account</Link></p>
                         </Form>

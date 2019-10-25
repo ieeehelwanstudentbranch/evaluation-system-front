@@ -201,10 +201,15 @@ class SingleTask extends Component{
                         :null
                     :null
                 }
-                <Modal title="Review Task" show={this.state.review} modalClosed={this.cancelReviewing}>
-                    <ReviewTask taskID={this.state.id}/>
-                </Modal>
-            
+                {
+                    this.state.sender_info?
+                        (this.state.sender_info[0].id === this.props.userID) && (this.state.status === 'deliver')?
+                            <Modal title="Review Task" show={this.state.review} modalClosed={this.cancelReviewing}>
+                                <ReviewTask taskID={this.state.id}/>
+                            </Modal>
+                        :null
+                    :null
+                }
             </>
         )
     }

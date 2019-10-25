@@ -38,10 +38,11 @@ class App extends Component {
             <Switch>
               <PrivateRouter path='/home' exact={true} component={HomeApp} isAuthenticated={this.props.isAuthenticated}/>
               <PrivateRouter path={"/post/:id"} isAuthenticated={this.props.isAuthenticated} component={SinglePost} />
-              
-              <PrivateRouter path="/task/:id" isAuthenticated={this.props.isAuthenticated} component={SingleTask} />
+              {/* Task Routing */}
               <PrivateRouter path="/create-task" isAuthenticated={this.props.isAuthenticated} component={CreateTask}/>
+              <PrivateRouter path="/task/:id" isAuthenticated={this.props.isAuthenticated} component={SingleTask} />
               <PrivateRouter path="/deliver-task/:id" isAuthenticated={this.props.isAuthenticated} component={SingleTask}/>
+
               <PrivateRouter path="/pending-tasks" isAuthenticated={this.props.isAuthenticated} component={PendingTasks}/>
               <PrivateRouter path="/completed-tasks" isAuthenticated={this.props.isAuthenticated} component={CompletedTasks}/>
               

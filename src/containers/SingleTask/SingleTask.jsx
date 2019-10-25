@@ -26,7 +26,7 @@ class SingleTask extends Component{
                     ...response.data.data
                 })
             }).catch(error=>{
-                console.log(error)
+                console.log(error.response)
                 if (error.response.status === 404){
                     this.setState({error: 404});
                 }
@@ -191,11 +191,16 @@ class SingleTask extends Component{
         }
         return (
             <>
-            {this.props.loading? <Spinner /> : task}
-            
-                <Modal title="Deliver Task" show={this.props.history.location.pathname===`/deliver-task/${this.state.id}`} modalClosed={()=>this.props.history.push(`/task/${this.state.id}`)}>
-                    <DeliverTask taskID={this.state.id} taskTitle={this.state.title}/>
-                </Modal>
+                {this.props.loading? <Spinner /> : task}
+                {
+                    this.state.receiver_info?
+                        (this.state.receiver_info[0].id === this.props.userID) && (this.state.status === 'pending')?
+                            <Modal title="Deliver Task" show={this.props.history.location.pathname===`/deliver-task/${this.state.id}`} modalClosed={()=>this.props.history.goBack()}>
+                                <DeliverTask taskID={this.state.id} taskTitle={this.state.title}/>
+                            </Modal>
+                        :null
+                    :null
+                }
                 <Modal title="Review Task" show={this.state.review} modalClosed={this.cancelReviewing}>
                     <ReviewTask taskID={this.state.id}/>
                 </Modal>

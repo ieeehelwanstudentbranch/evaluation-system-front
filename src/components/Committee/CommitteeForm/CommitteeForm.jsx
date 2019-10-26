@@ -26,7 +26,8 @@ class CommitteForm extends Component {
     }
 
     componentDidMount(){
-        axios.get('/addcommittee')
+        if(this.props.position === 'EX_com' && this.props.role === 'chairperson'){
+            axios.get('/addcommittee')
             .then(response=>{
                 this.setState({
                     mentors: response.data.data.mentor,
@@ -35,10 +36,12 @@ class CommitteForm extends Component {
                 });
             })
             .catch(error => {
-                this.setState({error: error});
+                // this.setState({error: error});
                 console.log(error)
             })
-        ;
+            ;
+        }
+        
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
@@ -132,7 +135,12 @@ class CommitteForm extends Component {
         )
     }
 }
-
+const mapStateToProps = state => {
+    return {
+        position: state.user.userData? state.user.userData.position:null,
+        role: state.user.userData? state.user.userData.ex_options.ex_options:null
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         onAdding: (name, mentor, director, hr_od)=> dispatch(actions.addCommittee(name, mentor, director, hr_od)),
@@ -140,4 +148,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(CommitteForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CommitteForm);

@@ -112,7 +112,7 @@ const mapStateToProps = state => {
         loading: state.committees.loading,
         error: state.committees.error,
         position: state.user.userData? state.user.userData.position:null,
-        role: state.user.userData? state.user.userData.ex_options[0].ex_options:null
+        role: state.user.userData? state.user.userData.ex_options.ex_options:null
     }
 }
 

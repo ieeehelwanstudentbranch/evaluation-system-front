@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers  } from 'redux';
 import thunk from 'redux-thunk';
 import axios from './axios';
-import loginReducer from './store/reducers/login';
-import registerReducer from './store/reducers/register';
+import loginReducer from './store/reducers/Authentication/login';
+import registerReducer from './store/reducers/Authentication/register';
 import committeesReducer from './store/reducers/committees';
 import postsReducer from './store/reducers/posts';
 import userReducer from './store/reducers/user';
 import tasksReducer from './store/reducers/Tasks/tasks';
 import evaluateTaskReducer from './store/reducers/evaluateTask';
-import logoutReducer from './store/reducers/logout'
+import logoutReducer from './store/reducers/Authentication/logout'
 
 import './index.scss';
 import App from './containers/App';

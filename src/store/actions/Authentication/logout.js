@@ -1,6 +1,6 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios';
-import * as actions from './repeatedActions';
+import * as actionTypes from '../actionTypes';
+import axios from '../../../axios';
+import * as actions from '../repeatedActions';
 
 export const logout = (token) => {
     return dispatch => {

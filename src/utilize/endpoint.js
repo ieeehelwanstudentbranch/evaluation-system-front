@@ -1,1 +1,1 @@
-export const endpoint = 'https://api.evaluation-system.ieeehsb.org';
+export const endpoint = 'http://localhost:8000';

@@ -1,7 +1,7 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios';
-import * as actions from './repeatedActions';
-import * as profileActions from './user';
+import * as actionTypes from '../actionTypes';
+import axios from '../../../axios';
+import * as actions from '../repeatedActions';
+import * as profileActions from '../user';
 import * as LogoutFunctions from './logout'
 
 export const login = (email, password) => {

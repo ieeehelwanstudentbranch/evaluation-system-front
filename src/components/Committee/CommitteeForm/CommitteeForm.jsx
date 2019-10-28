@@ -36,7 +36,7 @@ class CommitteForm extends Component {
                 });
             })
             .catch(error => {
-                // this.setState({error: error});
+                this.setState({error: error});
                 console.log(error)
             })
             ;

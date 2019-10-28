@@ -1,6 +1,7 @@
 import React from 'react';
 import * as classes from './NotificationItem.module.scss';
 import {Link} from 'react-router-dom';
+import {endpoint} from '../../utilize/endpoint';
 
 const NotificationItem = (props) =>{
     return(
@@ -8,8 +9,8 @@ const NotificationItem = (props) =>{
             <Link to={`/user/${props.from.id}`}>
                 {
                     props.from.image === "default.jpg" ?
-                        <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
-                        :<img src={`http://api.evaluation-system.ieeehsb.org/storage/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
+                        <img src={`${endpoint}/uploaded/profile_images/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
+                        :<img src={`${endpoint}/storage/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
                 }
             </Link>
             <Link to={`/post/${props.parent_id}`}>

@@ -125,7 +125,6 @@ class CreateTask extends Component {
     }
     
     render(){
-        console.log(this.state.nodes);
         const icons = {
             check: <MdCheckBox className="rct-icon rct-icon-check" />,
             uncheck: <MdCheckBoxOutlineBlank className="rct-icon rct-icon-uncheck" />,

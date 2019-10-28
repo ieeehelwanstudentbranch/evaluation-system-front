@@ -4,14 +4,15 @@ import * as classes from './ImageCropper.module.scss';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import formatFileSize from '../../utilize/formatFileSize';
+import {endpoint} from '../../utilize/endpoint';
 
 class ImageCropper extends Component {
   
   constructor(props) {
     super(props)
     const src= this.props.image === 'default.jpg' ?
-      `http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}`
-      :`http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`;
+      `${endpoint}/uploaded/profile_images/${this.props.image}`
+      :`${endpoint}/storage${this.props.image}`;
     const mimeTypes= 'jpg,png,jpeg,svg,gif,tiff,tif';
     const maxFileSize= 10490000;
     this.state = {

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as classes from './Profile.module.scss'
+import * as classes from './Profile.module.scss';
+import {endpoint} from '../../utilize/endpoint';
+
 class ProfileIcon extends Component {
 
     render(){
@@ -9,8 +11,8 @@ class ProfileIcon extends Component {
             data = <div className={classes.ProfileIcon}>
                 {
                     this.props.image === "default.jpg" ?
-                        <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${this.props.image}`} alt={`${this.props.name}`}/>
-                        :<img src={`http://api.evaluation-system.ieeehsb.org/storage${this.props.image}`} alt={`${this.props.name}`}/>
+                        <img src={`${endpoint}/uploaded/profile_images/${this.props.image}`} alt={`${this.props.name}`}/>
+                        :<img src={`${endpoint}/storage${this.props.image}`} alt={`${this.props.name}`}/>
                 }
                 <p>{this.props.name}</p>
             </div>

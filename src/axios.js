@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {endpoint} from './utilize/endpoint';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://api.evaluation-system.ieeehsb.org/api'
+    baseURL: `${endpoint}/api`
 })
 
 export default axiosInstance;

@@ -25,7 +25,7 @@ export const logout = (token) => {
 }
 
 export const logoutSuccess = (message) => {
-    localStorage.clear()
+    localStorage.clear();
     return {
         type: actionTypes.LOGOUT_SUCCESS,
         token: null,

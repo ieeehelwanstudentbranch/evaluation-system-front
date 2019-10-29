@@ -26,9 +26,9 @@ class CommitteForm extends Component {
     }
 
     componentDidMount(){
-        if(this.props.position === 'EX_com' && this.props.role === 'chairperson'){
-            axios.get('/addcommittee')
+        axios.get('/addcommittee')
             .then(response=>{
+                console.log(response)
                 this.setState({
                     mentors: response.data.data.mentor,
                     directors: response.data.data.director,
@@ -39,9 +39,7 @@ class CommitteForm extends Component {
                 this.setState({error: error});
                 console.log(error)
             })
-            ;
-        }
-        
+        ;
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{

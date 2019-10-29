@@ -138,7 +138,7 @@ class Registration extends Component{
                                         <ErrorMessage name="password_confirmation" />
                                     </div>
                                     <div className={InputClasses.Input}>
-                                        <Field type="date" id="dob" name="DOB" placeholder="Date Of Birth" className={InputClasses.InputElement}/>
+                                        <Field type="text" id="dob" name="DOB" placeholder="Date Of Birth" className={InputClasses.InputElement} onFocus={function(event){event.target.type='date'}}/>
                                         <ErrorMessage name="DOB" />
                                     </div>
                                 </div>

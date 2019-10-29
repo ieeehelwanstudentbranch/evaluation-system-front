@@ -12,6 +12,7 @@
     max-height: 80vh;
     overflow-y: scroll;
     z-index: 99;
+    padding: 10px;
     @media screen and (max-width: $large_tablet_max_width) {
         width: 90vw;
     }

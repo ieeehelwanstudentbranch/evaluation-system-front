@@ -1,6 +1,6 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios';
-import * as actions from './repeatedActions';
+import * as actionTypes from '../actionTypes';
+import axios from '../../../axios';
+import * as actions from '../repeatedActions';
 
 export const logout = (token) => {
     return dispatch => {
@@ -25,7 +25,7 @@ export const logout = (token) => {
 }
 
 export const logoutSuccess = (message) => {
-    localStorage.clear()
+    localStorage.clear();
     return {
         type: actionTypes.LOGOUT_SUCCESS,
         token: null,

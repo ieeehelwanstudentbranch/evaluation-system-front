@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as classes from './SingleCommittee.module.scss';
 import axios from '../../../axios';
 import {NavLink} from 'react-router-dom';
+import {endpoint} from '../../../utilize/endpoint';
 
 class SingleCommittee extends Component{
     state={
@@ -41,8 +42,8 @@ class SingleCommittee extends Component{
                                             {
                                                 member.image === "default.jpg" ?
 
-                                                <img src={`http://api.evaluation-system.ieeehsb.org/uploaded/profile_images/${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
-                                                :<img src={`http://api.evaluation-system.ieeehsb.org/storage${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
+                                                <img src={`${endpoint}/uploaded/profile_images/${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
+                                                :<img src={`${endpoint}/storage${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
                                             }
                                         </NavLink>
                                     </td>

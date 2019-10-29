@@ -16,8 +16,6 @@ class NotificationsContainer extends Component{
                 {
                     (sorted&&sorted.length>0)?
                         sorted.filter(notification=>{
-                            return notification.to === this.props.userID || notification.to === null
-                        }).filter(notification=>{
                             return notification.from.id !== this.props.userID
                         }).map(notification=>{
                             return (

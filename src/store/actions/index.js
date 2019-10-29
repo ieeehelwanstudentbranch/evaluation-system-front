@@ -1,6 +1,6 @@
-export {login, loginCheckState} from './login';
-export {logout} from './logout'
-export {register} from './register';
+export {login, loginCheckState} from './Authentication/login';
+export {logout} from './Authentication/logout'
+export {register} from './Authentication/register';
 export {initializeCommittees, addCommittee, editCommittee} from './committees';
 export {fetchPosts, addPost, deletePost, editPost, editPostStart, handlePostDetails} from './posts';
 export {fetchUserData, uploadImage, editProfileImage, changeImage, editProfileData, submitProfileData, cancelEditing} from './user';

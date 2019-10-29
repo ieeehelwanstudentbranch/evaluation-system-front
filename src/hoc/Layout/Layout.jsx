@@ -41,19 +41,23 @@ class Layout extends Component {
         // });
         this.channel.bind('task-created', (data)=>{
             let Notifications = JSON.parse(JSON.stringify(data));
-            let totalNotifications = [...this.state.notifications, {...Notifications}]
-            this.setState({
-                notifications: totalNotifications,
-                numberOfNotifications: this.state.numberOfNotifications+1
-            });
+            let totalNotifications = [...this.state.notifications, {...Notifications}];
+            if(this.props.userID !== Notifications.from.id){
+                this.setState({
+                    notifications: totalNotifications,
+                    numberOfNotifications: this.state.numberOfNotifications+1
+                });
+            }
         });
         this.channel.bind('post-created', (data)=>{
             let Notifications = JSON.parse(JSON.stringify(data));
             let totalNotifications = [...this.state.notifications, {...Notifications}]
-            this.setState({
-                notifications: totalNotifications,
-                numberOfNotifications: this.state.numberOfNotifications+1
-            });
+            if(this.props.userID !== Notifications.from.id){
+                this.setState({
+                    notifications: totalNotifications,
+                    numberOfNotifications: this.state.numberOfNotifications+1
+                });
+            }
         });
     }
     sideDrawerClosedHandler = () =>{

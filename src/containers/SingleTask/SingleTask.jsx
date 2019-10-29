@@ -12,6 +12,7 @@ import ReviewTask from '../../components/ReviewTask/ReviewTask';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import DeliverTask from '../DeliverTask/DeliverTask';
+import {endpoint} from '../../utilize/endpoint';
 
 class SingleTask extends Component{
     state={
@@ -95,7 +96,7 @@ class SingleTask extends Component{
                                 <ul className={classes.Files}>
                                     {
                                         this.state.sent_files.map((file,index)=>(
-                                            <li key={index}>{file}<a href={`http://api.evaluation-system.ieeehsb.org/storage/tasks_sent/${file}`} download={true}><MdFileDownload /></a></li>
+                                            <li key={index}>{file}<a href={`${endpoint}/storage/tasks_sent/${file}`} download={true}><MdFileDownload /></a></li>
                                         ))
                                     }
                                 </ul>
@@ -136,7 +137,7 @@ class SingleTask extends Component{
                                 <ul className={classes.Files}>
                                     {
                                         this.state.delivered_files.map((file,index)=>(
-                                            <li key={index}>{file}<a href={`http://api.evaluation-system.ieeehsb.org/storage/tasks_delivered/${file}`} download={true}><MdFileDownload /></a></li>
+                                            <li key={index}>{file}<a href={`${endpoint}/storage/tasks_delivered/${file}`} download={true}><MdFileDownload /></a></li>
                                         ))
                                     }
                                 </ul>

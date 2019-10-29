@@ -1,0 +1,1 @@
+export const endpoint = 'https://api.evaluation-system.ieeehsb.org';

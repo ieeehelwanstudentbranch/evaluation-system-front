@@ -1,5 +1,5 @@
-import * as actionTypes from '../actions/actionTypes';
-import * as reducers from './repeatedReducers';
+import * as actionTypes from '../../actions/actionTypes';
+import * as reducers from '../repeatedReducers';
 
 const initialState = {
     message: null,

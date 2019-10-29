@@ -1,7 +1,7 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios';
-import * as actions from './repeatedActions';
-import * as profileActions from './user';
+import * as actionTypes from '../actionTypes';
+import axios from '../../../axios';
+import * as actions from '../repeatedActions';
+import * as profileActions from '../user';
 import * as LogoutFunctions from './logout'
 
 export const login = (email, password) => {
@@ -65,26 +65,6 @@ export const checkLoginTime = (expirationDate, token) => {
     }
 }
 
-
-export const checkAutherization = (id, token) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler(actionTypes.LOGIN_START));
-        let userID = parseInt(id);
-        axios.get(`/check-token/${userID}/${token}`)
-            .then(response=>{
-                // eslint-disable-next-line
-                if(response.data.response == 'Success'){
-                    return false
-                } else{
-                    dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
-                }
-            }).catch(error=>{
-                console.log(error)
-            })
-        ;
-    }
-}
-
 export const loginCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
@@ -92,18 +72,42 @@ export const loginCheckState = () => {
         if (!token){
             dispatch(LogoutFunctions.logoutSuccess(null));
         } else {
-            const expirationDate = new Date (localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()){
-                dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
-            }else {
-                if(dispatch(checkAutherization(userID, token))){
-                    dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
-                }else {
-                    dispatch(loginSuccess(token, 'Your token is still valid, you had logged in automatically', userID));
-                    dispatch(checkLoginTime(expirationDate, token));
-                    dispatch(profileActions.fetchUserData(userID, userID));
-                }
-            }
+            dispatch(actions.loadingHandler(actionTypes.CHECK_TOKEN_START));
+            axios.get(`/check-token/${userID}/${token}`)
+                .then(response=>{
+                    if(response.data.response === "Error"){
+                        dispatch(checkAutherizationSuccess(response.data.message));
+                        dispatch(LogoutFunctions.logoutSuccess(response.data.message));
+                    }else{
+                        dispatch(checkAutherizationSuccess(response.data.message))
+                        const expirationDate = new Date (localStorage.getItem('expirationDate'));
+                        if (expirationDate <= new Date()){
+                            dispatch(LogoutFunctions.logoutSuccess('Your token is not valid please login'))
+                        }else {
+                            dispatch(loginSuccess(token, 'Your token is still valid, you had logged in automatically', userID));
+                            dispatch(checkLoginTime(expirationDate, token));
+                            dispatch(profileActions.fetchUserData(userID, userID));
+                        }
+                    }
+                }).catch(error=>{
+                    console.log(error.error);
+                    dispatch(checkAutherizationFailed(error.response))
+                })
+            ;
         }
+    }
+}
+
+export const checkAutherizationSuccess = (message) => {
+    return {
+        type: actionTypes.CHECK_TOKEN_SUCCESS,
+        message: message
+    }
+}
+
+export const checkAutherizationFailed = (message) => {
+    return {
+        type: actionTypes.CHECK_TOKEN_FAILED,
+        message: message
     }
 }

@@ -1,6 +1,6 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios';
-import * as actions from './repeatedActions';
+import * as actionTypes from '../actionTypes';
+import axios from '../../../axios';
+import * as actions from '../repeatedActions';
 
 export const register = (firstName, lastName, email, password, password_confirmation, DOB, faculty, university, position, ex_options, committee) => {
     return dispatch => {

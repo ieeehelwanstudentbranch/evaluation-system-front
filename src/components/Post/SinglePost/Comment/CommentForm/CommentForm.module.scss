@@ -1,0 +1,8 @@
+@import '../../../../../assets/scss/color_variables';
+.CommentForm{
+    display: flex;
+    .CommentButton{
+        border: none;
+        color: $main_color;
+    }
+}

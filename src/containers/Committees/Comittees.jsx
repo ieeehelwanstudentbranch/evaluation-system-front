@@ -92,7 +92,7 @@ class Committees extends Component{
                 <div className={classes.Committees}>
                     {committeeComponent}
                     {
-                        this.props.position === 'EX_com' && this.props.role === 'chairperson' ?
+                        (this.props.position === 'EX_com') && (this.props.role === 'chairperson')?
                             <MdAdd className={classes.AddCommittee} onClick={this.addCommitteeHandler}/>
                         :null
                     }
@@ -112,7 +112,7 @@ const mapStateToProps = state => {
         loading: state.committees.loading,
         error: state.committees.error,
         position: state.user.userData? state.user.userData.position:null,
-        role: state.user.userData? state.user.userData.ex_options.ex_options:null
+        role: state.user.userData? state.user.userData.position ==='EX_com'? state.user.userData.ex_options[0].ex_options:null:null
     }
 }
 

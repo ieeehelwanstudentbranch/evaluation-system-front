@@ -109,7 +109,7 @@ class Registration extends Component{
                                 </span>: null
                             }
                             {this.props.message? 
-                                <span>
+                                <span className="Success">
                                     {this.props.message}
                                 </span>: null
                             }

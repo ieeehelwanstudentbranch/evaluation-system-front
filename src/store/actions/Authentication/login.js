@@ -65,42 +65,6 @@ export const checkLoginTime = (expirationDate, token) => {
     }
 }
 
-export const checkAutherization = (id, token) => {
-    return dispatch => {
-        dispatch(actions.loadingHandler(actionTypes.CHECK_TOKEN_START));
-        let userID = parseInt(id);
-        axios.get(`/check-token/${userID}/${token}`)
-            .then(response=>{
-                console.log(response)
-                if(response.data.response === "Error"){
-                    dispatch(checkAutherizationSuccess(response.data.message));
-                    dispatch(LogoutFunctions.logoutSuccess(response.data.message));
-                }else{
-                    dispatch(checkAutherizationSuccess(response.data.message))
-                    return "success"
-                }
-            }).catch(error=>{
-                console.log(error.error);
-                dispatch(checkAutherizationFailed(error.response))
-            })
-        ;
-    }
-}
-
-export const checkAutherizationSuccess = (message) => {
-    return {
-        type: actionTypes.CHECK_TOKEN_SUCCESS,
-        message: message
-    }
-}
-
-export const checkAutherizationFailed = (message) => {
-    return {
-        type: actionTypes.CHECK_TOKEN_FAILED,
-        message: message
-    }
-}
-
 export const loginCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
@@ -111,7 +75,6 @@ export const loginCheckState = () => {
             dispatch(actions.loadingHandler(actionTypes.CHECK_TOKEN_START));
             axios.get(`/check-token/${userID}/${token}`)
                 .then(response=>{
-                    console.log(response)
                     if(response.data.response === "Error"){
                         dispatch(checkAutherizationSuccess(response.data.message));
                         dispatch(LogoutFunctions.logoutSuccess(response.data.message));
@@ -132,5 +95,19 @@ export const loginCheckState = () => {
                 })
             ;
         }
+    }
+}
+
+export const checkAutherizationSuccess = (message) => {
+    return {
+        type: actionTypes.CHECK_TOKEN_SUCCESS,
+        message: message
+    }
+}
+
+export const checkAutherizationFailed = (message) => {
+    return {
+        type: actionTypes.CHECK_TOKEN_FAILED,
+        message: message
     }
 }

@@ -55,7 +55,7 @@ class CommitteForm extends Component {
             name: Yup.string()
                 .trim()
                 .required('Committee Name is a Required field')
-                .min(3, 'Committee Name is too short it must be at least 3 characters or longer'),
+                .min(2, 'Committee Name is too short it must be at least 2 characters or longer'),
             mentor: Yup.string()
                 .nullable()
                 .notRequired(),

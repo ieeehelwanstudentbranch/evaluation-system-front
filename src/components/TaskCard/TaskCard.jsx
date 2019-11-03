@@ -10,13 +10,27 @@ const task = (props) => {
     let deliveredTime = new Date(props.deliver_at);
     return(
         <article className={classes.Card}>
-            {props.title?<NavLink className={classes.TaskLink} to={`/task/${props.id}`} exact={props.exact} style={{padding: '5px 0'}}>
-                <h3>{props.title.substring(0, 20)}...</h3>
-            </NavLink>:null}
+            {
+                props.title?
+                    <NavLink className={classes.TaskLink} to={`/task/${props.id}`} exact={props.exact} style={{padding: '5px 0'}}>
+                        <h3>{props.title.substring(0, 20)}...</h3>
+                    </NavLink>
+                :null
+            }
             
             {props.create_at ? <p>Creating Time: <time dateTime={createdTime}>{createdTime.getDate()}-{createdTime.getMonth()+1}-{createdTime.getFullYear()} at {createdTime.getHours()}:{createdTime.getMinutes()<9?'0'+createdTime.getMinutes():createdTime.getMinutes()}</time></p>: null }
             {props.deadline ? <p>Deadline: <time dateTime={deadline}>{deadline.getDate()}-{deadline.getMonth()+1}-{deadline.getFullYear()} at {deadline.getHours()}:{deadline.getMinutes()<9?'0'+deadline.getMinutes():deadline.getMinutes()}</time></p>: null }
-            {props.deliver_at ? <p>Delivering Time: <time dateTime={deliveredTime}>{deliveredTime.getDate()}-{deliveredTime.getMonth()+1}-{deliveredTime.getFullYear()} at {deliveredTime.getHours()}:{deliveredTime.getMinutes()<9?'0'+deliveredTime.getMinutes():deliveredTime.getMinutes()}</time></p>: null }
+            {
+                (props.task_status === 'deliver') || (props.task_status === 'accepted')?
+                    props.deliver_at?
+                        <p>Delivering Time:
+                            <time dateTime={deliveredTime}>
+                                {deliveredTime.getDate()}-{deliveredTime.getMonth()+1}-{deliveredTime.getFullYear()} at {deliveredTime.getHours()}:{deliveredTime.getMinutes()<9?'0'+deliveredTime.getMinutes():deliveredTime.getMinutes()}
+                            </time>
+                        </p>
+                    :null
+                :null
+            }
             {
                 props.sender_info ?
                     <p>Sender Name: <NavLink className={classes.TaskLink} to={`/user/${props.sender_info[0].id}`}>
@@ -34,7 +48,7 @@ const task = (props) => {
                 :null
             }
             {
-                (props.task_status === 'deliver')? 
+                (props.task_status === 'deliver')?
                     <span className={classes.TaskStatus}><MdCheckCircle/></span>
                 :null
             }

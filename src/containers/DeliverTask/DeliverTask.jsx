@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import classes from './DeliverTask.module.scss';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 
 import InputClasses from '../../assets/scss/Input.module.scss';
@@ -31,11 +30,11 @@ class CreateTask extends Component {
                 initialValues={initialValues}
                 onSubmit={this.handleSubmit}
                 render={(FormikProps)=>(
-                    <Form className={classes.TaskForm}>
-                        <div className={classes.leftSection}>
-                            {this.props.error? <span>{this.props.error}</span>: null}
-                            {this.props.message? <span>{this.props.message}</span>: null}
-                            <div className={classes.BasicInfo}>
+                    <Form>
+                        <div>
+                            {this.props.error? <span className="Success">{this.props.error}</span>: null}
+                            {this.props.message? <span className="Failes">{this.props.message}</span>: null}
+                            <div>
                                 <div className={InputClasses.Input}>
                                     <label htmlFor="title" className={InputClasses.Label} >Task Title<span className="required">*</span></label>
                                     <Field type="text" id="title" name="title" className={InputClasses.InputElement} disabled/>

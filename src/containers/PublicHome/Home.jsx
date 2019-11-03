@@ -14,8 +14,11 @@ class Home extends Component{
                         <p>An easier way to collaborate with your team or friends. You set up the meeting and set the priority. deicide who to invite and get started</p>
                     </div>
                     <Login className={classes.Login} />
-                    <Modal title="Registration" show={this.props.history.location.pathname==='/registration'} modalClosed={()=>this.props.history.push('/login')}>
+                    <Modal title="REGISTRATION" show={this.props.history.location.pathname==='/registration'} modalClosed={()=>this.props.history.goBack()}>
                         <Registration />
+                    </Modal>
+                    <Modal title="PASSWORD RESET" show={this.props.history.location.pathname==='/forget-password'} modalClosed={()=>this.props.history.goBack()}>
+                        
                     </Modal>
                 </div>
             </header>

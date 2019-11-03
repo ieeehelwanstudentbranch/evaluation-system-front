@@ -12,6 +12,7 @@ import PendingTasks from './PendingTasks/PendingTasks';
 import Committees from './Committees/Comittees';
 import SingleCommittee from './Committees/SingleCommittee/SingleCommittee';
 import Logout from './Auth/Logout/Logout';
+import ForgetPassword from './Auth/ForgetPassword/ForgetPassword';
 import * as actions from '../store/actions/index';
 import SinglePost from '../components/Post/SinglePost/SinglePost';
 import SingleProfile from './SingleProfile/SingleProfile';
@@ -60,6 +61,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Home} />
               <Route path="/registration" component={Home} />
+              <Route path="/forget-password" component={Home} />
               <Route path="/verify/:code" component={Verify}/>
               <Redirect exact from="/home" to="/" />
               <Route path="*"  component={NotFound} />

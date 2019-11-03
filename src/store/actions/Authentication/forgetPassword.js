@@ -10,26 +10,11 @@ export const forgetPassword = (email) => {
         }
         axios.post('/password/reset', formData)
             .then(response=>{
-                console.log(response)
+                dispatch(actions.SuccessHandler(actionTypes.FORGET_PASSWORD_SUCCESS, response.data.data.message))
             })
             .catch(error => {
-                console.log(error)
-                // dispatch(actions.FailerHandler(actionTypes.SERVER_ERROR_HANDLER, "Network Error!"));
+                dispatch(actions.FailerHandler(actionTypes.FORGET_PASSWORD_FAILED, error.response.data.error.email))
             })
         ;
-    }
-}
-
-export const forgetPasswordSuccess = (message) => {
-    return {
-        type: actionTypes.FORGET_PASSWORD_SUCCESS,
-        message: message
-    }
-}
-
-export const forgetPasswordFailed = (message) => {
-    return {
-        type: actionTypes.FORGET_PASSWORD_FAILED,
-        message: message
     }
 }

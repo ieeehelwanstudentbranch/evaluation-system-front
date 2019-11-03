@@ -10,10 +10,10 @@ export const forgetPassword = (email) => {
         }
         axios.post('/password/reset', formData)
             .then(response=>{
-                dispatch(actions.SuccessHandler(actionTypes.FORGET_PASSWORD_SUCCESS, response.data.data.message))
+                dispatch(actions.SuccessHandler(actionTypes.FORGET_PASSWORD_SUCCESS, response.data.message))
             })
             .catch(error => {
-                dispatch(actions.FailerHandler(actionTypes.FORGET_PASSWORD_FAILED, error.response.data.error.email))
+                dispatch(actions.FailerHandler(actionTypes.FORGET_PASSWORD_FAILED, error.response.data.error))
             })
         ;
     }

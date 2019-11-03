@@ -52,7 +52,18 @@ class Login extends Component{
                                 <ErrorMessage name="loginEmail" />
                             </div>
                             <div className={classes.Input}>
-                                <label htmlFor="loginPassword" className={classes.Label} >Password</label>
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <label htmlFor="loginPassword" className={classes.Label} >Password</label>
+                                    <p>
+                                        <Link
+                                            href={{pathname: '/forget-password', query: { mode: 'forget-password' }}}
+                                            as={`/`}
+                                            to="/forget-password"
+                                            className={classes.CreateAccountLink}
+                                        >Forgot Password?
+                                        </Link>
+                                    </p>
+                                </div>
                                 <Field type="password" id="loginPassword" name="loginPassword" placeholder="Password" className={classes.InputElement}/>
                                 <ErrorMessage name="loginPassword" />
                             </div>

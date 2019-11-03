@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
 import * as classes from '../../../assets/scss/Input.module.scss';
+import {connect} from 'react-redux';
 
 class ForgetPassword extends Component{
 
@@ -52,4 +53,20 @@ class ForgetPassword extends Component{
     }
 }
 
-export default ForgetPassword;
+
+const mapStateToProps = state => {
+    return {
+        loading: state.login.loading,
+        error: state.login.error,
+        message: state.login.message,
+        isAuthenticated: state.login.token !== null
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: (email, password) => dispatch(actions.login(email, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ForgetPassword);

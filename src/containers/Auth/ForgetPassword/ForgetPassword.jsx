@@ -4,8 +4,15 @@ import * as Yup from 'yup';
 import Button from '../../../components/UI/Button/Button';
 import * as classes from '../../../assets/scss/Input.module.scss';
 import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index';
 
 class ForgetPassword extends Component{
+
+    handleSubmit = (values, {props = this.props, setSubmitting }) => {
+        props.submit(values.targetEmail);
+        setSubmitting(false);
+        return;
+    }
 
     render(){
         const validationSchema = Yup.object().shape({
@@ -56,16 +63,16 @@ class ForgetPassword extends Component{
 
 const mapStateToProps = state => {
     return {
-        loading: state.login.loading,
-        error: state.login.error,
-        message: state.login.message,
-        isAuthenticated: state.login.token !== null
+        loading: state.forgetPassword.loading,
+        error: state.forgetPassword.error,
+        message: state.forgetPassword.message,
+        isAuthenticated: state.forgetPassword.token !== null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (email, password) => dispatch(actions.login(email, password))
+        submit: (email) => dispatch(actions.forgetPassword(email))
     }
 }
 

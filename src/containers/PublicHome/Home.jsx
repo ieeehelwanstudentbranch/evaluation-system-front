@@ -3,6 +3,7 @@ import Login from '../Auth/Login/Login';
 import * as classes from './Home.module.scss';
 import Modal from '../../components/UI/Modal/Modal';
 import Registration from '../Auth/Registration/Registration';
+import ForgetPassword from '../Auth/ForgetPassword/ForgetPassword';
 class Home extends Component{
     
     render(){
@@ -18,7 +19,7 @@ class Home extends Component{
                         <Registration />
                     </Modal>
                     <Modal title="PASSWORD RESET" show={this.props.history.location.pathname==='/forget-password'} modalClosed={()=>this.props.history.goBack()}>
-                        
+                        <ForgetPassword />
                     </Modal>
                 </div>
             </header>

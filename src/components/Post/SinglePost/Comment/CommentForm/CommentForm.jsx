@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import classes from '../../../../../assets/scss/Input.module.scss';
+import * as InputClasses from '../../../../../assets/scss/Input.module.scss';
+import * as classes from './CommentForm.module.scss';
 import Spinner from '../../../../UI/Spinner/Spinner';
 import axios from '../../../../../axios';
+import Button from '../../../../UI/Button/Button';
+import {IoMdSend} from 'react-icons/io'
 
 class CommentForm extends Component{
     state={
@@ -67,12 +70,13 @@ class CommentForm extends Component{
                     validationSchema={validationSchema}
                     onSubmit={this.handleSubmit}
                     render={(FormikProps)=>(
-                        <Form autoComplete="off">
+                        <Form autoComplete="off" className={classes.CommentForm}>
                             {this.state.error? <span>Sorry something went wrong please try again later</span>: null}
-                            <div className={classes.Input}>
-                                <Field type="text" id="comment" name="comment" placeholder="Write a comment" className={classes.InputElement}/>
+                            <div className={InputClasses.Input}>
+                                <Field type="text" id="comment" name="comment" placeholder="Write a comment" className={InputClasses.InputElement}/>
                                 <ErrorMessage name="comment" />
                             </div>
+                            <Button className={classes.CommentButton}><IoMdSend /></Button>
                         </Form>
                     )}
                 />

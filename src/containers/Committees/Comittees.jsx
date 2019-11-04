@@ -98,9 +98,11 @@ class Committees extends Component{
                     }
                 </div>
                 {
-                    <Modal title={this.state.editing? this.state.committeeData.name : 'ADD NEW COMMITTEE'} show={this.state.editing||this.state.adding} modalClosed={this.CancelHandler}>
-                        <CommitteeForm committeeData={this.state.committeeData} adding={this.state.adding}/>
-                    </Modal>
+                    (this.props.position === 'EX_com') && (this.props.role === 'chairperson')?
+                        <Modal title={this.state.editing? this.state.committeeData.name : 'ADD NEW COMMITTEE'} show={this.state.editing||this.state.adding} modalClosed={this.CancelHandler}>
+                            <CommitteeForm committeeData={this.state.committeeData} adding={this.state.adding}/>
+                        </Modal>
+                    :null
                 }
             </>
         )

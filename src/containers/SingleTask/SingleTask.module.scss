@@ -10,35 +10,6 @@
         margin: 0;
         width: 100%;
     }
-    .TaskDetails {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        width: 100%;
-        margin-bottom: 20px;
-        @media screen and (min-width: $large_min_width){
-            &:first-child{
-                margin-right: 10px;
-            }
-            &:last-child{
-                margin-left: 10px;
-            }
-        }
-        .Files{
-            list-style-type: none;
-            display: flex;
-            flex-direction: column;
-            li{
-                display: flex;
-                justify-content: space-between;
-                a{
-                    color: $main_color
-                }
-            }
-        }
-    }
 }
 .Actions{
     display: flex;
@@ -68,9 +39,6 @@
 }
 .Evaluation{
     margin: 30px auto;
-    @media screen and (max-width: $large_tablet_max_width ){
-        width: 95%;
-    }
     .EvaluationRate{
         display: flex;
         justify-content: center;

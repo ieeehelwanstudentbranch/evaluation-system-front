@@ -13,10 +13,20 @@ const NotificationItem = (props) =>{
                         :<img src={`${endpoint}/storage/${props.from.image}`} alt={`${props.from.first_name} ${props.from.last_name}`}/>
                 }
             </Link>
-            <Link to={`/post/${props.parent_id}`}>
-                <p>{props.from.first_name} {props.content}</p>
-                <time dateTime={props.created_at}>{props.created_at}</time>
-            </Link>
+            {
+                props.content.includes('post')?
+                    <Link to={`/post/${props.parent_id}`}>
+                        <p>{props.from.first_name} {props.content}</p>
+                        <time dateTime={props.created_at}>{props.created_at}</time>
+                    </Link>
+                :props.content.includes('task')?
+                    <Link to={`/task/${props.parent_id}`}>
+                        <p>{props.from.first_name} {props.content}</p>
+                        <time dateTime={props.created_at}>{props.created_at}</time>
+                    </Link>
+                :null
+            }
+            
         </div>
     )
 }

@@ -26,22 +26,20 @@ class CommitteForm extends Component {
     }
 
     componentDidMount(){
-        if(this.props.position === 'EX_com' && this.props.role === 'chairperson'){
-            axios.get('/addcommittee')
+        axios.get('/addcommittee')
             .then(response=>{
+                console.log(response)
                 this.setState({
-                    mentors: response.data.data.mentor,
-                    directors: response.data.data.director,
-                    hrs_od: response.data.data['hr-od']
+                    mentors: response.data.data[0].mentor,
+                    directors: response.data.data[0].director,
+                    hrs_od: response.data.data[0]['hr-od']
                 });
             })
             .catch(error => {
                 this.setState({error: error});
                 console.log(error)
             })
-            ;
-        }
-        
+        ;
     }
 
     handleSubmit = (values, {props = this.props, setSubmitting }) =>{
@@ -57,7 +55,7 @@ class CommitteForm extends Component {
             name: Yup.string()
                 .trim()
                 .required('Committee Name is a Required field')
-                .min(3, 'Committee Name is too short it must be at least 3 characters or longer'),
+                .min(2, 'Committee Name is too short it must be at least 2 characters or longer'),
             mentor: Yup.string()
                 .nullable()
                 .notRequired(),

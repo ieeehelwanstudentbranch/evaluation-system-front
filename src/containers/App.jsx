@@ -19,6 +19,7 @@ import SingleTask from './SingleTask/SingleTask';
 import PublicLayout from '../hoc/PublicLayout/PublicLayout';
 import NotFound from '../components/404/404';
 import Verify from './Verify/Verify';
+import ResetPassword from './Auth/ResetPassword/ResetPassword';
 
 import Home from './PublicHome/Home';
 import PrivateRouter from '../components/PrivateRoute/PrivateRoute';
@@ -60,6 +61,8 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Home} />
               <Route path="/registration" component={Home} />
+              <Route path="/forget-password" component={Home} />
+              <Route path="/password/reset/:code" component={ResetPassword}/>
               <Route path="/verify/:code" component={Verify}/>
               <Redirect exact from="/home" to="/" />
               <Route path="*"  component={NotFound} />

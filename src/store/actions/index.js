@@ -2,6 +2,7 @@ export {login, loginCheckState} from './Authentication/login';
 export {logout} from './Authentication/logout'
 export {register} from './Authentication/register';
 export {forgetPassword} from './Authentication/forgetPassword';
+export {resetPassword} from './Authentication/resetPassword';
 export {initializeCommittees, addCommittee, editCommittee} from './committees';
 export {fetchPosts, addPost, deletePost, editPost, editPostStart, handlePostDetails} from './posts';
 export {fetchUserData, uploadImage, editProfileImage, changeImage, editProfileData, submitProfileData, cancelEditing} from './user';

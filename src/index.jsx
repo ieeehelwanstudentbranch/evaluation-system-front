@@ -17,6 +17,7 @@ import loginReducer from './store/reducers/Authentication/login';
 import registerReducer from './store/reducers/Authentication/register';
 import logoutReducer from './store/reducers/Authentication/logout';
 import forgetPassword from './store/reducers/Authentication/forgetPassword';
+import resetPassword from './store/reducers/Authentication/resetPassword';
 
 import './index.scss';
 import App from './containers/App';
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     logout: logoutReducer,
-    forgetPassword: forgetPassword
+    forgetPassword: forgetPassword,
+    resetPassword: resetPassword
 });
 
 const store = createStore(rootReducer, composeEnhancers(

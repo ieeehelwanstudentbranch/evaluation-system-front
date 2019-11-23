@@ -53,8 +53,8 @@ class Registration extends Component{
             regPassword: Yup.string()
                 .trim()
                 .required('No Password Provided')
-                .min(8, 'Password is too short it must be at least 8 characters or longer')
-                .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must contains numbers, capital letters, small letters and special characters '),
+                .min(8, 'Password is too short it must be at least 6 characters or longer')
+                .matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20}/,'Your password must contains numbers, capital letters, small letters and special characters'),
             password_confirmation: Yup.string()
                 .trim()
                 .required('No Password Provided')
@@ -76,8 +76,16 @@ class Registration extends Component{
                     otherwise: Yup.string().required('Please choose your new Family')
                 })
             ,
-            faculty: Yup.string().trim(),
-            university: Yup.string().trim(),
+            faculty: Yup.string()
+                .trim()
+                .min(3, "Last Name must be at least 2 characters or longer")
+                .max(50, 'Last Name is too long it must be less than or equal 50 characters')
+            ,
+            university: Yup.string()
+                .trim()
+                .min(3, "Last Name must be at least 2 characters or longer")
+                .max(50, 'Last Name is too long it must be less than or equal 50 characters')
+            ,
         });
         const initialValues= {
             firstName: '',

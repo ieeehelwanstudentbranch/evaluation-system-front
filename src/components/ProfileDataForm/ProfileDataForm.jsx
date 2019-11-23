@@ -60,12 +60,12 @@ class CommitteForm extends Component {
                 .nullable()
                 .trim()
                 .min(3, "Your Faculty is very short it must be at least 3 characters or more")
-                .max(30, "Your Faculty is too long it must be less than or equal 30 characters"),
+                .max(50, "Your Faculty is too long it must be less than or equal 50 characters"),
             university: Yup.string()
                 .nullable()
                 .trim()
                 .min(3, "Your University is very short it must be at least 3 characters or more")
-                .max(30, "Your University is too long it must be less than or equal 30 characters"),
+                .max(50, "Your University is too long it must be less than or equal 50 characters"),
             phone: Yup.string()
                 .nullable()
                 .min(8, "Your Phone Number is very short it must be at least 8 characters or more")
@@ -74,7 +74,7 @@ class CommitteForm extends Component {
             address: Yup.string()
                 .nullable()
                 .min(3, "The Address is very short it must be at least 3 characters or more")
-                .max(100, "The Address is too long it must be less than or equal 50 characters")
+                .max(100, "The Address is too long it must be less than or equal 100 characters")
             ,
         });
 

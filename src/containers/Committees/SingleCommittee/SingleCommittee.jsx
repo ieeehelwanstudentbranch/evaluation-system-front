@@ -3,6 +3,7 @@ import * as classes from './SingleCommittee.module.scss';
 import axios from '../../../axios';
 import {NavLink} from 'react-router-dom';
 import {endpoint} from '../../../utilize/endpoint';
+import DeleteUser from '../../../components/DeleteUser/DeleteUser'
 
 class SingleCommittee extends Component{
     state={
@@ -31,6 +32,7 @@ class SingleCommittee extends Component{
                             <th>name</th>
                             <th>position</th>
                             <th>status</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,6 +56,7 @@ class SingleCommittee extends Component{
                                     </td>
                                     <td><span>{member.position}</span></td>
                                     <td><span>{member.status}</span></td>
+                                    <td><DeleteUser /></td>
                                 </tr>
                             )
                         })}

@@ -119,4 +119,7 @@ export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const CANCEL_EDITING = "CANCEL_EDITING";
 
-
+// delete user
+export const DELETE_USER_START = "DELETE_USER_START";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_FAILED = "DELETE_USER_FAILED";

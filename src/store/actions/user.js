@@ -2,22 +2,21 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as actions from './repeatedActions';
 
-export const fetchUserData = (profileID, userID=null) => {
+export const fetchUserData = (profileID, userID = null) => {
     return dispatch => {
         dispatch(actions.loadingHandler(actionTypes.FETCH_USER_START));
-        axios.get('/user/'+profileID)
-            .then(response=>{
+        axios.get('/user/' + profileID)
+            .then(response => {
                 // eslint-disable-next-line
-                if (profileID == userID){
+                if (profileID == userID) {
                     dispatch(fetchUserDataSuccess(response.data.data))
                 } else {
                     dispatch(fetchProfileDataSuccess(response.data.data))
                 }
-                
-            }).catch(error=>{
+
+            }).catch(error => {
                 dispatch(actions.FailerHandler('Network Error, Please Try Again ater'))
-            })
-        ;
+            });
     }
 }
 
@@ -36,13 +35,13 @@ export const fetchProfileDataSuccess = (response) => {
 }
 
 export const editProfileImage = () => {
-    return{
+    return {
         type: actionTypes.EDIT_PROFILE_IMAGE
     }
 }
 
 export const changeImage = (newImage) => {
-    return{
+    return {
         type: actionTypes.CHANGE_IMAGE,
         image: newImage
     }
@@ -51,25 +50,25 @@ export const changeImage = (newImage) => {
 export const uploadImage = (profileID, newImage) => {
     return dispatch => {
         dispatch(actions.loadingHandler());
-        if (newImage !== null){
+        if (newImage !== null) {
             let form_data = new FormData();
             form_data.append('profile_image', newImage)
-            axios.post('/update-profile-image/'+profileID, form_data, {
+            axios.post('/update-profile-image/' + profileID, form_data, {
                 headers: {
-                  'content-type': 'multipart/form-data'
+                    'content-type': 'multipart/form-data'
                 }
-            }).then(response=>{
+            }).then(response => {
                 window.location.reload()
-            }).catch(error=>{
+            }).catch(error => {
                 dispatch(actions.FailerHandler('Something Went wrong, please try again later'))
             });
         }
-        
+
     }
 }
 
 export const editProfileData = () => {
-    return{
+    return {
         type: actionTypes.EDIT_PROFILE_DATA
     }
 }
@@ -89,7 +88,7 @@ export const submitProfileData = (id, firstName, lastName, email, DOB, level, fa
             address: address
         }
         axios.put(`/update-profile/${id}`, updatedData)
-            .then(response=>{
+            .then(response => {
                 window.location.reload()
             })
             .catch(error => {
@@ -99,7 +98,7 @@ export const submitProfileData = (id, firstName, lastName, email, DOB, level, fa
 }
 
 export const cancelEditing = () => {
-    return{
+    return {
         type: actionTypes.CANCEL_EDITING
     }
 }

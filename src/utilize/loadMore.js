@@ -1,14 +1,14 @@
 const loadMore = (oldState, collection, type) => {
     let newObject;
-    if(collection.tasksArrays){
+    if (collection.tasksArrays) {
         newObject = {
             tasks: collection.tasks.concat(collection.tasksArrays[0]),
-            tasksArrays: collection.tasksArrays.filter((array, index)=>{
+            tasksArrays: collection.tasksArrays.filter((array, index) => {
                 return index !== 0
             })
         }
     };
-    
+
     switch (type) {
         case 'sentTasks':
             return {

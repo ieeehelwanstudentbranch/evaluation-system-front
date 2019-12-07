@@ -1,11 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
 import * as reducers from './repeatedReducers';
 
-const initialState ={
+const initialState = {
     data: null,
 }
 
-const evaluateTaskReducer = (state = initialState, action)=>{
+const evaluateTaskReducer = (state = initialState, action) => {
     switch (action.type) {
         // handle loading handler
         case actionTypes.LOADING_HANDLER:

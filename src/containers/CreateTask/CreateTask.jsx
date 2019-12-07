@@ -42,14 +42,17 @@ class CreateTask extends Component {
                     reject(error)
                 })
         }).then(response=>{
+            let EX_comArray = Object.keys(response.EX_com).map((key)=> {
+                return response.EX_com[key];
+            });
             let ex_com = {
-                value: response.EX_com.map(mentor=>{
+                value: EX_comArray.map(mentor=>{
                     return(
                         mentor.id !== this.props.userID ? mentor.id : null
                     )
                 }),
                 label: 'EX_COM',    
-                children: response.EX_com.map(mentor=>{
+                children: EX_comArray.map(mentor=>{
                     return {
                         value: mentor.id,
                         label: `${mentor.firstName} ${mentor.lastName}`,

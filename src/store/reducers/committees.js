@@ -21,7 +21,7 @@ const fetchCommitteeFailed = (state, action) => {
     };
 }
 
-const committeesReducer = (state = initialState, action)=>{
+const committeesReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_COMMITTEES_START:
             return reducers.loadingHandler(state, action);

@@ -10,14 +10,13 @@ export const resetPassword = (resetCode, newPassword) => {
             password_confirmation: newPassword
         }
         axios.post(`/password/reset/${resetCode}`, formData)
-            .then(response=>{
+            .then(response => {
                 console.log(response)
                 dispatch(actions.SuccessHandler(actionTypes.RESET_PASSWORD_SUCCESS, response.data.message))
             })
             .catch(error => {
                 console.log(error.response)
                 dispatch(actions.FailerHandler(actionTypes.RESET_PASSWORD_FAILED, error.response.data.error))
-            })
-        ;
+            });
     }
 }

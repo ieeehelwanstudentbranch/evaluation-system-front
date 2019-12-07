@@ -1,1 +1,5 @@
-export const endpoint = 'https://api.evaluation-system.ieeehsb.org';
+let endpoint = process.env.REACT_APP_BASE_URL;
+
+export {
+    endpoint
+};

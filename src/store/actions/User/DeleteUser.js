@@ -9,9 +9,10 @@ export const deleteUser = (id) => {
         axios.delete(`/delete-user/${id}`)
             .then(response => {
                 console.log(response)
-                actions.SuccessHandler(actionTypes.DELETE_USER_SUCCESS,response.data.message)
+                dispatch(actions.SuccessHandler(actionTypes.DELETE_USER_SUCCESS,response.data.message))
             }).catch(error => {
                 console.log(error.response)
+                dispatch(actions.SuccessHandler(actionTypes.DELETE_USER_FAILED,error.response.data.error))
             });
     }
 }

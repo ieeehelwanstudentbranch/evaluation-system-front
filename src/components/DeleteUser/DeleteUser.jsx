@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { MdDeleteForever } from 'react-icons/md';
-import * as actions from '../../store/actions/index'
+import * as actions from '../../store/actions/index';
+import * as classes from './DeleteUser.module.scss';
 
 class DeleteUser extends Component {
     render() {
         return (
-            <MdDeleteForever onClick={() => this.props.onDelete(this.props.selectedID)} />
+            <MdDeleteForever className={classes.DeleteUser} onClick={() => this.props.onDelete(this.props.selectedID)} />
         )
     }
 }

@@ -8,7 +8,6 @@ import axios from './axios';
 
 import committeesReducer from './store/reducers/committees';
 import postsReducer from './store/reducers/posts';
-import userReducer from './store/reducers/user';
 import tasksReducer from './store/reducers/Tasks/tasks';
 import evaluateTaskReducer from './store/reducers/evaluateTask';
 
@@ -19,6 +18,10 @@ import logoutReducer from './store/reducers/Authentication/logout';
 import forgetPassword from './store/reducers/Authentication/forgetPassword';
 import resetPassword from './store/reducers/Authentication/resetPassword';
 
+// user reducers
+import userReducer from './store/reducers/user';
+import deleteUser from './store/reducers/User/DeleteUser';
+
 import './index.scss';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
@@ -26,10 +29,8 @@ import * as serviceWorker from './serviceWorker';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-
     committees: committeesReducer,
     posts: postsReducer,
-    user: userReducer,
     tasks: tasksReducer,
     evaluateTask: evaluateTaskReducer,
     // auth reducer
@@ -37,7 +38,10 @@ const rootReducer = combineReducers({
     register: registerReducer,
     logout: logoutReducer,
     forgetPassword: forgetPassword,
-    resetPassword: resetPassword
+    resetPassword: resetPassword,
+    // User reducers
+    user: userReducer,
+    deleteUser: deleteUser
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -15,7 +15,7 @@ export const SuccessHandler = (actionType, message, ...params) => {
     }
 }
 
-export const FailerHandler = (actionType = actionTypes.SERVER_ERROR_HANDLER, error="Something went error, Please try again later.") => {
+export const FailerHandler = (actionType = actionTypes.SERVER_ERROR_HANDLER, error = "Something went error, Please try again later.") => {
     return {
         type: actionType,
         error: error

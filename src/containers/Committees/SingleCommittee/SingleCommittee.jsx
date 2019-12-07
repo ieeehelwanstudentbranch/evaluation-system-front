@@ -12,7 +12,6 @@ class SingleCommittee extends Component{
     componentDidMount(){
         axios.get(`/committee/${this.props.match.params.id}`)
             .then(response=>{
-                console.log(response.data)
                 this.setState({
                     ...response.data.data
                 })
@@ -24,7 +23,7 @@ class SingleCommittee extends Component{
     render(){
         return(
             this.state.members && this.state.members.length?
-            <sections className={classes.Committee}>
+            <section className={classes.Committee}>
                 <table className={classes.CommitteeTable}>
                     <thead>
                         <tr>
@@ -69,7 +68,7 @@ class SingleCommittee extends Component{
                         })}
                     </tbody>
                 </table>
-            </sections>
+            </section>
             :<p>No volunteers yet in this committee</p>
         )
     }

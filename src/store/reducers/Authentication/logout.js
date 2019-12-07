@@ -21,7 +21,7 @@ const logoutFailed = (state, action) => {
     };
 }
 
-const logoutReducer = (state = initialState, action)=>{
+const logoutReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGOUT_START:
             return reducers.loadingHandler(state, action);

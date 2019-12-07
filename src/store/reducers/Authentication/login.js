@@ -24,11 +24,11 @@ const loginFailed = (state, action) => {
     };
 }
 
-const loginReducer = (state = initialState, action)=>{
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN_START:
             return reducers.loadingHandler(state, action);
-            
+
         case actionTypes.LOGIN_SUCCESS:
             return loginSuccess(state, action);
 

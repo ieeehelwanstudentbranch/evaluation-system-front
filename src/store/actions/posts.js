@@ -6,12 +6,11 @@ export const fetchPosts = () => {
     return dispatch => {
         dispatch(actions.loadingHandler(actionTypes.FETCH_POSTS_START));
         axios.get('/posts')
-            .then(response=>{
+            .then(response => {
                 dispatch(fetchPostsSucceess(response.data.data))
-            }).catch(error=>{
+            }).catch(error => {
                 dispatch(actions.FailerHandler('Something went Wrong, Please Try Again Later'))
-            })
-        ;
+            });
     }
 }
 
@@ -29,12 +28,11 @@ export const addPost = (data) => {
             body: data
         }
         axios.post('/create-post', post)
-            .then(response=>{
+            .then(response => {
                 dispatch(fetchPosts());
-            }).catch(error=>{
+            }).catch(error => {
                 dispatch(addPostFailed('Something went wrong, Please try again later'));
-            })
-        ;
+            });
     }
 }
 
@@ -46,7 +44,7 @@ export const addPostFailed = (error) => {
 }
 
 export const editPost = (id, body) => {
-    return{
+    return {
         type: actionTypes.EDIT_POST,
         id: id,
         data: body
@@ -60,18 +58,17 @@ export const editPostStart = (id, body) => {
             body: body
         }
         axios.put(`/update-post/${id}`, newData)
-            .then(response=>{
+            .then(response => {
                 dispatch(fetchPosts());
                 dispatch(editPostSuccess());
-            }).catch(error=>{
+            }).catch(error => {
                 dispatch(addPostFailed('Something went wrong, please try again later'));
-            })
-        ;
+            });
     }
 }
 
 export const editPostSuccess = () => {
-    return{
+    return {
         type: actionTypes.EDIT_POST_SUCCESS
     }
 }
@@ -80,17 +77,16 @@ export const deletePost = (id) => {
     return dispatch => {
         dispatch(actions.loadingHandler(actionTypes.DELETE_POST_START));
         axios.delete(`/post/${id}`)
-            .then(response=>{
+            .then(response => {
                 dispatch(deletePostSuccess(id))
-            }).catch(error=>{
+            }).catch(error => {
                 dispatch(addPostFailed('Something went wrong, Please try again later'));
-            })
-        ;
+            });
     }
 }
 
 export const deletePostSuccess = (id) => {
-    return{
+    return {
         type: actionTypes.DELETE_POST,
         id: id
     }

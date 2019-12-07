@@ -24,7 +24,7 @@ const registerFailed = (state, action) => {
     };
 }
 
-const registerReducer = (state = initialState, action)=>{
+const registerReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.REGISTRATION_START:
             return reducers.loadingHandler(state, action);

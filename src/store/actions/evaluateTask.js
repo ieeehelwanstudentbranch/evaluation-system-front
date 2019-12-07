@@ -12,16 +12,15 @@ export const handleEvaluatingTaskDetails = (data) => {
 export const evaluatingTask = (id, mark, details) => {
     return dispatch => {
         dispatch(actions.loadingHandler(actionTypes.EVALUATING_TASK_START));
-        let evaluation ={
+        let evaluation = {
             rate: mark,
             evaluation: details
         }
         axios.post(`/accept-task/${id}`, evaluation)
-            .then(response=>{
+            .then(response => {
                 window.location.replace('/')
-            }).catch(error=>{
+            }).catch(error => {
                 console.log(error.response)
-            })
-        ;
+            });
     }
 }

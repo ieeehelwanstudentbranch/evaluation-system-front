@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers  } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import axios from './axios';
 
@@ -26,7 +26,7 @@ import * as serviceWorker from './serviceWorker';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    
+
     committees: committeesReducer,
     posts: postsReducer,
     user: userReducer,
@@ -46,20 +46,20 @@ const store = createStore(rootReducer, composeEnhancers(
 
 // interceptors for Application
 // interceptors for request
-axios.interceptors.request.use((config)=>{
+axios.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     // request.headers.Authorization =  token;
     config.headers.Authorization = `bearer ${token}`;
     return config;
-}, error=>{
+}, error => {
     console.log(error);
     return Promise.reject(error)
 });
 
 // interceptors for response
-axios.interceptors.response.use(response=>{
+axios.interceptors.response.use(response => {
     return response;
-}, error=>{
+}, error => {
     return Promise.reject(error)
 });
 

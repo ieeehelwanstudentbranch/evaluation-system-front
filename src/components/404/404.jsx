@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from '../../assets/images/404.jpg';
 const notFound = () => {
-    return(
+    return (
         <div>
-            <img src={Image} alt="Page Not Found" style={{width: '100%'}}/>
+            <img src={Image} alt="Page Not Found" style={{ width: '100%' }} />
         </div>
     )
 }

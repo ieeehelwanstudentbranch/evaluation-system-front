@@ -19,7 +19,7 @@ export const register = (firstName, lastName, email, password, password_confirma
             committee: committee
         }
         axios.post('/register', registerData)
-            .then(response=>{
+            .then(response => {
                 dispatch(registerSuccess(response.data.message));
             })
             .catch(error => {

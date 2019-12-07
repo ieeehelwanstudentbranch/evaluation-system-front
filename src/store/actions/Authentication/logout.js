@@ -9,8 +9,8 @@ export const logout = (token) => {
             token: token
         }
         axios.post('/logout', data)
-            .then(response=>{
-                if (response.data.success){
+            .then(response => {
+                if (response.data.success) {
                     dispatch(logoutSuccess(response.data.message));
                     window.location.href = '/'
                 } else {
@@ -19,8 +19,7 @@ export const logout = (token) => {
             })
             .catch(error => {
                 dispatch(actions.FailerHandler(error));
-            })
-        ;
+            });
     }
 }
 

@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import * as reducers from './repeatedReducers';
 
-const initialState ={
+const initialState = {
     userData: null,
     profile: null,
     editing: false,
@@ -56,7 +56,7 @@ const cancelEditing = (state, action) => {
     };
 }
 
-const userReducer = (state = initialState, action)=>{
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case actionTypes.FETCH_USER_START:
@@ -85,7 +85,7 @@ const userReducer = (state = initialState, action)=>{
         default:
             return state;
     }
-        
+
 }
 
 export default userReducer;

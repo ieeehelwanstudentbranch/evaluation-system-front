@@ -28,19 +28,19 @@ const addPostFailed = (state, action) => {
 }
 
 const deletePostSuccess = (state, action) => {
-    return{
+    return {
         ...state,
-        posts: state.posts.filter(post=>{
+        posts: state.posts.filter(post => {
             return post.id !== action.id
         })
     }
 }
 
 const editPost = (state, action) => {
-    return{
+    return {
         ...state,
         data: action.data,
-        posts: state.posts.filter(post=>{
+        posts: state.posts.filter(post => {
             return post.id !== action.id
         }),
         editing: true,
@@ -49,7 +49,7 @@ const editPost = (state, action) => {
 }
 
 const editPostSuccess = (state, action) => {
-    return{
+    return {
         ...state,
         data: null,
         editing: false,
@@ -57,41 +57,41 @@ const editPostSuccess = (state, action) => {
     }
 }
 
-const postsReducer = (state = initialState, action)=>{
+const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         // handling rich editor changes
         case actionTypes.HANDLE_POST_DETAILS:
             return reducers.handleData(state, action);
-        
-        // handling loader
+
+            // handling loader
         case actionTypes.FETCH_POSTS_START:
             return reducers.loadingHandler(state, action);
-        
-        // handling if fetching posts success
+
+            // handling if fetching posts success
         case actionTypes.FETCH_POSTS_SUCEESS:
             return fetchPostsSucceess(state, action);
-        
-        // handling adding post failed
+
+            // handling adding post failed
         case actionTypes.ADD_POST_FAILED:
             return addPostFailed(state, action);
-        
-        // handle deleting posts success
+
+            // handle deleting posts success
         case actionTypes.DELETE_POST:
             return deletePostSuccess(state, action);
-        
-        // handle editing post
+
+            // handle editing post
         case actionTypes.EDIT_POST:
             return editPost(state, action);
-        
-        // handle editing post success
+
+            // handle editing post success
         case actionTypes.EDIT_POST_SUCCESS:
             return editPostSuccess(state, action);
-        
-        // handling if server retairned any error
+
+            // handling if server retairned any error
         case actionTypes.SERVER_ERROR_HANDLER:
             return reducers.FailerHandler(state, action);
-        
-        // default state
+
+            // default state
         default:
             return state;
     }

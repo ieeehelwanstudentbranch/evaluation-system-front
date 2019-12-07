@@ -24,6 +24,15 @@ class SingleCommittee extends Component{
         return(
             this.state.members && this.state.members.length?
             <section className={classes.Committee}>
+                {
+                    this.props.message?
+                        <p style={{textTransform: 'capitalize', margin: '20px auto', color: "#8bc24c"}}>{this.props.message}</p>
+                    :this.props.error?
+                        <p style={{textTransform: 'capitalize', margin: '20px auto', color: "#ca0000"}}>
+                            {this.props.error}
+                        </p>
+                    :null
+                }
                 <table className={classes.CommitteeTable}>
                     <thead>
                         <tr>
@@ -80,6 +89,8 @@ const mapStateToProps = state => {
         role: state.user.userData? state.user.userData.ex_options.ex_options:null,
         userID: state.user.userData?state.user.userData.id:null,
         userName: state.user.userData?`${state.user.userData.firstName} ${state.user.userData.lastName}`:null,
+        message: state.deleteUser?state.deleteUser.message:null,
+        error: state.deleteUser?state.error:null,
     }
 }
 

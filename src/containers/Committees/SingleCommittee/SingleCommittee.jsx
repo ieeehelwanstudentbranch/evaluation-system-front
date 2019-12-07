@@ -3,18 +3,18 @@ import * as classes from './SingleCommittee.module.scss';
 import axios from '../../../axios';
 import {NavLink} from 'react-router-dom';
 import {endpoint} from '../../../utilize/endpoint';
-import DeleteUser from '../../../components/DeleteUser/DeleteUser'
+import DeleteUser from '../../../components/DeleteUser/DeleteUser';
+import {connect} from 'react-redux';
 
 class SingleCommittee extends Component{
-    state={
-        members: null
-    }
+    state={}
 
     componentDidMount(){
         axios.get(`/committee/${this.props.match.params.id}`)
             .then(response=>{
+                console.log(response.data)
                 this.setState({
-                    members: response.data.data.members
+                    ...response.data.data
                 })
             }).catch(error=>{
                 console.log(error)
@@ -32,7 +32,11 @@ class SingleCommittee extends Component{
                             <th>name</th>
                             <th>position</th>
                             <th>status</th>
-                            <th>Delete</th>
+                            {
+                                ((this.props.position === "EX_com")&&(this.state.mentor === this.props.userName)) || ((this.props.position === "highBoard")&&(this.state.director === this.props.userName))?
+                                    <th>Delete</th>
+                                :null
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +47,6 @@ class SingleCommittee extends Component{
                                         <NavLink to={`/user/${member.id}`}>
                                             {
                                                 member.image === "default.jpg" ?
-
                                                 <img src={`${endpoint}/uploaded/profile_images/${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
                                                 :<img src={`${endpoint}/storage${member.image}`} alt={`${member.firstName}`} width="50px" height="50px"/>
                                             }
@@ -56,7 +59,11 @@ class SingleCommittee extends Component{
                                     </td>
                                     <td><span>{member.position}</span></td>
                                     <td><span>{member.status}</span></td>
-                                    <td><DeleteUser /></td>
+                                    {
+                                        ((this.props.position === "EX_com")&&(this.state.mentor === this.props.userName)) || ((this.props.position === "highBoard")&&(this.state.director === this.props.userName))?
+                                            <td><DeleteUser selectedID={member.id}/></td>
+                                        :null
+                                    }
                                 </tr>
                             )
                         })}
@@ -68,4 +75,13 @@ class SingleCommittee extends Component{
     }
 }
 
-export default SingleCommittee;
+const mapStateToProps = state => {
+    return {
+        position: state.user.userData? state.user.userData.position:null,
+        role: state.user.userData? state.user.userData.ex_options.ex_options:null,
+        userID: state.user.userData?state.user.userData.id:null,
+        userName: state.user.userData?`${state.user.userData.firstName} ${state.user.userData.lastName}`:null,
+    }
+}
+
+export default connect(mapStateToProps, null)(SingleCommittee)

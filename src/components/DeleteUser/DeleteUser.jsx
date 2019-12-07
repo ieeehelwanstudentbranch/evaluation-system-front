@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {MdDeleteForever} from 'react-icons/md'
+import {MdDeleteForever} from 'react-icons/md';
+import * as actions from '../../store/actions/index'
 
 class DeleteUser extends Component{
     render(){
         return(
-            <MdDeleteForever />
+            <MdDeleteForever onClick={()=>this.props.onDelete(this.props.selectedID)}/>
         )
     }
 }
@@ -19,7 +20,9 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        onDelete: (id)=> dispatch(actions.deleteUser(id))
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteUser)

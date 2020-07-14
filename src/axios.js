@@ -1,10 +1,8 @@
 import axios from 'axios';
-import {
-    endpoint
-} from './utilize/endpoint';
+import { endpoint } from './utilize/endpoint';
 
 const axiosInstance = axios.create({
-    baseURL: `${endpoint}/api`
-})
+	baseURL: `${endpoint}/api`,
+});
 
 export default axiosInstance;

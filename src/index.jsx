@@ -29,51 +29,55 @@ import * as serviceWorker from './serviceWorker';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    committees: committeesReducer,
-    posts: postsReducer,
-    tasks: tasksReducer,
-    evaluateTask: evaluateTaskReducer,
-    // auth reducer
-    login: loginReducer,
-    register: registerReducer,
-    logout: logoutReducer,
-    forgetPassword: forgetPassword,
-    resetPassword: resetPassword,
-    // User reducers
-    user: userReducer,
-    deleteUser: deleteUser
+	committees: committeesReducer,
+	posts: postsReducer,
+	tasks: tasksReducer,
+	evaluateTask: evaluateTaskReducer,
+	// auth reducer
+	login: loginReducer,
+	register: registerReducer,
+	logout: logoutReducer,
+	forgetPassword: forgetPassword,
+	resetPassword: resetPassword,
+	// User reducers
+	user: userReducer,
+	deleteUser: deleteUser,
 });
 
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 // interceptors for Application
 // interceptors for request
-axios.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    // request.headers.Authorization =  token;
-    config.headers.Authorization = `bearer ${token}`;
-    return config;
-}, error => {
-    console.log(error);
-    return Promise.reject(error)
-});
+axios.interceptors.request.use(
+	(config) => {
+		const token = localStorage.getItem('token');
+		// request.headers.Authorization =  token;
+		config.headers.Authorization = `bearer ${token}`;
+		return config;
+	},
+	(error) => {
+		console.log(error);
+		return Promise.reject(error);
+	}
+);
 
 // interceptors for response
-axios.interceptors.response.use(response => {
-    return response;
-}, error => {
-    return Promise.reject(error)
-});
+axios.interceptors.response.use(
+	(response) => {
+		return response;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
